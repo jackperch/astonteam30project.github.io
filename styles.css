@@ -1,6 +1,5 @@
 /* CSS for a 5-color palette */
 
-
 :root {
     --color1: #000000; /* Black */
     --color2: #c2ee0a; /* Yellow 1 */
@@ -9,7 +8,7 @@
     --color5: #ffffff; /* White 2 */
   }
   
-  /* Example usage */
+  /* Example usage 
   body {
     background-color: var(--color1);
     color: var(--color5);
@@ -28,4 +27,4 @@
     background-color: var(--color4);
     color: #fff;
   }
-  
+  */
