@@ -1,0 +1,30 @@
+/* CSS for a 5-color palette */
+
+:root {
+    --color1: #000000; /* Black */
+    --color2: #c2ee0a; /* Yellow 1 */
+    --color3: #ccfe06; /* Yellow 2 */
+    --color4: #eceff1; /* White 1 */
+    --color5: #ffffff; /* White 2 */
+  }
+  
+  /* Example usage 
+  body {
+    background-color: var(--color1);
+    color: var(--color5);
+  }
+  
+  .button {
+    background-color: var(--color3);
+    color: #fff;
+  }
+  
+  .header {
+    border-bottom: 2px solid var(--color2);
+  }
+  
+  .footer {
+    background-color: var(--color4);
+    color: #fff;
+  }
+  */
