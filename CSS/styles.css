@@ -57,7 +57,7 @@ h1 {
 }
 
 #search-button {
-    background-color: #3498db;
+    background-color: var(--color1);
     color: #ecf0f1;
     border: none;
     padding: 8px 12px;
