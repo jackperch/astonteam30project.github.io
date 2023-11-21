@@ -18,7 +18,7 @@
 }
 
 header {
-    background-color: transparent;
+    background-color: transparent 50%;
     color: #ecf0f100;
     padding: 10px 20px;
     display: flex;
