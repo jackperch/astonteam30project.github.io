@@ -8,6 +8,46 @@
     --color5: #ffffff; /* White 2 */
   }
   
+
+  /* Codeb below is for new nav bar prototype */
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    max-width: 100px;
+    max-height: 50px;
+}
+
+nav {
+    display: flex;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+#cart-icon {
+    max-width: 30px;
+    cursor: pointer;
+}
+
+
   /* Example usage 
   body {
     background-color: var(--color1);
