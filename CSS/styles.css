@@ -15,8 +15,8 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--color1);
-    color: var(--color4);
+    background-color: #000000;
+    color: #eceff1;
 }
 
 header {
@@ -57,7 +57,7 @@ h1 {
 }
 
 #search-button {
-    background-color: var(--color1);
+    background-color: #000000;
     color: #ecf0f1;
     border: none;
     padding: 8px 12px;
