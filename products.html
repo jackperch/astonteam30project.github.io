@@ -7,20 +7,29 @@
 </head>
 <body>
     
-    <nav class="navbar">
-        <div class="logo">
-            <a href="index.php"><img src="Images/Logo-no-bg.png" alt="logo"></a>
+    <header>
+        <div id="logo-container">
+            <!-- logo image -->
+            <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
+            <h1 id="nav-bar-text">ACE GEAR</h1>
         </div>
-        <ul class="nav-links">
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="products.html">PRODUCTS</a></li>
-            <li><a href="about.html">ABOUT</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
-            <li><a href="login.html">LOGIN</a></li>
-            <li><a href="cart.html"><img src="images/cart-no-bg.png" alt="cart"></a></li>
-        </ul>
-        <img src="images/menu.png" alt="menu" class="menu-icon" onclick="toggle()">
-    </nav>
+        <div id="search-container">
+            <input type="text" id="search-bar" placeholder="Search...">
+            <button id="search-button">Search</button>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="products.html">Products</a>
+            <a href="#">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="login.php">Login</a>
+        </nav>
+        <div id="cart-container">
+            <!-- cart icon image -->
+            <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
+            <span id="cart-count">0</span>
+        </div>
+    </header>
 
 
     <h2>Products</h2>
