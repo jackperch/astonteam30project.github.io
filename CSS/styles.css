@@ -57,9 +57,9 @@ h1 {
 }
 
 #search-button {
-    background-color: #000000;
+    background-color: #ecf0f1;
     outline: #ecf0f1;
-    color: #ecf0f1;
+    color: #000000;
     border: none;
     padding: 8px 12px;
     border-radius: 4px;
@@ -96,7 +96,7 @@ nav a:hover {
     top: -8px;
     right: -8px;
     background-color: #ccfe06;
-    color: #fff;
+    color: #000000;
     font-size: 12px;
     border-radius: 50%;
     padding: 4px 8px;
