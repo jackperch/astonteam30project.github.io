@@ -113,7 +113,7 @@ nav a:hover {
 /*  Index page Image  */
 
 .index-image-container {
-    max-width: calc(100% - 100px); /* 100% width minus 50px from each side */
+    max-width: calc(100% - 75px); /* 100% width minus 50px from each side */
     margin: 50px;
 }
 
