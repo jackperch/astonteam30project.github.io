@@ -112,6 +112,7 @@ nav a:hover {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-bottom: 50px;
 }
 
 form {
@@ -136,7 +137,6 @@ input[type="submit"] {
     color: #000000;
     cursor: pointer;
     padding: 10px;
-    padding-bottom: 50px;
     border: none;
     border-radius: 4px;
 }
