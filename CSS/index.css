@@ -48,6 +48,7 @@ body {
                 margin: 0;
                 font-size: 1.5em;
             }
+            
 
             #search-container {
                 display: flex;
@@ -69,6 +70,7 @@ body {
                     cursor: pointer;
                 }
 
+
         nav {
             display: flex;
         }
@@ -82,6 +84,7 @@ body {
             nav a:hover {
                 color: #ccfe06;
             }
+
 
         #cart-container {
             position: relative;
