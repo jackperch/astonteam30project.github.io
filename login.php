@@ -21,7 +21,7 @@
             <nav>
                 <a href="index.html">Home</a>
                 <a href="products.html">Products</a>
-                <a href="#">About</a>
+                <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
                 <a href="login.php">Login</a>
             </nav>
@@ -47,6 +47,6 @@
         </form>
     </div>
 
-    
+
 </body>
 </html>
