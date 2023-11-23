@@ -21,6 +21,8 @@
     background-size: cover; /* Cover the entire viewport */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Do not repeat the background image */
+    justify-content: center;
+    align-items: center;
 }
 
 header {
@@ -125,8 +127,6 @@ nav a:hover {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    justify-content: center;
-    align-items: center;
 }
 
 
