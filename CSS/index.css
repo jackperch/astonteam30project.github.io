@@ -110,6 +110,26 @@ nav a:hover {
 
 
 
+
+
+/* View Products Button */
+
+.ProductsBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #ccfe06;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
+
 /*  Index page Image  */
 
 .index-image-container {
