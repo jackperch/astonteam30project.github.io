@@ -114,7 +114,7 @@ nav a:hover {
 
 /* View Products Button */
 
-.ProductsBtn {
+#ProductsBtn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
