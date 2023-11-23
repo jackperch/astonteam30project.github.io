@@ -125,6 +125,8 @@ nav a:hover {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
 
