@@ -51,9 +51,15 @@
             <br>
             <br>
             <label> Email </label>
-            <input type="text" name="email"  size="15" maxlength="25"/>
+            <input type="text" name="email"  size="15" maxlength="50"/>
             <br>
             <br>
+
+            <label> Address </label>
+            <input type="text" name="address"  size="15" maxlength="50"/>
+            <br>
+            <br>
+
             <input type="submit" value="Register" />
             <input type="reset" value="clear"/>
             <input type="hidden" name="submitted" value="TRUE" />
