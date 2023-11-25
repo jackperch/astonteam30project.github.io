@@ -1,3 +1,60 @@
+<?php
+  session_start();
+  //if the form has been submitted
+  if (isset($_POST['loginsubmitted'])){
+    require_once("connectionDB.php");  // connects to the dtb
+
+    //check if it's empty, stored as a boolean
+    
+    $username=isset($_POST['username'])?$_POST['username']:false;
+    $password=isset($_POST['password'])?password_hash($_POST['password'],PASSWORD_DEFAULT):false;
+    if ($username==false){ #If it's empty
+        echo "Usernasme is empty please enter your username";
+        exit;
+    }
+    elseif ($password==false){#If it's empty
+       echo "Password is empty please enter your password";
+        exit;
+    }
+
+    try {
+      //Query DB to find the matching username/password
+      //using prepare/bindparameter to prevent SQL injection.
+        $SQL = $db->prepare('SELECT password FROM Customers WHERE username = ?');
+        $SQL->execute(array($_POST['username']));
+          
+        // fetch the result row and check 
+        if ($SQL->rowCount()>0){  // matching username
+          $row=$SQL->fetch();
+  
+          if (password_verify($_POST['password'], $row['password'])){ //matching password with the user input password and database stored password
+
+          //Makes the username accessible for other php
+           if( $_SESSION["username"]=$_POST['username']);
+           //loads these website
+            header("Location:products.php"); 
+            //header("Location:.php");
+            exit();
+          
+          } else {
+           echo "<p>Error logging in, password does not match </p>";
+             }
+          } else {
+         //else display an error
+          echo "<p>Error logging in, Username not found </p>";
+          }
+      }//Catches the problem
+      catch(PDOException $ex) {
+        echo("Failed to connect to the database.<br>");
+        echo($ex->getMessage());
+        exit;
+      }  
+
+  }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +101,7 @@
             <input type="password" id="password" name="password" required>
 
             <input type="submit" value="Login">
+            <input type="hidden" name="loginsubmitted" value="TRUE" />
         </form>
     </div>
 
