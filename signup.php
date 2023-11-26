@@ -8,9 +8,11 @@ if (isset($_POST['signupsubmitted'])) {
 
     $newUsername = isset($_POST['newUsername']) ? $_POST['newUsername'] : false;
     $newPassword = isset($_POST['newPassword']) ? password_hash($_POST['newPassword'], PASSWORD_DEFAULT) : false;
+    $newEmail = isset($_POST['newEmail']) ? $_POST['newEmail'] : false;
+    $newAddress = isset($_POST['newAddress']) ? $_POST['newAddress'] : false;
 
-    if ($newUsername == false || $newPassword == false) {
-        echo "Username or password is empty. Please enter valid values.";
+    if ($newUsername == false || $newPassword == false || $newEmail == false || $newAddress == false) {
+        echo "One or more fields are empty. Please enter valid values.";
         exit;
     }
 
@@ -23,8 +25,8 @@ if (isset($_POST['signupsubmitted'])) {
             echo "Username already exists. Please choose a different username.";
         } else {
             // Insert new user into the database
-            $insertUserSQL = $db->prepare('INSERT INTO Customers (username, password) VALUES (?, ?)');
-            $insertUserSQL->execute(array($newUsername, $newPassword));
+            $insertUserSQL = $db->prepare('INSERT INTO Customers (username, password, email, address) VALUES (?, ?, ?, ?)');
+            $insertUserSQL->execute(array($newUsername, $newPassword, $newEmail, $newAddress));
 
             echo "Sign up successful! You can now log in.";
         }
