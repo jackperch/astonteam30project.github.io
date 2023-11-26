@@ -1,3 +1,43 @@
+<?php
+session_start();
+
+
+// Sign-up code...
+if (isset($_POST['signupsubmitted'])) {
+    require_once("connectionDB.php");
+
+    $newUsername = isset($_POST['newUsername']) ? $_POST['newUsername'] : false;
+    $newPassword = isset($_POST['newPassword']) ? password_hash($_POST['newPassword'], PASSWORD_DEFAULT) : false;
+
+    if ($newUsername == false || $newPassword == false) {
+        echo "Username or password is empty. Please enter valid values.";
+        exit;
+    }
+
+    try {
+        // Check if the username already exists
+        $checkUsernameSQL = $db->prepare('SELECT * FROM Customers WHERE username = ?');
+        $checkUsernameSQL->execute(array($newUsername));
+
+        if ($checkUsernameSQL->rowCount() > 0) {
+            echo "Username already exists. Please choose a different username.";
+        } else {
+            // Insert new user into the database
+            $insertUserSQL = $db->prepare('INSERT INTO Customers (username, password) VALUES (?, ?)');
+            $insertUserSQL->execute(array($newUsername, $newPassword));
+
+            echo "Sign up successful! You can now log in.";
+        }
+    } catch (PDOException $ex) {
+        echo("Failed to connect to the database.<br>");
+        echo($ex->getMessage());
+        exit;
+    }
+}
+?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
