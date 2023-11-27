@@ -103,6 +103,7 @@
             <input type="submit" value="Login">
             <input type="hidden" name="loginsubmitted" value="TRUE" />
         </form>
+        <a href="signup.php" class="signup-button">Sign Up</a>
     </div>
 
 
@@ -118,6 +119,6 @@
             </div>
         </div>
     </footer>
-    
+
 </body>
 </html>
