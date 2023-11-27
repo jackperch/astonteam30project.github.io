@@ -16,11 +16,10 @@ body {
     margin: 0;
     padding: 0;
     background-color: #000000;
+    justify-content: center;
+    align-items: center;
     color: #eceff1;
-    background-image: url('Images/index-page-bg.jpg'); /* Set the path to your background image */
-    background-size: cover; /* Cover the entire viewport */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Do not repeat the background image */
+    
 }
 
 header {
