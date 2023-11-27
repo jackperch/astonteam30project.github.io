@@ -14,10 +14,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
     background-color: var(--color1); /* Use the black color from the palette */
-    justify-content: center;
-    align-items: center;
     color: var(--color4); /* Use the white color from the palette */
 }
 
@@ -105,6 +102,13 @@ nav a:hover {
 }
 
 /* Code for login form */
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
 .login-container {
     max-width: 400px;
