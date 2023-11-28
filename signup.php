@@ -69,7 +69,7 @@ if (isset($_POST['signupsubmitted'])) {
             <nav>
                 <a href="index.html">Home</a>
                 <a href="products.html">Products</a>
-                <a href="#">About</a>
+                <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
                 <a href="login.php">Login</a>
             </nav>
@@ -86,18 +86,17 @@ if (isset($_POST['signupsubmitted'])) {
             <div class="signup-container">
                 <form action="signup.php" method="post">
                     
-                    <label>Username</label>
+                    <label>Username:</label>
                     <input type="text" id="username" name="username"  placeholder="Enter your Full Name here" required>
                     
                     <label>Password:</label>
-
                     <input type="password" id="password" name="password"  placeholder="Enter your Password here" required>
                 
-                    <label> Email </label>
+                    <label>Email: </label>
                     <input type="text" id="email" name="email"  placeholder="Enter your E-mail here" required>
                    
 
-                    <label> Address </label>
+                    <label>Address: </label>
                     <input type="text" id="adddress" name="address" placeholder="Enter your full address here" required>
 
                     <input type="submit" value="Register" >
