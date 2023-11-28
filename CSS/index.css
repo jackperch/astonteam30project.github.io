@@ -121,9 +121,8 @@ body {
     height: 100vh;
 }
     .ProductsBtn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+        /* code to center the button */
+        position: relative;
         padding: 10px 20px;
         font-size: 16px;
         background-color: #ccfe06;
@@ -131,6 +130,8 @@ body {
         border: none;
         border-radius: 5px;
         cursor: pointer;
+        display: block;
+        margin: 0 auto;
     }
 
 
