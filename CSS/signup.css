@@ -102,6 +102,57 @@ nav a:hover {
     padding: 4px 8px;
 }
 
+
+
+/* Code for signup form */
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+    .signup-container {
+        max-width: 400px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 0 10px #c2ee0a;
+        color: #000000;
+        margin-bottom: 100px;
+    }
+
+    form {
+        display: grid;
+        gap: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    input[type="submit"] {
+        background-color: var(--color3); /* Use the yellow 2 color from the palette */
+        color: var(--color1); /* Use the black color from the palette */
+        cursor: pointer;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+    }
+
+
+
+
 /* Code below is for the Footer */
 
 footer {
@@ -110,24 +161,24 @@ footer {
     padding: 20px 0;
 }
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
 
-.footer-links {
-    display: flex;
-}
+    .footer-links {
+        display: flex;
+    }
 
-.footer-links a {
-    color: #333;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-}
+    .footer-links a {
+        color: #333;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+    }
 
-.footer-links a:hover {
-    color: var(--color4); /* White 1 */
-}
+    .footer-links a:hover {
+        color: var(--color4); /* White 1 */
+    }
