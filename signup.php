@@ -84,6 +84,7 @@ if (isset($_POST['signupsubmitted'])) {
        
        <div class="content-container">
             <div class="signup-container">
+                <h2>Sign Up</h2>
                 <form action="signup.php" method="post">
                     
                     <label>Username:</label>
