@@ -122,7 +122,10 @@ body {
 }
     .ProductsBtn {
         /* code to center the button */
-        position: relative;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         padding: 10px 20px;
         font-size: 16px;
         background-color: #ccfe06;
@@ -130,8 +133,6 @@ body {
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        display: block;
-        margin: 0 auto;
     }
 
 
