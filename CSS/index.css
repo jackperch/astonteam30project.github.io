@@ -123,7 +123,7 @@ body {
     .ProductsBtn {
         /* code to center the button */
         position: relative;
-        /*padding: 10px 20px;*/
+        padding: 10px 20px;
         font-size: 16px;
         background-color: #ccfe06;
         color: #000000;
