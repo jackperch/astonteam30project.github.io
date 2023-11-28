@@ -1,15 +1,20 @@
 <?php
   session_start();
-  //if the form has been submitted
+  // checks if the form has been submitted
   if (isset($_POST['loginsubmitted'])){
     require_once("connectionDB.php");  // connects to the dtb
 
     //check if it's empty, stored as a boolean
-    
+    //Checks if the username parameter is there in the post request  if it is it will get assigned to the variable $username if not it will be assigned to false
     $username=isset($_POST['username'])?$_POST['username']:false;
+    
+    //Checks if the password parameter is there in the post request  if it is  it will get assigned to the variable $password and get hashed if not it will be assigned to false
+
     $password=isset($_POST['password'])?password_hash($_POST['password'],PASSWORD_DEFAULT):false;
+
+
     if ($username==false){ #If it's empty
-        echo "Usernasme is empty please enter your username";
+        echo "Username is empty please enter your username";
         exit;
     }
     elseif ($password==false){#If it's empty
@@ -29,7 +34,7 @@
   
           if (password_verify($_POST['password'], $row['password'])){ //matching password with the user input password and database stored password
 
-          //Makes the username accessible for other php
+          //Makes the username accessible for other php 
            if( $_SESSION["username"]=$_POST['username']);
            //loads these website
             header("Location:products.php"); 
