@@ -80,7 +80,6 @@ if (isset($_POST['signupsubmitted'])) {
             </div>
         </header>
 
-        <button onclick href="products.html" id="ProductsBtn" title="Go to Products Page">View Products</button>
         <form action="signup.php" method="post">
             
             <label>Username</label>
