@@ -1,16 +1,15 @@
 <?php
+// assigning variables to the server connection
+$servername = "localhost";
+$username = "u-210061822";
+$password = "lEQOxiR7x2vMo23";
+$dbname = "u_210061822_db";
 
-$db_host = 'localhost';
-$db_name = 'u_220099110_db';
-$username = 'u-220099110';
-$password = 'WwLi7WYlH7tQwGe';
+//database connetion sored as a variable so that it can be referenced across different pages
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-try {
-	$db = new PDO("mysql:dbname=$db_name;host=$db_host", $username, $password); 
-	#$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $ex) {
-	echo("Failed to connect to the database.<br>");
-	echo($ex->getMessage());
-	exit;
+//chcking the connection with a simple if statement
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
 ?>
