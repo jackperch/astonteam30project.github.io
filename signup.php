@@ -87,8 +87,11 @@ if (isset($_POST['signupsubmitted'])) {
                 <h2>Sign Up</h2>
                 <form action="signup.php" method="post">
                     
-                    <label>Enter your Full Name:</label>
-                    <input type="text" id="name" name="name"  placeholder="Enter your Full Name here" required>
+                    <label>Enter your First Name:</label>
+                    <input type="text" id="first-name" name="first-name"  placeholder="Enter your First Name here" required>
+
+                    <label>Enter your Last Name:</label>
+                    <input type="text" id="last-name" name="last-name"  placeholder="Enter your Last Name here" required>
 
                     <label>Enter your Username:</label>
                     <input type="text" id="username" name="username"  placeholder="Enter your Username here" required>
