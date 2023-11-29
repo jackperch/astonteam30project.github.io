@@ -111,7 +111,7 @@ body {
 
 /* View Products Button */
 
-.products-button-container {
+/*.products-button-container {
     position: relative;
     max-width: 1200px;
     margin: 0 auto;
@@ -119,19 +119,19 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
+} */
     .ProductsBtn {
         /* code to center the button */
         position: absolute;
-        top: 50%;
+        top: 90%;
         left: 50%;
         transform: translate(-50%, -50%);
         padding: 10px 20px;
-        font-size: 16px;
+        font-size: 20px;
         background-color: #ccfe06;
         color: #000000;
         border: none;
-        border-radius: 5px;
+        border-radius: 3px;
         cursor: pointer;
     }
 

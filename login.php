@@ -53,7 +53,15 @@
         echo("Failed to connect to the database.<br>");
         echo($ex->getMessage());
         exit;
-      }  
+      } 
+     
+      
+    // Assuming the login is successful
+    $_SESSION['username'] = $username; // Set a session variable for the username
+
+    // Redirect the user to the user's page
+    header("Location: products.html");
+    exit;
 
   }
 
@@ -112,6 +120,26 @@
         </div>
     </div>
 
+
+    <!-- Succesful login pop-up container -->
+    <div id="popup" class="popup-container">
+        <p>Login successful!</p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <script>
+        // Display the pop-up once the page is loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("popup").style.display = "block";
+        });
+
+        // Function to close the pop-up and redirect
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+            // Redirect to another page
+            window.location.href = "products.html";
+        }
+    </script>
 
 
     <footer>
