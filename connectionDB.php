@@ -2,7 +2,7 @@
 // assigning variables to the server connection
 $servername = "localhost";
 $username = "root";
-$password = 
+$password = "";
 $dbname = "acegear";
 
 //database connetion sored as a variable so that it can be referenced across different pages
