@@ -114,6 +114,20 @@ if (isset($_POST['signupsubmitted'])) {
             </div>
         </div>
 
+
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-links">
+                    <a href="reviews.html">Reviews</a>
+                    <a href="contact.html">Contact Us</a>
+                    <a href="about.html">About Us</a>
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                </div>
+            </div>
+        </footer>
+        
+
     </body>
 
 
