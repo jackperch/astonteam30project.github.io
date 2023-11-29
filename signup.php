@@ -107,10 +107,7 @@ if (isset($_POST['signupsubmitted'])) {
                    
 
                     <label>Enter your Address: </label>
-                    <input type="text" id="house-number" name="house-number" placeholder="Enter your house name or number here" required>
-                    <input type="text" id="address-line1" name="address-line1" placeholder="Enter your first line of address here" required>
-                    <input type="text" id="address-line2" name="address-line2" placeholder="Enter your second line of address here" required>
-                    <input type="text" id="post-code" name="post-code" placeholder="Enter your post code here" required>
+                    <input type="text" id="address" name="address" placeholder="Enter your full address here" required>
 
                     <input type="submit" value="Register" >
                     <input type="reset" value="clear">
@@ -132,7 +129,7 @@ if (isset($_POST['signupsubmitted'])) {
                 </div>
             </div>
         </footer>
-
+        
 
     </body>
 
