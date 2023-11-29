@@ -9,12 +9,20 @@ if (isset($_POST['signupsubmitted'])) {
     $newUsername = isset($_POST['username']) ? $_POST['username'] : false;
     $newPassword = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : false;
     $newEmail = isset($_POST['email']) ? $_POST['email'] : false;
-    $newAddress = isset($_POST['address']) ? $_POST['address'] : false;
+    //$newAddress = isset($_POST['address']) ? $_POST['address'] : false;
 
     $newFirstName = isset($_POST['first-name']) ? $_POST['first-name'] : false;
     $newLastName = isset($_POST['last-name']) ? $_POST['last-name'] : false;
 
-    if ($newUsername == false || $newPassword == false || $newEmail == false || $newAddress == false ||  $newFirstName == false || $newLastName == false) {
+    $newHouseNumber = isset($_POST['house-number']) ? $_POST['house-number'] : false;
+    $newAddressLine1 = isset($_POST['address-line1']) ? $_POST['address-line1'] : false;
+    $newAddressLine2 = isset($_POST['address-line2']) ? $_POST['address-line2'] : false;
+    $newPostCode = isset($_POST['post-code']) ? $_POST['post-code'] : false;
+    $newCity = isset($_POST['city']) ? $_POST['city'] : false;
+    $newCountry = isset($_POST['country']) ? $_POST['country'] : false;
+
+
+    if ($newUsername == false || $newPassword == false || $newEmail == false  ||  $newFirstName == false || $newLastName == false || $newHouseNumber == false || $newAddressLine1 == false || $newAddressLine2 == false || $newPostCode == false || $newCity == false || $newCountry == false) {
         echo "One or more fields are empty. Please enter valid values.";
         exit;
     }
@@ -31,7 +39,22 @@ if (isset($_POST['signupsubmitted'])) {
             $insertUserSQL = $db->prepare('INSERT INTO Customers (username, password, first_name, last_name,email) VALUES (?, ?, ?, ?,?)');
             $insertUserSQL->execute(array($newUsername, $newPassword, $newFirstName, $newLastName,$newEmail));
 
-            echo "Sign up successful! You can now log in.";
+            //Stores  cutomer's addresses in the address table
+           $insertUserAddress=$db->prepare('INSERT INTO Address (house_number, address_line1, address_line2, Postcode, city, country) VALUES (?, ?, ?, ?, ?, ?)');
+           $insertUserAddress->execute(array($newHouseNumber, $newAddressLine1, $newAddressLine2, $newPostCode, $newCity, $newCountry));
+        
+           $retrieveCustomerID = $db->prepare('SELECT customerID FROM Customers WHERE username = ?');
+           $retrieveCustomerID->execute(array($newUsername));
+        
+           $retrieveAddressID = $db->prepare('SELECT addressID FROM Address WHERE house_number = ? AND address_line1 = ? AND address_line2 = ? AND Postcode = ? AND city = ? AND country = ?');
+           $retrieveAddressID->execute(array($newHouseNumber, $newAddressLine1, $newAddressLine2, $newPostCode, $newCity, $newCountry));
+        
+           $insertCustomer_Address = $db->prepare('INSERT INTO Customer_Address (customerID, addressID) VALUES (?, ?)');
+            $insertCustomer_Address->execute(array($retrieveCustomerID->fetchColumn(), $retrieveAddressID->fetchColumn()));
+         
+
+           
+           echo "Sign up successful! You can now log in.";
         }
     } catch (PDOException $ex) {
         echo("Failed to connect to the database.<br>");
@@ -111,6 +134,9 @@ if (isset($_POST['signupsubmitted'])) {
                     <input type="text" id="address-line1" name="address-line1" placeholder="Enter your first line of address here" required>
                     <input type="text" id="address-line2" name="address-line2" placeholder="Enter your second line of address here" required>
                     <input type="text" id="post-code" name="post-code" placeholder="Enter your post code here" required>
+                    <input type="text" id="city" name="city" placeholder="Enter your city here" required>
+                    <input type="text" id="country" name="country" placeholder="Enter your country here" required>
+
 
                     <input type="submit" value="Register" >
                     <input type="reset" value="clear">
