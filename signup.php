@@ -6,12 +6,15 @@ session_start();
 if (isset($_POST['signupsubmitted'])) {
     require_once("connectionDB.php");
 
-    $newUsername = isset($_POST['newUsername']) ? $_POST['newUsername'] : false;
-    $newPassword = isset($_POST['newPassword']) ? password_hash($_POST['newPassword'], PASSWORD_DEFAULT) : false;
-    $newEmail = isset($_POST['newEmail']) ? $_POST['newEmail'] : false;
-    $newAddress = isset($_POST['newAddress']) ? $_POST['newAddress'] : false;
+    $newUsername = isset($_POST['username']) ? $_POST['username'] : false;
+    $newPassword = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : false;
+    $newEmail = isset($_POST['email']) ? $_POST['email'] : false;
+    $newAddress = isset($_POST['address']) ? $_POST['address'] : false;
 
-    if ($newUsername == false || $newPassword == false || $newEmail == false || $newAddress == false) {
+    $newFirstName = isset($_POST['first-name']) ? $_POST['first-name'] : false;
+    $newLastName = isset($_POST['last-name']) ? $_POST['last-name'] : false;
+
+    if ($newUsername == false || $newPassword == false || $newEmail == false || $newAddress == false ||  $newFirstName == false || $newLastName == false) {
         echo "One or more fields are empty. Please enter valid values.";
         exit;
     }
@@ -25,8 +28,8 @@ if (isset($_POST['signupsubmitted'])) {
             echo "Username already exists. Please choose a different username.";
         } else {
             // Insert new user into the database
-            $insertUserSQL = $db->prepare('INSERT INTO Customers (username, password, email, address) VALUES (?, ?, ?, ?)');
-            $insertUserSQL->execute(array($newUsername, $newPassword, $newEmail, $newAddress));
+            $insertUserSQL = $db->prepare('INSERT INTO Customers (username, password, first_name, last_name,email) VALUES (?, ?, ?, ?,?)');
+            $insertUserSQL->execute(array($newUsername, $newPassword, $newFirstName, $newLastName,$newEmail));
 
             echo "Sign up successful! You can now log in.";
         }
@@ -104,7 +107,7 @@ if (isset($_POST['signupsubmitted'])) {
                    
 
                     <label>Enter your Address: </label>
-                    <input type="text" id="adddress" name="address" placeholder="Enter your full address here" required>
+                    <input type="text" id="address" name="address" placeholder="Enter your full address here" required>
 
                     <input type="submit" value="Register" >
                     <input type="reset" value="clear">
