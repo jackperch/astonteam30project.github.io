@@ -8,7 +8,7 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
-        <script src="/js/main.js"></script>
+        <!--<script src="/js/main.js"></script> -->
     </head>
 
 
@@ -39,17 +39,46 @@
 
 
 
+        <div class="slideshow-container">
+
+            <div class="mySlides">
+                
+                <img src="Images/index-img-1.jpg" alt="Image 1">
+            </div>
+        
+            <div class="mySlides">
+                <img src="Images/index-img-2.jpg" alt="Image 2">
+            </div>
+        
+            <div class="mySlides">
+                <img src="Images/index-img-3.jpg" alt="Image 3">
+            </div>
+
+            <div class="mySlides">
+                <img src="Images/index-img-4.jpg" alt="Image 3">
+            </div>
+
+            <div class="mySlides">
+                <img src="Images/index-img-5.jpg" alt="Image 3">
+            </div>
+
+            <div class = products-button-container>
+                <button onclick href="products.html" class="ProductsBtn" title="Go to Products Page">View Products</button>
+                <a href="products.html" class="ProductsBtn" title="Go to Products Page">View Products</a>
+            </div>
+            
+        </div>
+        
 
 
-        <div class="index-image-container">
+
+
+       <!-- <div class="index-image-container">
             <img src="Images/index-page-bg.jpg" id= "index-image" alt="Index Page Image">
-        </div>
+        </div> -->
 
 
-        <div class = products-button-container>
-            <button onclick href="products.html" class="ProductsBtn" title="Go to Products Page">View Products</button>
-            <a href="products.html" class="ProductsBtn" title="Go to Products Page">View Products</a>
-        </div>
+        
 
 
 
@@ -66,8 +95,37 @@
         </footer>
 
 
+        <script>
+            let slideIndex = 0;
+        
+            function showSlides() {
+                let i;
+                const slides = document.getElementsByClassName("mySlides");
+        
+                for (i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+        
+                slideIndex++;
+        
+                if (slideIndex > slides.length) {
+                    slideIndex = 1;
+                }
+        
+                slides[slideIndex - 1].style.display = "block";
+                setTimeout(showSlides, 2000); // Change slide every 2 seconds (2000 milliseconds)
+            }
+        
+            // Start the slideshow when the page loads
+            document.addEventListener("DOMContentLoaded", showSlides);
+        </script>
+
+
     </body>
 
 
 </html>
+
+
+
 <!-- test-->
