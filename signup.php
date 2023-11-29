@@ -87,17 +87,20 @@ if (isset($_POST['signupsubmitted'])) {
                 <h2>Sign Up</h2>
                 <form action="signup.php" method="post">
                     
-                    <label>Username:</label>
-                    <input type="text" id="username" name="username"  placeholder="Enter your Full Name here" required>
+                    <label>Enter your Full Name:</label>
+                    <input type="text" id="name" name="name"  placeholder="Enter your Full Name here" required>
+
+                    <label>Enter your Username:</label>
+                    <input type="text" id="username" name="username"  placeholder="Enter your Username here" required>
                     
-                    <label>Password:</label>
+                    <label>Enter your Password:</label>
                     <input type="password" id="password" name="password"  placeholder="Enter your Password here" required>
                 
-                    <label>Email: </label>
+                    <label>Enter your Email: </label>
                     <input type="text" id="email" name="email"  placeholder="Enter your E-mail here" required>
                    
 
-                    <label>Address: </label>
+                    <label>Enter your Address: </label>
                     <input type="text" id="adddress" name="address" placeholder="Enter your full address here" required>
 
                     <input type="submit" value="Register" >
