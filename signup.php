@@ -114,7 +114,7 @@ if (isset($_POST['signupsubmitted'])) {
 
                     <input type="submit" value="Register" >
                     <input type="reset" value="clear">
-                    <input type="hidden" name="submitted" value="TRUE" >
+                    <input type="hidden" name="signupsubmitted" value="TRUE" >
                 
                 </form>
             </div>
