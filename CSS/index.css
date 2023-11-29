@@ -140,16 +140,33 @@ body {
 
 /*  Index page Image  */
 
-.index-image-container {
-    max-width: calc(100% - 25px); /* 100% width minus 50px from each side */
+/*.index-image-container {
+    max-width: calc(100% - 25px); /* 100% width minus 50px from each side 
     margin: 50px;
-    /*height: 400px;*/
+    /*height: 400px;*
 }
     #index-image {
         max-width: 100%;
         height: auto;
         display: block;
         margin: 0 auto;
+    } */
+
+
+
+    .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+    }
+
+    .mySlides {
+        display: none;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
     }
 
 
@@ -181,23 +198,3 @@ footer {
 
 
 
-  /* Example usage 
-  body {
-    background-color: var(--color1);
-    color: var(--color5);
-  }
-  
-  .button {
-    background-color: var(--color3);
-    color: #fff;
-  }
-  
-  .header {
-    border-bottom: 2px solid var(--color2);
-  }
-  
-  .footer {
-    background-color: var(--color4);
-    color: #fff;
-  }
-  */
