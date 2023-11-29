@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = 
-$dbname = "u_220099110_db";
+$dbname = "acegear";
 
 //database connetion sored as a variable so that it can be referenced across different pages
 $conn = new mysqli($servername, $username, $password, $dbname);
