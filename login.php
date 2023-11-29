@@ -106,7 +106,7 @@
                 <input type="password" id="password" name="password" required>
 
                 <input type="submit" value="Login">
-                <input type="hidden" name="loginsubmitted" value="TRUE" />
+                <input type="hidden" id= "loginsubmitted" name="loginsubmitted" value="TRUE" />
             </form>
             <a href="signup.php" class="signup-button">Dont have an account? Click here to Sign Up</a>
         </div>
