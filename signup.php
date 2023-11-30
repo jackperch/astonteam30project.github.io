@@ -96,6 +96,7 @@ if (isset($_POST['signupsubmitted'])) {
                 <a href="index.html">Home</a>
                 <a href="products.html">Products</a>
                 <a href="about.html">About</a>
+                <a href="members-blog.php">Blog</a>
                 <a href="contact.html">Contact</a>
                 <a href="login.php">Login</a>
             </nav>
@@ -153,7 +154,7 @@ if (isset($_POST['signupsubmitted'])) {
         <footer>
             <div class="footer-container">
                 <div class="footer-links">
-                    <a href="reviews.html">Reviews</a>
+                    <a href="reviews.php">Reviews</a>
                     <a href="contact.html">Contact Us</a>
                     <a href="about.html">About Us</a>
                     <a href="privacy-policy.html">Privacy Policy</a>

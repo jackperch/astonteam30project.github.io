@@ -27,6 +27,7 @@
                 <a href="index.html">Home</a>
                 <a href="products.html">Products</a>
                 <a href="about.html">About</a>
+                <a href="members-blog.php">Blog</a>
                 <a href="contact.html">Contact</a>
                 <a href="login.php">Cart</a>
             </nav>
