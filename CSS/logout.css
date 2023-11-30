@@ -1,6 +1,3 @@
-/* CSS code for cart page */
-
-
 /* CSS for a 5-color palette */
 
 :root {
@@ -9,4 +6,19 @@
     --color3: #ccfe06; /* Yellow 2 */
     --color4: #eceff1; /* White 1 */
     --color5: #ffffff; /* White 2 */
+}
+
+
+
+#log-out {
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+#log-out a {
+    color: var(--color4);
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
 }
