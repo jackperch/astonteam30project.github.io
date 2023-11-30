@@ -58,6 +58,7 @@
       
     // Assuming the login is successful
     $_SESSION['username'] = $username; // Set a session variable for the username
+    $loggedIn = true; // Set a boolean to indicate that the user is logged in
 
     // Redirect the user to the user's page
     header("Location: products.php");
@@ -131,6 +132,11 @@
     </div>
 
     <script>
+        <?php
+            if ($loggedIn) {
+                echo "document.getElementById('popup').style.display = 'block';";
+            }
+        ?>
         // Display the pop-up once the page is loaded
         document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("popup").style.display = "block";
