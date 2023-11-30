@@ -100,7 +100,8 @@ if (isset($_POST['signupsubmitted'])) {
                 <a href="login.php">Login</a>
             </nav>
             <div id="cart-container">
-                <!-- cart icon image -->
+                <!-- cart icon image with link to cart page -->
+                <a href="cart.html">
                 <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
                 <span id="cart-count">0</span>
             </div>
