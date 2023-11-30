@@ -24,19 +24,17 @@
         </div>
         <nav>
             <a href="index.html">Home</a>
-            <a href="products.html">Products</a>
+            <a href="products.php">Products</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
             <?php 
                 session_start();
-                if (isset($_SESSION['Username'])) {
+                if (isset($_SESSION['username'])) {
                     echo "<a href='logout.php'>Logout</a>";
                 } else {
                     echo "<a href='login.php'>Login</a>";
                 }
                 ?>
-
-           
         </nav>
         <div id="cart-container">
             <!-- cart icon image with link to cart page -->

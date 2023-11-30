@@ -60,7 +60,7 @@
     $_SESSION['username'] = $username; // Set a session variable for the username
 
     // Redirect the user to the user's page
-    header("Location: products.html");
+    header("Location: products.php");
     exit;
 
   }
@@ -90,7 +90,7 @@
             </div>
             <nav>
                 <a href="index.html">Home</a>
-                <a href="products.html">Products</a>
+                <a href="products.php">Products</a>
                 <a href="about.html">About</a>
                 <a href="members-blog.php">Blog</a>
                 <a href="contact.html">Contact</a>
@@ -140,7 +140,7 @@
         function closePopup() {
             document.getElementById("popup").style.display = "none";
             // Redirect to another page
-            window.location.href = "products.html";
+            window.location.href = "products.php";
         }
     </script>
 

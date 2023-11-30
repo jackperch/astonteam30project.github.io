@@ -94,7 +94,7 @@ if (isset($_POST['signupsubmitted'])) {
             </div>
             <nav>
                 <a href="index.html">Home</a>
-                <a href="products.html">Products</a>
+                <a href="products.php">Products</a>
                 <a href="about.html">About</a>
                 <a href="members-blog.php">Blog</a>
                 <a href="contact.html">Contact</a>
