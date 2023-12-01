@@ -199,6 +199,7 @@ CREATE table ProductOrderDetails (
   'ProductOrderDetailsID' int NOT NULL PRIMARY KEY,
   'orderID' int NOT NULL,
   'productID' int NOT NULL,
+  'quantity' double NOT NULL,
   'price' double NOT NULL,
   'color' VARCHAR NOT NULL,
   'size' int NOT NULL,
@@ -213,3 +214,34 @@ CREATE table Basket (
   FOREIGN KEY (customerID) REFERENCES customers (customerID),
   FOREIGN KEY (productListingID) REFERENCES ProductListing (productListingID)
 )
+
+CREATE table GuestCart (
+  'guestCartID' int NOT NULL PRIMARY KEY,
+  'orderID' int NOT NULL,
+  'productID' int NOT NULL,
+  'quantity' double NOT NULL,
+  'price' double NOT NULL,
+  'color' VARCHAR NOT NULL,
+  'size' int NOT NULL,
+  'date_purchased' date,
+  FOREIGN KEY (orderID) REFERENCES ProductOrderPlaced (orderID)
+)
+
+CREATE table Guest (
+  'guestID' int NOT NULL PRIMARY KEY,
+  'guestEmail' VARCHAR NOT NULL,
+  'guestFname' VARCHAR NOT NULL,
+  'guestSname' VARCHAR NOT NULL
+)
+ALTER TABLE ProductOrderPlaced MODIFY ProductOrderPlacedID INT AUTO_INCREMENT;
+ALTER TABLE Guest MODIFY guestID INT AUTO_INCREMENT;
+ALTER TABLE Basket MODIFY basketID INT AUTO_INCREMENT;
+ALTER TABLE GuestCart MODIFY guestCartID INT AUTO_INCREMENT;
+ALTER TABLE ProductOrderDetails MODIFY ProductOrderDetailsID INT AUTO_INCREMENT;
+ALTER TABLE ProductListingInfo MODIFY productListingInfoID INT AUTO_INCREMENT;
+ALTER TABLE StockLevel MODIFY stockID INT AUTO_INCREMENT;
+ALTER TABLE Admin MODIFY adminID INT AUTO_INCREMENT;
+ALTER TABLE ProductListing MODIFY productListingID INT AUTO_INCREMENT;
+ALTER TABLE Category MODIFY categoryID INT AUTO_INCREMENT;
+
+
