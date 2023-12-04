@@ -144,6 +144,13 @@ $products = getProducts();
         echo "<p>Color: {$product['color']}</p>";
         echo "<p>Size: {$product['size']}</p>";
         echo "<p>Category: {$product['categoryName']}</p>";
+
+        //a form with a button to add the product to the cart
+        echo "<form method='post' action='addtocart.php'>";
+        echo "<input type='hidden' name='productID' value='{$product['productListingID']}'>";
+        echo "<input type='submit' value='Add to Cart'>";
+        echo "</form>";
+
         echo "</div>";
         echo "<hr>";
     }
