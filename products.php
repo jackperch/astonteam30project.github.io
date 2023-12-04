@@ -11,7 +11,7 @@ function getProducts() {
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "acegear";
+    $dbname = "ace gear";
 
 
     try {
@@ -33,7 +33,7 @@ function getProducts() {
         JOIN
             ProductListingInfo pli ON pl.productListingID = pli.productListingID
         JOIN
-            Category c ON pl.ctategoryID = c.categoryID;
+            Category c ON pl.categoryID = c.categoryID;
         ";
 
         // Prepare and execute the query
@@ -43,26 +43,18 @@ function getProducts() {
         // Fetch results
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        // Close the database connection
+        $conn = null;
+
         return $products; // Return the fetched product
 
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
+        return []; // Return an empty array if there is an error
     }
 
-    // Close the database connection
-    $conn = null;
+    
 }
-
-    // $query = "SELECT * FROM ProductListing";
-    // $result = $db->query($query);
-    // return $result->fetchAll(PDO::FETCH_ASSOC);
-
-    // For demonstration purposes, a sample array is returned
-   // return [
-   //     ['productName' => 'Product 1', 'price' => 19.99, 'description' => 'Description 1'],
-   //     ['productName' => 'Product 2', 'price' => 29.99, 'description' => 'Description 2'],
-        // Add more products as needed
-   // ];
 
 
 $products = getProducts();
@@ -115,6 +107,8 @@ $products = getProducts();
             <a href="products.php">Products</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
+
+
             <?php 
                 session_start();
                 if (isset($_SESSION['username'])) {
@@ -134,11 +128,6 @@ $products = getProducts();
         </div>
     </header>
 
-
-    <h2>Products</h2>
-        <p>Product 1</p>
-        <p>Product 2</p>
-        <p>Product 3</p>
 
 
         
