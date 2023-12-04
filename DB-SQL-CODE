@@ -1,1 +1,96 @@
- 
+ CREATE TABLE Category (
+  categoryID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE ProductListing (
+  productListingID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  productName VARCHAR(255) NOT NULL,
+  price double NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  categoryID int NOT NULL,
+  FOREIGN KEY (categoryID) REFERENCES Category (categoryID)
+);
+
+CREATE TABLE Admin (
+  adminID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE StockLevel (
+  stockID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  quantity int NOT NULL,
+  modified Time NOT NULL,
+  adminID int NOT NULL,
+  FOREIGN KEY (adminID) REFERENCES Admin (adminID)
+);
+
+CREATE TABLE ProductListingInfo (
+  productListingInfoID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  productListingID int NOT NULL,
+  color VARCHAR(255) NOT NULL,
+  size int NOT NULL,
+  stockID int NOT NULL,
+  FOREIGN KEY (productListingID) REFERENCES ProductListing (productListingID),
+  FOREIGN KEY (stockID) REFERENCES StockLevel (stockID)
+);
+
+CREATE TABLE ProductOrderPlaced (
+  orderID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  CustomerID int NOT NULL,
+  productListingID int NOT NULL,
+  FOREIGN KEY (CustomerID) REFERENCES customers(CustomerID),
+  FOREIGN KEY (productListingID) REFERENCES ProductListing (productListingID)
+);
+
+CREATE TABLE ProductOrderDetails (
+  ProductOrderDetailsID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  orderID int NOT NULL,
+  productID int NOT NULL,
+  quantity double NOT NULL,
+  price double NOT NULL,
+  color VARCHAR(255) NOT NULL,
+  size int NOT NULL,
+  date_purchased date,
+  FOREIGN KEY (orderID) REFERENCES ProductOrderPlaced (orderID)
+);
+
+CREATE TABLE Basket (
+  basketID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  customerID int NOT NULL,
+  productListingID int NOT NULL,
+  FOREIGN KEY (customerID) REFERENCES customers (customerID),
+  FOREIGN KEY (productListingID) REFERENCES ProductListing (productListingID)
+);
+
+CREATE TABLE GuestCart (
+  guestCartID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  orderID int NOT NULL,
+  productID int NOT NULL,
+  quantity double NOT NULL,
+  price double NOT NULL,
+  color VARCHAR(255) NOT NULL,
+  size int NOT NULL,
+  date_purchased date,
+  FOREIGN KEY (orderID) REFERENCES ProductOrderPlaced (orderID)
+);
+
+CREATE TABLE Guest (
+  guestID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  guestEmail VARCHAR(255) NOT NULL,
+  guestFname VARCHAR(255) NOT NULL,
+  guestSname VARCHAR(255) NOT NULL
+);
+
+ALTER TABLE ProductOrderPlaced MODIFY orderID INT AUTO_INCREMENT;
+ALTER TABLE Guest MODIFY guestID INT AUTO_INCREMENT;
+ALTER TABLE Basket MODIFY basketID INT AUTO_INCREMENT;
+ALTER TABLE GuestCart MODIFY guestCartID INT AUTO_INCREMENT;
+ALTER TABLE ProductOrderDetails MODIFY ProductOrderDetailsID INT AUTO_INCREMENT;
+ALTER TABLE ProductListingInfo MODIFY productListingInfoID INT AUTO_INCREMENT;
+ALTER TABLE StockLevel MODIFY stockID INT AUTO_INCREMENT;
+ALTER TABLE Admin MODIFY adminID INT AUTO_INCREMENT;
+ALTER TABLE ProductListing MODIFY productListingID INT AUTO_INCREMENT;
+ALTER TABLE Category MODIFY categoryID INT AUTO_INCREMENT;
