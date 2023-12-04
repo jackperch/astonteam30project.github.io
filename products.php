@@ -1,5 +1,6 @@
 <?php
-
+// database connection code 
+//require_once("connectionDB.php");
 
 
 
@@ -7,11 +8,15 @@ function getProducts() {
     // Replace this with your actual query to retrieve products from the database
     // For example:
     
- 
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "acegear";
+
 
     try {
-        // database connection code 
-        require_once("connectionDB.php");
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // SQL query
         $sql = "
@@ -41,9 +46,10 @@ function getProducts() {
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
-}
+
     // Close the database connection
     $conn = null;
+}
     ?>
 
     <!DOCTYPE html>
