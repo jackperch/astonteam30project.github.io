@@ -1,3 +1,37 @@
+<?php
+// Include your database connection code here
+// For example, if your connection file is named connectionDB.php, include it like this:
+// require_once("connectionDB.php");
+
+// Assuming you have a function to fetch products from the database
+function getProducts() {
+    // Replace this with your actual query to retrieve products from the database
+    // For example:
+    // $query = "SELECT * FROM ProductListing";
+    // $result = $db->query($query);
+    // return $result->fetchAll(PDO::FETCH_ASSOC);
+
+    // For demonstration purposes, a sample array is returned
+    return [
+        ['productName' => 'Product 1', 'price' => 19.99, 'description' => 'Description 1'],
+        ['productName' => 'Product 2', 'price' => 29.99, 'description' => 'Description 2'],
+        // Add more products as needed
+    ];
+}
+
+$products = getProducts();
+?>
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -52,6 +86,17 @@
         <p>Product 2</p>
         <p>Product 3</p>
 
+
+        <div class="product-container">
+        <?php foreach ($products as $product): ?>
+            <div class="product">
+                <h2><?php echo $product['productName']; ?></h2>
+                <p><strong>Price:</strong> $<?php echo $product['price']; ?></p>
+                <p><?php echo $product['description']; ?></p>
+                <!-- Add more details or styling as needed -->
+            </div>
+        <?php endforeach; ?>
+    </div>
 
 
 
