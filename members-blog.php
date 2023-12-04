@@ -42,7 +42,7 @@ if (!isset($_SESSION['user_id'])) {
                 <button id="search-button">Search</button>
             </div>
             <nav>
-                <a href="index.html">Home</a>
+                <a href="index.php">Home</a>
                 <a href="products.html">Products</a>
                 <a href="about.html">About</a>
                 <a href="members-blog.php">Blog</a>
