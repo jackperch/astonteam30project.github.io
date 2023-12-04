@@ -49,38 +49,6 @@ function getProducts() {
 
     // Close the database connection
     $conn = null;
-}
-    ?>
-
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <title>Product Listing</title>
-    </head>
-    <body>
-
-    <h1>Product Listing</h1>
-
-    <?php
-    // Display fetched product details
-    foreach ($products as $product) {
-        echo "<div>";
-        echo "<h2>{$product['productName']}</h2>";
-        echo "<p>Price: {$product['price']}</p>";
-        echo "<p>Description: {$product['productDescription']}</p>";
-        echo "<p>Color: {$product['color']}</p>";
-        echo "<p>Size: {$product['size']}</p>";
-        echo "<p>Category: {$product['categoryName']}</p>";
-        echo "</div>";
-        echo "<hr>";
-    }
-    ?>
-
-    </body>
-    </html>
-
-
-
 
 
     // $query = "SELECT * FROM ProductListing";
@@ -88,20 +56,28 @@ function getProducts() {
     // return $result->fetchAll(PDO::FETCH_ASSOC);
 
     // For demonstration purposes, a sample array is returned
-    return [
-        ['productName' => 'Product 1', 'price' => 19.99, 'description' => 'Description 1'],
-        ['productName' => 'Product 2', 'price' => 29.99, 'description' => 'Description 2'],
+   // return [
+   //     ['productName' => 'Product 1', 'price' => 19.99, 'description' => 'Description 1'],
+   //     ['productName' => 'Product 2', 'price' => 29.99, 'description' => 'Description 2'],
         // Add more products as needed
-    ];
+   // ];
 
 
 $products = getProducts();
 ?>
 
+    
 
 
 
 
+
+
+
+
+
+
+  
 
 
 
@@ -173,6 +149,23 @@ $products = getProducts();
             </div>
         <?php endforeach; ?>
     </div>
+
+
+
+    <?php
+    // Display fetched product details
+    foreach ($products as $product) {
+        echo "<div>";
+        echo "<h2>{$product['productName']}</h2>";
+        echo "<p>Price: {$product['price']}</p>";
+        echo "<p>Description: {$product['productDescription']}</p>";
+        echo "<p>Color: {$product['color']}</p>";
+        echo "<p>Size: {$product['size']}</p>";
+        echo "<p>Category: {$product['categoryName']}</p>";
+        echo "</div>";
+        echo "<hr>";
+    }
+    ?>
 
 
 
