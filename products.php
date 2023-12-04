@@ -49,7 +49,7 @@ function getProducts() {
 
     // Close the database connection
     $conn = null;
-
+}
 
     // $query = "SELECT * FROM ProductListing";
     // $result = $db->query($query);
