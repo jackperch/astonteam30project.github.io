@@ -139,16 +139,7 @@ $products = getProducts();
         <p>Product 3</p>
 
 
-        <div class="product-container">
-        <?php foreach ($products as $product): ?>
-            <div class="product">
-                <h2><?php echo $product['productName']; ?></h2>
-                <p><strong>Price:</strong> $<?php echo $product['price']; ?></p>
-                <p><?php echo $product['description']; ?></p>
-                <!-- Add more details or styling as needed -->
-            </div>
-        <?php endforeach; ?>
-    </div>
+        
 
 
 
