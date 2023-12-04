@@ -13,7 +13,7 @@ if (isset($_SESSION['customerID'])) {
     $customerID = $_SESSION['customerID'];
     $stmt = $db_handle->prepare("INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, productID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 } else {
-    $stmt = $db_handle->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $db_handle->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 }
 
 if(isset($_POST['productID'])) {
