@@ -43,6 +43,8 @@ function getProducts() {
         // Fetch results
         $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        return $products; // Return the fetched product
+
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
