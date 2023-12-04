@@ -1,12 +1,82 @@
 <?php
-// Include your database connection code here
-// For example, if your connection file is named connectionDB.php, include it like this:
-// require_once("connectionDB.php");
 
-// Assuming you have a function to fetch products from the database
+
+
+
 function getProducts() {
     // Replace this with your actual query to retrieve products from the database
     // For example:
+    
+ 
+
+    try {
+        // database connection code 
+        require_once("connectionDB.php");
+
+        // SQL query
+        $sql = "
+        SELECT
+            pl.productListingID,
+            pl.productName,
+            pl.price,
+            pl.description AS productDescription,
+            pli.color,
+            pli.size,
+            c.name AS categoryName
+        FROM
+            ProductListing pl
+        JOIN
+            ProductListingInfo pli ON pl.productListingID = pli.productListingID
+        JOIN
+            Category c ON pl.ctategoryID = c.categoryID;
+        ";
+
+        // Prepare and execute the query
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        // Fetch results
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+}
+    // Close the database connection
+    $conn = null;
+    ?>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Product Listing</title>
+    </head>
+    <body>
+
+    <h1>Product Listing</h1>
+
+    <?php
+    // Display fetched product details
+    foreach ($products as $product) {
+        echo "<div>";
+        echo "<h2>{$product['productName']}</h2>";
+        echo "<p>Price: {$product['price']}</p>";
+        echo "<p>Description: {$product['productDescription']}</p>";
+        echo "<p>Color: {$product['color']}</p>";
+        echo "<p>Size: {$product['size']}</p>";
+        echo "<p>Category: {$product['categoryName']}</p>";
+        echo "</div>";
+        echo "<hr>";
+    }
+    ?>
+
+    </body>
+    </html>
+
+
+
+
+
     // $query = "SELECT * FROM ProductListing";
     // $result = $db->query($query);
     // return $result->fetchAll(PDO::FETCH_ASSOC);
@@ -17,7 +87,7 @@ function getProducts() {
         ['productName' => 'Product 2', 'price' => 29.99, 'description' => 'Description 2'],
         // Add more products as needed
     ];
-}
+
 
 $products = getProducts();
 ?>
