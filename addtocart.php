@@ -2,23 +2,23 @@
 include 'connectionDB.php';
 
 session_start();
-
-// Assuming $productByCode is an array of products, replace it with your actual product array.
-// This loop is just a placeholder, and you should adjust it based on your data retrieval logic.
-$productByCode = []; // Replace this line with your actual data retrieval logic
+$productByCode = [];
 
 foreach ($productByCode as $product) {
 
-    $insertQuery = "INSERT INTO ProductOrderPlaced (orderID, customerID, productListingID) 
-    VALUES ('$orderID', '$customerID', '$productListingID')"; 
-    
-    // Execute the insert query here
-    // ...
-
+    $insertQuery = "INSERT INTO ProductOrderPlaced (orderID, customerID, productListingID)
+    VALUES ('$orderID', '$customerID', '$prouctListingID')"; 
+}
+if (isset($_SESSION['customerID'])) {
+    // If the customer is logged in
+    $customerID = $_SESSION['customerID'];
+    $stmt = $db_handle->prepare("INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, prouctListingID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+} else {
+    $stmt = $db_handle->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 }
 
-if (isset($_POST['productID'])) {
-    $productListingID = $_POST['productID'];
+if (isset($_POST['prouctListingID'])) {
+    $productListingID = $_POST['prouctListingID'];
 
     // Check if the product ID is valid
     if (is_numeric($productListingID) && $productListingID > 0) {

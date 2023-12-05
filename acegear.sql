@@ -218,7 +218,7 @@ CREATE table Basket (
 CREATE table GuestCart (
   'guestCartID' int NOT NULL PRIMARY KEY,
   'orderID' int NOT NULL,
-  'productID' int NOT NULL,
+  'productListingID' int NOT NULL,
   'quantity' double NOT NULL,
   'price' double NOT NULL,
   'color' VARCHAR NOT NULL,
