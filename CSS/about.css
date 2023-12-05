@@ -49,7 +49,7 @@ h2 {
 
 .right {
     padding-left: 50%;
-    background: linear-gradient(90deg, var(--color1) 50%, var(--color3) 50%);
+    background: linear-gradient(90deg, var(--color1) 50%, var(--color4) 50%);
     color: var(--color1);
 }
 
