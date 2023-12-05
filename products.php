@@ -1,3 +1,83 @@
+<?php
+// database connection code 
+//require_once("connectionDB.php");
+
+
+
+function getProducts() {
+    // Replace this with your actual query to retrieve products from the database
+    // For example:
+    
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "ace gear";
+
+
+    try {
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // SQL query
+        $sql = "
+        SELECT
+            pl.productListingID,
+            pl.productName,
+            pl.price,
+            pl.description AS productDescription,
+            pli.color,
+            pli.size,
+            c.name AS categoryName
+        FROM
+            ProductListing pl
+        JOIN
+            ProductListingInfo pli ON pl.productListingID = pli.productListingID
+        JOIN
+            Category c ON pl.categoryID = c.categoryID;
+        ";
+
+        // Prepare and execute the query
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        // Fetch results
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        // Close the database connection
+        $conn = null;
+
+        return $products; // Return the fetched product
+
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return []; // Return an empty array if there is an error
+    }
+
+    
+}
+
+
+$products = getProducts();
+?>
+
+    
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,10 +103,12 @@
             <button id="search-button">Search</button>
         </div>
         <nav>
-            <a href="index.html">Home</a>
+            <a href="index.php">Home</a>
             <a href="products.php">Products</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
+
+
             <?php 
                 session_start();
                 if (isset($_SESSION['username'])) {
@@ -47,11 +129,32 @@
     </header>
 
 
-    <h2>Products</h2>
-        <p>Product 1</p>
-        <p>Product 2</p>
-        <p>Product 3</p>
 
+        
+
+
+
+    <?php
+    // Display fetched product details
+    foreach ($products as $product) {
+        echo "<div>";
+        echo "<h2>{$product['productName']}</h2>";
+        echo "<p>Price: {$product['price']}</p>";
+        echo "<p>Description: {$product['productDescription']}</p>";
+        echo "<p>Color: {$product['color']}</p>";
+        echo "<p>Size: {$product['size']}</p>";
+        echo "<p>Category: {$product['categoryName']}</p>";
+
+        //a form with a button to add the product to the cart
+        echo "<form method='post' action='addtocart.php'>";
+        echo "<input type='hidden' name='productID' value='{$product['productListingID']}'>";
+        echo "<input type='submit' value='Add to Cart'>";
+        echo "</form>";
+
+        echo "</div>";
+        echo "<hr>";
+    }
+    ?>
 
 
 
