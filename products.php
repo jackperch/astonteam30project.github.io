@@ -1,27 +1,15 @@
 <?php
-// database connection code 
-//require_once("connectionDB.php");
 
-
-
-function getProducts() {
-    // Replace this with your actual query to retrieve products from the database
-    // For example:
-    
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "ace gear";
-
+function fetchProducts() {
 
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+         // database connection code 
+         require_once("connectionDB.php");
         // SQL query
         $sql = "
         SELECT
             pl.productListingID,
+            pl.image,
             pl.productName,
             pl.price,
             pl.description AS productDescription,
@@ -37,46 +25,28 @@ function getProducts() {
         ";
 
         // Prepare and execute the query
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
 
+        $SQLEXECUTE = $db->prepare($sql);
+        $SQLEXECUTE->execute();
         // Fetch results
-        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+        $products = $SQLEXECUTE->fetchAll(PDO::FETCH_ASSOC);
         // Close the database connection
-        $conn = null;
-
+        $db = null;
         return $products; // Return the fetched product
 
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        return []; // Return an empty array if there is an error
-    }
-
-    
+    }//Catches the problem
+      catch(PDOException $ex) {
+        echo("Failed to connect to the database.<br>");
+        echo($ex->getMessage());
+        exit;
+      } 
+     
 }
 
-
-$products = getProducts();
+$allOfTheProducts = fetchProducts();
 ?>
 
     
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -114,6 +84,7 @@ $products = getProducts();
                 if (isset($_SESSION['username'])) {
                     echo "<a href='logout.php'>Logout</a>";
                 } else {
+                    echo "<a href='account.php'>Account</a>";
                     echo "<a href='login.php'>Login</a>";
                     
                 }
@@ -129,19 +100,17 @@ $products = getProducts();
     </header>
 
 
-
-        
-
-
-
     <?php
     // Display fetched product details
-    foreach ($products as $product) {
+    //The allOfTheProducts is an array of all the products  that  is going to be iterated through and the product is the current product that is being iterated through
+    //Display each product
+    foreach ($allOfTheProducts as $product) {
         echo "<div>";
+        echo "<img src='Images/{$product['image']}' alt='{$product['productName']}' width=50 height=50>";
         echo "<h2>{$product['productName']}</h2>";
         echo "<p>Price: {$product['price']}</p>";
         echo "<p>Description: {$product['productDescription']}</p>";
-        echo "<p>Color: {$product['color']}</p>";
+        echo "<p>Colour: {$product['color']}</p>";
         echo "<p>Size: {$product['size']}</p>";
         echo "<p>Category: {$product['categoryName']}</p>";
 
@@ -155,7 +124,6 @@ $products = getProducts();
         echo "<hr>";
     }
     ?>
-
 
 
         <footer>
