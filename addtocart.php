@@ -36,9 +36,9 @@ if (isset($_POST['prouctListingID'])) {
 
         $message = "Product added to cart successfully!";
     } else {
-        echo "Invalid product ID.";
+        $message = "Invalid product ID.";
     }
 } else {
-    echo "Product ID is missing.";
+    $message ="Product ID is missing.";
 }
 ?>
