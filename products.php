@@ -136,12 +136,15 @@ $allOfTheProducts = fetchProducts();
                 </div>
             </div>
         </footer>
-        <script>
-    <?php if (isset($message) && !empty($message)) { ?>
-        // Show a pop-up message
-        alert("<?php echo $message; ?>");
-    <?php } ?>
-</script>
+    <script>
+        <?php
+        session_start();
+        if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
+            echo 'alert("' . $_SESSION['message'] . '");';
+            unset($_SESSION['message']);
+        }
+        ?>
+    </script>
 </body>
 </html>
 
