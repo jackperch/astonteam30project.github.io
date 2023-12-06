@@ -124,13 +124,6 @@
         </div>
     </div>
 
-
-    <!-- Succesful login pop-up container -->
-    <div id="popup" class="popup-container">
-        <p>Login successful!</p>
-        <button onclick="closePopup()">Close</button>
-    </div>
-
     <script>
         <?php
             if ($loggedIn) {
