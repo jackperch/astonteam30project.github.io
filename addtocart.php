@@ -2,7 +2,7 @@
 include 'connectionDB.php';
 
 session_start();
-//$_SESSION['message'] = $message;
+
 
 // $productByCode is an array of products.
 $productByCode = [];
@@ -43,10 +43,13 @@ if (isset($_POST['productListingID'])) {
         }
 
         $message = "Product added to cart successfully!";
+        $_SESSION['message'] = $message;
     } else {
         $message = "Invalid product ID.";
+        $_SESSION['message'] = $message;
     }
 } else {
     $message = "Product ID is missing.";
+    $_SESSION['message'] = $message;
 }
 ?>
