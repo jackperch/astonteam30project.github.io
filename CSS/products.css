@@ -107,18 +107,22 @@ nav a:hover {
 
 
 
+
+
+
+
+
 /* Code below is for the Main Content */
 
-/* Product container styles */
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
+/* Container for products */
+.product-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin: 20px;
 }
 
-/* Individual product styles */
+/* Individual product styling */
 .product {
     width: 300px;
     margin: 20px;
@@ -135,13 +139,15 @@ nav a:hover {
 .product h2 {
     margin-top: 10px;
     font-size: 1.2em;
+    color: #333; /* Adjust color as needed */
 }
 
 .product p {
     margin: 5px 0;
+    color: #555; /* Adjust color as needed */
 }
 
-/* Add to cart button styles */
+/* Add to cart button styling */
 .add-to-cart {
     background-color: #4CAF50;
     color: #fff;
@@ -155,6 +161,22 @@ nav a:hover {
 .add-to-cart:hover {
     background-color: #45a049;
 }
+
+/* Separator line styling */
+.hr-line {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 15px 0;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    .product {
+        width: 100%;
+    }
+}
+
 
 
 
