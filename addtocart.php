@@ -4,7 +4,46 @@ include 'connectionDB.php';
 session_start();
 $productByCode = [];
 
+
 foreach ($productByCode as $product) {
+
+    // Fetch product details from the database based on the product ID
+    $stmt = $db->prepare("SELECT * FROM ProductListing WHERE productListingID = ?");
+    $stmt->execute([$productListingID]);
+    $productDetails = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Check if the product details were retrieved successfully
+    if ($productDetails) {
+        // You can now use $productDetails array to access specific details
+        $productName = $productDetails['productName'];
+        $price = $productDetails['price'];
+        $description = $productDetails['description'];
+
+        // Rest of your code to insert into ProductOrderPlaced or guest_cart
+        if (isset($_SESSION['customerID'])) {
+            // If the customer is logged in
+            $customerID = $_SESSION['customerID'];
+            $stmt = $db->prepare("INSERT INTO ProductOrderDetails (orderID, customerID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        } else {
+            // For guest users
+            $stmt = $db->prepare("INSERT INTO guest_cart (orderID, customerID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        }
+
+        // Add your bindings and execute the statement
+        $stmt->execute([$orderID, $customerID, $productListingID, $quantity, $price, $color, $size, $date_purchased]);
+
+        // Display success message or handle further logic
+        echo "Product added to cart successfully!";
+    } else {
+        echo "Error: Product details not found.";
+    }
+
+
+
+
+
+
+
 
     $insertQuery = "INSERT INTO ProductOrderPlaced (orderID, customerID, productListingID)
     VALUES ('$orderID', '$customerID', '$productListingID')"; 
@@ -14,7 +53,7 @@ if (isset($_SESSION['customerID'])) {
     $customerID = $_SESSION['customerID'];
     $stmt = $db->prepare("INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 } else {
-    $stmt = $db->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $db->prepare("INSERT INTO guest_cart (guestCartID, orderID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 }
 
 if (isset($_POST['productListingID'])) {
