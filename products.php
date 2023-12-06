@@ -136,6 +136,12 @@ $allOfTheProducts = fetchProducts();
                 </div>
             </div>
         </footer>
+        <script>
+    <?php if (isset($message) && !empty($message)) { ?>
+        // Show a pop-up message
+        alert("<?php echo $message; ?>");
+    <?php } ?>
+</script>
 </body>
 </html>
 

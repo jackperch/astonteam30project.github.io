@@ -7,18 +7,18 @@ $productByCode = [];
 foreach ($productByCode as $product) {
 
     $insertQuery = "INSERT INTO ProductOrderPlaced (orderID, customerID, productListingID)
-    VALUES ('$orderID', '$customerID', '$productListingID')"; 
+    VALUES ('$orderID', '$customerID', '$prouctListingID')"; 
 }
 if (isset($_SESSION['customerID'])) {
     // If the customer is logged in
     $customerID = $_SESSION['customerID'];
-    $stmt = $db->prepare("INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $db= "INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, prouctListingID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 } else {
-    $stmt = $db->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $db_handle->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 }
 
-if (isset($_POST['productListingID'])) {
-    $productListingID = $_POST['productListingID'];
+if (isset($_POST['prouctListingID'])) {
+    $productListingID = $_POST['prouctListingID'];
 
     // Check if the product ID is valid
     if (is_numeric($productListingID) && $productListingID > 0) {
@@ -34,7 +34,7 @@ if (isset($_POST['productListingID'])) {
             $_SESSION['cart'][$productListingID] = 1;
         }
 
-        echo "Product added to cart successfully!";
+        $message = "Product added to cart successfully!";
     } else {
         echo "Invalid product ID.";
     }
