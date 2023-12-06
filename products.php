@@ -1,6 +1,8 @@
 <?php
 
+require_once("connectionDB.php");
 function fetchProducts() {
+    global $db;
 
     try {
          // database connection code 
@@ -25,13 +27,14 @@ function fetchProducts() {
         ";
 
         // Prepare and execute the query
-
         $SQLEXECUTE = $db->prepare($sql);
         $SQLEXECUTE->execute();
+
         // Fetch results
         $products = $SQLEXECUTE->fetchAll(PDO::FETCH_ASSOC);
+
         // Close the database connection
-        $db = null;
+        //$db = null;
         return $products; // Return the fetched product
 
     }//Catches the problem

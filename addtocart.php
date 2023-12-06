@@ -2,28 +2,35 @@
 include 'connectionDB.php';
 
 session_start();
-$_SESSION['message'] = $message;
+//$_SESSION['message'] = $message;
+
+// $productByCode is an array of products.
 $productByCode = [];
 
 foreach ($productByCode as $product) {
-
+    // defined $orderID, $customerID, and $productListingID .
     $insertQuery = "INSERT INTO ProductOrderPlaced (orderID, customerID, productListingID)
-    VALUES ('$orderID', '$customerID', '$prouctListingID')"; 
+                    VALUES ('$orderID', '$customerID', '$productListingID')";
+    // i need to enter a line to Execute the query here
 }
+
 if (isset($_SESSION['customerID'])) {
     // If the customer is logged in
     $customerID = $_SESSION['customerID'];
-    $db= "INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, prouctListingID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    // PDO connection called $db_.
+    $stmt = $db->prepare("INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 } else {
-    $stmt = $db->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    //a PDO connection called $db.
+    $stmt = $db->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 }
 
-if (isset($_POST['prouctListingID'])) {
-    $productListingID = $_POST['prouctListingID'];
+if (isset($_POST['productListingID'])) {
+    $productListingID = $_POST['productListingID'];
 
     // Check if the product ID is valid
     if (is_numeric($productListingID) && $productListingID > 0) {
-
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = array();
         }
@@ -40,6 +47,6 @@ if (isset($_POST['prouctListingID'])) {
         $message = "Invalid product ID.";
     }
 } else {
-    $message ="Product ID is missing.";
+    $message = "Product ID is missing.";
 }
 ?>
