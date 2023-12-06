@@ -7,18 +7,18 @@ $productByCode = [];
 foreach ($productByCode as $product) {
 
     $insertQuery = "INSERT INTO ProductOrderPlaced (orderID, customerID, productListingID)
-    VALUES ('$orderID', '$customerID', '$prouctListingID')"; 
+    VALUES ('$orderID', '$customerID', '$productListingID')"; 
 }
 if (isset($_SESSION['customerID'])) {
     // If the customer is logged in
     $customerID = $_SESSION['customerID'];
-    $stmt = $db->prepare("INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, prouctListingID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $db->prepare("INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 } else {
     $stmt = $db->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 }
 
-if (isset($_POST['prouctListingID'])) {
-    $productListingID = $_POST['prouctListingID'];
+if (isset($_POST['productListingID'])) {
+    $productListingID = $_POST['productListingID'];
 
     // Check if the product ID is valid
     if (is_numeric($productListingID) && $productListingID > 0) {
