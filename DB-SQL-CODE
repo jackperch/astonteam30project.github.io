@@ -1,9 +1,9 @@
- -- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2023 at 02:08 PM
+-- Generation Time: Dec 06, 2023 at 10:44 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `acegear`
+-- Database: `ace gear`
 --
 
 -- --------------------------------------------------------
@@ -45,6 +45,56 @@ INSERT INTO `address` (`addressID`, `house_number`, `Address_Line1`, `Address_Li
 (1, 0, 'BBB', 'BBB', 'BBB', 'BBB', 'BBB'),
 (2, 11, 'T1', 'T1', 'T1', 'T1', 'T1'),
 (3, 11, 'SS', 'SS', 'SS', 'SS', 'SS');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `adminID` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`adminID`, `username`, `password`) VALUES
+(1, 'Admin1', 'Admin1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `basket`
+--
+
+CREATE TABLE `basket` (
+  `basketID` int(11) NOT NULL,
+  `customerID` int(11) NOT NULL,
+  `productListingID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category`
+--
+
+CREATE TABLE `category` (
+  `categoryID` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`categoryID`, `name`, `description`) VALUES
+(1, 'Racket Sports', 'All things rackets related');
 
 -- --------------------------------------------------------
 
@@ -93,6 +143,128 @@ INSERT INTO `customer_address` (`Customer_AddressID`, `CustomerID`, `addressID`)
 (0, 5, 2),
 (0, 6, 3);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guest`
+--
+
+CREATE TABLE `guest` (
+  `guestID` int(11) NOT NULL,
+  `guestEmail` varchar(255) NOT NULL,
+  `guestFname` varchar(255) NOT NULL,
+  `guestSname` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `guestcart`
+--
+
+CREATE TABLE `guestcart` (
+  `guestCartID` int(11) NOT NULL,
+  `orderID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `quantity` double NOT NULL,
+  `price` double NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `size` int(11) NOT NULL,
+  `date_purchased` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productlisting`
+--
+
+CREATE TABLE `productlisting` (
+  `productListingID` int(11) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `productName` varchar(255) NOT NULL,
+  `price` double NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `categoryID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `productlisting`
+--
+
+INSERT INTO `productlisting` (`productListingID`, `image`, `productName`, `price`, `description`, `categoryID`) VALUES
+(1, 'TennisRacket.jpeg', 'Tenis Racket', 10.98, 'A simple test for tenis raket', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productlistinginfo`
+--
+
+CREATE TABLE `productlistinginfo` (
+  `productListingInfoID` int(11) NOT NULL,
+  `productListingID` int(11) NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `size` int(11) NOT NULL,
+  `stockID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `productlistinginfo`
+--
+
+INSERT INTO `productlistinginfo` (`productListingInfoID`, `productListingID`, `color`, `size`, `stockID`) VALUES
+(2, 1, 'Green', 10, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productorderdetails`
+--
+
+CREATE TABLE `productorderdetails` (
+  `ProductOrderDetailsID` int(11) NOT NULL,
+  `orderID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `quantity` double NOT NULL,
+  `price` double NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `size` int(11) NOT NULL,
+  `date_purchased` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `productorderplaced`
+--
+
+CREATE TABLE `productorderplaced` (
+  `orderID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
+  `productListingID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `stocklevel`
+--
+
+CREATE TABLE `stocklevel` (
+  `stockID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `modified` time NOT NULL,
+  `adminID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `stocklevel`
+--
+
+INSERT INTO `stocklevel` (`stockID`, `quantity`, `modified`, `adminID`) VALUES
+(3, 4, '00:00:00', 1);
+
 --
 -- Indexes for dumped tables
 --
@@ -102,6 +274,26 @@ INSERT INTO `customer_address` (`Customer_AddressID`, `CustomerID`, `addressID`)
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`addressID`);
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`adminID`);
+
+--
+-- Indexes for table `basket`
+--
+ALTER TABLE `basket`
+  ADD PRIMARY KEY (`basketID`),
+  ADD KEY `customerID` (`customerID`),
+  ADD KEY `productListingID` (`productListingID`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`categoryID`);
 
 --
 -- Indexes for table `customers`
@@ -117,6 +309,56 @@ ALTER TABLE `customer_address`
   ADD KEY `addressID_fk` (`addressID`);
 
 --
+-- Indexes for table `guest`
+--
+ALTER TABLE `guest`
+  ADD PRIMARY KEY (`guestID`);
+
+--
+-- Indexes for table `guestcart`
+--
+ALTER TABLE `guestcart`
+  ADD PRIMARY KEY (`guestCartID`),
+  ADD KEY `orderID` (`orderID`);
+
+--
+-- Indexes for table `productlisting`
+--
+ALTER TABLE `productlisting`
+  ADD PRIMARY KEY (`productListingID`),
+  ADD KEY `categoryID` (`categoryID`);
+
+--
+-- Indexes for table `productlistinginfo`
+--
+ALTER TABLE `productlistinginfo`
+  ADD PRIMARY KEY (`productListingInfoID`),
+  ADD KEY `productListingID` (`productListingID`),
+  ADD KEY `stockID` (`stockID`);
+
+--
+-- Indexes for table `productorderdetails`
+--
+ALTER TABLE `productorderdetails`
+  ADD PRIMARY KEY (`ProductOrderDetailsID`),
+  ADD KEY `orderID` (`orderID`);
+
+--
+-- Indexes for table `productorderplaced`
+--
+ALTER TABLE `productorderplaced`
+  ADD PRIMARY KEY (`orderID`),
+  ADD KEY `CustomerID` (`CustomerID`),
+  ADD KEY `productListingID` (`productListingID`);
+
+--
+-- Indexes for table `stocklevel`
+--
+ALTER TABLE `stocklevel`
+  ADD PRIMARY KEY (`stockID`),
+  ADD KEY `adminID` (`adminID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -127,14 +369,81 @@ ALTER TABLE `address`
   MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `basket`
+--
+ALTER TABLE `basket`
+  MODIFY `basketID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `guest`
+--
+ALTER TABLE `guest`
+  MODIFY `guestID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `guestcart`
+--
+ALTER TABLE `guestcart`
+  MODIFY `guestCartID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `productlisting`
+--
+ALTER TABLE `productlisting`
+  MODIFY `productListingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `productlistinginfo`
+--
+ALTER TABLE `productlistinginfo`
+  MODIFY `productListingInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `productorderdetails`
+--
+ALTER TABLE `productorderdetails`
+  MODIFY `ProductOrderDetailsID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `productorderplaced`
+--
+ALTER TABLE `productorderplaced`
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `stocklevel`
+--
+ALTER TABLE `stocklevel`
+  MODIFY `stockID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `basket`
+--
+ALTER TABLE `basket`
+  ADD CONSTRAINT `basket_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`CustomerID`),
+  ADD CONSTRAINT `basket_ibfk_2` FOREIGN KEY (`productListingID`) REFERENCES `productlisting` (`productListingID`);
 
 --
 -- Constraints for table `customer_address`
@@ -142,105 +451,46 @@ ALTER TABLE `customers`
 ALTER TABLE `customer_address`
   ADD CONSTRAINT `customer_address_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`),
   ADD CONSTRAINT `customer_address_ibfk_2` FOREIGN KEY (`addressID`) REFERENCES `address` (`addressID`);
+
+--
+-- Constraints for table `guestcart`
+--
+ALTER TABLE `guestcart`
+  ADD CONSTRAINT `guestcart_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `productorderplaced` (`orderID`);
+
+--
+-- Constraints for table `productlisting`
+--
+ALTER TABLE `productlisting`
+  ADD CONSTRAINT `productlisting_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `category` (`categoryID`);
+
+--
+-- Constraints for table `productlistinginfo`
+--
+ALTER TABLE `productlistinginfo`
+  ADD CONSTRAINT `productlistinginfo_ibfk_1` FOREIGN KEY (`productListingID`) REFERENCES `productlisting` (`productListingID`),
+  ADD CONSTRAINT `productlistinginfo_ibfk_2` FOREIGN KEY (`stockID`) REFERENCES `stocklevel` (`stockID`);
+
+--
+-- Constraints for table `productorderdetails`
+--
+ALTER TABLE `productorderdetails`
+  ADD CONSTRAINT `productorderdetails_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `productorderplaced` (`orderID`);
+
+--
+-- Constraints for table `productorderplaced`
+--
+ALTER TABLE `productorderplaced`
+  ADD CONSTRAINT `productorderplaced_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`),
+  ADD CONSTRAINT `productorderplaced_ibfk_2` FOREIGN KEY (`productListingID`) REFERENCES `productlisting` (`productListingID`);
+
+--
+-- Constraints for table `stocklevel`
+--
+ALTER TABLE `stocklevel`
+  ADD CONSTRAINT `stocklevel_ibfk_1` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
- 
- CREATE TABLE Category (
-  categoryID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  description VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE ProductListing (
-  productListingID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  productName VARCHAR(255) NOT NULL,
-  price double NOT NULL,
-  description VARCHAR(255) NOT NULL,
-  categoryID int NOT NULL,
-  FOREIGN KEY (categoryID) REFERENCES Category (categoryID)
-);
-
-CREATE TABLE Admin (
-  adminID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  username VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE StockLevel (
-  stockID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  quantity int NOT NULL,
-  modified Time NOT NULL,
-  adminID int NOT NULL,
-  FOREIGN KEY (adminID) REFERENCES Admin (adminID)
-);
-
-CREATE TABLE ProductListingInfo (
-  productListingInfoID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  productListingID int NOT NULL,
-  color VARCHAR(255) NOT NULL,
-  size int NOT NULL,
-  stockID int NOT NULL,
-  FOREIGN KEY (productListingID) REFERENCES ProductListing (productListingID),
-  FOREIGN KEY (stockID) REFERENCES StockLevel (stockID)
-);
-
-CREATE TABLE ProductOrderPlaced (
-  orderID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  CustomerID int NOT NULL,
-  productListingID int NOT NULL,
-  FOREIGN KEY (CustomerID) REFERENCES customers(CustomerID),
-  FOREIGN KEY (productListingID) REFERENCES ProductListing (productListingID)
-);
-
-CREATE TABLE ProductOrderDetails (
-  ProductOrderDetailsID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  orderID int NOT NULL,
-  productID int NOT NULL,
-  quantity double NOT NULL,
-  price double NOT NULL,
-  color VARCHAR(255) NOT NULL,
-  size int NOT NULL,
-  date_purchased date,
-  FOREIGN KEY (orderID) REFERENCES ProductOrderPlaced (orderID)
-);
-
-CREATE TABLE Basket (
-  basketID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  customerID int NOT NULL,
-  productListingID int NOT NULL,
-  FOREIGN KEY (customerID) REFERENCES customers (customerID),
-  FOREIGN KEY (productListingID) REFERENCES ProductListing (productListingID)
-);
-
-CREATE TABLE GuestCart (
-  guestCartID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  orderID int NOT NULL,
-  productID int NOT NULL,
-  quantity double NOT NULL,
-  price double NOT NULL,
-  color VARCHAR(255) NOT NULL,
-  size int NOT NULL,
-  date_purchased date,
-  FOREIGN KEY (orderID) REFERENCES ProductOrderPlaced (orderID)
-);
-
-CREATE TABLE Guest (
-  guestID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  guestEmail VARCHAR(255) NOT NULL,
-  guestFname VARCHAR(255) NOT NULL,
-  guestSname VARCHAR(255) NOT NULL
-);
-
-ALTER TABLE ProductOrderPlaced MODIFY orderID INT AUTO_INCREMENT;
-ALTER TABLE Guest MODIFY guestID INT AUTO_INCREMENT;
-ALTER TABLE Basket MODIFY basketID INT AUTO_INCREMENT;
-ALTER TABLE GuestCart MODIFY guestCartID INT AUTO_INCREMENT;
-ALTER TABLE ProductOrderDetails MODIFY ProductOrderDetailsID INT AUTO_INCREMENT;
-ALTER TABLE ProductListingInfo MODIFY productListingInfoID INT AUTO_INCREMENT;
-ALTER TABLE StockLevel MODIFY stockID INT AUTO_INCREMENT;
-ALTER TABLE Admin MODIFY adminID INT AUTO_INCREMENT;
-ALTER TABLE ProductListing MODIFY productListingID INT AUTO_INCREMENT;
-ALTER TABLE Category MODIFY categoryID INT AUTO_INCREMENT;
