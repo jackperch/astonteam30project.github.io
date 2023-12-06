@@ -2,6 +2,7 @@
 include 'connectionDB.php';
 
 session_start();
+$_SESSION['message'] = $message;
 $productByCode = [];
 
 foreach ($productByCode as $product) {
