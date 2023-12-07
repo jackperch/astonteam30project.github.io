@@ -10,7 +10,7 @@ var addressLine2Error = document.getElementById("address-line2-error");
 var postCodeError = document.getElementById("post-code-error");
 var cityError = document.getElementById("city-error");
 var countryError = document.getElementById("country-error");
-var submitError = document.getElementById("submit-error");
+var submitError = document.getElementById("signup-error");
 
 
 function validateFirstName(){
@@ -149,7 +149,7 @@ function validatePostCode(){
         return false;
     }
 
-    if(!postCode.match(/^[a-zA-Z0-9]+$/) ){
+    if(!postCode.match(/^[0-9a-zA-Z\s-]{3,}$/) ){
         postCodeError.innerHTML = "Please enter a valid post code";
         postCodeError.style.color = "red"; 
         
@@ -161,8 +161,33 @@ function validatePostCode(){
 }   
 
 function validateCity(){
+    var city = document.getElementById("city").value;
+    if(!city.match(/^[a-zA-Z\s.'-]{2,}$/) ){
+        cityError.innerHTML = "Please enter a valid city";
+        cityError.style.color = "red"; 
+        
+        return false;
+    }
 
 }
 
  function validateCountry(){
+    var country = document.getElementById("country").value;
+    if(!country.match(/^[a-zA-Z\s.'-]{2,}$/) ){
+        countryError.innerHTML = "Please enter a valid country";
+        countryError.style.color = "red"; 
+        
+        return false;
+    }
+ }
+
+ function validateForm(){
+    if(validateFirstName() && validateLastName() && validateUsername() && validatePassword() && validateEmail() && validateHouseNumber() && validateAddressLine1() && validatePostCode() && validateCity() && validateCountry()){
+        return true;
+    }
+    else{
+        submitError.innerHTML = "Please fill in all the fields correctly";
+        submitError.style.color = "red";;
+        return false
+    }
  }

@@ -153,7 +153,7 @@ if (isset($_POST['signupsubmitted'])) {
                     <span id="country-error"></span>
 
 
-                    <input type="submit" value="Register" >
+                    <input onclick=" return validateForm()" type="submit" value="Register" >
                     <input type="reset" value="clear">
                     <input type="hidden" name="signupsubmitted" value="TRUE" >
                     <span id="signup-error"></span>
