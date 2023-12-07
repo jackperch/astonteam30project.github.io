@@ -32,11 +32,10 @@
             <?php 
                 session_start();
                 if (isset($_SESSION['username'])) {
+                    echo "<a href='account.php'>Account</a>";
                     echo "<a href='logout.php'>Logout</a>";
                 } else {
-                    echo "<a href='account.php'>Account</a>";
                     echo "<a href='login.php'>Login</a>";
-                    
                 }
                 ?>
         </nav>

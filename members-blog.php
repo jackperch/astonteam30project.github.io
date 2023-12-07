@@ -47,7 +47,15 @@ if (!isset($_SESSION['user_id'])) {
                 <a href="about.html">About</a>
                 <a href="members-blog.php">Blog</a>
                 <a href="contact.html">Contact</a>
-                <a href="login.php">Login</a>
+                <?php 
+                session_start();
+                if (isset($_SESSION['username'])) {
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+                } else {
+                    echo "<a href='login.php'>Login</a>";
+                }
+                ?>
             </nav>
             <div id="cart-container">
                 <!-- cart icon image with link to cart page -->
