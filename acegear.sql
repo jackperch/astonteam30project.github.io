@@ -198,7 +198,7 @@ CREATE table ProductOrderPlaced (
 CREATE table ProductOrderDetails (
   'ProductOrderDetailsID' int NOT NULL PRIMARY KEY,
   'orderID' int NOT NULL,
-  'productID' int NOT NULL,
+  'productListingID' int NOT NULL,
   'quantity' double NOT NULL,
   'price' double NOT NULL,
   'color' VARCHAR NOT NULL,

@@ -2,44 +2,59 @@
 include 'connectionDB.php';
 
 session_start();
-$_SESSION['message'] = $message;
-$productByCode = [];
+
+
+$stmtFetchProducts = $db->query("SELECT * FROM ProductListing");
+$productByCode = $stmtFetchProducts->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($productByCode as $product) {
-
+    // defined $orderID, $customerID, and $productListingID .
     $insertQuery = "INSERT INTO ProductOrderPlaced (orderID, customerID, productListingID)
-    VALUES ('$orderID', '$customerID', '$prouctListingID')"; 
+    VALUES ('$orderID', '$customerID', '$productListingID')";
+    $db->query($insertQuery);
 }
+
 if (isset($_SESSION['customerID'])) {
     // If the customer is logged in
     $customerID = $_SESSION['customerID'];
-    $db= "INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, prouctListingID, quantity, price, color, size, date_purcahsed) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+    // PDO connection called $db_.
+    $stmt = $db->prepare("INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+     
 } else {
-    $stmt = $db->prepare("INSERT INTO guest_cart (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    //a PDO connection called $db.
+    $stmt = $db->prepare("INSERT INTO guest_cart (guestCartID, orderID, productListingID, quantity, price, color, size, date_purchased)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 }
 
-if (isset($_POST['prouctListingID'])) {
-    $productListingID = $_POST['prouctListingID'];
+if (isset($_POST['productListingID'])) {
+    $productListingID = $_POST['productListingID'];
 
-    // Check if the product ID is valid
-    if (is_numeric($productListingID) && $productListingID > 0) {
+    // Fetch necessary details based on productListingID from the database
+    $stmtFetchDetails = $db->prepare("SELECT orderID, quantity, price, color, size, date_purchased FROM ProductListing WHERE productListingID = :productListingID");
+    $stmtFetchDetails->bindParam(":productListingID", $productListingID);
+    $stmtFetchDetails->execute();
+    $result = $stmtFetchDetails->fetchAll(PDO::FETCH_ASSOC);
 
-        if (!isset($_SESSION['cart'])) {
-            $_SESSION['cart'] = array();
-        }
+    if (count($result) === 1) {
+        $details = $result[0];
 
-        // Check if the product is already in the cart
-        if (array_key_exists($productListingID, $_SESSION['cart'])) {
-            $_SESSION['cart'][$productListingID]++;
-        } else {
-            $_SESSION['cart'][$productListingID] = 1;
-        }
+        $stmt->bindParam(":orderID", $details['orderID']);
+        $stmt->bindParam(":productListingID", $productListingID);
+        $stmt->bindParam(":quantity", $details['quantity']);
+        $stmt->bindParam(":price", $details['price']);
+        $stmt->bindParam(":color", $details['color']);
+        $stmt->bindParam(":size", $details['size']);
+        $stmt->bindParam(":date_purchased", $details['date_purchased']);
+        $stmt->execute();
 
-        $message = "Product added to cart successfully!";
+        $_SESSION['message'] = "Product added to cart successfully!";
+
     } else {
-        $message = "Invalid product ID.";
+        $_SESSION['message'] = "Invalid product ID.";
     }
 } else {
-    $message ="Product ID is missing.";
+    $_SESSION['message'] = "Product ID is missing.";
 }
 ?>

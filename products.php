@@ -1,60 +1,10 @@
-<?php
-
-function fetchProducts() {
-
-    try {
-         // database connection code 
-         require_once("connectionDB.php");
-        // SQL query
-        $sql = "
-        SELECT
-            pl.productListingID,
-            pl.image,
-            pl.productName,
-            pl.price,
-            pl.description AS productDescription,
-            pli.color,
-            pli.size,
-            c.name AS categoryName
-        FROM
-            ProductListing pl
-        JOIN
-            ProductListingInfo pli ON pl.productListingID = pli.productListingID
-        JOIN
-            Category c ON pl.categoryID = c.categoryID;
-        ";
-
-        // Prepare and execute the query
-
-        $SQLEXECUTE = $db->prepare($sql);
-        $SQLEXECUTE->execute();
-        // Fetch results
-        $products = $SQLEXECUTE->fetchAll(PDO::FETCH_ASSOC);
-        // Close the database connection
-        $db = null;
-        return $products; // Return the fetched product
-
-    }//Catches the problem
-      catch(PDOException $ex) {
-        echo("Failed to connect to the database.<br>");
-        echo($ex->getMessage());
-        exit;
-      } 
-     
-}
-
-$allOfTheProducts = fetchProducts();
-?>
-
-    
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <title>ACE GEAR</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="CSS/styles.css">
+        <link rel="stylesheet" href="CSS/products.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
@@ -99,13 +49,68 @@ $allOfTheProducts = fetchProducts();
         </div>
     </header>
 
+<?php
+
+require_once("connectionDB.php");
+function fetchProducts() {
+    global $db;
+
+    try {
+         // database connection code 
+         require_once("connectionDB.php");
+        // SQL query
+        $sql = "
+        SELECT
+            pl.productListingID,
+            pl.image,
+            pl.productName,
+            pl.price,
+            pl.description AS productDescription,
+            pli.color,
+            pli.size,
+            c.name AS categoryName
+        FROM
+            ProductListing pl
+        JOIN
+            ProductListingInfo pli ON pl.productListingID = pli.productListingID
+        JOIN
+            Category c ON pl.categoryID = c.categoryID;
+        ";
+
+        // Prepare and execute the query
+        $SQLEXECUTE = $db->prepare($sql);
+        $SQLEXECUTE->execute();
+
+        // Fetch results
+        $products = $SQLEXECUTE->fetchAll(PDO::FETCH_ASSOC);
+
+        // Close the database connection
+        //$db = null;
+        return $products; // Return the fetched product
+
+    }//Catches the problem
+      catch(PDOException $ex) {
+        echo("Failed to connect to the database.<br>");
+        echo($ex->getMessage());
+        exit;
+      } 
+     
+}
+
+$allOfTheProducts = fetchProducts();
+?>
+
+    
+
+
+
 
     <?php
     // Display fetched product details
     //The allOfTheProducts is an array of all the products  that  is going to be iterated through and the product is the current product that is being iterated through
     //Display each product
     foreach ($allOfTheProducts as $product) {
-        echo "<div>";
+        echo "<div class='product-container'>";
         echo "<img src='Images/{$product['image']}' alt='{$product['productName']}' width=50 height=50>";
         echo "<h2>{$product['productName']}</h2>";
         echo "<p>Price: {$product['price']}</p>";

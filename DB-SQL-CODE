@@ -165,7 +165,7 @@ CREATE TABLE `guest` (
 CREATE TABLE `guestcart` (
   `guestCartID` int(11) NOT NULL,
   `orderID` int(11) NOT NULL,
-  `productID` int(11) NOT NULL,
+  `productListingID` int(11) NOT NULL,
   `quantity` double NOT NULL,
   `price` double NOT NULL,
   `color` varchar(255) NOT NULL,
@@ -225,7 +225,7 @@ INSERT INTO `productlistinginfo` (`productListingInfoID`, `productListingID`, `c
 CREATE TABLE `productorderdetails` (
   `ProductOrderDetailsID` int(11) NOT NULL,
   `orderID` int(11) NOT NULL,
-  `productID` int(11) NOT NULL,
+  `productListingID` int(11) NOT NULL,
   `quantity` double NOT NULL,
   `price` double NOT NULL,
   `color` varchar(255) NOT NULL,
