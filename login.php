@@ -38,7 +38,8 @@
            if( $_SESSION["username"]=$_POST['username']);
            //loads these website
             header("Location:products.php"); 
-            //header("Location:.php");
+          
+            echo "Log in sucessfull";
             exit();
           
           } else {
@@ -48,23 +49,16 @@
          //else display an error
           echo "<p>Error logging in, Username not found </p>";
           }
-      }//Catches the problem
+      }//Catches the problem 
       catch(PDOException $ex) {
         echo("Failed to connect to the database.<br>");
         echo($ex->getMessage());
         exit;
       } 
      
+    }   
+  
       
-    // Assuming the login is successful
-    $_SESSION['username'] = $username; // Set a session variable for the username
-    $loggedIn = true; // Set a boolean to indicate that the user is logged in
-
-    // Redirect the user to the user's page
-    header("Location: products.php");
-    exit;
-
-  }
 
 ?>
 
@@ -124,24 +118,7 @@
         </div>
     </div>
 
-    <script>
-        <?php
-            if ($loggedIn) {
-                echo "document.getElementById('popup').style.display = 'block';";
-            }
-        ?>
-        // Display the pop-up once the page is loaded
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("popup").style.display = "block";
-        });
 
-        // Function to close the pop-up and redirect
-        function closePopup() {
-            document.getElementById("popup").style.display = "none";
-            // Redirect to another page
-            window.location.href = "products.php";
-        }
-    </script>
 
 
     <footer>
