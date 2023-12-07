@@ -4,16 +4,15 @@
         <title>ACE GEAR</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="CSS/cart.css">
+        <link rel="stylesheet" href="CSS/contact.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
-        <!--<script src="/js/main.js"></script> -->
+        <script src="/js/main.js"></script>
     </head>
+<body>
 
-
-    <body>
-        <header>
+    <header>
             <div id="logo-container">
                 <!-- logo image -->
                 <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
@@ -48,6 +47,41 @@
             </div>
         </header>
 
-        <h1> Log in or Sign up now to get these exclusive benefits.</h1>
-       <button type="button" class="btn btn-primary btn-lg" href="login.php">Log In</button>
-<button type="button" class="btn btn-secondary btn-lg" href="signup.php">Sign Up</button>
+    <h1>Contact Us</h1>
+
+
+    <div class="contact-form-container">
+        <h2>Get in contact with us by filling out the form below :</h2>
+        <form action="contact.php" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+
+            <label for="member?">Please Tick the box below if you are a member of our club</label>
+            <input type="checkbox" id="member?" name="member?" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="reviews.php">Reviews</a>
+                <a href="contact.html">Contact Us</a>
+                <a href="about.html">About Us</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
