@@ -100,11 +100,6 @@ function fetchProducts() {
 $allOfTheProducts = fetchProducts();
 ?>
 
-    
-
-
-
-
     <?php
     // Display fetched product details
     //The allOfTheProducts is an array of all the products  that  is going to be iterated through and the product is the current product that is being iterated through
@@ -130,7 +125,6 @@ $allOfTheProducts = fetchProducts();
     }
     ?>
 
-
         <footer>
             <div class="footer-container">
                 <div class="footer-links">
@@ -141,10 +135,12 @@ $allOfTheProducts = fetchProducts();
                 </div>
             </div>
         </footer>
+        
     <script>
-        <?php if (isset($_SESSION['message']) && !empty($_SESSION['message'])) { ?>
-        // Show a pop-up message
-        alert("<?php echo $_SESSION['message']; ?>");
+        <?php 
+        if (isset($_SESSION['message']) && !empty($_SESSION['message'])) { ?>
+            console.log("Message is set: <?php echo $_SESSION['message']; ?>");
+            alert("<?php echo $_SESSION['message']; ?>");
         <?php
         unset($_SESSION['message']);
         } ?>

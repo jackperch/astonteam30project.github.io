@@ -50,7 +50,7 @@ session_destroy();
 
         <div id="log-out">
             <h1> Logged out now! </h1> 
-            <a href="index.html">Click here to return to Home Page</a> 
+            <a href="index.php">Click here to return to Home Page</a> 
         </div>
 
 
