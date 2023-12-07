@@ -168,7 +168,9 @@ function validateCity(){
         
         return false;
     }
-
+    cityError.innerHTML = "Valid";
+    cityError.style.color = "green";
+    return true;
 }
 
  function validateCountry(){
@@ -179,6 +181,9 @@ function validateCity(){
         
         return false;
     }
+    countryError.innerHTML = "Valid";
+    countryError.style.color = "green";
+    return true;
  }
 
  function validateForm(){
