@@ -78,6 +78,8 @@ if (isset($_POST['signupsubmitted'])) {
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
         <script src="/js/main.js"></script>
+        <script src="signup.js"></script>
+
     </head>
 
 
@@ -117,33 +119,44 @@ if (isset($_POST['signupsubmitted'])) {
                 <form action="signup.php" method="post">
                     
                     <label>Enter your First Name:</label>
-                    <input type="text" id="first-name" name="first-name"  placeholder="Enter your First Name here" required>
+                    <input type="text" id="first-name" name="first-name"  placeholder="Enter your First Name here"  onblur="validateFirstName()">
+                    <span id="first-name-error"></span>
 
                     <label>Enter your Last Name:</label>
-                    <input type="text" id="last-name" name="last-name"  placeholder="Enter your Last Name here" required>
+                    <input type="text" id="last-name" name="last-name"  placeholder="Enter your Last Name here"   onblur="validateLastName()">
+                    <span id="last-name-error"></span>
 
                     <label>Enter your Username:</label>
-                    <input type="text" id="username" name="username"  placeholder="Enter your Username here" required>
+                    <input type="text" id="username" name="username"  placeholder="Enter your Username here" onblur="validateUsername()">
+                    <span id="username-error"></span>
                     
                     <label>Enter your Password:</label>
-                    <input type="password" id="password" name="password"  placeholder="Enter your Password here" required>
-                
+                    <input type="password" id="password" name="password"  placeholder="Enter your Password here" onblur="validatePassword()">
+                    <span id="password-error"></span>
+
                     <label>Enter your Email: </label>
-                    <input type="text" id="email" name="email"  placeholder="Enter your E-mail here" required>
-                   
+                    <input type="text" id="email" name="email"  placeholder="Enter your E-mail here" onblur="validateEmail()">
+                   <span id="email-error"></span>
 
                     <label>Enter your Address: </label>
-                    <input type="text" id="house-number" name="house-number" placeholder="Enter your house name or number here" required>
-                    <input type="text" id="address-line1" name="address-line1" placeholder="Enter your first line of address here" required>
-                    <input type="text" id="address-line2" name="address-line2" placeholder="Enter your second line of address here" required>
-                    <input type="text" id="post-code" name="post-code" placeholder="Enter your post code here" required>
-                    <input type="text" id="city" name="city" placeholder="Enter your city here" required>
-                    <input type="text" id="country" name="country" placeholder="Enter your country here" required>
+                    <input type="text" id="house-number" name="house-number" placeholder="Enter your house name or number here" onblur="validateHouseNumber()">
+                    <span id="house-number-error"></span>
+                    <input type="text" id="address-line1" name="address-line1" placeholder="Enter your first line of address here" onblur="validateAdressLine1()">
+                    <span id="address-line1-error"></span>
+                    <input type="text" id="address-line2" name="address-line2" placeholder="Enter your second line of address here" onblur="validateAdressLine2()">
+                    <span id="address-line2-error"></span>
+                    <input type="text" id="post-code" name="post-code" placeholder="Enter your post code here" onblur="validatePostCode()">
+                    <span id="post-code-error"></span>
+                    <input type="text" id="city" name="city" placeholder="Enter your city here" onblur="validateCity()">
+                    <span id="city-error"></span>
+                    <input type="text" id="country" name="country" placeholder="Enter your country here" onblur="validateCountry()">
+                    <span id="country-error"></span>
 
 
                     <input type="submit" value="Register" >
                     <input type="reset" value="clear">
                     <input type="hidden" name="signupsubmitted" value="TRUE" >
+                    <span id="signup-error"></span>
                 
                 </form>
             </div>
@@ -162,8 +175,8 @@ if (isset($_POST['signupsubmitted'])) {
             </div>
         </footer>
         
-
     </body>
 
+    <script src="signup.js"></script>
 
 </html>
