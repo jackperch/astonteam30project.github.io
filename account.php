@@ -5,6 +5,12 @@
 
     require_once("connectionDB.php"); // database connection file
 
+    // Check if customerID is set in the session
+    if (!isset($_SESSION['customerID'])) {
+        print_r($_SESSION);
+        echo "Session customerID not set.";
+        exit;
+    }
     // Fetch customer details from the database
     $customerID = $_SESSION['customerID'];
     $customerData = array(); // Initialize the variable

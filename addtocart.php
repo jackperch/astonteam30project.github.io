@@ -1,7 +1,8 @@
 <?php
+session_start();
 include 'connectionDB.php';
 
-session_start();
+
 
 
 $stmtFetchProducts = $db->query("SELECT * FROM ProductListing");
