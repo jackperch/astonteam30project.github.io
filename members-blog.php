@@ -43,10 +43,10 @@ if (!isset($_SESSION['user_id'])) {
             </div>
             <nav>
                 <a href="index.php">Home</a>
-                <a href="products.html">Products</a>
-                <a href="about.html">About</a>
+                <a href="products.php">Products</a>
+                <a href="about.php">About</a>
                 <a href="members-blog.php">Blog</a>
-                <a href="contact.html">Contact</a>
+                <a href="contact.php">Contact</a>
                 <?php 
                 session_start();
                 if (isset($_SESSION['username'])) {
