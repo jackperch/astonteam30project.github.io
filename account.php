@@ -5,19 +5,17 @@
 
     require_once("connectionDB.php"); // database connection file
 
-    // Check if customerID is set in the session
-    if (!isset($_SESSION['customerID'])) {
-        print_r($_SESSION);
-        echo "Session customerID not set.";
-        exit;
-    }
-    // Fetch customer details from the database
-    $customerID = $_SESSION['customerID'];
     $customerData = array(); // Initialize the variable
 
+
+    if (isset($_SESSION['username'])) {
+        $username = $_SESSION['username'];
+    }
+
+
     try {
-        $query = $db->prepare('SELECT * FROM customers WHERE CustomerID = ?');
-        $success = $query->execute([$customerID]);
+        $query = $db->prepare('SELECT * FROM customers WHERE username = ?');
+        $success = $query->execute([$username]);
 
         // Check if the query was successful
         if ($success) {
@@ -27,31 +25,6 @@
             if ($rowCount > 0) {
                 // Fetch customer data
                 $customerData = $query->fetch(PDO::FETCH_ASSOC);
-
-                // Display customer details
-                if (isset($customerData['username'])) {
-                    echo "Username: " . $customerData['username'] . "<br>";
-                } else {
-                    echo "Username not available.<br>";
-                }
-
-                if (isset($customerData['first_name'])) {
-                    echo "First Name: " . $customerData['first_name'] . "<br>";
-                } else {
-                    echo "First Name not available.<br>";
-                }
-
-                if (isset($customerData['last_name'])) {
-                    echo "Last Name: " . $customerData['last_name'] . "<br>";
-                } else {
-                    echo "Last Name not available.<br>";
-                }
-
-                if (isset($customerData['email'])) {
-                    echo "Email: " . $customerData['email'] . "<br>";
-                } else {
-                    echo "Email not available.<br>";
-                }
 
                 // Add similar lines for other details you want to display
             } else {
