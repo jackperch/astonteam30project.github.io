@@ -111,9 +111,10 @@
             <h3>My Orders</h3>
             <ul>
                 <?php
-                foreach ($orders as $order) {
-                    echo "<li><a href='order.php?id=" . $order['id'] . "'>Order #" . $order['id'] . "</a></li>";
-                }
+                echo "Not implemented yet."
+                //foreach ($orders as $order) {
+                   // echo "<li><a href='order.php?id=" . $order['id'] . "'>Order #" . $order['id'] . "</a></li>";
+                //}
                 ?>
             </ul>
         </section>
