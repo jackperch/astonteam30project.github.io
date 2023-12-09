@@ -51,7 +51,7 @@
 
 
 
-    <h1>Reviews</h1>
+    <h1 class="title"><center>Reviews<center></h1>
 
     <div class="container">
         <div class="review">

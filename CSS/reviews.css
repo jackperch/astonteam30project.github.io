@@ -116,8 +116,9 @@ body {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #413e3e;
+    background-color: var(--color4); /* White 1 */
     box-shadow: 0 0 10px var(--color3);
+    color: var(--color1);
     border-radius: 8px;
 }
 

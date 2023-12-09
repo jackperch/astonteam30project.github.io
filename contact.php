@@ -47,7 +47,7 @@
             </div>
         </header>
 
-    <h1>Contact Us</h1>
+    <h1><center>Contact Us<center></h1>
 
 
     <div class="contact-form-container">
