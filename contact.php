@@ -47,7 +47,7 @@
             </div>
         </header>
 
-    <h1>Contact Us</h1>
+    <h1><center>Contact Us<center></h1>
 
 
     <div class="contact-form-container">
@@ -75,9 +75,9 @@
         <div class="footer-container">
             <div class="footer-links">
                 <a href="reviews.php">Reviews</a>
-                <a href="contact.html">Contact Us</a>
-                <a href="about.html">About Us</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="contact.php">Contact Us</a>
+                <a href="about.php">About Us</a>
+                <a href="privacy-policy.php">Privacy Policy</a>
             </div>
         </div>
     </footer>

@@ -1,4 +1,5 @@
 <?php
+// Path: connectionDB.php
 // assigning variables to the server connection
 $servername = "localhost";
 $username = "root";

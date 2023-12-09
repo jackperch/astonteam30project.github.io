@@ -13,14 +13,14 @@
     $password=isset($_POST['password'])?password_hash($_POST['password'],PASSWORD_DEFAULT):false;
 
 
-    if ($username==false){ #If it's empty
-        echo "Username is empty please enter your username";
-        exit;
-    }
-    elseif ($password==false){#If it's empty
-       echo "Password is empty please enter your password";
-        exit;
-    }
+    //if ($username==false){ #If it's empty
+     //  echo "<p>Username is empty please enter your username</p>";
+   //  exit;
+   // }
+   // elseif ($password==false){#If it's empty
+    //  echo "<p>Password is empty please enter your password</p>";
+      //exit;
+    // }
 
     try {
       //Query DB to find the matching username/password
@@ -34,11 +34,14 @@
   
           if (password_verify($_POST['password'], $row['password'])){ //matching password with the user input password and database stored password
 
+            $_SESSION['customerID'] = $customerID; // Set the customerID in the session
+
           //Makes the username accessible for other php 
            if( $_SESSION["username"]=$_POST['username']);
+
            //loads these website
             header("Location:products.php"); 
-          
+            
             echo "Log in sucessfull";
             exit();
           
@@ -70,6 +73,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="CSS/login.css">
+    <script src="loginValidation.js"></script>
+
 </head>
 <body>
 
@@ -104,16 +109,19 @@
     <div class="content-container">
         <div class="login-container">
             <h2>Login</h2>
-            <form action="login.php" method="post">
+            <form   action="login.php" method="post">
                 <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" onclick="validateUsername()">
+                <span id="usernameError"></span>
 
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-
-                <input type="submit" value="Login">
+                <input type="password" id="password" name="password" onclick="validatePassword()">
+                <span id="passwordError"></span>
+                <input  onclick=" return validateForm()" type="submit" value="Login">
                 <input type="hidden" id= "loginsubmitted" name="loginsubmitted" value="TRUE" />
+                <span id="loginError"></span>
             </form>
+            <br>
             <a href="signup.php" class="signup-button">Dont have an account? Click here to Sign Up</a>
         </div>
     </div>
@@ -125,12 +133,13 @@
         <div class="footer-container">
             <div class="footer-links">
                 <a href="reviews.php">Reviews</a>
-                <a href="contact.html">Contact Us</a>
-                <a href="about.html">About Us</a>
-                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="contact.php">Contact Us</a>
+                <a href="about.php">About Us</a>
+                <a href="privacy-policy.php">Privacy Policy</a>
             </div>
         </div>
     </footer>
 
 </body>
+ <script src="loginValidation.js"></script>
 </html>

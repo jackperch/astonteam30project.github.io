@@ -1,7 +1,8 @@
 <?php
+session_start();
 include 'connectionDB.php';
 
-session_start();
+
 
 // Check if the user is logged
 if (isset($_SESSION['customerID']) && isset($_SESSION['cart'])) {
