@@ -125,12 +125,13 @@ function validateAddressLine1(){
         return false;
     }
 
-    if(!addressLine1.match(/^[a-zA-Z0-9]+$/) ){
+    // Allow alphanumeric characters and spaces
+    if (!addressLine1.match(/^[a-zA-Z0-9\s]+$/)) {
         addressLine1Error.innerHTML = "Please enter a valid address line 1";
-        addressLine1Error.style.color = "red"; 
-        
+        addressLine1Error.style.color = "red";
         return false;
     }
+    
     addressLine1Error.innerHTML = "Valid";
     addressLine1Error.style.color = "green";
     return true;
