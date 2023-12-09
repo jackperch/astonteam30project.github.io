@@ -49,12 +49,15 @@ if (isset($_POST['productListingID'])) {
         $stmt->bindParam(":date_purchased", $details['date_purchased']);
         $stmt->execute();
 
-        $_SESSION['message'] = "Product added to cart successfully!";
+        $message= "Product added to cart successfully!";
 
     } else {
-        $_SESSION['message'] = "Invalid product ID.";
+        $message = "Invalid product ID.";
     }
 } else {
-    $_SESSION['message'] = "Product ID is missing.";
+    $message = "Product ID is missing.";
 }
+$_SESSION['alert_message'] = $message;
+header("Location: display_alert.html");
+    exit();
 ?>

@@ -136,14 +136,11 @@ $allOfTheProducts = fetchProducts();
             </div>
         </footer>
         
-    <script>
-        <?php 
-        if (isset($_SESSION['message']) && !empty($_SESSION['message'])) { ?>
-            console.log("Message is set: <?php echo $_SESSION['message']; ?>");
-            alert("<?php echo $_SESSION['message']; ?>");
-        <?php
-        unset($_SESSION['message']);
-        } ?>
+        <script>
+        var message = "<?php session_start(); if(isset($_SESSION['alert_message'])) { echo $_SESSION['alert_message']; unset($_SESSION['alert_message']); } ?>";
+        if(message !== "") {
+            alert(message);
+        }
     </script>
 
 </body>
