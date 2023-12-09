@@ -4,7 +4,7 @@
         <title>ACE GEAR</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="CSS/styles.css">
+        <link rel="stylesheet" href="CSS/reviews.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
@@ -53,6 +53,25 @@
 
     <h1>Reviews</h1>
 
+    <div class="container">
+        <div class="review">
+            <p class="author">John Smith</p>
+            <p class="date">November 1, 2023</p>
+            <p class="content"> This is review 1.</p>
+        </div>
+
+        <div class="review">
+            <p class="author">Jane Smith</p>
+            <p class="date">September 5, 2023</p>
+            <p class="content">This is review 2.</p>
+        </div>
+
+        <div class="review">
+            <p class="author">Sam Johnson</p>
+            <p class="date">June 10, 2023</p>
+            <p class="content">This is review 3.</p>
+        </div>
+    </div>
 
 
 
