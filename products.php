@@ -128,10 +128,10 @@ $allOfTheProducts = fetchProducts();
         <footer>
             <div class="footer-container">
                 <div class="footer-links">
-                    <a href="reviews.html">Reviews</a>
-                    <a href="contact.html">Contact Us</a>
-                    <a href="about.html">About Us</a>
-                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="reviews.php">Reviews</a>
+                    <a href="contact.php">Contact Us</a>
+                    <a href="about.php">About Us</a>
+                    <a href="privacy-policy.php">Privacy Policy</a>
                 </div>
             </div>
         </footer>
