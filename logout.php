@@ -48,8 +48,11 @@ session_destroy();
 
 
         <div id="log-out">
+            <br>
             <h1> <center>Logged out now! <center></h1> 
+            <br>
             <a href="index.php"><center>Click here to return to Home Page<center></a> 
+            <br>
         </div>
 
 
