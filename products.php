@@ -106,7 +106,7 @@ $allOfTheProducts = fetchProducts();
     //Display each product
     foreach ($allOfTheProducts as $product) {
         echo "<div class='product-container'>";
-        echo "<img src='Images/{$product['image']}' alt='{$product['productName']}' width=50 height=50>";
+        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' width=50 height=50>";
         echo "<h2>{$product['productName']}</h2>";
         echo "<p>Price: {$product['price']}</p>";
         echo "<p>Description: {$product['productDescription']}</p>";

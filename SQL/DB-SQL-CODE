@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 10:44 AM
+-- Generation Time: Dec 11, 2023 at 12:47 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -44,7 +44,8 @@ CREATE TABLE `address` (
 INSERT INTO `address` (`addressID`, `house_number`, `Address_Line1`, `Address_Line2`, `Postcode`, `City`, `Country`) VALUES
 (1, 0, 'BBB', 'BBB', 'BBB', 'BBB', 'BBB'),
 (2, 11, 'T1', 'T1', 'T1', 'T1', 'T1'),
-(3, 11, 'SS', 'SS', 'SS', 'SS', 'SS');
+(3, 11, 'SS', 'SS', 'SS', 'SS', 'SS'),
+(4, 123, 'TestStreet', 'test area', 'T3 STX', 'Test city', 'Test country');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,11 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`categoryID`, `name`, `description`) VALUES
-(1, 'Racket Sports', 'All things rackets related');
+(1, 'Racket Sports', 'All things rackets related'),
+(2, 'Combat Sports', 'All exuipment related to combat and fighting sports'),
+(3, 'Climbing sports', 'Equipment for climbing sports'),
+(4, 'Football', 'Football equipment'),
+(5, 'Home Fitness', 'General home fitness and workout equipment');
 
 -- --------------------------------------------------------
 
@@ -121,7 +126,8 @@ INSERT INTO `customers` (`CustomerID`, `username`, `password`, `first_name`, `la
 (3, 'bb', '$2y$10$kcneanToK9rK/0HrY.xXOOoVOPmZ3zt/0KF8u7hOuO.43oCpB5KEm', 'Aa', 'b', 'b'),
 (4, 'BBB', '$2y$10$sCQRcbRrmKXu1Trzag.pFOePZRKwctdMRRtAeNyF4R480PkFLtDn.', 'BBB', 'BBB', 'BBB'),
 (5, 'T1', '$2y$10$9LuEaXjs9wG6TCftnhVEUu9nVGsycnMe2D9XA43qUwh8FflYm4NY6', 'T1', 'T1', 'T1'),
-(6, 'SS', '$2y$10$XH6MVmYE8CV894L7c3MnLOnIiEo.831/kvuMfOd6Dxv1MlFY7w9g6', 'SS', 'SS', 'SS');
+(6, 'SS', '$2y$10$XH6MVmYE8CV894L7c3MnLOnIiEo.831/kvuMfOd6Dxv1MlFY7w9g6', 'SS', 'SS', 'SS'),
+(7, 'saad1', '$2y$10$XITa2iMGS13tz/G8oUXbI.Z0JqtKV4AmY/iQ6z.D6ophqPO6vU9nm', 'Saad', 'Rashid', 'saad@saad.com');
 
 -- --------------------------------------------------------
 
@@ -141,7 +147,8 @@ CREATE TABLE `customer_address` (
 
 INSERT INTO `customer_address` (`Customer_AddressID`, `CustomerID`, `addressID`) VALUES
 (0, 5, 2),
-(0, 6, 3);
+(0, 6, 3),
+(0, 7, 4);
 
 -- --------------------------------------------------------
 
@@ -193,7 +200,11 @@ CREATE TABLE `productlisting` (
 --
 
 INSERT INTO `productlisting` (`productListingID`, `image`, `productName`, `price`, `description`, `categoryID`) VALUES
-(1, 'TennisRacket.jpeg', 'Tenis Racket', 10.98, 'A simple test for tenis raket', 1);
+(1, 'TennisRacket.jpeg', 'Tennis Racket', 10.98, 'A simple test for tennis racket', 1),
+(2, 'BoxingGloves.jpeg', 'Boxing Gloves', 5.99, 'Gloves used for oxing with premium padding for extra comfort', 2),
+(4, 'ClimbingRope.jpeg', 'Climbing Rope', 8.99, 'A rope used for climbing', 3),
+(5, 'Football.jpeg', 'Football', 5.99, 'A round football', 4),
+(6, 'ResistanceBand.jpeg', 'Resistance Band', 2.99, 'A band used for home workouts', 5);
 
 -- --------------------------------------------------------
 
@@ -214,7 +225,11 @@ CREATE TABLE `productlistinginfo` (
 --
 
 INSERT INTO `productlistinginfo` (`productListingInfoID`, `productListingID`, `color`, `size`, `stockID`) VALUES
-(2, 1, 'Green', 10, 3);
+(2, 1, 'Green', 10, 3),
+(4, 2, 'Black', 1, 3),
+(5, 4, 'Brown', 5, 3),
+(6, 5, 'White', 5, 3),
+(7, 6, 'Blue', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -225,7 +240,7 @@ INSERT INTO `productlistinginfo` (`productListingInfoID`, `productListingID`, `c
 CREATE TABLE `productorderdetails` (
   `ProductOrderDetailsID` int(11) NOT NULL,
   `orderID` int(11) NOT NULL,
-  `productListingID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
   `quantity` double NOT NULL,
   `price` double NOT NULL,
   `color` varchar(255) NOT NULL,
@@ -366,7 +381,7 @@ ALTER TABLE `stocklevel`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -384,13 +399,13 @@ ALTER TABLE `basket`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `guest`
@@ -408,13 +423,13 @@ ALTER TABLE `guestcart`
 -- AUTO_INCREMENT for table `productlisting`
 --
 ALTER TABLE `productlisting`
-  MODIFY `productListingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `productListingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `productlistinginfo`
 --
 ALTER TABLE `productlistinginfo`
-  MODIFY `productListingInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `productListingInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `productorderdetails`
@@ -426,7 +441,7 @@ ALTER TABLE `productorderdetails`
 -- AUTO_INCREMENT for table `productorderplaced`
 --
 ALTER TABLE `productorderplaced`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `stocklevel`
