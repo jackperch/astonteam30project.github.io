@@ -136,12 +136,12 @@ $allOfTheProducts = fetchProducts();
             </div>
         </footer>
         
-        <!-- <script>
+        <script>
         var message = "<?php session_start(); if(isset($_SESSION['alert_message'])) { echo $_SESSION['alert_message']; unset($_SESSION['alert_message']); } ?>";
         if(message !== "") {
             alert(message);
         }
-    </script> -->
+    </script>
 
 </body>
 </html>

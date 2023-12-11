@@ -59,6 +59,6 @@ if (isset($_POST['productListingID'])) {
     $message = "Product ID is missing.";
 }
 $_SESSION['alert_message'] = $message;
-header("Location: display_alert.html");
+header("Location: products.php");
     exit();
 ?>
