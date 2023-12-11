@@ -117,7 +117,7 @@ $allOfTheProducts = fetchProducts();
         //a form with a button to add the product to the cart
         echo "<form method='post' action='#' onsubmit='return false;'>";
     echo "<input type='hidden' name='productListingID' value='{$product['productListingID']}'>";
-    echo "<input type='button' value='Add to Cart' onclick='alert()'>";
+    echo "<input type='button' value='Add to Cart' onclick='displayAlert()'>";
     echo "</form>";
 
         echo "</div>";
@@ -137,7 +137,7 @@ $allOfTheProducts = fetchProducts();
         </footer>
         
     <script>
-        function alert() {
+        function displayAlert() {
         var message = "<?php session_start(); if(isset($_SESSION['alert_message'])) { echo $_SESSION['alert_message']; unset($_SESSION['alert_message']); } ?>";
         if(message !== "") {
             alert(message);
