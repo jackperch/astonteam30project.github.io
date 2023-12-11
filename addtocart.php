@@ -50,7 +50,7 @@ if (isset($_POST['productListingID'])) {
         $stmt->bindParam(":date_purchased", $details['date_purchased']);
         $stmt->execute();
 
-        echo("Product added to cart successfully!");
+        $message = "Product added to cart successfully!";
 
     } else {
         $message = "Invalid product ID.";
