@@ -92,7 +92,6 @@
                 <a href="index.php">Home</a>
                 <a href="products.php">Products</a>
                 <a href="about.php">About</a>
-                <a href="members-blog.php">Blog</a>
                 <a href="contact.php">Contact</a>
                 <a href="login.php">Login</a>
             </nav>

@@ -27,11 +27,11 @@
             <a href="index.php">Home</a>
             <a href="products.php">Products</a>
             <a href="about.php">About</a>
-            <a href="members-blog.php">Blog</a>
             <a href="contact.php">Contact</a>
             <?php 
                 session_start();
                 if (isset($_SESSION['username'])) {
+                    echo "<a href='members-blog.php'>Blog</a>";
                     echo "<a href='account.php'>Account</a>";
                     echo "<a href='logout.php'>Logout</a>";
                 } else {

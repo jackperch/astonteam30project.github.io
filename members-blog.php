@@ -1,20 +1,4 @@
-<?php
-// Start the session to access session variables
-session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    // If not logged in, redirect to the login page
-    header("Location: login.php");
-    exit();
-}
-
-// If logged in, proceed with displaying the page
-
-// configuration or database connection files
-
-// Rest of blog page HTML and PHP code here
-?>
 
 
 <!DOCTYPE html>
@@ -45,11 +29,11 @@ if (!isset($_SESSION['user_id'])) {
                 <a href="index.php">Home</a>
                 <a href="products.php">Products</a>
                 <a href="about.php">About</a>
-                <a href="members-blog.php">Blog</a>
                 <a href="contact.php">Contact</a>
                 <?php 
                 session_start();
                 if (isset($_SESSION['username'])) {
+                    echo "<a href='members-blog.php'>Blog</a>";
                     echo "<a href='account.php'>Account</a>";
                     echo "<a href='logout.php'>Logout</a>";
                 } else {
@@ -69,9 +53,11 @@ if (!isset($_SESSION['user_id'])) {
 
 
 
-
-    <h1>Reviews</h1>
-
+    <br>
+    <h1><center>Members Exclusive Blog<center></h1>
+    <br>
+    <p><center> This Section is coming very soon........<center></p>
+    <br>
 
 
 
