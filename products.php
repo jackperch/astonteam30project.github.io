@@ -136,7 +136,7 @@ $allOfTheProducts = fetchProducts();
             </div>
         </footer>
         
-    <script>
+    <!-- <script>
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
         var message = "<?php 
@@ -154,7 +154,7 @@ $allOfTheProducts = fetchProducts();
                 alert(message);
             }
         }
-    </script>
+    </script> -->
 
 </body>
 </html>
