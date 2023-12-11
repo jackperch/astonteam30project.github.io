@@ -136,14 +136,23 @@ $allOfTheProducts = fetchProducts();
             </div>
         </footer>
         
-    <script>
-        function displayAlert() {
-        var message = "<?php session_start(); if(isset($_SESSION['alert_message'])) { echo $_SESSION['alert_message']; unset($_SESSION['alert_message']); } ?>";
-        if(message !== "") {
+        <script>
+    var message = "<?php 
+        session_start();
+        if(isset($_SESSION['alert_message'])) {
+            echo $_SESSION['alert_message'];
+            unset($_SESSION['alert_message']);
+        } else {
+            echo ''; // Echo an empty string if no message is set
+        }
+    ?>";
+
+    function displayAlert() {
+        if (message !== "") {
             alert(message);
         }
-        }
-    </script>
+    }
+</script>
 
 </body>
 </html>
