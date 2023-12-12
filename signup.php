@@ -55,6 +55,8 @@ if (isset($_POST['signupsubmitted'])) {
 
            
            echo "Sign up successful! You can now log in.";
+           header("Location:products.php"); 
+
         }
     } catch (PDOException $ex) {
         echo("Failed to connect to the database.<br>");
