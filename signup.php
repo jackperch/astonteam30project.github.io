@@ -53,10 +53,11 @@ if (isset($_POST['signupsubmitted'])) {
             $insertCustomer_Address->execute(array($retrieveCustomerID->fetchColumn(), $retrieveAddressID->fetchColumn()));
          
 
-           
            echo "Sign up successful! You can now log in.";
-           header("Location:products.php"); 
-
+           if( $_SESSION["username"]=$_POST['username']);
+           //loads these website
+            header("Location:products.php"); 
+            exit();
         }
     } catch (PDOException $ex) {
         echo("Failed to connect to the database.<br>");
