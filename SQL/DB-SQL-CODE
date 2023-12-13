@@ -242,6 +242,15 @@ INSERT INTO `productlistinginfo` (`productListingInfoID`, `productListingID`, `c
 (5, 4, 'Brown', 5, 3),
 (6, 5, 'White', 5, 3),
 (7, 6, 'Blue', 2, 3);
+(8, 7, 'Orange', 4, 3);
+(9, 8, 'Green', 2, 3);
+(10, 9, 'Purple', 7, 3);
+(11, 10, 'Pink', 2, 3);
+(12, 11, 'White', 3, 3);
+(13, 12, 'Black', 2, 3);
+(14, 13, 'Magenta', 6, 3);
+(15, 14, 'Yellow', 2, 3);
+
 
 -- --------------------------------------------------------
 
