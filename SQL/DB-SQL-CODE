@@ -201,8 +201,19 @@ CREATE TABLE `productlisting` (
 
 INSERT INTO `productlisting` (`productListingID`, `image`, `productName`, `price`, `description`, `categoryID`) VALUES
 (1, 'TennisRacket.jpeg', 'Tennis Racket', 10.98, 'A simple test for tennis racket', 1),
+(7, 'tennisballs.jpg', 'Tennis Balls', 7.99, 'A simple test for tennis balls', 1),
+(8, 'badmintonracket.jpg', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1),
+(9, 'shuttlecock.jpg', 'Shuttlecocks', 10.98, 'A simple test for shuttlecock', 1),
+(10, 'tenniswrap.jpg', 'Tennis Wrap', 5.99, 'A simple test for tennis wrap', 1),
+
 (2, 'BoxingGloves.jpeg', 'Boxing Gloves', 5.99, 'Gloves used for oxing with premium padding for extra comfort', 2),
-(4, 'ClimbingRope.jpeg', 'Climbing Rope', 8.99, 'A rope used for climbing', 3),
+
+(4, 'ClimbingRope.jpeg', 'Climbing Rope', 79.99, 'A rope used for climbing', 3),
+(4, 'climbingshoe.jpg', 'Climbing Shoes', 112.99, 'Shoes used for climbing', 3),
+(4, 'chalk.jpg', 'Climbing chalk', 8.99, 'Shoes used for climbing', 3),
+(4, 'harness.jpg', 'Climbing Harness', 39.99, 'A Harness used for climbing', 3),
+(4, 'carabiner.jpg', 'Carabiner', 12.99, 'A carabiner used for climbing', 3),
+
 (5, 'Football.jpeg', 'Football', 5.99, 'A round football', 4),
 (6, 'ResistanceBand.jpeg', 'Resistance Band', 2.99, 'A band used for home workouts', 5);
 
