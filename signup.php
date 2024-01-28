@@ -121,38 +121,32 @@ if (isset($_POST['signupsubmitted'])) {
                 <h2>Sign Up</h2>
                 <form action="signup.php" method="post">
                     
-                    <label>Enter your First Name:</label>
-                    <input type="text" id="first-name" name="first-name"  placeholder="Enter your First Name here"  onblur="validateFirstName()">
+                    <input type="text" id="first-name" name="first-name"  placeholder="First Name"  onblur="validateFirstName()">
                     <span id="first-name-error"></span>
 
-                    <label>Enter your Last Name:</label>
-                    <input type="text" id="last-name" name="last-name"  placeholder="Enter your Last Name here"   onblur="validateLastName()">
+                    <input type="text" id="last-name" name="last-name"  placeholder="Last Name"   onblur="validateLastName()">
                     <span id="last-name-error"></span>
 
-                    <label>Enter your Username:</label>
-                    <input type="text" id="username" name="username"  placeholder="Enter your Username here" onblur="validateUsername()">
+                    <input type="text" id="username" name="username"  placeholder="Username" onblur="validateUsername()">
                     <span id="username-error"></span>
                     
-                    <label>Enter your Password:</label>
-                    <input type="password" id="password" name="password"  placeholder="Enter your Password here" onblur="validatePassword()">
+                    <input type="password" id="password" name="password"  placeholder="Password" onblur="validatePassword()">
                     <span id="password-error"></span>
 
-                    <label>Enter your Email: </label>
-                    <input type="text" id="email" name="email"  placeholder="Enter your E-mail here" onblur="validateEmail()">
+                    <input type="text" id="email" name="email"  placeholder="E-mail" onblur="validateEmail()">
                    <span id="email-error"></span>
 
-                    <label>Enter your Address: </label>
-                    <input type="text" id="house-number" name="house-number" placeholder="Enter your house name or number here" onblur="validateHouseNumber()">
+                    <input type="text" id="house-number" name="house-number" placeholder="house name or number" onblur="validateHouseNumber()">
                     <span id="house-number-error"></span>
-                    <input type="text" id="address-line1" name="address-line1" placeholder="Enter your first line of address here" onblur="validateAdressLine1()">
+                    <input type="text" id="address-line1" name="address-line1" placeholder="first line of address" onblur="validateAdressLine1()">
                     <span id="address-line1-error"></span>
-                    <input type="text" id="address-line2" name="address-line2" placeholder="Enter your second line of address here" onblur="validateAdressLine2()">
+                    <input type="text" id="address-line2" name="address-line2" placeholder="second line of address" onblur="validateAdressLine2()">
                     <span id="address-line2-error"></span>
-                    <input type="text" id="post-code" name="post-code" placeholder="Enter your post code here" onblur="validatePostCode()">
+                    <input type="text" id="post-code" name="post-code" placeholder="post code" onblur="validatePostCode()">
                     <span id="post-code-error"></span>
-                    <input type="text" id="city" name="city" placeholder="Enter your city here" onblur="validateCity()">
+                    <input type="text" id="city" name="city" placeholder="city" onblur="validateCity()">
                     <span id="city-error"></span>
-                    <input type="text" id="country" name="country" placeholder="Enter your country here" onblur="validateCountry()">
+                    <input type="text" id="country" name="country" placeholder="country" onblur="validateCountry()">
                     <span id="country-error"></span>
 
 

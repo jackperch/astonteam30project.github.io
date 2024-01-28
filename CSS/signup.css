@@ -6,6 +6,9 @@
     --color3: #ccfe06; /* Yellow 2 */
     --color4: #eceff1; /* White 1 */
     --color5: #ffffff; /* White 2 */
+    --formcolor: #aaaaaa;
+    --font1: 'Anton', sans-serif;
+    --font2: 'HK Grotesk', sans-serif;
 }
 
 /* Code below is for new nav bar prototype */
@@ -114,15 +117,18 @@ nav a:hover {
 }
 
     .signup-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
         max-width: 600px;
         width: 100%;
         padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        background-color: #fff;
-        box-shadow: 0 0 10px #c2ee0a;
+        border: none;
+        background-color: var(--formcolor);
         color: #000000;
         margin-bottom: 100px;
+        text-transform: uppercase;
     }
 
     form {
@@ -141,10 +147,29 @@ nav a:hover {
         border: 1px solid #ccc;
         border-radius: 4px;
     }
+    h2{
+        font-family: var(--font1);
+        font-weight: 700;
+        font-style: italic;
+        text-align: center;
+        margin-bottom: 20px;
+    }
 
-    input[type="submit"] {
-        background-color: var(--color3); /* Use the yellow 2 color from the palette */
-        color: var(--color1); /* Use the black color from the palette */
+    .signup-container input{
+        background-color: var(--color3);
+        color: var(--color1);
+        font-family: var(--font2);
+        font-weight: 700;
+        text-transform: uppercase;
+        text-align: center;
+    }
+    .signup-container ::placeholder{
+        color: var(--color1);
+    }
+
+    input[type="submit"], input[type="reset"] {
+        background-color: #000000; /* Use the yellow 2 color from the palette */
+        color: var(--color3); /* Use the black color from the palette */
         cursor: pointer;
         padding: 10px;
         border: none;
