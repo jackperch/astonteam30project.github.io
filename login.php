@@ -107,21 +107,24 @@
 
     <div class="content-container">
         <div class="login-container">
-            <h2>Login</h2>
+            <h2>Log In</h2>
             <form   action="login.php" method="post">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" onclick="validateUsername()">
+
+                <input type="text" id="username" name="username" onclick="validateUsername()" placeholder="USERNAME">
                 <span id="usernameError"></span>
 
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" onclick="validatePassword()">
+
+                <input type="password" id="password" name="password" onclick="validatePassword()" placeholder="PASSWORD">
                 <span id="passwordError"></span>
-                <input  onclick=" return validateForm()" type="submit" value="Login">
+                <input  onclick=" return validateForm()" type="submit" value="LOG IN" >
                 <input type="hidden" id= "loginsubmitted" name="loginsubmitted" value="TRUE" />
                 <span id="loginError"></span>
             </form>
             <br>
-            <a href="signup.php" class="signup-button">Dont have an account? Click here to Sign Up</a>
+            <h2>Don't have an account?</h2>
+            <a href="signup.php" class="signup-button">
+                <button>SIGN UP</button>
+            </a>
         </div>
     </div>
 
