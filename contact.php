@@ -53,17 +53,14 @@
     <div class="contact-form-container">
         <h2>Get in contact with us by filling out the form below :</h2>
         <form action="contact.php" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required placeholder="name">
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" required placeholder="email">
 
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
+            <textarea id="message" name="message" rows="4" required placeholder="message..."></textarea>
 
             <label for="member?">Please Tick the box below if you are a member of our club</label>
-            <input type="checkbox" id="member?" name="member?" required>
+            <input type="checkbox" id="member?" name="member?" required >
 
             <input type="submit" value="Submit">
         </form>

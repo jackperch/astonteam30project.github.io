@@ -6,6 +6,9 @@
     --color3: #ccfe06; /* Yellow 2 */
     --color4: #eceff1; /* White 1 */
     --color5: #ffffff; /* White 2 */
+    --formcolor: #aaaaaa;
+    --font1: 'Anton', sans-serif;
+    --font2: 'HK Grotesk', sans-serif;
   }
   
 
@@ -108,11 +111,10 @@ nav a:hover {
 .contact-form-container {
     max-width: 600px;
     margin: 50px auto;
-    background-color: #fff;
+    background-color: var(--formcolor);
     color: #000000;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: none;
     padding-bottom: 50px;
 }
 
@@ -133,9 +135,40 @@ textarea {
     border-radius: 4px;
 }
 
-input[type="submit"] {
-    background-color: #ccfe06;
+.contact-form-container input{
+    background-color: var(--color3);
+    color: var(--color1);
+    font-weight: 700;
+    font-family: var(--font2);
+    text-transform: uppercase;
+    border: none;
+
+}
+
+::placeholder{
     color: #000000;
+}
+
+textarea{
+    border: none;
+    background-color: var(--color3);
+    color: var(--color1);
+    font-weight: 700;
+    font-family: var(--font2);
+    text-transform: uppercase;
+}
+
+.contact-form-container h2, label{
+    font-family: var(--font1);
+    font-weight: 700;
+    font-style: italic;
+    text-align: center;
+
+}
+
+input[type="submit"] {
+    background-color: var(--color1);
+    color: var(--color3);
     cursor: pointer;
     padding: 10px;
     border: none;
