@@ -1,3 +1,44 @@
+<?php
+ if(isset($_POST['contactSubmitted'])) { //If the form is submited then code below will run
+    require_once("connectionDB.php"); //Connects to the database
+
+    //Stores the values from the form ( post array)  to variables
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+    $member = $_POST['member?'];
+
+    //if its  ticked it will equal to member to be stored in the contact table of its not ticked its stored as not member
+    if ($member==true){
+        $member="member";
+    }else{
+        $member="not member";
+    }
+
+    //Looks if the fields are empty
+    if ($name == false || $email == false || $message == false) { //Returns false if the varaibles are empty
+        echo "One or more fields are empty. Please enter valid values.";
+        exit;
+    }
+    // Tries to  insert data to the contact table
+    try{
+        $insertToContactTable = $db->prepare('INSERT INTO contact (name, email, message, member) VALUES (?, ?, ?, ?)');
+        $insertToContactTable->execute(array($name, $email, $message, $member));
+
+
+    }catch(PDOException $excption) {
+        echo("Failed to connect to the database.<br>");
+        echo($exception->getMessage());
+        exit;
+    }
+ }
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -62,7 +103,7 @@
             <label for="member?">Please Tick the box below if you are a member of our club</label>
             <input type="checkbox" id="member?" name="member?" required >
 
-            <input type="submit" value="Submit">
+            <input type="submit" name="contactSubmitted" value="Submit">
         </form>
     </div>
 
