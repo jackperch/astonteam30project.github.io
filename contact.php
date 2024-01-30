@@ -6,10 +6,9 @@
     $name = $_POST['name'];
     $email = $_POST['email'];
     $message = $_POST['message'];
-    $member = $_POST['member?'];
 
     //if its  ticked it will equal to member to be stored in the contact table of its not ticked its stored as not member
-    if ($member==true){
+    if ($_POST['member?']==true){
         $member="member";
     }else{
         $member="not member";
@@ -49,7 +48,8 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
-        <script src="/js/main.js"></script>
+       <!--<script src="/js/main.js"></script> -->
+        <script src="contact.js"></script>
     </head>
 <body>
 
@@ -94,16 +94,20 @@
     <div class="contact-form-container">
         <h2>Get in contact with us by filling out the form below :</h2>
         <form action="contact.php" method="post">
-            <input type="text" id="name" name="name" required placeholder="name">
+            <input type="text" id="name" name="name"   onclick="validateName()" placeholder="name">
+            <span id="nameError"></span>
 
-            <input type="email" id="email" name="email" required placeholder="email">
+            <input type="email" id="email" name="email"    onclick="validateEmail()" placeholder="email">
+            <span id="emailError"></span>
 
-            <textarea id="message" name="message" rows="4" required placeholder="message..."></textarea>
+            <textarea id="message" name="message" rows="4"  onclick="validateMessage()" placeholder="message..."></textarea>
+            <span id="messageError"></span>
 
             <label for="member?">Please Tick the box below if you are a member of our club</label>
-            <input type="checkbox" id="member?" name="member?" required >
+            <input type="checkbox" id="member?" name="member?">
 
-            <input type="submit" name="contactSubmitted" value="Submit">
+            <input  onclick=" return validateForm()" type="submit" name="contactSubmitted" value="Submit">
+            <span id="submitError"></span>
         </form>
     </div>
 
