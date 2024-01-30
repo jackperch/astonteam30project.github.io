@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2023 at 12:47 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Jan 30, 2024 at 12:55 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +45,8 @@ INSERT INTO `address` (`addressID`, `house_number`, `Address_Line1`, `Address_Li
 (1, 0, 'BBB', 'BBB', 'BBB', 'BBB', 'BBB'),
 (2, 11, 'T1', 'T1', 'T1', 'T1', 'T1'),
 (3, 11, 'SS', 'SS', 'SS', 'SS', 'SS'),
-(4, 123, 'TestStreet', 'test area', 'T3 STX', 'Test city', 'Test country');
+(4, 123, 'TestStreet', 'test area', 'T3 STX', 'Test city', 'Test country'),
+(5, 11, 's', 'eemefe', 'CVM RG', 'DWRF', ' EFGE');
 
 -- --------------------------------------------------------
 
@@ -104,6 +105,27 @@ INSERT INTO `category` (`categoryID`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact`
+--
+
+CREATE TABLE `contact` (
+  `contactID` int(11) NOT NULL,
+  `name` varchar(20) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `message` varchar(1000) NOT NULL,
+  `member` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`contactID`, `name`, `email`, `message`, `member`) VALUES
+(1, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customers`
 --
 
@@ -127,7 +149,8 @@ INSERT INTO `customers` (`CustomerID`, `username`, `password`, `first_name`, `la
 (4, 'BBB', '$2y$10$sCQRcbRrmKXu1Trzag.pFOePZRKwctdMRRtAeNyF4R480PkFLtDn.', 'BBB', 'BBB', 'BBB'),
 (5, 'T1', '$2y$10$9LuEaXjs9wG6TCftnhVEUu9nVGsycnMe2D9XA43qUwh8FflYm4NY6', 'T1', 'T1', 'T1'),
 (6, 'SS', '$2y$10$XH6MVmYE8CV894L7c3MnLOnIiEo.831/kvuMfOd6Dxv1MlFY7w9g6', 'SS', 'SS', 'SS'),
-(7, 'saad1', '$2y$10$XITa2iMGS13tz/G8oUXbI.Z0JqtKV4AmY/iQ6z.D6ophqPO6vU9nm', 'Saad', 'Rashid', 'saad@saad.com');
+(7, 'saad1', '$2y$10$XITa2iMGS13tz/G8oUXbI.Z0JqtKV4AmY/iQ6z.D6ophqPO6vU9nm', 'Saad', 'Rashid', 'saad@saad.com'),
+(8, 'THARRM', '$2y$10$7AC15Ixad.ha1wM5HscBt.FhgDAR6/PwKXHEdFwHtiWrfvsmiuzUG', 'THARRM', 'THARRM', 'THARRM@HotMAIL.COM');
 
 -- --------------------------------------------------------
 
@@ -148,7 +171,8 @@ CREATE TABLE `customer_address` (
 INSERT INTO `customer_address` (`Customer_AddressID`, `CustomerID`, `addressID`) VALUES
 (0, 5, 2),
 (0, 6, 3),
-(0, 7, 4);
+(0, 7, 4),
+(0, 8, 5);
 
 -- --------------------------------------------------------
 
@@ -201,22 +225,18 @@ CREATE TABLE `productlisting` (
 
 INSERT INTO `productlisting` (`productListingID`, `image`, `productName`, `price`, `description`, `categoryID`) VALUES
 (1, 'TennisRacket.jpeg', 'Tennis Racket', 10.98, 'A simple test for tennis racket', 1),
+(2, 'BoxingGloves.jpeg', 'Boxing Gloves', 5.99, 'Gloves used for oxing with premium padding for extra comfort', 2),
+(4, 'ClimbingRope.jpeg', 'Climbing Rope', 79.99, 'A rope used for climbing', 3),
+(5, 'Football.jpeg', 'Football', 5.99, 'A round football', 4),
+(6, 'ResistanceBand.jpeg', 'Resistance Band', 2.99, 'A band used for home workouts', 5),
 (7, 'tennisballs.jpg', 'Tennis Balls', 7.99, 'A simple test for tennis balls', 1),
 (8, 'badmintonracket.jpg', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1),
 (9, 'shuttlecock.jpg', 'Shuttlecocks', 10.98, 'A simple test for shuttlecock', 1),
 (10, 'tenniswrap.jpg', 'Tennis Wrap', 5.99, 'A simple test for tennis wrap', 1),
-
-(2, 'BoxingGloves.jpeg', 'Boxing Gloves', 5.99, 'Gloves used for oxing with premium padding for extra comfort', 2),
-
-(4, 'ClimbingRope.jpeg', 'Climbing Rope', 79.99, 'A rope used for climbing', 3),
 (11, 'climbingshoe.jpg', 'Climbing Shoes', 112.99, 'Shoes used for climbing', 3),
 (12, 'chalk.jpg', 'Climbing chalk', 8.99, 'Shoes used for climbing', 3),
 (13, 'harness.jpg', 'Climbing Harness', 39.99, 'A Harness used for climbing', 3),
-(14, 'carabiner.jpg', 'Carabiner', 12.99, 'A carabiner used for climbing', 3),
-
-(5, 'Football.jpeg', 'Football', 5.99, 'A round football', 4),
-
-(6, 'ResistanceBand.jpeg', 'Resistance Band', 2.99, 'A band used for home workouts', 5);
+(14, 'carabiner.jpg', 'Carabiner', 12.99, 'A carabiner used for climbing', 3);
 
 -- --------------------------------------------------------
 
@@ -250,7 +270,6 @@ INSERT INTO `productlistinginfo` (`productListingInfoID`, `productListingID`, `c
 (13, 12, 'Black', 2, 3),
 (14, 13, 'Magenta', 6, 3),
 (15, 14, 'Yellow', 2, 3);
-
 
 -- --------------------------------------------------------
 
@@ -332,6 +351,12 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`categoryID`);
 
 --
+-- Indexes for table `contact`
+--
+ALTER TABLE `contact`
+  ADD PRIMARY KEY (`contactID`);
+
+--
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
@@ -402,7 +427,7 @@ ALTER TABLE `stocklevel`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -423,10 +448,16 @@ ALTER TABLE `category`
   MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `contact`
+--
+ALTER TABLE `contact`
+  MODIFY `contactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `guest`
@@ -444,13 +475,13 @@ ALTER TABLE `guestcart`
 -- AUTO_INCREMENT for table `productlisting`
 --
 ALTER TABLE `productlisting`
-  MODIFY `productListingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `productListingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `productlistinginfo`
 --
 ALTER TABLE `productlistinginfo`
-  MODIFY `productListingInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `productListingInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `productorderdetails`
