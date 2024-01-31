@@ -193,7 +193,7 @@ function validateCity(){
     }
     else{
         submitError.innerHTML = "Please fill in all the fields correctly";
-        submitError.style.color = "red";;
+        submitError.style.color = "red";
         return false
     }
  }
