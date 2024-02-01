@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2024 at 12:55 PM
+-- Generation Time: Feb 01, 2024 at 02:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -73,10 +73,12 @@ INSERT INTO `admin` (`adminID`, `username`, `password`) VALUES
 -- Table structure for table `basket`
 --
 
-CREATE TABLE `customerCart` (
-  `customerCartID` int(11) NOT NULL,
+CREATE TABLE `basket` (
+  `basketID` int(11) NOT NULL,
   `customerID` int(11) NOT NULL,
-  `ProductOrderDetailsID` int(11) FOREIGN KEY REFERENCES ProductOrderDetails(ProductOrderDetailsID),
+  `productListingID` int(11) NOT NULL,
+  `quantity` int(11) DEFAULT 1,
+  `date_added` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -121,7 +123,23 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`contactID`, `name`, `email`, `message`, `member`) VALUES
-(1, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member');
+(1, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
+(2, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
+(3, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
+(4, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
+(5, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
+(6, 'THHHARRNN', 'M@KK.COm', ', ,LM', 'member'),
+(7, 'trhethbe', 'wesrewsgwe@hotmai.com', 'wsgsgvwe', 'not member'),
+(8, 'trhethbe', 'wesrewsgwe@hotmai.com', 'wsgsgvwe', 'not member'),
+(9, 'trhethbe', 'wesrewsgwe@hotmai.com', 'wsgsgvwe', 'not member'),
+(10, 'THHHARRNN', 'gfhgfhn@hotg.com', 'sdfbsdbsd', 'not member'),
+(11, 'RFGR', 'cpERGEGEGE@hotmail.com', 'HELLO', 'member'),
+(12, 'RFGR', 'cpERGEGEGE@hotmail.com', 'HELLO', 'member'),
+(13, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member'),
+(14, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member'),
+(15, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member'),
+(16, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member'),
+(17, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member');
 
 -- --------------------------------------------------------
 
@@ -130,7 +148,7 @@ INSERT INTO `contact` (`contactID`, `name`, `email`, `message`, `member`) VALUES
 --
 
 CREATE TABLE `customers` (
-  `customerID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL,
   `first_name` text NOT NULL,
@@ -193,10 +211,15 @@ CREATE TABLE `guest` (
 -- Table structure for table `guestcart`
 --
 
-CREATE TABLE `guestCart` (
+CREATE TABLE `guestcart` (
   `guestCartID` int(11) NOT NULL,
-  'guestID' int(11) FOREIGN KEY REFERENCES guest(guestID),
-  `ProductOrderDetailsID` int(11) FOREIGN KEY REFERENCES ProductOrderDetails(ProductOrderDetailsID),
+  `orderID` int(11) NOT NULL,
+  `productListingID` int(11) NOT NULL,
+  `quantity` double NOT NULL,
+  `price` double NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `size` int(11) NOT NULL,
+  `date_purchased` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -205,7 +228,7 @@ CREATE TABLE `guestCart` (
 -- Table structure for table `productlisting`
 --
 
-CREATE TABLE `productListing` (
+CREATE TABLE `productlisting` (
   `productListingID` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `productName` varchar(255) NOT NULL,
@@ -272,9 +295,10 @@ INSERT INTO `productlistinginfo` (`productListingInfoID`, `productListingID`, `c
 -- Table structure for table `productorderdetails`
 --
 
-CREATE TABLE `ProductOrderDetails` (
+CREATE TABLE `productorderdetails` (
   `ProductOrderDetailsID` int(11) NOT NULL,
-  'productListingID' int(11) FOREIGN KEY REFERENCES productListing(productListingID),
+  `orderID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
   `quantity` double NOT NULL,
   `price` double NOT NULL,
   `color` varchar(255) NOT NULL,
@@ -445,7 +469,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `contactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `contactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `customers`
