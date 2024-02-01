@@ -107,8 +107,13 @@ $allOfTheProducts = fetchProducts();
     //Display each product
     foreach ($allOfTheProducts as $product) {
         echo "<div class='product-container'>";
+
+        // Make the product name a clickable link
+        echo "<a href='productDetail.php?productListingID={$product['productListingID']}'>";
         echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' width=50 height=50>";
         echo "<h2>{$product['productName']}</h2>";
+        echo "</a>";
+
         echo "<p>Price: {$product['price']}</p>";
         echo "<p>Description: {$product['productDescription']}</p>";
         echo "<p>Colour: {$product['color']}</p>";
@@ -117,9 +122,9 @@ $allOfTheProducts = fetchProducts();
 
         //a form with a button to add the product to the cart
         echo "<form method='post' action='#' onsubmit='return false;'>";
-    echo "<input type='hidden' name='productListingID' value='{$product['productListingID']}'>";
-    echo "<button onclick='displayAlert()'>Add to cart!</button>";
-    echo "</form>";
+        echo "<input type='hidden' name='productListingID' value='{$product['productListingID']}'>";
+        echo "<button onclick='displayAlert()'>Add to cart!</button>";
+        echo "</form>";
 
         echo "</div>";
         echo "<hr>";

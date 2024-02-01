@@ -1,3 +1,43 @@
+<?php
+ if(isset($_POST['contactSubmitted'])) { //If the form is submited then code below will run
+    require_once("connectionDB.php"); //Connects to the database
+
+    //Stores the values from the form ( post array)  to variables
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+
+    //if its  ticked it will equal to member to be stored in the contact table of its not ticked its stored as not member
+    if ($_POST['member?']==true){
+        $member="member";
+    }else{
+        $member="not member";
+    }
+
+    //Looks if the fields are empty
+    if ($name == false || $email == false || $message == false) { //Returns false if the varaibles are empty
+        echo "One or more fields are empty. Please enter valid values.";
+        exit;
+    }
+    // Tries to  insert data to the contact table
+    try{
+        $insertToContactTable = $db->prepare('INSERT INTO contact (name, email, message, member) VALUES (?, ?, ?, ?)');
+        $insertToContactTable->execute(array($name, $email, $message, $member));
+
+
+    }catch(PDOException $excption) {
+        echo("Failed to connect to the database.<br>");
+        echo($exception->getMessage());
+        exit;
+    }
+ }
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,7 +49,8 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
-        <script src="/js/main.js"></script>
+      
+        
     </head>
 <body>
 
@@ -53,17 +94,23 @@
 
     <div class="contact-form-container">
         <h2>Get in contact with us by filling out the form below :</h2>
+
         <form action="contact.php" method="post">
-            <input type="text" id="name" name="name" required placeholder="name">
 
-            <input type="email" id="email" name="email" required placeholder="email">
+            <input type="text" id="name" name="name"   placeholder="name" onblur="validateName()">
+            <span id="nameError"></span>
 
-            <textarea id="message" name="message" rows="4" required placeholder="message..."></textarea>
+            <input type="email" id="email" name="email"  onblur="validateEmail()" placeholder="email">
+            <span id="emailError"></span>
+
+            <textarea id="message" name="message" rows="4"  onblur="validateMessage()" placeholder="message..."></textarea>
+            <span id="messageError"></span>
 
             <label for="member?">Please Tick the box below if you are a member of our club</label>
-            <input type="checkbox" id="member?" name="member?" required >
-
-            <input type="submit" value="Submit">
+            <input type="checkbox" id="member?" name="member?">
+ 
+            <input  onclick=" return validateForm()" type="submit" name="contactSubmitted" value="Submit">
+            <span id="submitError"></span>
         </form>
     </div>
 
@@ -79,7 +126,7 @@
             </div>
         </div>
     </footer>
-
+    <script src="contact.js"></script>
 </body>
 </html>
 
