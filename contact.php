@@ -48,8 +48,8 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
-       <!--<script src="/js/main.js"></script> -->
-        <script src="contact.js"></script>
+      
+        
     </head>
 <body>
 
@@ -125,7 +125,7 @@
             </div>
         </div>
     </footer>
-
+    <script src="contact.js"></script>
 </body>
 </html>
 
