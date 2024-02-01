@@ -58,7 +58,7 @@
     <div id="cart-items">
 
         <?php
-       // session_start();
+       session_start();
         require_once("connectionDB.php");
 
       //  if (!isset($_SESSION['customerID'])) {
