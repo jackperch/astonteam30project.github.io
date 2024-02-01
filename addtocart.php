@@ -20,13 +20,13 @@ if (isset($_POST['productListingID'])) {
         $customerID = $_SESSION['customerID'];
 
         // PDO connection called $db_.
-        $stmt = $db->prepare("INSERT INTO ProductOrderDetails (productOrderDetailsID, orderID, productListingID, quantity, price, color, size, date_purchased)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $db->prepare("INSERT INTO customerCart (customerCartID, customerID, ProductOrderDetailsID)
+        VALUES (?, ?, ?)");
         
     } else {
-        //a PDO connection called $db.
-        $stmt = $db->prepare("INSERT INTO guest_cart (guestCartID, orderID, productListingID, quantity, price, color, size, date_purchased)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+
+        $stmt = $db->prepare("INSERT INTO guest_cart (guestCartID, guestID, ProductOrderDetailsID)
+        VALUES (?, ?, ?)");
     }
 
         // Fetch necessary details based on productListingID from the database

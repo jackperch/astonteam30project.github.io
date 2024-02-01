@@ -73,10 +73,10 @@ INSERT INTO `admin` (`adminID`, `username`, `password`) VALUES
 -- Table structure for table `basket`
 --
 
-CREATE TABLE `basket` (
-  `basketID` int(11) NOT NULL,
+CREATE TABLE `customerCart` (
+  `customerCartID` int(11) NOT NULL,
   `customerID` int(11) NOT NULL,
-  `productListingID` int(11) NOT NULL
+  `ProductOrderDetailsID` int(11) FOREIGN KEY REFERENCES ProductOrderDetails(ProductOrderDetailsID),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -193,15 +193,10 @@ CREATE TABLE `guest` (
 -- Table structure for table `guestcart`
 --
 
-CREATE TABLE `guestcart` (
+CREATE TABLE `guestCart` (
   `guestCartID` int(11) NOT NULL,
-  `orderID` int(11) NOT NULL,
-  `productListingID` int(11) NOT NULL,
-  `quantity` double NOT NULL,
-  `price` double NOT NULL,
-  `color` varchar(255) NOT NULL,
-  `size` int(11) NOT NULL,
-  `date_purchased` date DEFAULT NULL
+  'guestID' int(11) FOREIGN KEY REFERENCES guest(guestID),
+  `ProductOrderDetailsID` int(11) FOREIGN KEY REFERENCES ProductOrderDetails(ProductOrderDetailsID),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -210,7 +205,7 @@ CREATE TABLE `guestcart` (
 -- Table structure for table `productlisting`
 --
 
-CREATE TABLE `productlisting` (
+CREATE TABLE `productListing` (
   `productListingID` int(11) NOT NULL,
   `image` varchar(255) NOT NULL,
   `productName` varchar(255) NOT NULL,
@@ -277,10 +272,9 @@ INSERT INTO `productlistinginfo` (`productListingInfoID`, `productListingID`, `c
 -- Table structure for table `productorderdetails`
 --
 
-CREATE TABLE `productorderdetails` (
+CREATE TABLE `ProductOrderDetails` (
   `ProductOrderDetailsID` int(11) NOT NULL,
-  `orderID` int(11) NOT NULL,
-  `productID` int(11) NOT NULL,
+  'productListingID' int(11) FOREIGN KEY REFERENCES productListing(productListingID),
   `quantity` double NOT NULL,
   `price` double NOT NULL,
   `color` varchar(255) NOT NULL,
