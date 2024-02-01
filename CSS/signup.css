@@ -7,62 +7,64 @@
     min-height: 100vh;
 }
 
-    .signup-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        align-content: center;
-        max-width: 600px;
-        width: 100%;
-        padding: 20px;
-        border: none;
-        background-color: #aaaaaa;
-        color: #000000;
-        margin-bottom: 100px;
-        text-transform: uppercase;
-    }
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    border: none;
+    background-color: #aaaaaa;
+    color: #000000;
+    margin-bottom: 100px;
+    text-transform: uppercase;
+}
 
-    form {
-        display: grid;
-        gap: 10px;
-    }
+form {
+    display: grid;
+    gap: 10px;
+}
 
-    label {
-        font-weight: bold;
-    }
+label {
+    font-weight: bold;
+}
 
-    input,
-    textarea {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-    h2{
-        font-family: var(--font1);
-        font-weight: 700;
-        font-style: italic;
-        text-align: center;
-        margin-bottom: 20px;
-    }
+input,
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-    .signup-container input{
-        background-color: var(--color3);
-        color: var(--color1);
-        font-family: var(--font2);
-        font-weight: 700;
-        text-transform: uppercase;
-        text-align: center;
-    }
-    .signup-container ::placeholder{
-        color: var(--color1);
-    }
+h2{
+    font-family: var(--font1);
+    font-weight: 700;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    input[type="submit"], input[type="reset"] {
-        background-color: #000000; /* Use the yellow 2 color from the palette */
-        color: var(--color3); /* Use the black color from the palette */
-        cursor: pointer;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-    }
+.signup-container input{
+    background-color: var(--color3);
+    color: var(--color1);
+    font-family: var(--font2);
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.signup-container ::placeholder{
+    color: var(--color1);
+}
+
+input[type="submit"], input[type="reset"] {
+    background-color: #000000; /* Use the yellow 2 color from the palette */
+    color: var(--color3); /* Use the black color from the palette */
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+}

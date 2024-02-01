@@ -63,12 +63,6 @@
     }
 }
 
-
-
-
-
-
-
 /* Code beloq is for styliing the product containers*/
 .product-container a {
     text-decoration: none;
@@ -78,43 +72,4 @@
 .product-container a:hover {
     text-decoration: underline;
     color: var(--color2); /* Change the color on hover */
-}
-
-
-
-
-
-
-
-
-
-
-/* Code below is for the Footer */
-
-footer {
-    background-color: var(--color3); /* Yellow 2 */
-    color: #333;
-    padding: 20px 0;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-}
-
-.footer-links {
-    display: flex;
-}
-
-.footer-links a {
-    color: #333;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-}
-
-.footer-links a:hover {
-    color: var(--color4); /* White 1 */
 }
