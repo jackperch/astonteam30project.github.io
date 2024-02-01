@@ -1,4 +1,4 @@
-/* CSS for a 5-color palette */
+/* Product Details CSS */
 
 :root {
     --color1: #000000; /* Black */
@@ -6,17 +6,22 @@
     --color3: #ccfe06; /* Yellow 2 */
     --color4: #eceff1; /* White 1 */
     --color5: #ffffff; /* White 2 */
+    --color-border: #ddd; /* Border color */
 }
-
-/* Code below is for new nav bar prototype */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--color1); /* Black */
-    color: var(--color4); /* White 1 */
+    background-color: var(--color1);
+    color: var(--color4);
 }
+
+
+
+
+
+
 
 header {
     background-color: transparent;
@@ -109,90 +114,69 @@ nav a:hover {
 
 
 
-
-
-
-/* Code below is for the Main Content */
-
-/* Container for products */
+/* Container for the whole page content */
 .product-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--color4);
+    border: 1px solid var(--color4);
+    border-radius: 8px;
 }
 
-/* Individual product styling */
-.product {
-    width: 300px;
-    margin: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
-.product img {
+/* Product image styling */
+.product-image {
     max-width: 100%;
     height: auto;
+    display: block;
+    margin: 0 auto 20px;
 }
 
-.product h2 {
-    margin-top: 10px;
-    font-size: 1.2em;
-    color: #333; /* Adjust color as needed */
+/* Product details container */
+.product-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    padding: 20px;
+   color: var(--color1); 
 }
 
-.product p {
-    margin: 5px 0;
-    color: #555; /* Adjust color as needed */
+/* Product title and description styling */
+.product-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.product-description {
+    color: var(--color1);
+    line-height: 1.6;
 }
 
 /* Add to cart button styling */
-.add-to-cart {
-    background-color: #4CAF50;
+.add-to-cart-btn {
+    background-color: var(--color1);
     color: #fff;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 1.2em;
+    text-transform: uppercase;
     transition: background-color 0.3s;
 }
 
-.add-to-cart:hover {
-    background-color: #45a049;
+.add-to-cart-btn:hover {
+    background-color: darken(var(--color2), 10%);
 }
 
-/* Separator line styling */
-.hr-line {
-    border: 0;
-    height: 1px;
-    background: #ddd;
-    margin: 15px 0;
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 600px) {
-    .product {
-        width: 100%;
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .product-details {
+        grid-template-columns: 1fr;
     }
 }
 
 
-
-
-
-
-
-/* Code beloq is for styliing the product containers*/
-.product-container a {
-    text-decoration: none;
-    color: inherit; /* This ensures the color of the links is consistent with your text color */
-}
-
-.product-container a:hover {
-    text-decoration: underline;
-    color: var(--color2); /* Change the color on hover */
-}
 
 
 

@@ -39,6 +39,8 @@
           //Makes the username accessible for other php 
            if( $_SESSION["username"]=$_POST['username']);
 
+           $_SESSION['customerID'] = $user['CustomerID']; // Set the customerID in the session
+
            //loads these website
             header("Location:products.php"); 
             
