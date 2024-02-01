@@ -93,19 +93,21 @@
 
     <div class="contact-form-container">
         <h2>Get in contact with us by filling out the form below :</h2>
+
         <form action="contact.php" method="post">
-            <input type="text" id="name" name="name"   onclick="validateName()" placeholder="name">
+
+            <input type="text" id="name" name="name"   placeholder="name" onblur="validateName()">
             <span id="nameError"></span>
 
-            <input type="email" id="email" name="email"    onclick="validateEmail()" placeholder="email">
+            <input type="email" id="email" name="email"  onblur="validateEmail()" placeholder="email">
             <span id="emailError"></span>
 
-            <textarea id="message" name="message" rows="4"  onclick="validateMessage()" placeholder="message..."></textarea>
+            <textarea id="message" name="message" rows="4"  onblur="validateMessage()" placeholder="message..."></textarea>
             <span id="messageError"></span>
 
             <label for="member?">Please Tick the box below if you are a member of our club</label>
             <input type="checkbox" id="member?" name="member?">
-
+ 
             <input  onclick=" return validateForm()" type="submit" name="contactSubmitted" value="Submit">
             <span id="submitError"></span>
         </form>

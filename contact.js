@@ -8,11 +8,12 @@ var submitError=document.getElementById("submitError");
 function validateName(){
     var name= document.getElementById("name").value;
     if(!name.match(/^[a-zA-Z ]{2,}$/)){
-        nameError.innerHTML="Please enter your full name";
+        nameError.innerHTML="Please enter your name";
         nameError.style.color="red";
         return false;
     }
-    nameError.innerHTML='';
+    nameError.innerHTML='Valid';
+    nameError.style.color='green';
     return true;
 }
 
@@ -25,12 +26,13 @@ function validateEmail(){
         
         return false;
     }
-    emailError.innerHTML = "";
+    emailError.innerHTML = "Valid";
+    emailError.style.color="green";
     return true;
 
 }
 
-function validateMesssage(){
+function validateMessage(){
     var message= document.getElementById("message").value;
     if(!message.match(/^[a-zA-Z ]{2,}$/)){
         messageError.innerHTML="Please enter a valid message";
@@ -38,18 +40,18 @@ function validateMesssage(){
         return false;
 
     }
-    messageError.innerHTML='';
+    messageError.innerHTML='Valid';
+    messageError.style.color='green';
     return true;
+}
 
-    function validateForm(){
-        if(validateName() && validateEmail() && validateMesssage() ){
+function validateForm(){
+    if(validateName() && validateEmail() && validateMessage() ){
             return true;
-        }
-        else{
+        } else{
             submitError.innerHTML = "Please fill in all the fields correctly";
-            submitError.style.color = "red";;
+            submitError.style.color = "red";
             return false
         }
-      }    
-}
-z
+ }    
+
