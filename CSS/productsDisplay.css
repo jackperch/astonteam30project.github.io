@@ -1,0 +1,128 @@
+/*  */
+
+/* CSS for a 5-color palette */
+:root {
+    --color1: #000000; /* Black */
+    --color2: #c2ee0a; /* Yellow 1 */
+    --color3: #ccfe06; /* Yellow 2 */
+    --color4: #eceff1; /* White 1 */
+    --color5: #ffffff; /* White 2 */
+    --formcolor: #aaaaaa;
+    --font1: 'Anton', sans-serif;
+    --font2: 'HK Grotesk', sans-serif;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color1); /* Black */
+    color: var(--color4); /* White 1 */
+}
+
+header {
+    background-color: transparent;
+    color: var(--color2); /* Yellow 1 */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.category-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    /* Add more styling as needed */
+}
+
+.category {
+    margin: 0 30px;
+    color: var(--color2); /* Yellow 1 */
+    text-transform: uppercase;
+    cursor: pointer;
+    /* Add more styling as needed */
+}
+
+.arrow {
+    cursor: pointer;
+    color: var(--color2); /* Yellow 1 */
+    font-size: 2em;
+    /* Add more styling as needed */
+}
+
+.left-arrow {
+    margin-right: 20px;
+}
+
+.right-arrow {
+    margin-left: 20px;
+}
+
+/* Sections for products */
+#featured-products,
+#popular-products,
+#new-products {
+    background-color: var(--color1); /* Black */
+    color: var(--color4); /* White 1 */
+    padding: 20px;
+    margin-bottom: 20px;
+    /* Add more styling as needed */
+}
+
+/* need to add responsive styling for smaller devices */
+
+
+
+
+
+
+
+
+
+
+
+/* Code below is for the Footer */
+
+footer {
+    background-color: var(--color3); /* Yellow 2 */
+    color: #333;
+    padding: 20px 0;
+}
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer-links {
+        display: flex;
+    }
+
+    .footer-links a {
+        color: #333;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+    }
+
+    .footer-links a:hover {
+        color: var(--color4); /* White 1 */
+    }
