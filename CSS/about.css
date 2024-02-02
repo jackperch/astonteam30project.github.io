@@ -1,18 +1,3 @@
-/* CSS code for about us page */
-
-
-/* CSS for a 5-color palette */
-:root {
-    --color1: #000000; /* Black */
-    --color2: #c2ee0a; /* Yellow 1 */
-    --color3: #ccfe06; /* Yellow 2 */
-    --color4: #eceff1; /* White 1 */
-    --color5: #ffffff; /* White 2 */
-    --formcolor: #aaaaaa;
-    --font1: 'Anton', sans-serif;
-    --font2: 'HK Grotesk', sans-serif;
-}
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
