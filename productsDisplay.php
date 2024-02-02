@@ -61,17 +61,61 @@
         }
 
         // Define functions to fetch featured, popular, and new products
-        function fetchFeaturedProducts($db) {
-            // Your SQL query to fetch featured products
-        }
+       // function fetchFeaturedProducts($db) {
+            // SQL query to fetch featured products
 
-        function fetchPopularProducts($db) {
+      //  }
+
+      //  function fetchPopularProducts($db) {
             // Your SQL query to fetch popular products
-        }
+      //  }
 
-        function fetchNewProducts($db) {
+      //  function fetchNewProducts($db) {
             // Your SQL query to fetch new products
+      //  }
+
+      function fetchFeaturedProducts($db) {
+        $sql = "SELECT * FROM productlisting WHERE is_featured = 1"; // Adjust the condition based on your database schema
+        try {
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error fetching featured products: " . $e->getMessage();
+            return [];
         }
+    }
+    
+    function fetchPopularProducts($db) {
+        $sql = "SELECT * FROM productlisting WHERE is_popular = 1"; // Adjust 'popularity' to your database field and criteria
+        try {
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error fetching popular products: " . $e->getMessage();
+            return [];
+        }
+    }
+    
+    function fetchNewProducts($db) {
+        $sql = "SELECT * FROM productlisting WHERE is_new = 1"; // Adjust 'release_date' to your database field
+        try {
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error fetching new products: " . $e->getMessage();
+            return [];
+        }
+    }
+    
+
+        $featuredProducts = fetchFeaturedProducts($db);
+        $popularProducts = fetchPopularProducts($db);
+        $newProducts = fetchNewProducts($db);
+
+       
     ?>
 
 
@@ -82,18 +126,36 @@
 
 
 
-    <section class="category-selector">
+   <!-- <section class="category-selector">
         <div class="arrow left-arrow" onclick="previousCategory()">&#x2190;</div>
         <div class="category">HOME FITNESS</div>
         <div class="category">GYM EQUIPMENT</div>
         <div class="category">COMBAT SPORTS</div>
         <div class="arrow right-arrow" onclick="nextCategory()">&#x2192;</div>
+    </section> -->
+
+    <section class="category-selector">
+        <div class="arrow left-arrow" onclick="previousCategory()">&#x2190;</div>
+        <?php foreach ($categories as $category): ?>
+            <div class="category"><?php echo htmlspecialchars($category['name']); ?></div>
+        <?php endforeach; ?>
+        <div class="arrow right-arrow" onclick="nextCategory()">&#x2192;</div>
     </section>
 
     <section id="featured-products">
         <h2>Featured Products:</h2>
-        <!-- Featured products will be loaded here -->
+        <div class="product-grid">
+            <?php foreach ($featuredProducts as $product): ?>
+                <div class="product">
+                    <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['productName']); ?>">
+                    <h3><?php echo htmlspecialchars($product['productName']); ?></h3>
+                    <!-- need to Add more details -->
+                </div>
+            <?php endforeach; ?>
+        </div>
     </section>
+
+
 
     <section id="popular-products">
         <h2>Popular Products:</h2>

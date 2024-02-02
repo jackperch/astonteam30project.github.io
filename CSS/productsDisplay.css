@@ -161,6 +161,20 @@ header {
 
 
 
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.product {
+    background-color: #fff; /* Assuming white background for products */
+    /* Add more styling as needed */
+}
+
+
+
+
 
 
 
