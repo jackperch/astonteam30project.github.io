@@ -20,19 +20,19 @@
     padding: 0;
     background-color: #000000;
     color: #eceff1;
-    background-image: url("Images/index-page-bg.jpg"); /* Set the path to your background image */
-    background-size: cover; /* Cover the entire viewport */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Do not repeat the background image */
+    width: 100%;
+    overflow-x: hidden;
 }
 
 header {
     background-color: transparent;
     color: #ecf0f100;
     padding: 10px 20px;
+    margin: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 8vh;
 }
 
 #logo-container {
