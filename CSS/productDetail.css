@@ -10,8 +10,8 @@
 
 /* Product image styling */
 .product-image {
-    max-width: 100%;
-    height: auto;
+    width: auto;
+    height: 40vh;
     display: block;
     margin: 0 auto 20px;
 }

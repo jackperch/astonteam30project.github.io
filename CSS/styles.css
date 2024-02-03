@@ -123,9 +123,11 @@ footer {
   background-color: #ccfe06;
   color: #333;
   padding: 20px 0;
-  height: 4vh;
+  margin: none;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  display: flex; /* Add this line */
+  height: 4vh;
   width: 100vw;
 }
 

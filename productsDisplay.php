@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Products - ACE GEAR</title>
+    <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/productsDisplay.css">
     <script src="js/products.js"></script> <!-- need to create this -->
 </head>

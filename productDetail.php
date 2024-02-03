@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Product Details</title>
+    <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/productDetail.css">
     </head>
 <body>
