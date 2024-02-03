@@ -43,15 +43,22 @@
 
 
 
-.slideshow-container {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
-}
-.mySlides {
-    display: none;
-}
-img {
-    width: 100%;
-    height: auto;
-}
+    .slideshow-container {
+        margin: none;
+        padding: none;
+        display: flex; /* Add display: flex to enable flexbox */
+        align-items: center;
+        justify-content: center; /* Add justify-content: center to center horizontally */
+        height: 81vh;
+        width: 100vw;
+    }
+    
+    .mySlides {
+        /* No need for display: flex and justify-content here */
+        height: 100%;
+    }
+    
+    .slideshow-container img {
+        max-height: 100%; /* Use max-height instead of height to maintain aspect ratio */
+        width: auto;
+    }
