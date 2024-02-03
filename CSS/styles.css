@@ -25,7 +25,7 @@
 }
 
 header {
-    background-color: transparent;
+    background-color: #000000;
     color: #ecf0f100;
     padding: 10px 20px;
     margin: none;
@@ -33,6 +33,7 @@ header {
     justify-content: space-between;
     align-items: center;
     height: 8vh;
+    width: 100vw;
 }
 
 #logo-container {
@@ -92,6 +93,7 @@ nav a:hover {
 
 #cart-container {
     position: relative;
+    padding-right: 5vw;
 }
 
 #cart-icon {
@@ -102,7 +104,7 @@ nav a:hover {
 #cart-count {
     position: absolute;
     top: -8px;
-    right: -8px;
+    right: calc(-8px + 5vw);
     background-color: #ccfe06;
     color: #000000;
     font-size: 12px;
@@ -121,10 +123,13 @@ footer {
   background-color: #ccfe06;
   color: #333;
   padding: 20px 0;
+  height: 4vh;
+  align-items: center;
+  display: flex; /* Add this line */
+  width: 100vw;
 }
 
 .footer-container {
-  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
