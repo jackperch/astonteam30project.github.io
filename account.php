@@ -122,7 +122,7 @@
     </div>
 
 
-<footer>
+    <footer>
         <div class="footer-container">
             <div class="footer-links">
                 <a href="reviews.php">Reviews</a>
