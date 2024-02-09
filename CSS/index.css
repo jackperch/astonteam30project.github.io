@@ -1,14 +1,3 @@
-/* View Products Button */
-
-/*.products-button-container {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-} */
 .ProductsBtn {
     /* code to center the button */
     position: absolute;
@@ -24,41 +13,22 @@
     cursor: pointer;
 }
 
-
-
-
-/*  Index page Image  */
-
-/*.index-image-container {
-    max-width: calc(100% - 25px); /* 100% width minus 50px from each side 
-    margin: 50px;
-    /*height: 400px;*
+.slideshow-container {
+    margin: none;
+    padding: none;
+    display: flex; /* Add display: flex to enable flexbox */
+    align-items: center;
+    justify-content: center; /* Add justify-content: center to center horizontally */
+    height: 81vh;
+    width: 100vw;
 }
-    #index-image {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-    } */
-
-
-
-    .slideshow-container {
-        margin: none;
-        padding: none;
-        display: flex; /* Add display: flex to enable flexbox */
-        align-items: center;
-        justify-content: center; /* Add justify-content: center to center horizontally */
-        height: 81vh;
-        width: 100vw;
-    }
     
-    .mySlides {
-        /* No need for display: flex and justify-content here */
-        height: 100%;
-    }
+.mySlides {
+    /* No need for display: flex and justify-content here */
+    height: 100%;
+}
     
-    .slideshow-container img {
-        max-height: 100%; /* Use max-height instead of height to maintain aspect ratio */
-        width: auto;
-    }
+.slideshow-container img {
+    max-height: 100%; /* Use max-height instead of height to maintain aspect ratio */
+    width: auto;
+}

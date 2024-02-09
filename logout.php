@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+unset($_SESSION['customerID']); // Unset the customerID from the session
 session_destroy();
 
 ?>

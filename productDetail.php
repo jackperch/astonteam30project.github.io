@@ -1,3 +1,7 @@
+<?php
+require_once("connectionDB.php");
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,8 +51,9 @@
 
 <main>
     <div class="product-container">
+
         <?php
-        require_once("connectionDB.php");
+            require_once("connectionDB.php");
 
         if (isset($_GET['productID']) && is_numeric($_GET['productID'])) {
             $productID = $_GET['productID'];
@@ -85,20 +90,29 @@
             else {
                 echo "Product not found.";
             }
-        }
+
+               
+
+               // Fetch product reviews    !!!!!! NEEDS DOING !!!!!!
             
         ?>
-    </div>
-</main>
+        </div>
+    </main>
 
-<footer>
-            <div class="footer-container">
-                <div class="footer-links">
-                    <a href="reviews.php">Reviews</a>
-                    <a href="contact.php">Contact Us</a>
-                    <a href="about.php">About Us</a>
-                    <a href="privacy-policy.php">Privacy Policy</a>
-                </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="reviews.php">Reviews</a>
+                <a href="contact.php">Contact Us</a>
+                <a href="about.php">About Us</a>
+                <a href="privacy-policy.php">Privacy Policy</a>
             </div>
-        </footer>
-
+        </div>
+    </footer>
+</body>
+</html>
+<?php
+}
+else {
+    echo "Product not found.";
+}

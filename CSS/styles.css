@@ -151,26 +151,3 @@ footer {
 .footer-links a:hover {
   color: #ecf0f1;
 }
-
-
-
-  /* Example usage 
-  body {
-    background-color: var(--color1);
-    color: var(--color5);
-  }
-  
-  .button {
-    background-color: var(--color3);
-    color: #fff;
-  }
-  
-  .header {
-    border-bottom: 2px solid var(--color2);
-  }
-  
-  .footer {
-    background-color: var(--color4);
-    color: #fff;
-  }
-  */

@@ -20,10 +20,12 @@
                 <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
                 <h1 id="nav-bar-text">ACE GEAR</h1>
             </div>
+
             <div id="search-container">
                 <input type="text" id="search-bar" placeholder="Search...">
                 <button id="search-button">Search</button>
             </div>
+
             <nav>
                 <a href="index.php">Home</a>
                 <a href="products.php">Products</a>
@@ -40,6 +42,7 @@
                 }
                 ?>
             </nav>
+
             <div id="cart-container">
                 <!-- cart icon image with link to cart page -->
                 <a href="cart.php">
@@ -47,78 +50,88 @@
                     <span id="cart-count">0</span>
                 </a>
             </div>
+
         </header>
 
-       <!-- <h1> Log in or Sign up now to get these exclusive benefits.</h1>
-       <button type="button" class="btn btn-primary btn-lg" href="login.php">Log In</button>
-<button type="button" class="btn btn-secondary btn-lg" href="signup.php">Sign Up</button> -->
 
+        <main>
+            <h1>Your Shopping Cart</h1>
+            <div id="cart-items">
 
-<main>
-    <h1>Your Shopping Cart</h1>
-    <div id="cart-items">
+                <?php
+                    require_once("connectionDB.php");
 
-        <?php
-       //session_start();
-        require_once("connectionDB.php");
+                //  if (!isset($_SESSION['customerID'])) {
+                //      // Redirect to login page or handle the case where customerID is not set
+                //      header("Location: login.php");
+                //      exit;
+                //  }
+                    
+                    $customerID = $_SESSION['customerID'];
 
-      //  if (!isset($_SESSION['customerID'])) {
-      //      // Redirect to login page or handle the case where customerID is not set
-      //      header("Location: login.php");
-      //      exit;
-      //  }
-        
-        $customerID = $_SESSION['customerID'];
+                    // Function to fetch cart items
+                    function fetchCartItems() {
+                        global $db;
+                        $customerID = $_SESSION['customerID']; // checking to see if user is logged by comparing customerID to value stored in session
 
-        // Function to fetch cart items
-        function fetchCartItems() {
-            global $db;
-            $customerID = $_SESSION['customerID']; // checking to see if user is logged by comparing customerID to value stored in session
+                        try {
+                            $sql = "
+                            SELECT
+                                p.productName,
+                                p.price,
+                                b.quantity,
+                                p.image
+                            FROM
+                                basket b
+                            JOIN
+                                productlisting p ON b.productListingID = p.productListingID
+                            WHERE
+                                b.customerID = :customerID;
+                            ";
 
-            try {
-                $sql = "
-                SELECT
-                    p.productName,
-                    p.price,
-                    b.quantity,
-                    p.image
-                FROM
-                    basket b
-                JOIN
-                    productlisting p ON b.productListingID = p.productListingID
-                WHERE
-                    b.customerID = :customerID;
-                ";
+                            $stmt = $db->prepare($sql);
+                            $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
+                            $stmt->execute();
 
-                $stmt = $db->prepare($sql);
-                $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
-                $stmt->execute();
+                            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        } catch(PDOException $ex) {
+                            echo "Error fetching cart items: " . $ex->getMessage();
+                            exit;
+                        }
+                    }
 
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch(PDOException $ex) {
-                echo "Error fetching cart items: " . $ex->getMessage();
-                exit;
-            }
-        }
+                    $cartItems = fetchCartItems();
 
-        $cartItems = fetchCartItems();
+                    foreach ($cartItems as $item) {
+                        echo "<div class='cart-item'>";
+                        echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['productName']}' width=50 height=50>";
+                        echo "<h2>{$item['productName']}</h2>";
+                        echo "<p>Price: {$item['price']}</p>";
+                        echo "<p>Quantity: {$item['quantity']}</p>";
+                        // Form for updating quantity or removing item
+                        echo "<form method='post' action='updateCart.php'>";
+                        echo "<input type='hidden' name='productListingID' value='{$item['productListingID']}'>";
+                        echo "<input type='number' name='quantity' value='{$item['quantity']}' min='1'>";
+                        echo "<button type='submit' name='action' value='update'>Update</button>";
+                        echo "<button type='submit' name='action' value='remove'>Remove</button>";
+                        echo "</form>";
+                        echo "</div>";
+                    }
+                ?>
 
-        foreach ($cartItems as $item) {
-            echo "<div class='cart-item'>";
-            echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['productName']}' width=50 height=50>";
-            echo "<h2>{$item['productName']}</h2>";
-            echo "<p>Price: {$item['price']}</p>";
-            echo "<p>Quantity: {$item['quantity']}</p>";
-            // Form for updating quantity or removing item
-            echo "<form method='post' action='updateCart.php'>";
-            echo "<input type='hidden' name='productListingID' value='{$item['productListingID']}'>";
-            echo "<input type='number' name='quantity' value='{$item['quantity']}' min='1'>";
-            echo "<button type='submit' name='action' value='update'>Update</button>";
-            echo "<button type='submit' name='action' value='remove'>Remove</button>";
-            echo "</form>";
-            echo "</div>";
-        }
-        ?>
+            </div>
+        </main>
+    </body>
 
-    </div>
-</main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="reviews.php">Reviews</a>
+                <a href="contact.php">Contact Us</a>
+                <a href="about.php">About Us</a>
+                <a href="privacy-policy.php">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+</html>

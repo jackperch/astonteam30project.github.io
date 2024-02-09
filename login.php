@@ -25,23 +25,29 @@
     try {
       //Query DB to find the matching username/password
       //using prepare/bindparameter to prevent SQL injection.
-        $SQL = $db->prepare('SELECT password FROM Customers WHERE username = ?');
+        $SQL = $db->prepare('SELECT password, CustomerID FROM Customers WHERE username = ?');
         $SQL->execute(array($_POST['username']));
           
         // fetch the result row and check 
         if ($SQL->rowCount()>0){  // matching username
           $row=$SQL->fetch();
+
+
+
+          //echo $row['username']; 
   
           if (password_verify($_POST['password'], $row['password'])){ //matching password with the user input password and database stored password
 
-            $_SESSION['customerID'] = $customerID; // Set the customerID in the session
+            //Makes the username accessible for other php 
+            $_SESSION["username"] = $_POST['username'];
+            $_SESSION["customerID"] = $row['CustomerID'];
+            
+           // $_SESSION['customerID'] = $db->prepare('SELECT CustomerID FROM Customers WHERE username = $_SESSION["username"]'); // Set the customerID in the session
 
-          //Makes the username accessible for other php 
-           if( $_SESSION["username"]=$_POST['username']);
+        
 
-           $_SESSION['customerID'] = $user['CustomerID']; // Set the customerID in the session
 
-           //loads these website
+            //loads these website
             header("Location:products.php"); 
             
             echo "Log in sucessfull";
