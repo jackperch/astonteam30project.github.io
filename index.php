@@ -80,21 +80,7 @@
             </div>
             
         </div>
-        
-
-
-
-
-       <!-- <div class="index-image-container">
-            <img src="Images/index-page-bg.jpg" id= "index-image" alt="Index Page Image">
-        </div> -->
-
-
-        
-
-
-
-        
+     
         <footer>
             <div class="footer-container">
                 <div class="footer-links">
@@ -137,7 +123,3 @@
 
 
 </html>
-
-
-
-<!-- test-->
