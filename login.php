@@ -31,13 +31,19 @@
         // fetch the result row and check 
         if ($SQL->rowCount()>0){  // matching username
           $row=$SQL->fetch();
+
+
+          //echo $row['username'];
   
           if (password_verify($_POST['password'], $row['password'])){ //matching password with the user input password and database stored password
 
-            $_SESSION['customerID'] = $row['CustomerID']; // Set the customerID in the session
-
             //Makes the username accessible for other php 
             $_SESSION["username"] = $_POST['username'];
+            $_SESSION["customerID"] = $row['customerID'];
+            
+           // $_SESSION['customerID'] = $db->prepare('SELECT CustomerID FROM Customers WHERE username = $_SESSION["username"]'); // Set the customerID in the session
+
+        
 
 
             //loads these website

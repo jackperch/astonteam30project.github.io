@@ -1,11 +1,11 @@
 <?php
 session_start();
 // Check if the user is logged in and the request is a POST request
-               if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
+               if (isset($_SESSION['username']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
                     require_once("connectionDB.php");
                     echo "Connected to the database";
 
-                    $customerID = $_SESSION['customerID']; 
+                    //$customerID = $_SESSION['customerID']; 
                     $productListingID = $_POST['productListingID'];
                     $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default to 1 if quantity is not specified
 
