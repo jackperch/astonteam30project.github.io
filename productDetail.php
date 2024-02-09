@@ -1,3 +1,7 @@
+<?php
+require_once("connectionDB.php");
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,58 +51,71 @@
 
 <main>
     <div class="product-container">
+
         <?php
-        require_once("connectionDB.php");
+            require_once("connectionDB.php");
 
-        if (isset($_GET['productListingID']) && is_numeric($_GET['productListingID'])) {
-            $productListingID = $_GET['productListingID'];
+            if (isset($_GET['productListingID']) && is_numeric($_GET['productListingID'])) {
+                $productListingID = $_GET['productListingID'];
 
-            // Fetch product details
-            $sql = "SELECT pl.*, pli.color, pli.size, c.name AS categoryName 
-                    FROM ProductListing pl
-                    JOIN ProductListingInfo pli ON pl.productListingID = pli.productListingID
-                    JOIN Category c ON pl.categoryID = c.categoryID
-                    WHERE pl.productListingID = ?";
-            $stmt = $db->prepare($sql);
-            $stmt->execute([$productListingID]);
-            $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                // Fetch product details
+                $sql = "SELECT pl.*, pli.color, pli.size, c.name AS categoryName 
+                        FROM ProductListing pl
+                        JOIN ProductListingInfo pli ON pl.productListingID = pli.productListingID
+                        JOIN Category c ON pl.categoryID = c.categoryID
+                        WHERE pl.productListingID = ?";
+                $stmt = $db->prepare($sql);
+                $stmt->execute([$productListingID]);
+                $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($product) {
-                echo "<div class='product-container'>"; // Container for the product
-            
-                // Product Image
-                echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' class='product-image'>";
-            
-                // Product Details
-                echo "<div class='product-details'>";
-                echo "<h1 class='product-title'>{$product['productName']}</h1>";
-                echo "<p class='product-description'>Description: {$product['description']}</p>";
-                echo "<p>Price: {$product['price']}</p>";
-                echo "<p>Colour: {$product['color']}</p>";
-                echo "<p>Size: {$product['size']}</p>";
-                echo "<p>Category: {$product['categoryName']}</p>";
-                echo "<button class='add-to-cart-btn'>Add to Cart</button>"; // Example add-to-cart button
-                echo "</div>"; // Close product-details
-            
-                echo "</div>"; // Close product-container
-            } 
-            else {
-                echo "Product not found.";
+                if ($product) {
+                    echo "<div class='product-container'>"; // Container for the product
+                
+                    // Product Image
+                    echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' class='product-image'>";
+                
+                        // Product Details
+                        echo "<div class='product-details'>";
+                        echo "<h1 class='product-title'>{$product['productName']}</h1>";
+                        echo "<p class='product-description'>Description: {$product['description']}</p>";
+                        echo "<p>Price: {$product['price']}</p>";
+                        echo "<p>Colour: {$product['color']}</p>";
+                        echo "<p>Size: {$product['size']}</p>";
+                        echo "<p>Category: {$product['categoryName']}</p>";
+                        
+                        // Add to Cart Form
+                        echo "<form method='post' action='updatecart.php'>";
+                        echo "<input type='hidden' name='productListingID' value='{$productListingID}'>";
+                        echo "<input type='number' name='quantity' min='1' value='1' class='quantity-input'>";
+                        echo "<button type='submit' class='add-to-cart-btn'>Add to Cart</button>";
+                        echo "</form>";
+
+                        // Close product-details
+                        echo "</div>"; 
+                
+                    // Close product-container
+                    echo "</div>"; 
+                } 
+                else {
+                    echo "Product not found.";
+                }
             }
-        }
+
+               
+
+               // Fetch product reviews    !!!!!! NEEDS DOING !!!!!!
             
         ?>
-    </div>
-</main>
+        </div>
+    </main>
 
-<footer>
-            <div class="footer-container">
-                <div class="footer-links">
-                    <a href="reviews.php">Reviews</a>
-                    <a href="contact.php">Contact Us</a>
-                    <a href="about.php">About Us</a>
-                    <a href="privacy-policy.php">Privacy Policy</a>
-                </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="reviews.php">Reviews</a>
+                <a href="contact.php">Contact Us</a>
+                <a href="about.php">About Us</a>
+                <a href="privacy-policy.php">Privacy Policy</a>
             </div>
-        </footer>
-
+        </div>
+    </footer>

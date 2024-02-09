@@ -34,14 +34,13 @@
   
           if (password_verify($_POST['password'], $row['password'])){ //matching password with the user input password and database stored password
 
-            $_SESSION['customerID'] = $customerID; // Set the customerID in the session
+            $_SESSION['customerID'] = $row['CustomerID']; // Set the customerID in the session
 
-          //Makes the username accessible for other php 
-           if( $_SESSION["username"]=$_POST['username']);
+            //Makes the username accessible for other php 
+            $_SESSION["username"] = $_POST['username'];
 
-           $_SESSION['customerID'] = $user['CustomerID']; // Set the customerID in the session
 
-           //loads these website
+            //loads these website
             header("Location:products.php"); 
             
             echo "Log in sucessfull";
