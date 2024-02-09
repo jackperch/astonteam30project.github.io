@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 01, 2024 at 02:32 PM
+-- Generation Time: Feb 09, 2024 at 07:01 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ace gear`
+-- Database: `age gear`
 --
 
 -- --------------------------------------------------------
@@ -29,24 +29,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `address` (
   `addressID` int(11) NOT NULL,
+  `customerID` int(11) NOT NULL,
   `house_number` int(11) NOT NULL,
-  `Address_Line1` text NOT NULL,
-  `Address_Line2` text NOT NULL,
-  `Postcode` text NOT NULL,
-  `City` text NOT NULL,
-  `Country` text NOT NULL
+  `address_line_1` varchar(50) NOT NULL,
+  `address_line_2` varchar(50) NOT NULL,
+  `post_code` varchar(50) NOT NULL,
+  `city` varchar(30) NOT NULL,
+  `country` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `address`
 --
 
-INSERT INTO `address` (`addressID`, `house_number`, `Address_Line1`, `Address_Line2`, `Postcode`, `City`, `Country`) VALUES
-(1, 0, 'BBB', 'BBB', 'BBB', 'BBB', 'BBB'),
-(2, 11, 'T1', 'T1', 'T1', 'T1', 'T1'),
-(3, 11, 'SS', 'SS', 'SS', 'SS', 'SS'),
-(4, 123, 'TestStreet', 'test area', 'T3 STX', 'Test city', 'Test country'),
-(5, 11, 's', 'eemefe', 'CVM RG', 'DWRF', ' EFGE');
+INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_1`, `address_line_2`, `post_code`, `city`, `country`) VALUES
+(6, 10, 1, 'user', 'user', 'usr 2', 'use', 'user');
 
 -- --------------------------------------------------------
 
@@ -56,29 +53,22 @@ INSERT INTO `address` (`addressID`, `house_number`, `Address_Line1`, `Address_Li
 
 CREATE TABLE `admin` (
   `adminID` int(11) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`adminID`, `username`, `password`) VALUES
-(1, 'Admin1', 'Admin1');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `basket`
+-- Table structure for table `cart`
 --
 
-CREATE TABLE `basket` (
-  `basketID` int(11) NOT NULL,
+CREATE TABLE `cart` (
+  `cartID` int(11) NOT NULL,
   `customerID` int(11) NOT NULL,
-  `productListingID` int(11) NOT NULL,
-  `quantity` int(11) DEFAULT 1,
-  `date_added` timestamp NOT NULL DEFAULT current_timestamp()
+  `productID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `totat_cost` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -89,8 +79,8 @@ CREATE TABLE `basket` (
 
 CREATE TABLE `category` (
   `categoryID` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL
+  `name` varchar(50) NOT NULL,
+  `description` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -98,48 +88,32 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`categoryID`, `name`, `description`) VALUES
-(1, 'Racket Sports', 'All things rackets related'),
-(2, 'Combat Sports', 'All exuipment related to combat and fighting sports'),
-(3, 'Climbing sports', 'Equipment for climbing sports'),
+(1, 'Racket Sports', 'All things rackets related\r\n'),
+(2, 'Combat Sports', 'All equipment related to combat and fighting sports'),
+(3, 'Climbing Sports', 'Equipment for climbing sports'),
 (4, 'Football', 'Football equipment'),
 (5, 'Home Fitness', 'General home fitness and workout equipment');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact`
+-- Table structure for table `contact_request`
 --
 
-CREATE TABLE `contact` (
+CREATE TABLE `contact_request` (
   `contactID` int(11) NOT NULL,
-  `name` varchar(20) NOT NULL,
+  `name` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
-  `message` varchar(1000) NOT NULL,
-  `member` varchar(30) NOT NULL
+  `message` varchar(225) NOT NULL,
+  `is_member` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `contact`
+-- Dumping data for table `contact_request`
 --
 
-INSERT INTO `contact` (`contactID`, `name`, `email`, `message`, `member`) VALUES
-(1, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
-(2, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
-(3, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
-(4, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
-(5, 'qwfqgf', 'ceq@HOTMAIL.COM', 'wfgwegw', 'member'),
-(6, 'THHHARRNN', 'M@KK.COm', ', ,LM', 'member'),
-(7, 'trhethbe', 'wesrewsgwe@hotmai.com', 'wsgsgvwe', 'not member'),
-(8, 'trhethbe', 'wesrewsgwe@hotmai.com', 'wsgsgvwe', 'not member'),
-(9, 'trhethbe', 'wesrewsgwe@hotmai.com', 'wsgsgvwe', 'not member'),
-(10, 'THHHARRNN', 'gfhgfhn@hotg.com', 'sdfbsdbsd', 'not member'),
-(11, 'RFGR', 'cpERGEGEGE@hotmail.com', 'HELLO', 'member'),
-(12, 'RFGR', 'cpERGEGEGE@hotmail.com', 'HELLO', 'member'),
-(13, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member'),
-(14, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member'),
-(15, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member'),
-(16, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member'),
-(17, 'THHHARRNN', 'dsasfasfwaf@HOTMAIL.COM', 'wegwsegwse', 'member');
+INSERT INTO `contact_request` (`contactID`, `name`, `email`, `message`, `is_member`) VALUES
+(0, 'watr', 'water@Water.com', 'testing', 'member');
 
 -- --------------------------------------------------------
 
@@ -148,195 +122,93 @@ INSERT INTO `contact` (`contactID`, `name`, `email`, `message`, `member`) VALUES
 --
 
 CREATE TABLE `customers` (
-  `CustomerID` int(11) NOT NULL,
-  `username` text NOT NULL,
-  `password` text NOT NULL,
-  `first_name` text NOT NULL,
-  `last_name` text NOT NULL,
-  `email` text NOT NULL
+  `customerID` int(11) NOT NULL,
+  `username` varchar(20) DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`CustomerID`, `username`, `password`, `first_name`, `last_name`, `email`) VALUES
-(1, 's', '$2y$10$TLICk1TDkoWZ7scqPai.ze27qMeheB1jxWpBu04DkYPMuKuWioXEu', 's', 's', 's'),
-(2, 'b', '$2y$10$deQvcdR09YY1UlwYXsxsg.HXHDJH/GBVNLLQj8bG7KufkrLbqmTym', 'A', 'b', 'b'),
-(3, 'bb', '$2y$10$kcneanToK9rK/0HrY.xXOOoVOPmZ3zt/0KF8u7hOuO.43oCpB5KEm', 'Aa', 'b', 'b'),
-(4, 'BBB', '$2y$10$sCQRcbRrmKXu1Trzag.pFOePZRKwctdMRRtAeNyF4R480PkFLtDn.', 'BBB', 'BBB', 'BBB'),
-(5, 'T1', '$2y$10$9LuEaXjs9wG6TCftnhVEUu9nVGsycnMe2D9XA43qUwh8FflYm4NY6', 'T1', 'T1', 'T1'),
-(6, 'SS', '$2y$10$XH6MVmYE8CV894L7c3MnLOnIiEo.831/kvuMfOd6Dxv1MlFY7w9g6', 'SS', 'SS', 'SS'),
-(7, 'saad1', '$2y$10$XITa2iMGS13tz/G8oUXbI.Z0JqtKV4AmY/iQ6z.D6ophqPO6vU9nm', 'Saad', 'Rashid', 'saad@saad.com'),
-(8, 'THARRM', '$2y$10$7AC15Ixad.ha1wM5HscBt.FhgDAR6/PwKXHEdFwHtiWrfvsmiuzUG', 'THARRM', 'THARRM', 'THARRM@HotMAIL.COM');
+INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `last_name`, `email`) VALUES
+(10, 'user1', '$2y$10$nq.RRv5vuAQMUmy/dVjT4uCckyMH9bgGSF9D7I73uzdnp4aSweCXK', 'user', 'user', 'user@user.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer_address`
+-- Table structure for table `orders`
 --
 
-CREATE TABLE `customer_address` (
-  `Customer_AddressID` int(11) NOT NULL,
-  `CustomerID` int(11) NOT NULL,
-  `addressID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `customer_address`
---
-
-INSERT INTO `customer_address` (`Customer_AddressID`, `CustomerID`, `addressID`) VALUES
-(0, 5, 2),
-(0, 6, 3),
-(0, 7, 4),
-(0, 8, 5);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `guest`
---
-
-CREATE TABLE `guest` (
-  `guestID` int(11) NOT NULL,
-  `guestEmail` varchar(255) NOT NULL,
-  `guestFname` varchar(255) NOT NULL,
-  `guestSname` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `guestcart`
---
-
-CREATE TABLE `guestcart` (
-  `guestCartID` int(11) NOT NULL,
+CREATE TABLE `orders` (
   `orderID` int(11) NOT NULL,
-  `productListingID` int(11) NOT NULL,
-  `quantity` double NOT NULL,
-  `price` double NOT NULL,
-  `color` varchar(255) NOT NULL,
-  `size` int(11) NOT NULL,
-  `date_purchased` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `productlisting`
---
-
-CREATE TABLE `productlisting` (
-  `productListingID` int(11) NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `productName` varchar(255) NOT NULL,
-  `price` double NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `categoryID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `productlisting`
---
-
-INSERT INTO `productlisting` (`productListingID`, `image`, `productName`, `price`, `description`, `categoryID`) VALUES
-(1, 'TennisRacket.jpeg', 'Tennis Racket', 10.98, 'A simple test for tennis racket', 1),
-(2, 'BoxingGloves.jpeg', 'Boxing Gloves', 5.99, 'Gloves used for oxing with premium padding for extra comfort', 2),
-(4, 'ClimbingRope.jpeg', 'Climbing Rope', 79.99, 'A rope used for climbing', 3),
-(5, 'Football.jpeg', 'Football', 5.99, 'A round football', 4),
-(6, 'ResistanceBand.jpeg', 'Resistance Band', 2.99, 'A band used for home workouts', 5),
-(7, 'tennisballs.jpg', 'Tennis Balls', 7.99, 'A simple test for tennis balls', 1),
-(8, 'badmintonracket.jpg', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1),
-(9, 'shuttlecock.jpg', 'Shuttlecocks', 10.98, 'A simple test for shuttlecock', 1),
-(10, 'tenniswrap.jpg', 'Tennis Wrap', 5.99, 'A simple test for tennis wrap', 1),
-(11, 'climbingshoe.jpg', 'Climbing Shoes', 112.99, 'Shoes used for climbing', 3),
-(12, 'chalk.jpg', 'Climbing chalk', 8.99, 'Shoes used for climbing', 3),
-(13, 'harness.jpg', 'Climbing Harness', 39.99, 'A Harness used for climbing', 3),
-(14, 'carabiner.jpg', 'Carabiner', 12.99, 'A carabiner used for climbing', 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `productlistinginfo`
---
-
-CREATE TABLE `productlistinginfo` (
-  `productListingInfoID` int(11) NOT NULL,
-  `productListingID` int(11) NOT NULL,
-  `color` varchar(255) NOT NULL,
-  `size` int(11) NOT NULL,
-  `stockID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `productlistinginfo`
---
-
-INSERT INTO `productlistinginfo` (`productListingInfoID`, `productListingID`, `color`, `size`, `stockID`) VALUES
-(2, 1, 'Green', 10, 3),
-(4, 2, 'Black', 1, 3),
-(5, 4, 'Brown', 5, 3),
-(6, 5, 'White', 5, 3),
-(7, 6, 'Blue', 2, 3),
-(8, 7, 'Orange', 4, 3),
-(9, 8, 'Green', 2, 3),
-(10, 9, 'Purple', 7, 3),
-(11, 10, 'Pink', 2, 3),
-(12, 11, 'White', 3, 3),
-(13, 12, 'Black', 2, 3),
-(14, 13, 'Magenta', 6, 3),
-(15, 14, 'Yellow', 2, 3);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `productorderdetails`
---
-
-CREATE TABLE `productorderdetails` (
-  `ProductOrderDetailsID` int(11) NOT NULL,
-  `orderID` int(11) NOT NULL,
+  `customerID` int(11) NOT NULL,
   `productID` int(11) NOT NULL,
-  `quantity` double NOT NULL,
-  `price` double NOT NULL,
-  `color` varchar(255) NOT NULL,
-  `size` int(11) NOT NULL,
-  `date_purchased` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `productorderplaced`
---
-
-CREATE TABLE `productorderplaced` (
-  `orderID` int(11) NOT NULL,
-  `CustomerID` int(11) NOT NULL,
-  `productListingID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stocklevel`
---
-
-CREATE TABLE `stocklevel` (
-  `stockID` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `modified` time NOT NULL,
-  `adminID` int(11) NOT NULL
+  `price_of_product` decimal(10,0) NOT NULL,
+  `order_date` date NOT NULL,
+  `total_amount` decimal(10,0) NOT NULL,
+  `addressID` int(11) NOT NULL,
+  `paymentInfoID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_information`
+--
+
+CREATE TABLE `payment_information` (
+  `paymentInfoID` int(11) NOT NULL,
+  `customerID` int(11) NOT NULL,
+  `payment_method` varchar(20) NOT NULL,
+  `card_number` int(11) NOT NULL,
+  `expiry_date` date NOT NULL,
+  `CVV` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `productID` int(11) NOT NULL,
+  `image` varchar(225) NOT NULL,
+  `product_name` varchar(40) NOT NULL,
+  `price` float NOT NULL,
+  `description` varchar(225) NOT NULL,
+  `categoryID` int(11) NOT NULL,
+  `colour` varchar(30) NOT NULL,
+  `size` varchar(30) NOT NULL,
+  `stock` int(11) NOT NULL,
+  `is_featured` int(11) NOT NULL,
+  `is_new` int(11) NOT NULL,
+  `is_popular` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `stocklevel`
+-- Dumping data for table `products`
 --
 
-INSERT INTO `stocklevel` (`stockID`, `quantity`, `modified`, `adminID`) VALUES
-(3, 4, '00:00:00', 1);
+INSERT INTO `products` (`productID`, `image`, `product_name`, `price`, `description`, `categoryID`, `colour`, `size`, `stock`, `is_featured`, `is_new`, `is_popular`) VALUES
+(1, 'TennisRacket.jpeg', 'Tennis Racket', 10.98, 'A simple test for tennis racket', 1, 'Green', '10', 12, 1, 0, 0),
+(2, 'BoxingGloves.jpeg', 'Boxing Gloves', 5.99, 'Gloves used for boxing with premium padding for extra comfort', 2, 'Black', '1', 5, 1, 0, 0),
+(3, 'ClimbingRope.jpeg', 'Climbing Rope', 79.99, 'A rope used for climbing', 3, 'Brown', '5', 20, 0, 1, 0),
+(4, 'Football.jpeg', 'Football', 5.99, 'A round football', 4, 'White', '5', 20, 0, 0, 1),
+(5, 'ResistanceBand.jpeg', 'Resistance Band', 2.99, 'A band used for home workouts', 5, 'Blue', '2', 50, 1, 0, 0),
+(6, 'tennisballs.jpg', 'Tennis Ball', 7.99, 'A simple test for tennis balls', 1, 'Orange', '4', 3, 0, 0, 1),
+(7, 'badmintonracket.jpg', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1, 'Green', '2', 42, 1, 0, 0),
+(8, 'shuttlecock.jpg', 'Shuttlecocks', 10.98, 'A simple test for shuttlecock', 1, 'Green', '2', 5, 0, 1, 0),
+(9, 'tenniswrap.jpg', 'Tennis Wrap', 5.99, 'A simple test for tennis wrap', 1, 'Purple', '7', 4, 1, 0, 0),
+(10, 'climbingshoe.jpg', 'Climbing Shoes', 112.99, 'Shoes used for climbing', 3, 'Pink', '5', 25, 1, 0, 1),
+(11, 'chalk.jpg', 'climbing chalk', 8.99, 'Shoes used for climbing', 3, 'White', '3', 66, 0, 1, 1),
+(12, 'harness.jpg', 'Climbing Harness', 39.99, 'A harness used for climbing', 3, 'Magenta', '6', 6, 1, 0, 0),
+(13, 'carabiner.jpg', 'Carabiner', 12.99, 'A carabiner used for climbing', 3, 'Yellow', '2', 24, 1, 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -346,21 +218,16 @@ INSERT INTO `stocklevel` (`stockID`, `quantity`, `modified`, `adminID`) VALUES
 -- Indexes for table `address`
 --
 ALTER TABLE `address`
-  ADD PRIMARY KEY (`addressID`);
+  ADD PRIMARY KEY (`addressID`),
+  ADD KEY `customerID` (`customerID`);
 
 --
--- Indexes for table `admin`
+-- Indexes for table `cart`
 --
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`adminID`);
-
---
--- Indexes for table `basket`
---
-ALTER TABLE `basket`
-  ADD PRIMARY KEY (`basketID`),
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`cartID`),
   ADD KEY `customerID` (`customerID`),
-  ADD KEY `productListingID` (`productListingID`);
+  ADD KEY `cart_ibfk_1` (`productID`);
 
 --
 -- Indexes for table `category`
@@ -369,73 +236,33 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`categoryID`);
 
 --
--- Indexes for table `contact`
---
-ALTER TABLE `contact`
-  ADD PRIMARY KEY (`contactID`);
-
---
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
-  ADD PRIMARY KEY (`CustomerID`);
+  ADD PRIMARY KEY (`customerID`);
 
 --
--- Indexes for table `customer_address`
+-- Indexes for table `orders`
 --
-ALTER TABLE `customer_address`
-  ADD KEY `customerID_fk` (`CustomerID`),
-  ADD KEY `addressID_fk` (`addressID`);
+ALTER TABLE `orders`
+  ADD KEY `productID` (`productID`),
+  ADD KEY `orders_ibfk_1` (`customerID`),
+  ADD KEY `addressID` (`addressID`),
+  ADD KEY `paymentInfoID` (`paymentInfoID`);
 
 --
--- Indexes for table `guest`
+-- Indexes for table `payment_information`
 --
-ALTER TABLE `guest`
-  ADD PRIMARY KEY (`guestID`);
+ALTER TABLE `payment_information`
+  ADD PRIMARY KEY (`paymentInfoID`),
+  ADD KEY `customerID` (`customerID`);
 
 --
--- Indexes for table `guestcart`
+-- Indexes for table `products`
 --
-ALTER TABLE `guestcart`
-  ADD PRIMARY KEY (`guestCartID`),
-  ADD KEY `orderID` (`orderID`);
-
---
--- Indexes for table `productlisting`
---
-ALTER TABLE `productlisting`
-  ADD PRIMARY KEY (`productListingID`),
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`productID`),
   ADD KEY `categoryID` (`categoryID`);
-
---
--- Indexes for table `productlistinginfo`
---
-ALTER TABLE `productlistinginfo`
-  ADD PRIMARY KEY (`productListingInfoID`),
-  ADD KEY `productListingID` (`productListingID`),
-  ADD KEY `stockID` (`stockID`);
-
---
--- Indexes for table `productorderdetails`
---
-ALTER TABLE `productorderdetails`
-  ADD PRIMARY KEY (`ProductOrderDetailsID`),
-  ADD KEY `orderID` (`orderID`);
-
---
--- Indexes for table `productorderplaced`
---
-ALTER TABLE `productorderplaced`
-  ADD PRIMARY KEY (`orderID`),
-  ADD KEY `CustomerID` (`CustomerID`),
-  ADD KEY `productListingID` (`productListingID`);
-
---
--- Indexes for table `stocklevel`
---
-ALTER TABLE `stocklevel`
-  ADD PRIMARY KEY (`stockID`),
-  ADD KEY `adminID` (`adminID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -445,135 +272,71 @@ ALTER TABLE `stocklevel`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT for table `cart`
 --
-ALTER TABLE `admin`
-  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `basket`
---
-ALTER TABLE `basket`
-  MODIFY `basketID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cart`
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `contact`
---
-ALTER TABLE `contact`
-  MODIFY `contactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `guest`
+-- AUTO_INCREMENT for table `payment_information`
 --
-ALTER TABLE `guest`
-  MODIFY `guestID` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `payment_information`
+  MODIFY `paymentInfoID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `guestcart`
+-- AUTO_INCREMENT for table `products`
 --
-ALTER TABLE `guestcart`
-  MODIFY `guestCartID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `productlisting`
---
-ALTER TABLE `productlisting`
-  MODIFY `productListingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT for table `productlistinginfo`
---
-ALTER TABLE `productlistinginfo`
-  MODIFY `productListingInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `productorderdetails`
---
-ALTER TABLE `productorderdetails`
-  MODIFY `ProductOrderDetailsID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `productorderplaced`
---
-ALTER TABLE `productorderplaced`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `stocklevel`
---
-ALTER TABLE `stocklevel`
-  MODIFY `stockID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `products`
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `basket`
+-- Constraints for table `address`
 --
-ALTER TABLE `basket`
-  ADD CONSTRAINT `basket_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`CustomerID`),
-  ADD CONSTRAINT `basket_ibfk_2` FOREIGN KEY (`productListingID`) REFERENCES `productlisting` (`productListingID`);
+ALTER TABLE `address`
+  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`CustomerID`);
 
 --
--- Constraints for table `customer_address`
+-- Constraints for table `cart`
 --
-ALTER TABLE `customer_address`
-  ADD CONSTRAINT `customer_address_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`),
-  ADD CONSTRAINT `customer_address_ibfk_2` FOREIGN KEY (`addressID`) REFERENCES `address` (`addressID`);
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`);
 
 --
--- Constraints for table `guestcart`
+-- Constraints for table `orders`
 --
-ALTER TABLE `guestcart`
-  ADD CONSTRAINT `guestcart_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `productorderplaced` (`orderID`);
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`paymentInfoID`) REFERENCES `payment_information` (`paymentInfoID`);
 
 --
--- Constraints for table `productlisting`
+-- Constraints for table `payment_information`
 --
-ALTER TABLE `productlisting`
-  ADD CONSTRAINT `productlisting_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `category` (`categoryID`);
+ALTER TABLE `payment_information`
+  ADD CONSTRAINT `payment_information_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`CustomerID`);
 
 --
--- Constraints for table `productlistinginfo`
+-- Constraints for table `products`
 --
-ALTER TABLE `productlistinginfo`
-  ADD CONSTRAINT `productlistinginfo_ibfk_1` FOREIGN KEY (`productListingID`) REFERENCES `productlisting` (`productListingID`),
-  ADD CONSTRAINT `productlistinginfo_ibfk_2` FOREIGN KEY (`stockID`) REFERENCES `stocklevel` (`stockID`);
-
---
--- Constraints for table `productorderdetails`
---
-ALTER TABLE `productorderdetails`
-  ADD CONSTRAINT `productorderdetails_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `productorderplaced` (`orderID`);
-
---
--- Constraints for table `productorderplaced`
---
-ALTER TABLE `productorderplaced`
-  ADD CONSTRAINT `productorderplaced_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`),
-  ADD CONSTRAINT `productorderplaced_ibfk_2` FOREIGN KEY (`productListingID`) REFERENCES `productlisting` (`productListingID`);
-
---
--- Constraints for table `stocklevel`
---
-ALTER TABLE `stocklevel`
-  ADD CONSTRAINT `stocklevel_ibfk_1` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `category` (`categoryID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

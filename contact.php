@@ -21,7 +21,7 @@
     }
     // Tries to  insert data to the contact table
     try{
-        $insertToContactTable = $db->prepare('INSERT INTO contact (name, email, message, member) VALUES (?, ?, ?, ?)');
+        $insertToContactTable = $db->prepare('INSERT INTO contact_request (name, email, message, is_member) VALUES (?, ?, ?, ?)');
         $insertToContactTable->execute(array($name, $email, $message, $member));
 
 

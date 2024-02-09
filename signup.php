@@ -38,19 +38,17 @@ if (isset($_POST['signupsubmitted'])) {
             // Insert new user into the database
             $insertUserSQL = $db->prepare('INSERT INTO Customers (username, password, first_name, last_name,email) VALUES (?, ?, ?, ?,?)');
             $insertUserSQL->execute(array($newUsername, $newPassword, $newFirstName, $newLastName,$newEmail));
+           
+            $retrieveCustomerID = $db->prepare('SELECT customerID FROM Customers WHERE username = ?');
+            $retrieveCustomerID->execute(array($newUsername));
+            $customerID = $retrieveCustomerID->fetch(PDO::FETCH_ASSOC)['customerID'];
 
-            //Stores  cutomer's addresses in the address table
-           $insertUserAddress=$db->prepare('INSERT INTO Address (house_number, address_line1, address_line2, Postcode, city, country) VALUES (?, ?, ?, ?, ?, ?)');
-           $insertUserAddress->execute(array($newHouseNumber, $newAddressLine1, $newAddressLine2, $newPostCode, $newCity, $newCountry));
-        
-           $retrieveCustomerID = $db->prepare('SELECT customerID FROM Customers WHERE username = ?');
-           $retrieveCustomerID->execute(array($newUsername));
-        
-           $retrieveAddressID = $db->prepare('SELECT addressID FROM Address WHERE house_number = ? AND address_line1 = ? AND address_line2 = ? AND Postcode = ? AND city = ? AND country = ?');
-           $retrieveAddressID->execute(array($newHouseNumber, $newAddressLine1, $newAddressLine2, $newPostCode, $newCity, $newCountry));
-        
-           $insertCustomer_Address = $db->prepare('INSERT INTO Customer_Address (customerID, addressID) VALUES (?, ?)');
-            $insertCustomer_Address->execute(array($retrieveCustomerID->fetchColumn(), $retrieveAddressID->fetchColumn()));
+            $insertUserAddress = $db->prepare('INSERT INTO address (customerID, house_number, address_line_1, address_line_2, post_code, city, country) VALUES (?, ?, ?, ?, ?, ?, ?)');
+            $insertUserAddress->execute(array($customerID, $newHouseNumber, $newAddressLine1, $newAddressLine2, $newPostCode, $newCity, $newCountry));
+            
+            
+                   
+             
          
 
            echo "Sign up successful! You can now log in.";

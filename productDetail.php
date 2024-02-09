@@ -50,31 +50,31 @@
         <?php
         require_once("connectionDB.php");
 
-        if (isset($_GET['productListingID']) && is_numeric($_GET['productListingID'])) {
-            $productListingID = $_GET['productListingID'];
+        if (isset($_GET['productID']) && is_numeric($_GET['productID'])) {
+            $productID = $_GET['productID'];
 
             // Fetch product details
-            $sql = "SELECT pl.*, pli.color, pli.size, c.name AS categoryName 
-                    FROM ProductListing pl
-                    JOIN ProductListingInfo pli ON pl.productListingID = pli.productListingID
-                    JOIN Category c ON pl.categoryID = c.categoryID
-                    WHERE pl.productListingID = ?";
+            $sql = "SELECT products.*, products.colour, products.size, c.name AS categoryName 
+                    FROM products 
+                    JOIN category c ON products.categoryID = c.categoryID
+                    WHERE products.productID = ?";
+                    
             $stmt = $db->prepare($sql);
-            $stmt->execute([$productListingID]);
+            $stmt->execute([$productID]);
             $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($product) {
                 echo "<div class='product-container'>"; // Container for the product
             
                 // Product Image
-                echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' class='product-image'>";
+                echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['product_name']}' class='product-image'>";
             
                 // Product Details
                 echo "<div class='product-details'>";
-                echo "<h1 class='product-title'>{$product['productName']}</h1>";
+                echo "<h1 class='product-title'>{$product['product_name']}</h1>";
                 echo "<p class='product-description'>Description: {$product['description']}</p>";
                 echo "<p>Price: {$product['price']}</p>";
-                echo "<p>Colour: {$product['color']}</p>";
+                echo "<p>Colour: {$product['colour']}</p>";
                 echo "<p>Size: {$product['size']}</p>";
                 echo "<p>Category: {$product['categoryName']}</p>";
                 echo "<button class='add-to-cart-btn'>Add to Cart</button>"; // Example add-to-cart button
