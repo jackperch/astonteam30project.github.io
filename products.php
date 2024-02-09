@@ -39,7 +39,9 @@
                 } else {
                     echo "<a href='login.php'>Login</a>";
                 }
-                echo $_SESSION['customerID'];
+                //echo 'cutomer Id is ',$_SESSION['customerID'];
+                //echo 'username is ',$_SESSION['username'];
+                
                 ?>
         </nav>
         <div id="cart-container">

@@ -25,7 +25,7 @@
     try {
       //Query DB to find the matching username/password
       //using prepare/bindparameter to prevent SQL injection.
-        $SQL = $db->prepare('SELECT password FROM Customers WHERE username = ?');
+        $SQL = $db->prepare('SELECT password, CustomerID FROM Customers WHERE username = ?');
         $SQL->execute(array($_POST['username']));
           
         // fetch the result row and check 
@@ -33,13 +33,14 @@
           $row=$SQL->fetch();
 
 
-          //echo $row['username'];
+
+          //echo $row['username']; 
   
           if (password_verify($_POST['password'], $row['password'])){ //matching password with the user input password and database stored password
 
             //Makes the username accessible for other php 
             $_SESSION["username"] = $_POST['username'];
-            $_SESSION["customerID"] = $row['customerID'];
+            $_SESSION["customerID"] = $row['CustomerID'];
             
            // $_SESSION['customerID'] = $db->prepare('SELECT CustomerID FROM Customers WHERE username = $_SESSION["username"]'); // Set the customerID in the session
 
