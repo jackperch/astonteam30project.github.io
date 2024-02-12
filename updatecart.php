@@ -6,30 +6,30 @@ echo "Connected to the database";
                if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     $customerID = $_SESSION['customerID']; 
-                    $productListingID = $_POST['productListingID'];
+                    $productID = $_POST['productID'];
                     $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default to 1 if quantity is not specified
 
                     try {
-                        // Check if the item already exists in the basket
-                        $stmt = $db->prepare("SELECT quantity FROM basket WHERE customerID = :customerID AND productListingID = :productListingID");
+                        // Check if the item already exists in the cart
+                        $stmt = $db->prepare("SELECT quantity FROM cart WHERE customerID = :customerID AND productID = :productID");
                         $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
-                        $stmt->bindParam(':productListingID', $productListingID, PDO::PARAM_INT);
+                        $stmt->bindParam(':productID', $productID, PDO::PARAM_INT);
                         $stmt->execute();
                         
                         $existingItem = $stmt->fetch(PDO::FETCH_ASSOC);
 
                         if ($existingItem) {
-                            // Item already in basket, update quantity
+                            // Item already in cart, update quantity
                             $newQuantity = $existingItem['quantity'] + $quantity;
-                            $stmt = $db->prepare("UPDATE basket SET quantity = :quantity WHERE customerID = :customerID AND productListingID = :productListingID");
+                            $stmt = $db->prepare("UPDATE cart SET quantity = :quantity WHERE customerID = :customerID AND productID = :productID");
                             $stmt->bindParam(':quantity', $newQuantity, PDO::PARAM_INT);
                         } else {
-                            // Item not in basket, insert new record
-                            $stmt = $db->prepare("INSERT INTO basket (customerID, productListingID, quantity) VALUES (:customerID, :productListingID, :quantity)");
+                            // Item not in cart, insert new record
+                            $stmt = $db->prepare("INSERT INTO cart (customerID, productID, quantity) VALUES (:customerID, :productLID, :quantity)");
                         }
 
                         $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
-                        $stmt->bindParam(':productListingID', $productListingID, PDO::PARAM_INT);
+                        $stmt->bindParam(':productID', $product, PDO::PARAM_INT);
                         $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
                         $stmt->execute();
 
@@ -42,7 +42,7 @@ echo "Connected to the database";
                         // Handle errors, maybe log them and show user-friendly message
                         echo "Error updating cart: " . $ex->getMessage();
                         // Redirect to product page or display error
-                        header("Location: product.php?id=".$productListingID."&error=cart-update-failed");
+                        header("Location: product.php?id=".$productID."&error=cart-update-failed");
                         exit;
                     }
               //  } else {
