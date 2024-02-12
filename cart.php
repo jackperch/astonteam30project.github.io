@@ -73,20 +73,21 @@
                     function fetchCartItems() {
                         global $db;
                         $customerID = $_SESSION['customerID']; // checking to see if user is logged by comparing customerID to value stored in session
-
+                        //echo 'cutomer Id is ',$_SESSION['productID'];
                         try {
                             $sql = "
                             SELECT
-                                p.productName,
-                                p.price,
-                                b.quantity,
-                                p.image
+                                pr.productID,
+                                pr.product_name AS productName,
+                                pr.price,
+                                c.quantity,
+                                pr.image
                             FROM
-                                basket b
+                                cart c
                             JOIN
-                                productlisting p ON b.productListingID = p.productListingID
+                                products pr ON c.productID = pr.productID
                             WHERE
-                                b.customerID = :customerID;
+                                c.customerID = :customerID;
                             ";
 
                             $stmt = $db->prepare($sql);
@@ -110,7 +111,7 @@
                         echo "<p>Quantity: {$item['quantity']}</p>";
                         // Form for updating quantity or removing item
                         echo "<form method='post' action='updateCart.php'>";
-                        echo "<input type='hidden' name='productListingID' value='{$item['productListingID']}'>";
+                        echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
                         echo "<input type='number' name='quantity' value='{$item['quantity']}' min='1'>";
                         echo "<button type='submit' name='action' value='update'>Update</button>";
                         echo "<button type='submit' name='action' value='remove'>Remove</button>";

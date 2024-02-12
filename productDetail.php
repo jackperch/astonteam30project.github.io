@@ -1,6 +1,17 @@
 <?php
 require_once("connectionDB.php");
 session_start();
+echo '<pre>';
+print_r($_POST);
+echo '</pre>';
+
+// Access the productID
+if (isset($_POST['productID'])) {
+    $productID = $_POST['productID'];
+    echo "Product ID: " . $productID;
+} else {
+    echo "Product ID is missing.";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +41,7 @@ session_start();
 
 
             <?php 
-                session_start();
+                //session_start();
                 if (isset($_SESSION['username'])) {
                     echo "<a href='members-blog.php'>Blog</a>";
                     echo "<a href='account.php'>Account</a>";
@@ -82,10 +93,18 @@ session_start();
                 echo "<p>Colour: {$product['colour']}</p>";
                 echo "<p>Size: {$product['size']}</p>";
                 echo "<p>Category: {$product['categoryName']}</p>";
-                echo "<button class='add-to-cart-btn'>Add to Cart</button>"; // Example add-to-cart button
-                echo "</div>"; // Close product-details
-            
-                echo "</div>"; // Close product-container
+                // Add to Cart Form
+                echo "<form method='post' action='updatecart.php'>";
+                echo "<input type='hidden' name='productID' value='{$productID}'>";
+                echo "<input type='number' name='quantity' min='1' value='1' class='quantity-input'>";
+                echo "<button type='submit' class='add-to-cart-btn'>Add to Cart</button>";
+                echo "</form>";
+
+                // Close product-details
+                echo "</div>"; 
+
+            // Close product-container
+            echo "</div>";
             } 
             else {
                 echo "Product not found.";

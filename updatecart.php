@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require_once("connectionDB.php");
 echo "Connected to the database";
 // Check if the user is logged in and the request is a POST request
@@ -25,11 +26,11 @@ echo "Connected to the database";
                             $stmt->bindParam(':quantity', $newQuantity, PDO::PARAM_INT);
                         } else {
                             // Item not in cart, insert new record
-                            $stmt = $db->prepare("INSERT INTO cart (customerID, productID, quantity) VALUES (:customerID, :productLID, :quantity)");
+                            $stmt = $db->prepare("INSERT INTO cart (customerID, productID, quantity) VALUES (:customerID, :productID, :quantity)");
                         }
 
                         $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
-                        $stmt->bindParam(':productID', $product, PDO::PARAM_INT);
+                        $stmt->bindParam(':productID', $productID, PDO::PARAM_INT);
                         $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
                         $stmt->execute();
 

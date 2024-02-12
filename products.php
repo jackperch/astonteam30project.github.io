@@ -64,21 +64,20 @@ function fetchProducts() {
          require_once("connectionDB.php");
         // SQL query
         $sql = "
-        
-    SELECT
-    products.productID,
-    products.image,
-    products.product_name,
-    products.price,
-    products.description AS productDescription,
-    products.colour,
-    products.size,
-    category.name AS categoryName
-    FROM
-    products
-    JOIN
-    category ON products.categoryID = category.categoryID;
-        ";
+                SELECT
+                p.productID,
+                p.image,
+                p.product_name AS productName,
+                p.price,
+                p.description AS productDescription,
+                p.colour,
+                p.size,
+                c.name AS categoryName
+                FROM
+                products p
+                JOIN
+                category c ON p.categoryID = c.categoryID;
+                    ";
 
         // Prepare and execute the query
         $SQLEXECUTE = $db->prepare($sql);
@@ -86,6 +85,7 @@ function fetchProducts() {
 
         // Fetch results
         $products = $SQLEXECUTE->fetchAll(PDO::FETCH_ASSOC);
+        $productID= $_POST['productID'];
 
         // Close the database connection
         //$db = null;
@@ -112,8 +112,8 @@ $allOfTheProducts = fetchProducts();
 
         // Make the product name a clickable link
         echo "<a href='productDetail.php?productID={$product['productID']}'>";
-        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['product_name']}' width=50 height=50>";
-        echo "<h2>{$product['product_name']}</h2>";
+        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' width=50 height=50>";
+        echo "<h2>{$product['productName']}</h2>";
         echo "</a>";
 
         echo "<p>Price: {$product['price']}</p>";
@@ -123,13 +123,15 @@ $allOfTheProducts = fetchProducts();
         echo "<p>Category: {$product['categoryName']}</p>";
 
         //a form with a button to add the product to the cart
-        echo "<form method='post' action='#' onsubmit='return false;'>";
+        echo "<form method='post' action='updatecart.php'>";
         echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
         echo "<button onclick='displayAlert()'>Add to cart!</button>";
         echo "</form>";
 
         echo "</div>";
         echo "<hr>";
+        
+        echo "productID is", $productID;
     }
     ?>
 
