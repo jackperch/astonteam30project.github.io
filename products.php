@@ -85,7 +85,7 @@ function fetchProducts() {
 
         // Fetch results
         $products = $SQLEXECUTE->fetchAll(PDO::FETCH_ASSOC);
-        $productID= $_POST['productID'];
+    
 
         // Close the database connection
         //$db = null;
@@ -131,7 +131,7 @@ $allOfTheProducts = fetchProducts();
         echo "</div>";
         echo "<hr>";
         
-        echo "productID is", $productID;
+      
     }
     ?>
 
