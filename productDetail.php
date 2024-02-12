@@ -1,17 +1,8 @@
 <?php
 require_once("connectionDB.php");
 session_start();
-echo '<pre>';
-print_r($_POST);
-echo '</pre>';
 
-// Access the productID
-if (isset($_POST['productID'])) {
-    $productID = $_POST['productID'];
-    echo "Product ID: " . $productID;
-} else {
-    echo "Product ID is missing.";
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
