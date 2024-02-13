@@ -8,6 +8,7 @@ echo "Connected to the database";
 
                     $customerID = $_SESSION['customerID']; 
                     $productID = $_POST['productID'];
+                    $action = $_POST['action'];
                     $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default to 1 if quantity is not specified
 
                     try {
@@ -27,6 +28,18 @@ echo "Connected to the database";
                         } else {
                             // Item not in cart, insert new record
                             $stmt = $db->prepare("INSERT INTO cart (customerID, productID, quantity) VALUES (:customerID, :productID, :quantity)");
+                        }
+
+                        if ($action === 'remove') {
+                            // Remove item from cart
+                            $sql = "DELETE FROM cart WHERE customerID = :customerID AND productID = :productID";
+                            $stmt = $db->prepare($sql);
+                            $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
+                            $stmt->bindParam(':productID', $productID, PDO::PARAM_INT);
+                            $stmt->execute();
+                
+                            header("Location: cart.php?status=removed");
+                            exit;
                         }
 
                         $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
