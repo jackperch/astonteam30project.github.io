@@ -116,8 +116,19 @@
                         echo "<button type='submit' name='action' value='update'>Update</button>";
                         echo "<button type='submit' name='action' value='remove'>Remove</button>";
                         echo "</form>";
+                    }
+
+                    if (empty($cartItems)) {
+                        echo "<p>Your cart is empty</p>";
+                    } else {
+                        // Checkout button form
+                        echo "<form action='checkout.php' method='get'>";
+                        echo "<input type='submit' value='Continue to Checkout' class='button'>";
+                        echo "</form>";
                         echo "</div>";
                     }
+
+                    
                 ?>
 
             </div>
