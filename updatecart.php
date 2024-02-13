@@ -59,11 +59,11 @@ echo "Connected to the database";
                         header("Location: product.php?id=".$productID."&error=cart-update-failed");
                         exit;
                     }
-              //  } else {
+                } else {
                     //If the user is not logged in, redirect to the login page
-              //      header("Location: login.php");
-              //      exit;
+                    header("Location: login.php");
+                    exit;
                 }
-                echo "Not Logged in or not a POST request";
-                echo 'cutomer Id is ',$_SESSION['customerID'];
+                //echo "Not Logged in or not a POST request";
+                //echo 'cutomer Id is ',$_SESSION['customerID'];
 ?>
