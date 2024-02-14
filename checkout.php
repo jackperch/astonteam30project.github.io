@@ -68,18 +68,43 @@
                             $totalPrice += ($item['quantity'] * $item['price']);
                         }
                         echo "<p>Total Price: $$totalPrice</p>";
+
+
+                        // Initialize variables to hold address details
+                        $address_line_1 = $address_line_2 = $city = $state = $postal_code = $country = "";
+
+                        // Check if user is logged in
+                        if (isset($_SESSION['customerID'])) {
+                            $customerID = $_SESSION['customerID'];
+                            
+                            // Fetch address details for the logged-in user
+                            $sql = "SELECT * FROM address WHERE customerID = :customerID LIMIT 1"; // Adjust table/column names as per your database schema
+                            $stmt = $db->prepare($sql);
+                            $stmt->execute(['customerID' => $customerID]);
+                            $address = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                            if ($address) {
+                                // Set variables if address exists
+                                $address_line_1 = $address['address_line_1'];
+                                $address_line_2 = $address['address_line_2'];
+                                $city = $address['city'];
+                                $state = $address['state']; // Assume there's a state column; adjust as necessary
+                                $postal_code = $address['postal_code'];
+                                $country = $address['country'];
+                            }
+                        }
                         ?>
                     </div>
                 </section>
 
                 <section class="shipping-information">
                     <h2>Shipping Information</h2>
-                    <input type="text" name="address_line_1" placeholder="Address Line 1" required>
-                    <input type="text" name="address_line_2" placeholder="Address Line 2">
-                    <input type="text" name="city" placeholder="City" required>
-                    <input type="text" name="state" placeholder="State" required>
-                    <input type="text" name="postal_code" placeholder="Postal Code" required>
-                    <input type="text" name="country" placeholder="Country" required>
+                    <input type="text" name="address_line_1" placeholder="Address Line 1" value="<?php echo htmlspecialchars($address_line_1); ?>" required>
+                    <input type="text" name="address_line_2" placeholder="Address Line 2" value="<?php echo htmlspecialchars($address_line_2); ?>">
+                    <input type="text" name="city" placeholder="City" value="<?php echo htmlspecialchars($city); ?>" required>
+                    <input type="text" name="state" placeholder="State" value="<?php echo htmlspecialchars($state); ?>" required>
+                    <input type="text" name="postal_code" placeholder="Postal Code" value="<?php echo htmlspecialchars($postal_code); ?>" required>
+                    <input type="text" name="country" placeholder="Country" value="<?php echo htmlspecialchars($country); ?>" required>
                 </section>
 
                 <section class="payment-information">
