@@ -47,7 +47,7 @@
     <main>
         <h1>Checkout</h1>
         <div class="checkout-container">
-            <form action="process_order.php" method="post"> <!-- !!!!!!! Need to Replace with processing page script !!!!!! -->
+            <form action="processOrder.php" method="post"> <!-- !!!!!!! Need to Replace with processing page script !!!!!! -->
                 <section class="cart-summary">
                     <h2>Your Cart</h2>
                     <div id="cart-items">
