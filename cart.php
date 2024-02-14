@@ -84,7 +84,7 @@
                 //      header("Location: login.php");
                 //      exit;
                 //  }
-                    
+                if (isset($_SESSION['customerID'])) {
                     $customerID = $_SESSION['customerID'];
 
                     // Function to fetch cart items
@@ -146,7 +146,46 @@
                         echo "</div>";
                     }
 
+                }else{
+                    require_once("connectionDB.php");
+
+                    function fetchGuestItems($db, $productID){
+                        try{
+                            $sql = "SELECT * FROM products WHERE productID = :productID";
+                            $stmt = $db->prepare($sql);
+                            $stmt->bindParam(':productID', $productID, PDO::PARAM_INT);
+                            $stmt->execute();
+                            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        }
+                        catch(PDOException $ex){
+                            echo "Error fetching  items: " . $ex->getMessage();
+                            exit;
+                        }
+                    }
                     
+                    if (isset($_SESSION["guest_shopping_cart"])) {
+                        $guest_shopping_cart = $_SESSION["guest_shopping_cart"];
+                        foreach ($guest_shopping_cart as $productID => $quantity) {
+                           // echo "Product ID: " . $productID . ", Quantity: " . $quantity . "<br>"; Testing
+                            $guestItems = fetchGuestItems($db, $productID);
+                            foreach ($guestItems as $item) {
+                                echo "<div class='cart-item'>";
+                                echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=50 height=50>";
+                                echo "<h2>{$item['product_name']}</h2>";
+                                echo "<p>Price: {$item['price']}</p>";
+                                echo "<p>Quantity: {$quantity}</p>";
+                                echo "<form method='post' action='updateCart.php'>";
+                                echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
+                                echo "<input type='number' name='quantity' value='{$quantity}' min='1'>";
+                                echo "<button type='submit' name='action' value='updateGuest'>Update</button>";
+                                echo "<button type='submit' name='action' value='removeGuest'>Remove</button>";
+                                echo "</form>";
+                            }                            
+                        }
+                    }
+                    
+            }
+            
                 ?>
 
             </div>
