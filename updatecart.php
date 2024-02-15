@@ -83,9 +83,10 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
    //     echo "The shopping cart is empty.";
    // }
 
-   // header("Location: cart.php");
-    echo "Item added to cart";
-    exit;
+   header("Location: products.php"); //  Directs to the products page after a product is added to cart for a guest user
+   //echo "Item added to cart"; Testing if product is added to the cart
+    
+    //exit;
 }
 //echo "Not Logged in or not a POST request";
 //echo 'cutomer Id is ',$_SESSION['customerID'];
