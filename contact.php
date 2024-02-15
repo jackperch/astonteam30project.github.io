@@ -96,7 +96,12 @@
             if ($result && $result['totalQuantity'] > 0) {
                 $totalQuantity = $result['totalQuantity'];
             }
-        }
+        }else{
+            // Fetch the total quantity of items in the guest's cart
+              if (isset($_SESSION['guest_shopping_cart'])) {
+                  $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);}
+          
+      } 
         ?>
         <div id="cart-container">
             <!-- cart icon image with link to cart page -->
