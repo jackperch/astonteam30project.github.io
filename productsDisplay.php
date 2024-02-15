@@ -88,7 +88,7 @@
         // Fetch products functions
 
         function fetchFeaturedProducts($db) {
-            $sql = "SELECT * FROM productlisting WHERE is_featured = 1"; // Fetching products in productlisting table that are marked as featured
+            $sql = "SELECT * FROM products WHERE is_featured = 1"; // Fetching products in productlisting table that are marked as featured
             try {
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
@@ -100,7 +100,7 @@
         }
         
         function fetchPopularProducts($db) {
-            $sql = "SELECT * FROM productlisting WHERE is_popular = 1"; // Fetch popular products
+            $sql = "SELECT * FROM products WHERE is_popular = 1"; // Fetch popular products
             try {
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
@@ -112,7 +112,7 @@
         }
         
         function fetchNewProducts($db) {
-            $sql = "SELECT * FROM productlisting WHERE is_new = 1"; // Fetching products in productlisting table that are marked as new
+            $sql = "SELECT * FROM products WHERE is_new = 1"; // Fetching products in productlisting table that are marked as new
             try {
                 $stmt = $db->prepare($sql);
                 $stmt->execute();
@@ -160,8 +160,8 @@
             <div class="product-grid">
                 <?php foreach ($featuredProducts as $product): ?>
                     <div class="product">
-                        <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['productName']); ?>">
-                        <h3><?php echo htmlspecialchars($product['productName']); ?></h3>
+                        <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                        <h3><?php echo htmlspecialchars($product['product_name']); ?></h3>
                         <!-- need to Add more details -->
                     </div>
                 <?php endforeach; ?>
