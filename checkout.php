@@ -88,7 +88,6 @@
                                 $address_line_1 = $address['address_line_1'];
                                 $address_line_2 = $address['address_line_2'];
                                 $city = $address['city'];
-                                $state = $address['state']; // Assume there's a state column; adjust as necessary
                                 $postal_code = $address['postal_code'];
                                 $country = $address['country'];
                             }
@@ -102,7 +101,6 @@
                     <input type="text" name="address_line_1" placeholder="Address Line 1" value="<?php echo htmlspecialchars($address_line_1); ?>" required>
                     <input type="text" name="address_line_2" placeholder="Address Line 2" value="<?php echo htmlspecialchars($address_line_2); ?>">
                     <input type="text" name="city" placeholder="City" value="<?php echo htmlspecialchars($city); ?>" required>
-                    <input type="text" name="state" placeholder="State" value="<?php echo htmlspecialchars($state); ?>" required>
                     <input type="text" name="postal_code" placeholder="Postal Code" value="<?php echo htmlspecialchars($postal_code); ?>" required>
                     <input type="text" name="country" placeholder="Country" value="<?php echo htmlspecialchars($country); ?>" required>
                 </section>
