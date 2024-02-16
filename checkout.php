@@ -114,7 +114,11 @@
                     <input type="text" name="card_cvv" placeholder="CVV" required>
                 </section>
 
-                <input type="submit" value="Place Order">
+                <?php 
+                echo "<form action='processOrder.php' method='post'>";
+                echo "<input type='submit' value='Click here to place Order' class='button'>";
+                echo "</form>";
+                ?>
             </form>
         </div>
     </main>
