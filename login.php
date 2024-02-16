@@ -157,6 +157,10 @@
             <a href="signup.php" class="signup-button">
                 <button>SIGN UP</button>
             </a>
+            <br>
+            <h2> Admin Log In</h2>
+            <a href="adminLogin.php" class="admin-button">
+                <button>ADMIN LOG IN</button>
         </div>
     </div>
 
