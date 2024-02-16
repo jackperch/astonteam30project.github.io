@@ -72,6 +72,78 @@
         <br>
         <a href="index.php"><center>or Click here to go to Home page<center></a> 
         <br>
+
+
+        <?php
+        require_once("connectionDB.php");
+
+        // Check if the user is logged in
+        if (!isset($_SESSION['customerID'])) {
+            // Redirect to login page if not logged in
+            header('Location: login.php');
+            exit;
+        }
+
+        $customerID = $_SESSION['customerID'];
+        $totalPrice = $_SESSION['totalPrice']; // Check if it is passed from the form
+
+        //Customer Address details
+        //$address_line_1 = $_POST['address_line_1'];
+        //$address_line_2 = $_POST['address_line_2'];
+        //$city = $_POST['city'];
+        //$post_code = $_POST['post_code'];
+        //$country = $_POST['country'];
+
+        //Customer Card details
+        $card_name = $_POST['card_name'];
+        $card_number = $_POST['card_number'];
+        $card_expiry = $_POST['card_expiry'];
+        $card_cvv = $_POST['card_cvv'];
+
+
+        try {
+            $db->beginTransaction();
+        
+            // Fetch the addressID for the logged-in customer
+            $addressQuery = "SELECT addressID FROM address WHERE customerID = :customerID LIMIT 1";
+            $addressStmt = $db->prepare($addressQuery);
+            $addressStmt->execute(['customerID' => $customerID]);
+            $addressResult = $addressStmt->fetch(PDO::FETCH_ASSOC);
+        
+            if (!$addressResult) {
+                throw new Exception("No address found for the customer.");
+            }
+        
+            $addressID = $addressResult['addressID'];
+        
+            // Insert order details into orders table including the addressID
+            $orderSql = "INSERT INTO orders (customerID, addressID, total_amount, payment_details) VALUES (:customerID, :addressID, :total_amount, :payment_details)";
+            $payment_details = "Card Name: $card_name, Card Number: $card_number, Expiry: $card_expiry, CVV: $card_cvv";
+            
+            $orderStmt = $db->prepare($orderSql);
+            $orderStmt->execute([
+                ':customerID' => $customerID,
+                ':addressID' => $addressID,
+                ':total_amount' => $totalPrice,
+                ':payment_details' => $payment_details
+            ]);
+        
+            $db->commit();
+            
+            // Success message or redirect
+            echo "Order placed successfully. Your order will be shipped to your address.";
+
+            
+            // Clear the cart here code can go here
+        
+        } catch (Exception $e) {
+            $db->rollBack();
+            echo "Error placing order: " . $e->getMessage();
+        }
+        
+        ?>
+
+
     </main>
 
     <footer>

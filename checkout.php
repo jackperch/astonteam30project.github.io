@@ -67,7 +67,9 @@
                             echo "</div>";
                             $totalPrice += ($item['quantity'] * $item['price']);
                         }
+                        $_SESSION['totalPrice'] = $totalPrice;
                         echo "<p>Total Price: $$totalPrice</p>";
+                        
 
 
                         // Initialize variables to hold address details
@@ -98,6 +100,7 @@
 
                 <section class="shipping-information">
                     <h2>Shipping Information</h2>
+                    <input type="text" name="house_number" placeholder="House Number" value="<?php echo htmlspecialchars($house_number); ?>" required>
                     <input type="text" name="address_line_1" placeholder="Address Line 1" value="<?php echo htmlspecialchars($address_line_1); ?>" required>
                     <input type="text" name="address_line_2" placeholder="Address Line 2" value="<?php echo htmlspecialchars($address_line_2); ?>">
                     <input type="text" name="city" placeholder="City" value="<?php echo htmlspecialchars($city); ?>" required>
@@ -108,10 +111,26 @@
                 <section class="payment-information">
                     <h2>Payment Information</h2>
                     <!-- Placeholder for payment information. Could use a payment gateway's integration code here. -->
+                    <label for="card_type">Card Type: </label>
+                    <select name="card_type" required>
+                        <option value="visa">Visa</option>
+                        <option value="mastercard">Mastercard</option>
+                        <option value="amex">American Express</option>
+                    </select>
                     <input type="text" name="card_name" placeholder="Name on Card" required>
                     <input type="text" name="card_number" placeholder="Card Number" required>
                     <input type="text" name="card_expiry" placeholder="Expiry Date (MM/YY)" required>
                     <input type="text" name="card_cvv" placeholder="CVV" required>
+                </section>
+
+                <section class="Billing-information">
+                    <h2>Billing Information</h2>
+                    <input type="text" name="house_number" placeholder="House Number" value="<?php echo htmlspecialchars($house_number); ?>" required>
+                    <input type="text" name="address_line_1" placeholder="Address Line 1" value="<?php echo htmlspecialchars($address_line_1); ?>" required>
+                    <input type="text" name="address_line_2" placeholder="Address Line 2" value="<?php echo htmlspecialchars($address_line_2); ?>">
+                    <input type="text" name="city" placeholder="City" value="<?php echo htmlspecialchars($city); ?>" required>
+                    <input type="text" name="post_code" placeholder="Post Code" value="<?php echo htmlspecialchars($post_code); ?>" required>
+                    <input type="text" name="country" placeholder="Country" value="<?php echo htmlspecialchars($country); ?>" required>
                 </section>
 
                 <?php 
