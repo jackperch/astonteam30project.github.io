@@ -73,7 +73,7 @@
 
 
                         // Initialize variables to hold address details
-                        $address_line_1 = $address_line_2 = $city = $state = $postal_code = $country = "";
+                        $house_number = $address_line_1 = $address_line_2 = $city = $state = $postal_code = $country = "";
 
                         // Check if user is logged in
                         if (isset($_SESSION['customerID'])) {
@@ -87,6 +87,7 @@
 
                             if ($address) {
                                 // Set variables if address exists
+                                $house_number = $address['house_number'];
                                 $address_line_1 = $address['address_line_1'];
                                 $address_line_2 = $address['address_line_2'];
                                 $city = $address['city'];

@@ -95,6 +95,7 @@
         //$country = $_POST['country'];
 
         //Customer Card details
+        $card_type = $_POST['card_type'];
         $card_name = $_POST['card_name'];
         $card_number = $_POST['card_number'];
         $card_expiry = $_POST['card_expiry'];
@@ -103,7 +104,22 @@
 
         try {
             $db->beginTransaction();
-        
+            
+
+             // Insert Payment Information
+            $paymentSql = "INSERT INTO payment_information (customerID, card_type, card_number, expiry_date, CVV) VALUES (:customerID, :card_type, :card_number, :expiry_date, :CVV)";
+            $paymentStmt = $db->prepare($paymentSql);
+            $paymentStmt->execute([
+                ':customerID' => $customerID,
+                ':card_type' => $card_type,
+                ':card_number' => $card_number,
+                ':expiry_date' => $card_expiry,
+                ':CVV' => $card_cvv
+            ]);
+            $paymentInfoID = $db->lastInsertId();
+
+
+
             // Fetch the addressID for the logged-in customer
             $addressQuery = "SELECT addressID FROM address WHERE customerID = :customerID LIMIT 1";
             $addressStmt = $db->prepare($addressQuery);
@@ -117,15 +133,15 @@
             $addressID = $addressResult['addressID'];
         
             // Insert order details into orders table including the addressID
-            $orderSql = "INSERT INTO orders (customerID, addressID, total_amount, payment_details) VALUES (:customerID, :addressID, :total_amount, :payment_details)";
-            $payment_details = "Card Name: $card_name, Card Number: $card_number, Expiry: $card_expiry, CVV: $card_cvv";
+            $orderSql = "INSERT INTO orders (customerID, addressID, total_amount, paymentInfoID) VALUES (:customerID, :addressID, :total_amount, :paymentInfoID)";
+            //$payment_details = "Card Name: $card_name, Card Number: $card_number, Expiry: $card_expiry, CVV: $card_cvv";
             
             $orderStmt = $db->prepare($orderSql);
             $orderStmt->execute([
                 ':customerID' => $customerID,
                 ':addressID' => $addressID,
                 ':total_amount' => $totalPrice,
-                ':payment_details' => $payment_details
+                ':paymentInfoID' => $paymentInfoID
             ]);
         
             $db->commit();
@@ -133,7 +149,7 @@
             // Success message or redirect
             echo "Order placed successfully. Your order will be shipped to your address.";
 
-            
+
             // Clear the cart here code can go here
         
         } catch (Exception $e) {
