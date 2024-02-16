@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2024 at 07:01 PM
+-- Generation Time: Feb 16, 2024 at 06:34 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `age gear`
+-- Database: `ace gear`
 --
 
 -- --------------------------------------------------------
@@ -43,7 +43,8 @@ CREATE TABLE `address` (
 --
 
 INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_1`, `address_line_2`, `post_code`, `city`, `country`) VALUES
-(6, 10, 1, 'user', 'user', 'usr 2', 'use', 'user');
+(6, 10, 1, 'user', 'user', 'usr 2', 'use', 'user'),
+(7, 11, 12, 'user strt', 'user area', 'us1 2er', 'user', 'user');
 
 -- --------------------------------------------------------
 
@@ -70,6 +71,15 @@ CREATE TABLE `cart` (
   `quantity` int(11) NOT NULL,
   `totat_cost` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cartID`, `customerID`, `productID`, `quantity`, `totat_cost`) VALUES
+(8, 9, 2, 3, 0),
+(12, 9, 1, 1, 0),
+(13, 9, 3, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -135,7 +145,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `last_name`, `email`) VALUES
-(10, 'user1', '$2y$10$nq.RRv5vuAQMUmy/dVjT4uCckyMH9bgGSF9D7I73uzdnp4aSweCXK', 'user', 'user', 'user@user.com');
+(10, 'user1', '$2y$10$nq.RRv5vuAQMUmy/dVjT4uCckyMH9bgGSF9D7I73uzdnp4aSweCXK', 'user', 'user', 'user@user.com'),
+(11, 'userr', '$2y$10$XoTxm083uwwa11WxrIf.POe.lN7uRO7HL2lIkoNF.NiPs05QhJjXW', 'userr', 'userr', 'userrr@u.com');
 
 -- --------------------------------------------------------
 
@@ -155,6 +166,16 @@ CREATE TABLE `orders` (
   `paymentInfoID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orderID`, `customerID`, `productID`, `quantity`, `price_of_product`, `order_date`, `total_amount`, `addressID`, `paymentInfoID`) VALUES
+(1, 11, 0, 0, 0, '0000-00-00', 32, 7, 2),
+(2, 11, 0, 0, 0, '0000-00-00', 32, 7, 3),
+(3, 11, 0, 0, 0, '0000-00-00', 8, 7, 4),
+(4, 11, 0, 0, 0, '0000-00-00', 16, 7, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -164,11 +185,28 @@ CREATE TABLE `orders` (
 CREATE TABLE `payment_information` (
   `paymentInfoID` int(11) NOT NULL,
   `customerID` int(11) NOT NULL,
-  `payment_method` varchar(20) NOT NULL,
+  `card_type` varchar(20) NOT NULL,
+  `name_on_card` varchar(255) NOT NULL,
   `card_number` int(11) NOT NULL,
   `expiry_date` date NOT NULL,
-  `CVV` int(11) NOT NULL
+  `CVV` int(11) NOT NULL,
+  `house_number` int(11) NOT NULL,
+  `address_line1` varchar(255) NOT NULL,
+  `address_line2` varchar(255) NOT NULL,
+  `post_code` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `country` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment_information`
+--
+
+INSERT INTO `payment_information` (`paymentInfoID`, `customerID`, `card_type`, `name_on_card`, `card_number`, `expiry_date`, `CVV`, `house_number`, `address_line1`, `address_line2`, `post_code`, `city`, `country`) VALUES
+(2, 11, 'visa', '', 1, '0000-00-00', 1, 0, '', '', '', '', ''),
+(3, 11, 'visa', '', 12, '0000-00-00', 12, 0, '', '', '', '', ''),
+(4, 11, 'visa', '', 123, '0000-00-00', 122, 0, '', '', '', '', ''),
+(5, 11, 'visa', '', 123123, '0000-00-00', 788, 0, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -245,6 +283,7 @@ ALTER TABLE `customers`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
+  ADD PRIMARY KEY (`orderID`),
   ADD KEY `productID` (`productID`),
   ADD KEY `orders_ibfk_1` (`customerID`),
   ADD KEY `addressID` (`addressID`),
@@ -272,13 +311,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -290,13 +329,19 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `payment_information`
 --
 ALTER TABLE `payment_information`
-  MODIFY `paymentInfoID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `paymentInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -312,7 +357,7 @@ ALTER TABLE `products`
 -- Constraints for table `address`
 --
 ALTER TABLE `address`
-  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`CustomerID`);
+  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`);
 
 --
 -- Constraints for table `cart`
@@ -330,7 +375,7 @@ ALTER TABLE `orders`
 -- Constraints for table `payment_information`
 --
 ALTER TABLE `payment_information`
-  ADD CONSTRAINT `payment_information_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`CustomerID`);
+  ADD CONSTRAINT `payment_information_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`);
 
 --
 -- Constraints for table `products`
