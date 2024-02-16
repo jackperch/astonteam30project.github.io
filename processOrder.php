@@ -63,15 +63,6 @@
     </header>
 
     <main>
-        <br>
-        <h1> <center>Thank you for your order! <center></h1> 
-        <br>
-        <h1> <center>Your Order has been placed! <center></h1> 
-        <br>
-        <a href="account.php"><center>Click here to view your order<center></a> 
-        <br>
-        <a href="index.php"><center>or Click here to go to Home page<center></a> 
-        <br>
 
 
         <?php
@@ -147,7 +138,14 @@
             $db->commit();
             
             // Success message or redirect
+            echo "<h1> <center>Thank you for your order! <center></h1> ";
+            echo "<br>";
             echo "Order placed successfully. Your order will be shipped to your address.";
+            echo "<br>";
+            echo "<a href='account.php'><center>Click here to view your orders<center></a>";
+            echo "<br>";
+            echo "<a href='index.php'><center>or Click here to go to Home page<center></a>";
+            echo "<br>";
 
 
             // Clear the cart here code can go here
