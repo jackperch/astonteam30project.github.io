@@ -142,6 +142,17 @@
             echo "<br>";
             echo "Order placed successfully. Your order will be shipped to your address.";
             echo "<br>";
+            echo "Your order total is: £" . $totalPrice;
+            echo "<br>";
+            echo "Your payment details have been saved.";
+            echo "<br>";
+            echo "Your order number is: " . $db->lastInsertId();
+            echo "<br>";
+            echo "You will receive an email confirmation shortly.";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
             echo "<a href='account.php'><center>Click here to view your orders<center></a>";
             echo "<br>";
             echo "<a href='index.php'><center>or Click here to go to Home page<center></a>";
@@ -149,6 +160,12 @@
 
 
             // Clear the cart here code can go here
+            $sqlEmptyCart = "DELETE FROM cart WHERE customerID = :customerID";
+            $stmtEmptyCart = $db->prepare($sqlEmptyCart);
+            $stmtEmptyCart->execute(['customerID' => $customerID]);
+
+            $db->commit();
+            
         
         } catch (Exception $e) {
             $db->rollBack();
