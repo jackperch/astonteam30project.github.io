@@ -42,12 +42,7 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             exit;
         }
 
-        if ($action === "removeGuest") {
-            $productID = $_POST['productID'];
-            unset($_SESSION["guest_shopping_cart"][$productID]);
-            header("Location: cart.php?status=removed");
-            exit;
-        }
+       
 
         $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
         $stmt->bindParam(':productID', $productID, PDO::PARAM_INT);
@@ -66,27 +61,45 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 } else {
-    //If the user is not logged in, redirect to the login page
-    //header("Location: login.php");
-    $productID = $_POST['productID'];
-    $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default to 1 if quantity is not specified
-    $_SESSION["guest_shopping_cart"][$productID] = $quantity;
-   
-    //TESTING IF PRODUCTS ARE ADDED ONTO THE SESSION VARAIBLE GUEST SHOPPING CART
+    // Ensure that the action is set and valid
+    if (isset($_POST['action']) && $_POST['action'] === "removeGuest") {
+        // Ensure that the productID is provided and valid
+        
+        if (isset($_POST['productID'])) {
+            $productID = $_POST['productID'];
+            // Removes the item from the guest shopping cart session variable
 
-    // if (isset($_SESSION["guest_shopping_cart"])) {
-        // Print the content of the "guest_shopping_cart" session variable
-      //  echo "<pre>";
-       // print_r($_SESSION["guest_shopping_cart"]);
-      //  echo "</pre>";
-  //  } else {
-   //     echo "The shopping cart is empty.";
-   // }
+            if (isset($_SESSION["guest_shopping_cart"][$productID])) {
+                unset($_SESSION["guest_shopping_cart"][$productID]);
+                header("Location: cart.php?status=removed");
+                exit;
+            }
+        }else{
+            echo "Product ID not set"; //testing
+        }
 
-   header("Location: products.php"); //  Directs to the products page after a product is added to cart for a guest user
-   //echo "Item added to cart"; Testing if product is added to the cart
-    
-    //exit;
+    } elseif(isset($_POST['action']) && $_POST['action'] === "updateGuest"){
+        // Ensure that the productID is provided and valid
+        if (isset($_POST['productID'])) {
+            $productID = $_POST['productID'];
+            // Update the item in the guest shopping cart session variable
+            if (isset($_SESSION["guest_shopping_cart"][$productID])) {
+                $_SESSION["guest_shopping_cart"][$productID] = $_POST['quantity'];
+                header("Location: cart.php?status=updated");
+                exit;
+            }
+        }else{
+            echo "Product ID not set"; //testing
+        }
+    }else{
+        //If user does not click  the remove and update button then user will add a product to the cart 
+        $productID = $_POST['productID'];
+        $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default to 1 if quantity is not specified
+        $_SESSION["guest_shopping_cart"][$productID] = $quantity;
+        
+        header("Location: products.php"); // Redirect to the products page after adding a product to cart for a guest user
+        exit;
+    }
 }
 //echo "Not Logged in or not a POST request";
 //echo 'cutomer Id is ',$_SESSION['customerID'];
