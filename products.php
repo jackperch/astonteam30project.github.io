@@ -148,7 +148,7 @@ $allOfTheProducts = fetchProducts();
         //a form with a button to add the product to the cart
         echo "<form method='post' action='updatecart.php'>";
         echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
-        echo "<button onclick='displayAlert()'>Add to cart!</button>";
+        echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
         echo "</form>";
 
         echo "</div>";
