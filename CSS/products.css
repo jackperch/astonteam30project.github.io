@@ -35,8 +35,8 @@
 
 /* Add to cart button styling */
 .add-to-cart  {
-    background-color: #13aa52;
-    border: 1px solid #13aa52;
+    background-color: --color2;
+    border: 1px solid --color2;
     border-radius: 4px;
     box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
     box-sizing: border-box;
@@ -56,20 +56,18 @@
     touch-action: manipulation;
   }
   
-  .button-37:hover {
+  .add-to-cart:hover {
     box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
     transform: translateY(-2px);
   }
   
   @media (min-width: 768px) {
-    .button-37 {
+    .add-to-cart {
       padding: 10px 30px;
     }
   }
 
-.add-to-cart:hover {
-    background-color: #45a049;
-}
+
 
 /* Separator line styling */
 .hr-line {
