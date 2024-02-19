@@ -53,7 +53,7 @@
                     <div id="cart-items">
                         <?php
                         require_once("connectionDB.php");
-                      //  $customerID = $_SESSION['customerID']; // Using customerID is stored in session
+                        $customerID = $_SESSION['customerID']; // Using customerID is stored in session
 
                         // Fetch cart items for the user
                         $stmt = $db->prepare("SELECT c.productID, p.product_name, c.quantity, p.price FROM cart c JOIN products p ON c.productID = p.productID WHERE c.customerID = :customerID");
