@@ -10,6 +10,7 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $productID = $_POST['productID'];
     $action = $_POST['action'];
     $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default to 1 if quantity is not specified
+    
 
     try {
         // Check if the item already exists in the cart
@@ -42,17 +43,40 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
             exit;
         }
 
-       
 
+        $productName = $product['product_name']; 
+        $itemCost = $product['price'] * $quantity;
+
+        $cartTotal =  0;
+        foreach ($cartItems as $item) {
+            echo "<div class='cart-item'>";
+            echo "<p>{$item['product_name']} (Quantity: {$item['quantity']}) - $" . ($item['quantity'] * $item['price']) . "</p>";
+            echo "</div>";
+            $cartTotal += ($item['quantity'] * $item['price']);
+        }
+
+        $_SESSION['cart_summary'] = [
+            'productName' => $productName,
+            'quantity' => $quantity,
+            'itemCost' => $itemCost,
+            'cartTotal' => $cartTotal
+        ];
+
+       
         $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
         $stmt->bindParam(':productID', $productID, PDO::PARAM_INT);
         $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
         $stmt->execute();
 
+
         // Redirect to cart page or display a success message
-        header("Location: cart.php");
+        header("Location: products.php?addedToCart={$productID}");
         echo "Item added to cart";
         exit;
+
+
+
+
     } catch (PDOException $ex) {
         // Handle errors, maybe log them and show user-friendly message
         echo "Error updating cart: " . $ex->getMessage();

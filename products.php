@@ -189,6 +189,31 @@ $allOfTheProducts = fetchProducts();
         }
     </script> -->
 
+
+
+    <?php if (isset($_SESSION['cart_summary'])): ?>
+        <div id="cart-popup" style="display:none; position: fixed; z-index: 100; right: 20px; bottom: 20px; width: 300px; background-color: white; border: 1px solid #ccc; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,.2);">
+            <span style="cursor: pointer; float: right;" onclick="$('#cart-popup').hide();">&times;</span>
+            <strong>Cart Summary</strong>
+            <div>
+                <p>Product: <?= htmlspecialchars($_SESSION['cart_summary']['productName']); ?></p>
+                <p>Quantity: <?= htmlspecialchars($_SESSION['cart_summary']['quantity']); ?></p>
+                <p>Item Cost: $<?= htmlspecialchars($_SESSION['cart_summary']['itemCost']); ?></p>
+                <p>Cart Total: $<?= htmlspecialchars($_SESSION['cart_summary']['cartTotal']); ?></p>
+            </div>
+            <button onclick="window.location.href='products.php';">Keep Shopping</button>
+            <button onclick="window.location.href='cart.php';">View Cart</button>
+        </div>
+        <script>
+        $(document).ready(function() {
+            $('#cart-popup').show();
+        });
+        </script>
+    <?php 
+        unset($_SESSION['cart_summary']); // Clear the cart summary to prevent the popup from appearing on page refresh
+    ?>
+    <?php endif; ?>
+
 </body>
 </html>
 
