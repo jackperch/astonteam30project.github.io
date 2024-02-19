@@ -35,13 +35,38 @@
                 }
                 ?>
         </nav>
-        <div id="cart-container">
-            <!-- cart icon image with link to cart page -->
-            <a href="cart.php">
-                <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
-                <span id="cart-count">0</span>
-            </a>
-        </div>
+        <?php
+            // Initialize the total quantity variable
+            $totalQuantity = 0;
+
+            // Check if the user is logged in
+            if (isset($_SESSION['customerID'])) {
+                require_once("connectionDB.php"); // Adjust this path as necessary
+
+                // Fetch the total quantity of items in the user's cart
+                $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE customerID = :customerID");
+                $stmt->execute(['customerID' => $_SESSION['customerID']]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($result && $result['totalQuantity'] > 0) {
+                    $totalQuantity = $result['totalQuantity'];
+                }
+            }else{
+                  // Fetch the total quantity of items in the guest's cart
+                    if (isset($_SESSION['guest_shopping_cart'])) {
+                        $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);}
+                
+            } 
+            
+            ?>
+            <div id="cart-container">
+                <!-- cart icon image with link to cart page -->
+                <a href="cart.php">
+                    <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
+                    <span id="cart-count"><?php echo $totalQuantity; ?></span>
+                </a>
+            </div>
+
     </header>
 
     <main>
@@ -53,6 +78,7 @@
                     <div id="cart-items">
                         <?php
                         require_once("connectionDB.php");
+                        if(isset($_SESSION['customerID'])){ 
                         $customerID = $_SESSION['customerID']; // Using customerID is stored in session
 
                         // Fetch cart items for the user
@@ -69,11 +95,27 @@
                         }
                         $_SESSION['totalPrice'] = $totalPrice;
                         echo "<p>Total Price: $$totalPrice</p>";
-                        
+                    }else{
+                        // For the guest users 
+                        $totalPrice = 0;
+                        if (isset($_SESSION['guest_shopping_cart'])) {
+                           //Displays the items in the shopping cart array session varaible 
+                            foreach ($_SESSION['guest_shopping_cart'] as $productID => $quantity) {
+                                $stmt = $db->prepare("SELECT product_name, price FROM products WHERE productID = :productID");
+                                $stmt->execute(['productID' => $productID]);
+                                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                                echo "<div class='cart-item'>";
+                                echo "<p>{$product['product_name']} (Quantity: $quantity) - $" . ($quantity * $product['price']) . "</p>";
+                                echo "</div>";
+                                //Calculates the total price of the products 
+                                $totalPrice += ($quantity * $product['price']);
+                            }
+                        }
+                    }
 
 
                         // Initialize variables to hold address details
-                        $house_number = $address_line_1 = $address_line_2 = $city = $state = $postal_code = $country = "";
+                        $address_line_1 = $address_line_2 = $city = $state = $postal_code = $country = "";
 
                         // Check if user is logged in
                         if (isset($_SESSION['customerID'])) {
@@ -87,7 +129,6 @@
 
                             if ($address) {
                                 // Set variables if address exists
-                                $house_number = $address['house_number'];
                                 $address_line_1 = $address['address_line_1'];
                                 $address_line_2 = $address['address_line_2'];
                                 $city = $address['city'];
