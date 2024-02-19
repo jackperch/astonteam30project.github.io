@@ -87,7 +87,7 @@
 /* Code beloq is for styliing the product containers*/
 .product-container a {
     text-decoration: none;
-    color: inherit; /* This ensures the color of the links is consistent with your text color */
+    /*color: inherit; /* This ensures the color of the links is consistent with your text color */
 }
 
 .product-container a:hover {
