@@ -145,6 +145,17 @@ $allOfTheProducts = fetchProducts();
         echo "<p>Size: {$product['size']}</p>";
         echo "<p>Category: {$product['categoryName']}</p>";
 
+        // Quantity input
+        echo "<div class='quantity'>";
+        echo "<button class='plus-btn' type='button' name='button'>";
+        echo "<img src='plus.svg' alt='' />";
+        echo "</button>";
+        echo "<input type='text' name='name' value='1'>";
+        echo "<button class='minus-btn' type='button' name='button'>";
+        echo "<img src='minus.svg' alt='' />";
+        echo "</button>";
+        echo "</div>";
+
         //a form with a button to add the product to the cart
         echo "<form method='post' action='updatecart.php'>";
         echo "<input type='hidden' name='productID' value='{$product['productID']}'>";

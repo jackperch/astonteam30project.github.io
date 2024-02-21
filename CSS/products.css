@@ -49,6 +49,43 @@
     background-color: #45a049;
 }
 
+
+/* Quantity input styling */
+.quantity {
+    padding-top: 20px;
+    margin-right: 60px;
+  }
+  .quantity input {
+    border: none;
+    text-align: center;
+    width: 32px;
+    font-size: 16px;
+    color: #43484D;
+    font-weight: 300;
+  }
+   
+  button[class*=btn] {
+    width: 30px;
+    height: 30px;
+    background-color: #E1E8EE;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  .minus-btn img {
+    margin-bottom: 3px;
+  }
+  .plus-btn img {
+    margin-top: 2px;
+  }
+   
+  button:focus,
+  input:focus {
+    outline:0;
+  }
+
+
+
 /* Separator line styling */
 .hr-line {
     border: 0;
