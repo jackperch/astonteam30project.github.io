@@ -135,15 +135,21 @@ $allOfTheProducts = fetchProducts();
 
         // Make the product name a clickable link
         echo "<a href='productDetail.php?productID={$product['productID']}'>";
-        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' width=50 height=50>";
+        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' width=80 height=80>";
         echo "<h2>{$product['productName']}</h2>";
         echo "</a>";
-
-        echo "<p>Price: {$product['price']}</p>";
-        echo "<p>Description: {$product['productDescription']}</p>";
+        echo "<p class='price'>£{$product['price']}</p>";
+        
+        echo "<div class='product-details'>";
         echo "<p>Colour: {$product['colour']}</p>";
         echo "<p>Size: {$product['size']}</p>";
         echo "<p>Category: {$product['categoryName']}</p>";
+        echo "</div>";
+        echo "<div class='product-description'>";
+        echo "<p>Description: {$product['productDescription']}</p>";
+        echo "</div>";
+
+        
 
         // Quantity input
         echo "<div class='quantity'>";
@@ -159,11 +165,11 @@ $allOfTheProducts = fetchProducts();
         //a form with a button to add the product to the cart
         echo "<form method='post' action='updatecart.php'>";
         echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
-        echo "<button onclick='displayAlert()'>Add to cart!</button>";
+        echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
         echo "</form>";
 
         echo "</div>";
-        echo "<hr>";
+        echo "<hr class='hr-line'>";
         
       
     }
