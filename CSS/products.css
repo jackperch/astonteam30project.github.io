@@ -2,23 +2,20 @@
 
 /* Container for products */
 .product-container {
-    display: flex;
-    flex-wrap: flex;
-    justify-content: space-around;
-    align-items: center;
+    display: grid; /*grid layout */
+    grid-template-columns: repeat(4, minmax(300px, 1fr)); /* auto-fill to create flexible grid cells */
+    gap: 20px; /*gap between grid cells */
     margin: 20px;
 }
 
 /* Individual product styling */
 .product {
-     width: 300px;
+    width: 300px;
     margin: 10px 20px;
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center content horizontally */
+   
 }
 
 .product img {
@@ -35,17 +32,27 @@
 .product p {
     margin: 5px 0;
     color: #555; /* Adjust color as needed */
+    text-align: center;
+    display: flex; /* Change to flex container */
+    flex-direction: column;
+    align-items: center;
 }
 
 .price {
     font-size: 1.5em; /* larger font for price */
-    margin: 10px 20px;
+    margin: 10px 0;
+    text-align: center;
     
 }
 
-
+.product-details p {
+    margin: 5px 0;
+    color: #ffffff;
+    text-align: left; /* Ensure consistent alignment */
+}
 /* Add to cart button styling */
 .add-to-cart  {
+    
     background-color: var(--color2);
     border: 1px solid var(--color2);
     border-radius: 4px;
@@ -65,20 +72,23 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+    margin: 10px 75px;
+    
+   
+    
   }
   
   .add-to-cart:hover {
     box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
     transform: translateY(-2px);
   }
-  
+
+ 
   @media (min-width: 768px) {
     .add-to-cart {
       padding: 10px 30px;
     }
   }
-
-
 
 /* Separator line styling */
 .hr-line {
@@ -95,7 +105,7 @@
     }
 }
 
-/* Code beloq is for styliing the product containers*/
+/* Code below is for styling the product containers*/
 .product-container a {
     text-decoration: none;
     color: inherit; /* This ensures the color of the links is consistent with your text color */
@@ -106,6 +116,7 @@
 {
     text-decoration: none;
     color: inherit; /* This ensures the color of the links is consistent with your text color */
+    margin: 10px;
     
 }
 

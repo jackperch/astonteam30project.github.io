@@ -138,8 +138,9 @@ $allOfTheProducts = fetchProducts();
         echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' width=80 height=80>";
         echo "<h2>{$product['productName']}</h2>";
         echo "</a>";
-        echo "<p class='price'>£{$product['price']}</p>";
+
         
+
         echo "<div class='product-details'>";
         echo "<p>Colour: {$product['colour']}</p>";
         echo "<p>Size: {$product['size']}</p>";
@@ -148,13 +149,15 @@ $allOfTheProducts = fetchProducts();
         echo "<div class='product-description'>";
         echo "<p>Description: {$product['productDescription']}</p>";
         echo "</div>";
-
         
-        //a form with a button to add the product to the cart
         echo "<form method='post' action='updatecart.php'>";
         echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
         echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+        echo "<p class='price'>£{$product['price']}</p>";
         echo "</form>";
+        
+        //a form with a button to add the product to the cart
+        
 
         echo "</div>";
         echo "<hr class='hr-line'>";
