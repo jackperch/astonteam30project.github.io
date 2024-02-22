@@ -135,24 +135,41 @@ $allOfTheProducts = fetchProducts();
 
         // Make the product name a clickable link
         echo "<a href='productDetail.php?productID={$product['productID']}'>";
-        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' width=50 height=50>";
+        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' width=80 height=80>";
         echo "<h2>{$product['productName']}</h2>";
         echo "</a>";
-
-        echo "<p>Price: {$product['price']}</p>";
-        echo "<p>Description: {$product['productDescription']}</p>";
+        echo "<p class='price'>£{$product['price']}</p>";
+        
+        echo "<div class='product-details'>";
         echo "<p>Colour: {$product['colour']}</p>";
         echo "<p>Size: {$product['size']}</p>";
         echo "<p>Category: {$product['categoryName']}</p>";
+        echo "</div>";
+        echo "<div class='product-description'>";
+        echo "<p>Description: {$product['productDescription']}</p>";
+        echo "</div>";
+
+        
+
+        // Quantity input
+        echo "<div class='quantity'>";
+        echo "<button class='plus-btn' type='button' name='button'>";
+        echo "<img src='plus.svg' alt='' />";
+        echo "</button>";
+        echo "<input type='text' name='name' value='1'>";
+        echo "<button class='minus-btn' type='button' name='button'>";
+        echo "<img src='minus.svg' alt='' />";
+        echo "</button>";
+        echo "</div>";
 
         //a form with a button to add the product to the cart
         echo "<form method='post' action='updatecart.php'>";
         echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
-        echo "<button onclick='displayAlert()'>Add to cart!</button>";
+        echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
         echo "</form>";
 
         echo "</div>";
-        echo "<hr>";
+        echo "<hr class='hr-line'>";
         
       
     }
@@ -188,6 +205,31 @@ $allOfTheProducts = fetchProducts();
             }
         }
     </script> -->
+
+
+
+    <?php if (isset($_SESSION['cart_summary'])): ?>
+        <div id="cart-popup" style="display:none; position: fixed; z-index: 100; right: 20px; bottom: 20px; width: 300px; background-color: white; border: 1px solid #ccc; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,.2);">
+            <span style="cursor: pointer; float: right;" onclick="$('#cart-popup').hide();">&times;</span>
+            <strong>Cart Summary</strong>
+            <div>
+                <p>Product: <?= htmlspecialchars($_SESSION['cart_summary']['productName']); ?></p>
+                <p>Quantity: <?= htmlspecialchars($_SESSION['cart_summary']['quantity']); ?></p>
+                <p>Item Cost: $<?= htmlspecialchars($_SESSION['cart_summary']['itemCost']); ?></p>
+                <p>Cart Total: $<?= htmlspecialchars($_SESSION['cart_summary']['cartTotal']); ?></p>
+            </div>
+            <button onclick="window.location.href='products.php';">Keep Shopping</button>
+            <button onclick="window.location.href='cart.php';">View Cart</button>
+        </div>
+        <script>
+        $(document).ready(function() {
+            $('#cart-popup').show();
+        });
+        </script>
+    <?php 
+        unset($_SESSION['cart_summary']); // Clear the cart summary to prevent the popup from appearing on page refresh
+    ?>
+    <?php endif; ?>
 
 </body>
 </html>
