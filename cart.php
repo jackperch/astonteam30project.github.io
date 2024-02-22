@@ -71,7 +71,7 @@
                 <!-- cart icon image with link to cart page -->
                 <a href="cart.php">
                     <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
-                    <span id="cart-count"><?php echo $totalQuantity; ?></span>
+                    <close id="cart-count"><?php echo $totalQuantity; ?></close>
                 </a>
             </div>
 
@@ -192,20 +192,145 @@
                             echo "<p>Your cart is empty</p>";
                         } else {
                             // Checkout button form
-                            echo "<form action='checkout.php' method='get'>";
-                            echo "<input type='submit' value='Continue to Checkout' class='button'>";
-                            echo "</form>";
+                            //echo "<form action='checkout.php' method='get'>";
+                            echo "<input type='submit' id='checkOutButton' value='Continue to Checkout' class='button'>";
+                            echo "<div class='modal' id='modal'>";
+                            echo "<div class='modal-content'>";
+                            echo "<button type='submit'  name='action' id='checkOutAsGuest' class='style' value='checkOutAsGuest'>Checkout as Guest</button>";
+                            echo "<br>";
+                            echo "<button type='submit' name='action'  id='checkOutAsMember' class='style' value='checkOutAsMember'>Checkout as a Member</button>";
+                            echo "<br>";
+                            echo "<button type='submit' name='action'  id='signin'  class='style' value='signin'>Do you want to sign-up</button>";
+                            echo "<close class='close'>&times;</close>";
+
                             echo "</div>";
+                            echo "</div>";
+                           // echo "</form>";
+                            echo "</div>";
+                            echo "<div id='overlay'</div>";
+
+
                         }
                     }
                     
             }
             
-                ?>
+            ?>
 
+            <!-- CSS for modal ( NEEDS IMPROVING!!!!) -->
+            <style>
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgba(0,0,0,0.4);
+                border-color: greenyellow;
+                border-radius: 50px;
+                
+            }
+            
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 30%;
+                border-radius: 50px;
+            }
+            
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            
+        .style{
+            color:black;
+        }       
+
+        #overlay{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1;
+            display: none;
+        }
+       
+</style>
             </div>
         </main>
     </body>
+   
+  
+    <script>
+        //This script is for the moodal
+        
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get the modal
+                var modal = document.getElementById('modal');
+            
+                // Retrieves the button that opens the modal
+                var checkOutButton = document.getElementById("checkOutButton");
+            
+                // Get the <close> element that closes the modal
+                var close = document.getElementsByClassName("close")[0];
+            
+                // When the user clicks the button, open the modal 
+                checkOutButton.onclick = function() {
+                    modal.style.display = "block";
+                }
+            
+                // When the user clicks on <close> (x), close the modal
+                close.onclick = function() {
+                    modal.style.display = "none";
+                }
+            
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+
+                //Retrieves and stores
+                var checkOutAsGuest = document.getElementById("checkOutAsGuest");
+                var checkOutAsMember = document.getElementById("checkOutAsMember");
+                var signIn = document.getElementById("signin");
+
+                //When its clicked, it redirects to the checkout page
+                checkOutAsGuest.onclick = function() {
+                    window.location.href = "guestOrder.php";
+
+                }
+                //When its clicked, it redirects to the login page
+                checkOutAsMember.onclick = function() {
+                    window.location.href = "login.php";
+
+                }
+                
+                signIn.onclick = function() {
+                    window.location.href = "signup.php";
+
+                }
+            });
+            </script>
 
     <footer>
         <div class="footer-container">
