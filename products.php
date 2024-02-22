@@ -150,31 +150,25 @@ $allOfTheProducts = fetchProducts();
         echo "<p>Description: {$product['productDescription']}</p>";
         echo "</div>";
 
-        
-
-        // Quantity input
+        echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
+        echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
+        echo "<div class='price'>£{$product['price']}</div>";
+        echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+         
         echo "<div class='quantity'>";
         echo "<button class='plus-btn' type='button' name='button'>";
         echo "<img src='plus.svg' alt='' />";
         echo "</button>";
         echo "<input type='text' name='name' value='1'>";
+
         echo "<button class='minus-btn' type='button' name='button'>";
         echo "<img src='minus.svg' alt='' />";
         echo "</button>";
-        echo "</div>";
-
-        //a form with a button to add the product to the cart
         
-        echo "<form method='post' action='updatecart.php'>";
-        echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
-        echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
-        echo "<p class='price'>£{$product['price']}</p>";
+        echo "</div>";
         echo "</form>";
-        
-        //a form with a button to add the product to the cart
-        
-
-        echo "</div>";
+    
+        echo "</div>"; 
         echo "<hr class='hr-line'>";
         
       
