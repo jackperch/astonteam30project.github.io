@@ -4,7 +4,7 @@ session_start();
 if (isset($_SESSION['adminID'])) {
 	if (isset($_POST['btnEdit'])) {
 		$_SESSION['sesProductId'] = $_POST['btnEdit'];
-		header('location: ./editProducts.php');
+		header('location: ./editProduct.php');
 	}
 	if (isset($_POST['btnDel'])) {
 		require_once("connectionDB.php");
@@ -47,7 +47,7 @@ if (isset($_SESSION['adminID'])) {
 		<h1>
 			&emsp;OSP - Dashboard
 			<a href="./adminLogout.php">Logout</a>
-			<a href="./AddProduct.php">Add Product</a>
+			<a href="./addProduct.php">Add Product</a>
 		</h1>
 		<hr>
 		<form method="POST">
