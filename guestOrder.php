@@ -77,8 +77,15 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                              //Calculates the total price of the products 
                              $totalPrice += ($quantity * $product['price']);
                              $insertOrder->execute(array($customerID, $product['productID'], $quantity, $product['price'], $totalPrice, $addressID, $paymentInfoID));
+                             if($insertOrder){
+                                $updateStock= "UPDATE products SET stock = stock - :quantity WHERE productID = :productID";
+                                $stmt = $db->prepare($updateStock);
+                                $stmt->execute(['quantity' => $quantity, 'productID' => $productID]);
+            
+                             }
                          }
-
+    
+                        
                      }else{ // guest shopping cart is empty
                             echo "Failed to retrieve the products in the shopping cart.";
                      }
@@ -88,6 +95,7 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                 } else {
                     echo "Failed to retrieve customer ID.";
                 }
+                // it will catch database errors
             } catch (PDOException $exception) {
                 echo("Failed to connect to the database.<br>");
                 echo($exception->getMessage());

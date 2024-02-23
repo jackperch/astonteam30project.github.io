@@ -95,6 +95,7 @@ function fetchProducts() {
                 p.description AS productDescription,
                 p.colour,
                 p.size,
+                p.stock,
                 c.name AS categoryName
                 FROM
                 products p
@@ -150,6 +151,11 @@ $allOfTheProducts = fetchProducts();
         echo "<p>Description: {$product['productDescription']}</p>";
         echo "</div>";
 
+        if ($product['stock'] == 0) {
+            echo "<p>Out of stock</p>";
+        } else{
+            
+        
         echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
         echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
         echo "<div class='price'>£{$product['price']}</div>";
@@ -162,14 +168,17 @@ $allOfTheProducts = fetchProducts();
         echo "</button>";
         echo "<input type='text' name='name' value='1'>";
 
+      
+        
         echo "<button class='minus-btn' type='button' name='button'>";
         //echo "<img src='minus.svg' alt='' />";
         echo "-";
         echo "</button>";
+
         
         echo "</div>";
         echo "</form>";
-    
+        }
         echo "</div>"; 
         echo "<hr class='hr-line'>";
         
