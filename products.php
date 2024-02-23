@@ -157,12 +157,14 @@ $allOfTheProducts = fetchProducts();
          
         echo "<div class='quantity'>";
         echo "<button class='plus-btn' type='button' name='button'>";
-        echo "<img src='plus.svg' alt='' />";
+        //echo "<img src='minus.svg' alt='' />";
+        echo "+";
         echo "</button>";
         echo "<input type='text' name='name' value='1'>";
 
         echo "<button class='minus-btn' type='button' name='button'>";
-        echo "<img src='minus.svg' alt='' />";
+        //echo "<img src='minus.svg' alt='' />";
+        echo "-";
         echo "</button>";
         
         echo "</div>";
