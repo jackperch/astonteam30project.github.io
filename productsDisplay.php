@@ -179,11 +179,43 @@
         <section id="popular-products">
             <h2>Popular Products:</h2>
             <!-- Popular products will be loaded here -->
+            <div class="product-grid">
+                <?php foreach ($popularProducts as $product): ?>
+                    <div class="product">
+                        <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" class="product-image">
+                        <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
+                        <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
+                        <div class="quantity-input">
+                            <button class="quantity-decrease" onclick="changeQuantity(false, '<?= $product['productID'] ?>')">-</button>
+                            <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
+                            <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('<?= $product['productID'] ?>')">Add to Cart</button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </section>
+
+
 
         <section id="new-products">
             <h2>New Products:</h2>
             <!-- New products will be loaded here -->
+            <div class="product-grid">
+                <?php foreach ($newProducts as $product): ?>
+                    <div class="product">
+                        <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" class="product-image">
+                        <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
+                        <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
+                        <div class="quantity-input">
+                            <button class="quantity-decrease" onclick="changeQuantity(false, '<?= $product['productID'] ?>')">-</button>
+                            <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
+                            <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('<?= $product['productID'] ?>')">Add to Cart</button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </section>
     </main>
 

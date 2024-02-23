@@ -9,7 +9,7 @@
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
-        <script src="/js/main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
 <body>
     
@@ -216,30 +216,79 @@ $allOfTheProducts = fetchProducts();
     </script> -->
 
 
-
-    <?php if (isset($_SESSION['cart_summary'])): ?>
-        <div id="cart-popup" style="display:none; position: fixed; z-index: 100; right: 20px; bottom: 20px; width: 300px; background-color: white; border: 1px solid #ccc; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,.2);">
-            <span style="cursor: pointer; float: right;" onclick="$('#cart-popup').hide();">&times;</span>
-            <strong>Cart Summary</strong>
-            <div>
-                <p>Product: <?= htmlspecialchars($_SESSION['cart_summary']['productName']); ?></p>
-                <p>Quantity: <?= htmlspecialchars($_SESSION['cart_summary']['quantity']); ?></p>
-                <p>Item Cost: $<?= htmlspecialchars($_SESSION['cart_summary']['itemCost']); ?></p>
-                <p>Cart Total: $<?= htmlspecialchars($_SESSION['cart_summary']['cartTotal']); ?></p>
+    <!-- Pop-up Modal -->
+        <!-- Make two classes a hide and show and switch between them when you want to display the pop up -->
+        <!-- <div id="cart-summary-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Cart Summary</h2>
+            <p id="cart-items-summary">Your cart items will be listed here...</p>
+            <div class="modal-actions">
+            <button id="continue-shopping">Continue Shopping</button>
+            <button id="go-to-cart">Go to Cart</button>
             </div>
-            <button onclick="window.location.href='products.php';">Keep Shopping</button>
-            <button onclick="window.location.href='cart.php';">View Cart</button>
         </div>
-        <script>
-        $(document).ready(function() {
-            $('#cart-popup').show();
-        });
-        </script>
-    <?php 
-        unset($_SESSION['cart_summary']); // Clear the cart summary to prevent the popup from appearing on page refresh
-    ?>
-    <?php endif; ?>
+        </div> -->
+
+
+        <!-- <script>
+                $(document).ready(function() {
+                // When the user clicks on the button, open the modal
+                $('.add-to-cart').on('click', function() {
+                    // fetchCartSummary() is a function that returns the summary of the cart
+                    // You should replace this with actual logic to fetch cart summary
+                    var cartSummary = fetchCartSummary();
+                    function fetchCartSummary() {
+                        // Make an AJAX request to updatecart.php to fetch the cart summary
+                        $.ajax({
+                            url: 'updatecart.php',
+                            type: 'GET',
+                            dataType: 'html',
+                            success: function(response) {
+                                $('#cart-items-summary').html(response); // Assuming response contains the summary HTML
+                                $('#cart-summary-modal').show();
+                            },
+                            error: function() {
+                                console.log('Error fetching cart summary.');
+                            }
+                        });
+                    }
+                    $('#cart-items-summary').html(cart_summary);
+                    $('#cart-summary-modal').show();
+                });
+
+                // // When the user clicks on <span> (x), close the modal
+                // $('.close-btn').on('click', function() {
+                //     $('#cart-summary-modal').hide();
+                // });
+
+                // // When the user clicks anywhere outside of the modal, close it
+                // $(window).on('click', function(event) {
+                //     if ($(event.target).is('#cart-summary-modal')) {
+                //     $('#cart-summary-modal').hide();
+                //     }
+                // });
+
+                // // Continue shopping button
+                // $('#continue-shopping').on('click', function() {
+                //     $('#cart-summary-modal').hide();
+                // });
+
+                // // Go to cart button
+                // $('#go-to-cart').on('click', function() {
+                //     window.location.href = 'cart.php'; // Adjust the link as necessary
+                // });
+
+                // Example function to fetch cart summary
+                function fetchCartSummary() {
+                    // Placeholder for cart summary. Replace this with actual dynamic content.
+                    return "2 items in your cart. Total: $100.00";
+                }
+                });
+            </script> -->
+
 
 </body>
+
 </html>
 
