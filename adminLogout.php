@@ -2,5 +2,5 @@
 session_start();
 
 if(session_destroy())
-	echo "<script>alert('Logout Succesfully!');window.location.replace('./AdminLogin.php');</script>";
+	echo "<script>alert('Logout Succesfully!');window.location.replace('./adminLogin.php');</script>";
 ?>
