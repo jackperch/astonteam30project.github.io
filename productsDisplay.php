@@ -160,9 +160,15 @@
             <div class="product-grid">
                 <?php foreach ($featuredProducts as $product): ?>
                     <div class="product">
-                        <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
-                        <h3><?php echo htmlspecialchars($product['product_name']); ?></h3>
-                        <!-- need to Add more details -->
+                        <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" class="product-image">
+                        <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
+                        <p class="product-price">$<?php echo htmlspecialchars($product['price']); ?></p>
+                        <div class="quantity-input">
+                            <button class="quantity-decrease" onclick="changeQuantity(false, '<?= $product['productID'] ?>')">-</button>
+                            <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
+                            <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
+                        </div>
+                        <button class="add-to-cart-btn" onclick="addToCart('<?= $product['productID'] ?>')">Add to Cart</button>
                     </div>
                 <?php endforeach; ?>
             </div>

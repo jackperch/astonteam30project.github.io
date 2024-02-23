@@ -44,11 +44,49 @@
 
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
+    padding: 20px;
+    grid-auto-rows: minmax(100px, auto);
 }
 
 .product {
-    background-color: #fff; /* Assuming white background for products */
-    /* Add more styling as needed */
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.product-image {
+    width: auto;
+    height: 40vh;
+    display: block;
+    margin: 0 auto 20px;
+}
+
+.quantity-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.quantity-input button {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+.quantity-field {
+    width: 50px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.add-to-cart-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
 }
