@@ -29,9 +29,9 @@
                 $_SESSION["adminID"] = $row['adminID'];
 
                 // loads these website
-                // header("Location:products.php"); 
+                 header("Location:dashboard.php"); 
 
-                echo "<p>Log in successful For people  who are working on the admin portal, uncomment line 32 and add the admin page u are working on</p>";
+                echo "<p>Welcome back Admin</p>";
                 exit();
 
             } else {
