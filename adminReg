@@ -38,7 +38,7 @@ if (isset($_POST['btnRegister'])) {
         echo "<script>alert('Please agree the terms & conditions!');</script>";
 
     else {
-        require_once '../Database/DBConnection.php';
+        require_once("connectionDB.php");
         $sql = "SELECT * FROM Admin WHERE email = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('s', $email);
