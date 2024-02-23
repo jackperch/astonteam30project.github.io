@@ -159,12 +159,33 @@
             echo "<br>";
 
 
-            // Clear the cart here code can go here
-            $sqlEmptyCart = "DELETE FROM cart WHERE customerID = :customerID";
-            $stmtEmptyCart = $db->prepare($sqlEmptyCart);
-            $stmtEmptyCart->execute(['customerID' => $customerID]);
+            //Decrements the stock level of the products in the order
+            if ($orderStmt) {
+                $sql = "SELECT productID, quantity FROM orders WHERE customerID = :customerID";
+                $stmt = $db->prepare($sql);
+                $stmt->execute(['customerID' => $customerID]);
+                $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($cartItems as $item) {
+                    $productID = $item['productID'];
+                    $quantity = $item['quantity'];
+                    $sql = "UPDATE products SET stock_level = stock_level - :quantity WHERE productID = :productID";
+                    $stmt = $db->prepare($sql);
+                    $stmt->execute(['quantity' => $quantity, 'productID' => $productID]);
+                }
+            }
+            
+              // Clear the cart here code can go here
+              $sqlEmptyCart = "DELETE FROM cart WHERE customerID = :customerID";
+              $stmtEmptyCart = $db->prepare($sqlEmptyCart);
+              $stmtEmptyCart->execute(['customerID' => $customerID]);
+  
+              $db->commit();
+  
+            
+            
+            
 
-            $db->commit();
+            
             
         
         } catch (Exception $e) {
