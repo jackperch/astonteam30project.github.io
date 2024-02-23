@@ -1,28 +1,18 @@
 <?php
 session_start();
 include("connectionDB.php");
-$customerID=$_REQUEST['customerID'];
 
 $result=mysqli_query($con,"select customerID,username,password,first_name,last_name, email, from customers where customerID='$customerID'")or die ("query 1 incorrect.......");
 
 list($customerID,$first_name,$last_name,$email,$password,$username)=mysqli_fetch_array($result);
 
-if(isset($_POST['btn_save'])) 
-{
 
-$first_name=$_POST['first_name'];
-$last_name=$_POST['last_name'];
-$email=$_POST['email'];
-$password=$_POST['password'];
-$username=$_POST['username'];
 
 mysqli_query($con,"update customers set first_name='$first_name', last_name='$last_name', email='$email', password='$password', username='$username' where customerID='$customerID'")or die("Query 2 is inncorrect..........");
 
 header("location: manageuser.php");
 mysqli_close($con);
 }
-// include "sidenav.php";
-// include "topheader.php";
 ?>
       <header>
             <div id="logo-container">
