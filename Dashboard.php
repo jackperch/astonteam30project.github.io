@@ -54,6 +54,7 @@ if (isset($_SESSION['adminID'])) {
 			<?php
   require_once("connectionDB.php");
 function fetchProducts() {
+}
     global $db;
 
     try {
@@ -74,20 +75,20 @@ function fetchProducts() {
 							<th>Price</th>
 							<th>Product Description</th>
 							<th>Clour</th>
-              <th>Size</th>
+              				<th>Size</th>
 							<th>Action</th>
-              <th>Category</th>
+              				<th>Category</th>
 						</tr>";
 				while ($row = mysqli_fetch_array($result)) {
 					$output .= "<tr>
 									<td><img src='../images/" . $row['Image'] . "' width='150px' height='150px'></td>
 									<td>" . $row['productId'] . "</td>
 									<td>" . $row['product_name'] . "</td>
-                  <td>" . $row['price'] . "</td>
-                  <td>" . $row['description'] . "</td>
+                  					<td>" . $row['price'] . "</td>
+                  					<td>" . $row['description'] . "</td>
 									<td>" . $row['categoryID'] . "</td>
 									<td>" . $row['colour'] . "</td>
-                  <td>" . $row['size'] . "</td>
+                  					<td>" . $row['size'] . "</td>
 									<td>" . $row['stock'] . "</td>
 									<td>
 										<button type='submit' name='btnEdit' value='" . $row['productId'] . "'>Edit</button>&ensp;
@@ -105,6 +106,8 @@ function fetchProducts() {
 	</html>
 
 <?php
-} else
+}
+} else {
 	echo "Please <a href='./adminLogin.php'>Login</a> first!";
+}
 ?>
