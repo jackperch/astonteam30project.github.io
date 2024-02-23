@@ -127,3 +127,4 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 //echo "Not Logged in or not a POST request";
 //echo 'cutomer Id is ',$_SESSION['customerID'];
+
