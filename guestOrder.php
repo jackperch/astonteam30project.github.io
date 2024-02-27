@@ -63,7 +63,7 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                     $retrievePaymentInfoID->execute(array($customerID, $card_number));
                     $paymentInfoID = $retrievePaymentInfoID->fetch(PDO::FETCH_ASSOC)['paymentInfoID'];
 
-                    $insertOrder = $db->prepare('INSERT INTO orders (customerID, productID, quantity, price_of_product, total_amount, addressID, paymentInfoID) VALUES (?, ?, ?, ?, ?, ?, ?)');
+                    $insertOrder = $db->prepare('INSERT INTO orders (customerID, productID, quantity, price_of_product, total_amount, addressID, paymentInfoID,order_date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())');
 
                     if (isset($_SESSION['guest_shopping_cart'])) { //If it's not empty
                        
@@ -76,6 +76,7 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
             
                              //Calculates the total price of the products 
                              $totalPrice += ($quantity * $product['price']);
+                         }
                              $insertOrder->execute(array($customerID, $product['productID'], $quantity, $product['price'], $totalPrice, $addressID, $paymentInfoID));
                              if($insertOrder){
                                 $updateStock= "UPDATE products SET stock = stock - :quantity WHERE productID = :productID";
@@ -83,7 +84,7 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                                 $stmt->execute(['quantity' => $quantity, 'productID' => $productID]);
             
                              }
-                         }
+                         
     
                         
                      }else{ // guest shopping cart is empty
