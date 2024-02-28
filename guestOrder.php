@@ -63,7 +63,7 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                     $retrievePaymentInfoID->execute(array($customerID, $card_number));
                     $paymentInfoID = $retrievePaymentInfoID->fetch(PDO::FETCH_ASSOC)['paymentInfoID'];
 
-                    $insertOrder = $db->prepare('INSERT INTO orders (customerID, productID, quantity, price_of_product, total_amount, addressID, paymentInfoID,order_date) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())');
+                    $insertOrder = $db->prepare('INSERT INTO orders (customerID, productID, quantity, price_of_product, total_amount, addressID, paymentInfoID,order_date) VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE())');
 
                     if (isset($_SESSION['guest_shopping_cart'])) { //If it's not empty
                        
@@ -92,7 +92,7 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                      }
                    
                     //echo "Order placed successfully!";
-                    header("Location:succesfulOrder.php");
+                    header("Location:successfulOrder.php");
                 } else {
                     echo "Failed to retrieve customer ID.";
                 }
