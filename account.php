@@ -1,21 +1,19 @@
 <?php
     session_start();
-
     // The user is already logged in if they can see this section in the nav bar, so login validation is not required here
 
     require_once("connectionDB.php"); // database connection file
-
+   
     $customerData = array(); // Initialize the variable
+    $addressData=array();
 
-
-    if (isset($_SESSION['username'])) {
-        $username = $_SESSION['username'];
+    if (isset($_SESSION['customerID'])) {
+        $customerID = $_SESSION['customerID'];
     }
-
-
+    
     try {
-        $query = $db->prepare('SELECT * FROM customers WHERE username = ?');
-        $success = $query->execute([$username]);
+        $query = $db->prepare('SELECT * FROM customers WHERE customerID = ?');
+        $success = $query->execute([$customerID]);
 
         // Check if the query was successful
         if ($success) {
@@ -39,11 +37,6 @@
         exit;
     }
 ?>
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -123,16 +116,61 @@
                 <li><strong>Last Name:</strong> <?php echo $customerData['last_name']; ?></li>
                 <li><strong>Email:</strong> <?php echo $customerData['email']; ?></li>
             </ul>
+            <a href="editAccount.php">Edit Account</a>
         </section>
 
         <section class="my-orders">
             <h3>My Orders</h3>
             <ul>
                 <?php
-                echo "Not implemented yet."
+                //echo "Not implemented yet."
                 //foreach ($orders as $order) {
                    // echo "<li><a href='order.php?id=" . $order['id'] . "'>Order #" . $order['id'] . "</a></li>";
                 //}
+                 try
+                 {
+                    $query = $db->prepare('SELECT * FROM orders WHERE customerID = ?');
+                    $query->execute([$customerID]);
+                    $customerID = $_SESSION['customerID'];
+                    $rowCount = $query->rowCount();
+                    // Check if any rows were returned
+                    if ($rowCount > 0) 
+                    {
+                        // Fetch customer data
+                        $orders = $query->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($orders as $order)
+                        {
+                            echo  "<p>Order ID:  {$order['orderID']};</p>";
+                            echo "<p>Quantity: {$order['quantity']};</p>";
+                            echo "<p>Price of Product: {$order['price_of_product']};</p>";
+                            echo "<p>Order Date: {$order['order_date']};</p>";
+                            echo "<p>Total Amount: {$order['total_amount']};</p>";
+
+                            // Fetch product data
+                            $retrivedPoductID=$order['productID'];
+                            $retrieveProduct = $db->prepare('SELECT * FROM products WHERE productID = ?');
+                            $retrieveProduct->execute([$retrivedPoductID]);
+                            $products = $retrieveProduct->fetchAll(PDO::FETCH_ASSOC);
+                            foreach ($products as $product) 
+                            {
+                                echo "<p>Product Name: {$product['product_name']};</p>";
+                                echo "<p>Price of Product: {$order['price_of_product']};</p>";
+                          
+                            }
+                                // echo "<p>Colour: {$product['colour']}</p>";
+
+                        }
+                    } else 
+                        {
+                        echo "No matching orders found.";
+                        }
+                    }catch (PDOException $ex) 
+                    {
+                        echo("Failed to fetch order data.<br>");
+                        echo($ex->getMessage());
+                        exit;
+                }
+            
                 ?>
             </ul>
         </section>
