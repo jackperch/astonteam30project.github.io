@@ -25,7 +25,7 @@ if (isset($_SESSION['adminID'])) {
 
 	<head>
 		<meta charset="UTF-8">
-		<title>OSP</title>
+		<title>ACE GEAR ADMIN</title>
 		<!-- <link rel="stylesheet" href="../assets/style.css"> -->
 		<link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css">
 		<style>
@@ -45,7 +45,7 @@ if (isset($_SESSION['adminID'])) {
 			// alert(document.cookie);
 		</SCRIPT>
 		<h1>
-			&emsp;OSP - Dashboard
+			&emsp;ACE GEAR - Dashboard
 			<a href="./adminLogout.php">Logout</a>
 			<a href="./addProduct.php">Add Product</a>
 		</h1>
@@ -74,10 +74,10 @@ function fetchProducts() {
 							<th>Product Name</th>
 							<th>Price</th>
 							<th>Product Description</th>
-							<th>Clour</th>
-              				<th>Size</th>
-							<th>Action</th>
-              				<th>Category</th>
+							<th>Colour</th>
+                                                        <th>Size</th>
+              				                <th>Category</th>
+				                        <th>Action</th>
 						</tr>";
 				while ($row = mysqli_fetch_array($result)) {
 					$output .= "<tr>
