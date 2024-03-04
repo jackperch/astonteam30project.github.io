@@ -2,28 +2,32 @@
 session_start();
 include("connectionDB.php");
 
-// Update User
+// Update order
 if(isset($_POST['update-btn'])) {
-    $query = "UPDATE customers SET CustomerID= $CustomerID, username= $username, password= $password, first_name= $first_name, last_name= $last_name, email= $email WHERE CustomerID= $CustomerID";
+    $query = "UPDATE orders SET productID=:productID, customerID=:customerID, quantity=:quantity, price_of_product=:price_of_product, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, paymentInfoID=:paymentInfoID WHERE orderID=:orderID";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':CustomerID', $CustomerID);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':first_name', $first_name);
-    $stmt->bindParam(':last_name', $last_name);
-    $stmt->bindParam(':email', $email);
+    $stmt->bindParam(':orderID', $orderID);
+    $stmt->bindParam(':productID', $productID);
+    $stmt->bindParam(':customerID', $customerID);
+    $stmt->bindParam(':quantity', $quantity);
+    $stmt->bindParam(':price_of_product', $price_of_product);
+    $stmt->bindParam(':order_date', $order_date);
+    $stmt->bindParam(':total_amount', $total_amount);
+    $stmt->bindParam(':addressID', $addressID);
+    $stmt->bindParam(':aymentInfoID', $aymentInfoID);
     $stmt->execute();
     exit;
 }
 
 
-// Delete User
-if(isset($_POST['delete-btn'])) {
-    $CustomerID = $_POST['CustomerID'];
 
-    $query = "DELETE FROM customers WHERE CustomerID=:CustomerID";
+// Delete order
+if(isset($_POST['delete-btn'])) {
+    $CustomerID = $_POST['orderID'];
+
+    $query = "DELETE FROM orders WHERE orderID=:orderID";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':CustomerID', $CustomerID);
+    $stmt->bindParam(':orderID', $orderID);
     $stmt->execute();
     exit;
 }
@@ -101,15 +105,19 @@ if(isset($_POST['delete-btn'])) {
 
 <div class="content-container">
     <div class="user-management-container">
-        <h1>Users Management</h1>
+        <h1>Orders Management</h1>
 
         <table>
             <tr>
+                <th>Order ID</th>
                 <th>Customer ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email Address</th>
-                <th>Username</th>
+                <th>Product ID</th>
+                <th>Quantity</th>
+                <th>Price of product</th>
+                <th>Order Date</th>
+                <th>Total Amount</th>
+                <th>Adress ID</th>
+                <th>Payment ID</th>
                 <th>Action</th>
             </tr>
 
@@ -118,22 +126,26 @@ if(isset($_POST['delete-btn'])) {
             $query = "SELECT * FROM customers";
             $stmt = $db->query($query);
             while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr data-id='{$user['CustomerID']}'>"; 
-                echo "<td><span class='editable' contenteditable='true' data-column='CustomerID' data-id='{$user['CustomerID']}'>{$user['CustomerID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='first_name' data-id='{$user['CustomerID']}'>{$user['first_name']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='last_name' data-id='{$user['CustomerID']}'>{$user['last_name']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='email' data-id='{$user['CustomerID']}'>{$user['email']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='username' data-id='{$user['CustomerID']}'>{$user['username']}</span></td>";
+                echo "<tr data-id='{$user['orderID']}'>"; 
+                echo "<td><span class='editable' contenteditable='true' data-column='orderID' data-id='{$user['orderID']}'>{$user['orderID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='customerID'' data-id='{$user['orderID']}'>{$user['customerID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='productID' data-id='{$user['orderID']}'>{$user['productID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='quantity' data-id='{$user['orderID']}'>{$user['quantity']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='price_of_product' data-id='{$user['orderID']}'>{$user['price_of_product']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='order_date' data-id='{$user['orderID']}'>{$user['order_date']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='total_amount' data-id='{$user['orderID']}'>{$user['total_amount']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='addressID' data-id='{$user['orderID']}'>{$user['addressID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='paymentInfoID' data-id='{$user['orderID']}'>{$user['paymentInfoID']}</span></td>";
                 echo "<td>";
-                echo "<button class='update-btn' data-id='{$user['CustomerID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$user['CustomerID']}'>Delete</button>"; 
+                echo "<button class='update-btn' data-id='{$user['orderID']}'>Update</button>"; 
+                echo "<button class='delete-btn' data-id='{$user['orderID']}'>Delete</button>"; 
                 echo "</td>";
                 echo "</tr>";
             }
             ?>
         </table>
-        <!-- Add User Button -->
-        <button id="addUser">Add User</button>
+        <!-- Add Order Button -->
+        <button id="addOrder">Add Order</button>
     </div>
 </div>
 
@@ -152,7 +164,7 @@ if(isset($_POST['delete-btn'])) {
 const updateButtons = document.querySelectorAll('.update-btn');
 updateButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const CustomerID = button.dataset.id; 
+        const orderID = button.dataset.id; 
         const row = button.parentNode.parentNode;
         const editableFields = row.querySelectorAll('.editable');
         const dataToUpdate = {};
@@ -161,24 +173,24 @@ updateButtons.forEach(button => {
             const value = field.textContent.trim();
             dataToUpdate[column] = value;
         });
-        if (confirm("Are you sure you want to update this user?")) {
-            updateUserData(CustomerID, dataToUpdate);
+        if (confirm("Are you sure you want to update this order?")) {
+            updateUserData(orderID, dataToUpdate);
         }
     });
 });
 
-    // Delete User Functionality
+    // Delete order Functionality
     const deleteButtons = document.querySelectorAll('.delete-btn');
     deleteButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const CustomerID = button.dataset.id; 
-            if (confirm("Are you sure you want to delete this user?")) {
-                deleteUserData(CustomerID);
+            const orderID = button.dataset.id; 
+            if (confirm("Are you sure you want to delete this order?")) {
+                deleteUserData(orderID);
             }
         });
     });
 
-    function updateUserData(CustomerID, data) {
+    function updateOrderData(orderID, data) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '', true); 
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -186,17 +198,17 @@ updateButtons.forEach(button => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 console.log(xhr.responseText);
-                alert('User data updated successfully.');
+                alert('Order data updated successfully.');
             } else {
-                alert('Failed to update user data.');
+                alert('Failed to update order data.');
             }
         }
     };
-    xhr.send(JSON.stringify({ CustomerID, data }));
+    xhr.send(JSON.stringify({ orderID, data }));
 }
 
 
-    function deleteUserData(CustomerID) {
+    function deleteOrderData(orderID) {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '', true); 
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -204,20 +216,20 @@ updateButtons.forEach(button => {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 console.log(xhr.responseText);
                 
-                const deletedRow = document.querySelector(`tr[data-id="${CustomerID}"]`);
+                const deletedRow = document.querySelector(`tr[data-id="${orderID}"]`);
                 if (deletedRow) {
                     deletedRow.remove();
                 }
             }
         };
-        xhr.send(`delete-btn=true&CustomerID=${CustomerID}`);
+        xhr.send(`delete-btn=true&CustomerID=${orderID}`);
     }
-//Adding user
+//Adding order
 document.addEventListener("DOMContentLoaded", function() {
-        const addUserButton = document.getElementById("addUser");
+        const addOrderButton = document.getElementById("addOrder");
 
         addUserButton.addEventListener("click", function() {
-            window.location.href = "adduser.php";
+            window.location.href = "addorder.php";
         });
     });
 
