@@ -97,7 +97,7 @@
                 $stmt = $db->prepare($sql);
                 $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
                 $stmt->execute();
-                echo "Fetching products for category ID: " . $categoryId;
+                //echo "Fetching products for category ID: " . $categoryId;
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
                 echo "Error fetching products: " . $e->getMessage();
