@@ -73,6 +73,7 @@
         
         require_once("connectionDB.php");  // Database connection
 
+       
         // Fetch categories
         $categories = [];
         try {
@@ -142,9 +143,12 @@
         }
         
 
-            $featuredProducts = fetchFeaturedProducts($db);
-            $popularProducts = fetchPopularProducts($db);
-            $newProducts = fetchNewProducts($db);
+           
+        $featuredProducts = fetchFeaturedProducts($db);
+        $popularProducts = fetchPopularProducts($db);
+        $newProducts = fetchNewProducts($db);
+        $categoryProducts = []; // Initialize as empty, will be populated based on category
+
 
 
             
@@ -343,8 +347,8 @@
 
                     
 
-    var currentCategoryIndex = 0;  // setting it at 0 to start with 
-    var categories = $(".category"); // Selecting all the categories from the array
+     var currentCategoryIndex = 0;  // setting it at 0 to start with 
+     var categories = $(".category"); // Selecting all the categories from the array
 
     // Show the first category's products initially or on page load
     fetchProductsForCategory($(categories[currentCategoryIndex]).data("category-id"));
@@ -357,7 +361,7 @@
             data: {categoryId: categoryId},
             success: function(response) {
                 // Assuming response contains the HTML for the products
-                $('.product-grid').html(response);
+                $('#category-products .product-grid').html(response);
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error:", status, error);
