@@ -79,6 +79,8 @@
             $stmt = $db->query("SELECT * FROM category");
             $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $categoryId = $categories[0]['categoryID'];
+            //print_r($categories);
+            //echo "Category ID: " . $categoryId;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
             exit;
@@ -341,78 +343,43 @@
 
                     
 
+    var currentCategoryIndex = 0;  // setting it at 0 to start with 
+    var categories = $(".category"); // Selecting all the categories from the array
 
-    let currentCategoryIndex = 0;
-    const categories = document.querySelectorAll('.category');
+    // Show the first category's products initially or on page load
+    fetchProductsForCategory($(categories[currentCategoryIndex]).data("category-id"));
 
-    function updateCategoryDisplay() {
-        categories.forEach((category, index) => {
-            category.style.display = index === currentCategoryIndex ? 'block' : 'none';
-        });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        updateCategoryDisplay();
-        document.querySelector('.left-arrow').addEventListener('click', () => {
-            currentCategoryIndex = (currentCategoryIndex > 0) ? currentCategoryIndex - 1 : categories.length - 1;
-            updateCategoryDisplay();
-            <?php 
-                if ($categoryId > 0) {
-                    $categoryId--;
-                } else {
-                    $categoryId = count($categories) - 1;
-                }
-            ?>
-        });
-
-        document.querySelector('.right-arrow').addEventListener('click', () => {
-            currentCategoryIndex = (currentCategoryIndex < categories.length - 1) ? currentCategoryIndex + 1 : 0;
-            updateCategoryDisplay();
-            <?php 
-                if ($categoryId > count($categories) - 1) {
-                    $categoryId++;
-                } else {
-                    $categoryId = 0;
-                }
-            ?>
-        });
-    });
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'ArrowLeft') {
-            currentCategoryIndex = (currentCategoryIndex > 0) ? currentCategoryIndex - 1 : categories.length - 1;
-            updateCategoryDisplay();
-        } else if (event.key === 'ArrowRight') {
-            currentCategoryIndex = (currentCategoryIndex < categories.length - 1) ? currentCategoryIndex + 1 : 0;
-            updateCategoryDisplay();
-        }
-    });
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.category').forEach(function(categoryElement) {
-            categoryElement.addEventListener('click', function() {
-                var categoryId = this.getAttribute('data-category-id'); // Assume each category div has a data-category-id attribute
-                fetchProductsForCategory(categoryId);
-            });
-        });
-    });
-
+    // Function to fetch and display products for a given category
     function fetchProductsForCategory(categoryId) {
         $.ajax({
-            url: 'fetchProducts.php', // PHP script to fetch products by category
+            url: 'fetchProducts.php', // Your PHP script to return products HTML
             type: 'GET',
-            data: { categoryId: categoryId },
-            success: function(data) {
-                console.log(data)
-                //the PHP script should return the product HTML
-                document.querySelector('.product-grid').innerHTML = data;
+            data: {categoryId: categoryId},
+            success: function(response) {
+                // Assuming response contains the HTML for the products
+                $('.product-grid').html(response);
             },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log('AJAX error: ' + textStatus + ' : ' + errorThrown);
+            error: function(xhr, status, error) {
+                console.error("AJAX Error:", status, error);
             }
         });
     }
+
+    // Previous category button
+    $('.left-arrow').click(function() {
+        currentCategoryIndex = (currentCategoryIndex - 1 + categories.length) % categories.length;
+        var categoryId = $(categories[currentCategoryIndex]).data("category-id");
+        fetchProductsForCategory(categoryId);
+    });
+
+    // Next category button
+    $('.right-arrow').click(function() {
+        currentCategoryIndex = (currentCategoryIndex + 1) % categories.length;
+        var categoryId = $(categories[currentCategoryIndex]).data("category-id");
+        fetchProductsForCategory(categoryId);
+    });
+
+ 
 
     </script>
 
