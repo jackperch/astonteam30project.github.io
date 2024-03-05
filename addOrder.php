@@ -4,26 +4,32 @@ include("connectionDB.php");
 
 // Add New User
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
+    $orderID = $_POST['orderID'];
+    $productID = $_POST['productID'];
     $customerID = $_POST['customerID'];
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $quantity = $_POST['quantity'];
+    $price_of_product = $_POST['price_of_product'];
+    $order_date = $_POST['order_date'];
+    $total_amount = $_POST['total_amount'];
+    $addressID = $_POST['addressID'];
+    $paymentInfoID = $_POST['paymentInfoID'];
 
-    $query = "INSERT INTO customers (customerID, first_name, last_name, email, username, password) VALUES (:customerID, :first_name, :last_name, :email, :username, :password)";
+    $query = "INSERT INTO orders (orderID, productID, customerID, quantity, price_of_product, order_date, total_amount, addressID, paymentInfoID)";
     $stmt = $db->prepare($query);
+    $stmt->bindParam(':orderID', $orderID);
+    $stmt->bindParam(':productID', $productID);
     $stmt->bindParam(':customerID', $customerID);
-    $stmt->bindParam(':first_name', $first_name);
-    $stmt->bindParam(':last_name', $last_name);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $password);
+    $stmt->bindParam(':quantity', $quantity);
+    $stmt->bindParam(':price_of_product', $price_of_product);
+    $stmt->bindParam(':order_date', $order_date);
+    $stmt->bindParam(':total_amount', $total_amount);
+    $stmt->bindParam(':addressID', $addressID);
+    $stmt->bindParam(':paymentInfoID', $paymentInfoID);
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
         // Redirect to edituser.php after adding the user
-        header("Location: editusers.php");
+        header("Location: editOrders.php");
         exit;
     } else {
         echo "Failed to add user.";
@@ -99,22 +105,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
     <div class="content-container">
         <div class="signup-container">
-                <h2>ADD New User</h2>
+                <h2>ADD New Order</h2>
     <form method="post">
-    <input type="text" id="first-name" name="first_name"  placeholder="First Name"  onblur="validateFirstName()">
+    <input type="text" id="first-name" name="first_name"  placeholder="Quantity">
     <span id="first-name-error"></span>
 
-    <input type="text" id="last-name" name="last_name"  placeholder="Last Name"   onblur="validateLastName()">
+    <input type="text" id="last-name" name="last_name"  placeholder="Price of Product">
     <span id="last-name-error"></span>
 
-    <input type="text" id="username" name="username"  placeholder="Username" onblur="validateUsername()">
+    <input type="text" id="username" name="username"  placeholder="Total Amount">
     <span id="username-error"></span>
     
-    <input type="password" id="password" name="password"  placeholder="Password" onblur="validatePassword()">
+    <input type="password" id="password" name="password"  placeholder="Order Data">
     <span id="password-error"></span>
-
-    <input type="text" id="email" name="email"  placeholder="E-mail" onblur="validateEmail()">
-    <span id="email-error"></span>
 
     <input name="submit" type="submit" value="Add new user">
     <input type="reset" value="Clear">
