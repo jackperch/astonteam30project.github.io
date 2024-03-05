@@ -50,6 +50,7 @@
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
         <script src="/js/main.js"></script>
+        <link rel="stylesheet" href="CSS/products.css">
     </head>
 <body>
     
@@ -133,6 +134,12 @@
                     $query->execute([$customerID]);
                     $customerID = $_SESSION['customerID'];
                     $rowCount = $query->rowCount();
+                    
+                    $query2 = $db->prepare('SELECT  productID FROM orders WHERE customerID = ?');
+                    $query2->execute([$customerID]);
+                    $retrivedProductID = $query2->fetch(PDO::FETCH_ASSOC);
+                    //var_dump($retrivedProductID); Testing
+
                     // Check if any rows were returned
                     if ($rowCount > 0) 
                     {
@@ -140,6 +147,7 @@
                         $orders = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($orders as $order)
                         {
+                            echo "<div class='product-container'>";
                             echo  "<p>Order ID:  {$order['orderID']};</p>";
                             echo "<p>Quantity: {$order['quantity']};</p>";
                             echo "<p>Price of Product: {$order['price_of_product']};</p>";
@@ -147,20 +155,38 @@
                             echo "<p>Total Amount: {$order['total_amount']};</p>";
 
                             // Fetch product data
-                            $retrivedPoductID=$order['productID'];
-                            $retrieveProduct = $db->prepare('SELECT * FROM products WHERE productID = ?');
-                            $retrieveProduct->execute([$retrivedPoductID]);
-                            $products = $retrieveProduct->fetchAll(PDO::FETCH_ASSOC);
-                            foreach ($products as $product) 
-                            {
-                                echo "<p>Product Name: {$product['product_name']};</p>";
-                                echo "<p>Price of Product: {$order['price_of_product']};</p>";
-                          
-                            }
-                                // echo "<p>Colour: {$product['colour']}</p>";
+                            $retrieveProductSQL = $db->prepare('SELECT * FROM products WHERE productID = ?');
+                            $retrieveProductSQL->execute([$retrivedProductID['productID']]);
+                            $products = $retrieveProductSQL->fetchAll(PDO::FETCH_ASSOC);
+                            //var_dump($products);
 
-                        }
-                    } else 
+                            foreach ($products as $product) {
+                                
+                             
+
+                                // Make the product name a clickable link
+                                echo "{$product['product_name']}";
+
+                                echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['product_name']}' width=80 height=80>";                        
+                                
+                        
+                                echo "<div class='product-details'>";
+                                echo "<p>Colour: {$product['colour']}</p>";
+                                echo "<p>Size: {$product['size']}</p>";
+                                echo "</div>";
+                                echo "<div class='product-description'>";
+                                echo "<p>Description: {$product['description']}</p>";
+                                echo "</div>";
+                        
+                                
+                                }
+                                echo "</div>"; 
+                                echo "<hr class='hr-line'>";
+                            
+                            }
+                   
+
+                        } else 
                         {
                         echo "No matching orders found.";
                         }
