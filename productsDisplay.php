@@ -69,17 +69,17 @@
     <main>
         
 
-        <?php
-        
+        <?php     
         require_once("connectionDB.php");  // Database connection
-
+        $categories = []; // Initialize as empty, will be populated based on category
        
         // Fetch categories
-        $categories = [];
         try {
             $stmt = $db->query("SELECT * FROM category");
             $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $categoryId = $categories[0]['categoryID'];
+            $currentCategoryId = !empty($_GET['categoryId']) ? $_GET['categoryId'] : (isset($categories[0]) ? $categories[0]['categoryID'] : null);
+
             //print_r($categories);
             //echo "Category ID: " . $categoryId;
         } catch (PDOException $e) {
@@ -89,77 +89,13 @@
 
 
 
-
-        // Fetch products functions
-
-        function fetchProductsByCategory($db, $categoryId) {
-            $sql = "SELECT * FROM products WHERE categoryID = :categoryId"; // Fetching products in productlisting table that have current category id
-            try {
-                $stmt = $db->prepare($sql);
-                $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
-                $stmt->execute();
-                //echo "Fetching products for category ID: " . $categoryId;
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                echo "Error fetching products: " . $e->getMessage();
-                return [];
-            }
-        }
-
-        function fetchFeaturedProducts($db) {
-            $sql = "SELECT * FROM products WHERE is_featured = 1"; // Fetching products in productlisting table that are marked as featured
-            try {
-                $stmt = $db->prepare($sql);
-                $stmt->execute();
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                echo "Error fetching featured products: " . $e->getMessage();
-                return [];
-            }
-        }
-        
-        function fetchPopularProducts($db) {
-            $sql = "SELECT * FROM products WHERE is_popular = 1"; // Fetch popular products
-            try {
-                $stmt = $db->prepare($sql);
-                $stmt->execute();
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                echo "Error fetching popular products: " . $e->getMessage();
-                return [];
-            }
-        }
-        
-        function fetchNewProducts($db) {
-            $sql = "SELECT * FROM products WHERE is_new = 1"; // Fetching products in productlisting table that are marked as new
-            try {
-                $stmt = $db->prepare($sql);
-                $stmt->execute();
-                return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {
-                echo "Error fetching new products: " . $e->getMessage();
-                return [];
-            }
-        }
-        
-
-           
-        $featuredProducts = fetchFeaturedProducts($db);
-        $popularProducts = fetchPopularProducts($db);
-        $newProducts = fetchNewProducts($db);
         $categoryProducts = []; // Initialize as empty, will be populated based on category
-
-
 
             
 
             // Fetch products by category
             $products = fetchProductsByCategory($db, $categoryId);
         ?>
-
-
-
-
 
 
         <h1><center>CATEGORIES</center></h1>
@@ -173,8 +109,20 @@
         </section>
 
 
+        <?php
 
-
+                function fetchProductsByCategory($db, $categoryId) {
+            try {
+                $stmt = $db->prepare("SELECT * FROM products WHERE categoryID = :categoryId");
+                $stmt->execute(['categoryId' => $categoryId]);
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                error_log("Error fetching products by category: " . $e->getMessage());
+                return [];
+            }
+        }
+        $categoryProducts = fetchProductsByCategory($db, $categoryId);
+        ?>
 
         <section id="products">
             <h2><center>Products:</center></h2>
@@ -185,9 +133,9 @@
             <?php
            // if(isset($_GET['categoryId'])) {
              //   $categoryId = $_GET['categoryId'];
-                //$products = fetchProductsByCategory($db, $categoryId);
+            
 
-                foreach ($products as $product) {
+                foreach ($categoryProducts as $product) {
                     echo "<h3>" . $categoryId . "</h3>";
                     echo "<div class='product'>";
                     echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
@@ -206,6 +154,70 @@
 
 
 
+
+
+
+        <?php
+        // Fetch Popular New and Featured products functions
+
+        // function fetchProductsByCategory($db, $categoryId) {
+        //     try {
+        //         $sql = "SELECT * FROM products WHERE categoryID = :categoryId"; // Fetching products in productlisting table that have current category id
+        //         $stmt = $db->prepare($sql);
+        //         $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
+        //         $stmt->execute();
+        //         //echo "Fetching products for category ID: " . $categoryId;
+        //         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //     } catch (PDOException $e) {
+        //         echo "Error fetching products: " . $e->getMessage();
+        //         return [];
+        //     }
+        // }
+
+        function fetchFeaturedProducts($db) {
+            $sql = "SELECT * FROM products WHERE is_featured = 1"; // Fetching products in productlisting table that are marked as featured
+            try {
+                $stmt = $db->prepare($sql);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo "Error fetching featured products: " . $e->getMessage();
+                return [];
+            }
+        }
+
+        function fetchPopularProducts($db) {
+            $sql = "SELECT * FROM products WHERE is_popular = 1"; // Fetch popular products
+            try {
+                $stmt = $db->prepare($sql);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo "Error fetching popular products: " . $e->getMessage();
+                return [];
+            }
+        }
+
+        function fetchNewProducts($db) {
+            $sql = "SELECT * FROM products WHERE is_new = 1"; // Fetching products in productlisting table that are marked as new
+            try {
+                $stmt = $db->prepare($sql);
+                $stmt->execute();
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                echo "Error fetching new products: " . $e->getMessage();
+                return [];
+            }
+        }
+
+
+        
+        $featuredProducts = fetchFeaturedProducts($db);
+        $popularProducts = fetchPopularProducts($db);
+        $newProducts = fetchNewProducts($db);
+        ?>
+
+        <!-- Featured products will be loaded here -->
         <section id="featured-products">
             <h2><center>Featured Products:</center></h2>
             <div class="product-grid">
@@ -219,7 +231,12 @@
                             <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
                             <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart('<?= $product['productID'] ?>')">Add to Cart</button>
+                        <?php
+                            echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
+                            echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
+                            echo "<div class='price'>£{$product['price']}</div>";
+                            echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                        ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -227,9 +244,9 @@
 
 
 
+        <!-- Popular products will be loaded here -->
         <section id="popular-products">
             <h2><center>Popular Products:</center></h2>
-            <!-- Popular products will be loaded here -->
             <div class="product-grid">
                 <?php foreach ($popularProducts as $product): ?>
                     <div class="product">
@@ -249,9 +266,9 @@
 
 
 
+        <!-- New products will be loaded here -->
         <section id="new-products">
             <h2><center>New Products:</center></h2>
-            <!-- New products will be loaded here -->
             <div class="product-grid">
                 <?php foreach ($newProducts as $product): ?>
                     <div class="product">
@@ -268,12 +285,9 @@
                 <?php endforeach; ?>
             </div>
         </section>
+
+
     </main>
-
-
-
-
-
 
 
 
