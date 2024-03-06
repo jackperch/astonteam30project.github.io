@@ -23,7 +23,7 @@ if(isset($_POST['update-btn'])) {
 
 // Delete order
 if(isset($_POST['delete-btn'])) {
-    $CustomerID = $_POST['orderID'];
+    $orderID = $_POST['orderID'];
 
     $query = "DELETE FROM orders WHERE orderID=:orderID";
     $stmt = $db->prepare($query);
@@ -123,22 +123,22 @@ if(isset($_POST['delete-btn'])) {
 
             <tr>
             <?php
-            $query = "SELECT * FROM customers";
+            $query = "SELECT * FROM orders";
             $stmt = $db->query($query);
-            while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr data-id='{$user['orderID']}'>"; 
-                echo "<td><span class='editable' contenteditable='true' data-column='orderID' data-id='{$user['orderID']}'>{$user['orderID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='customerID'' data-id='{$user['orderID']}'>{$user['customerID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='productID' data-id='{$user['orderID']}'>{$user['productID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='quantity' data-id='{$user['orderID']}'>{$user['quantity']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='price_of_product' data-id='{$user['orderID']}'>{$user['price_of_product']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='order_date' data-id='{$user['orderID']}'>{$user['order_date']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='total_amount' data-id='{$user['orderID']}'>{$user['total_amount']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='addressID' data-id='{$user['orderID']}'>{$user['addressID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='paymentInfoID' data-id='{$user['orderID']}'>{$user['paymentInfoID']}</span></td>";
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo "<tr data-id='{$row['orderID']}'>"; 
+                echo "<td><span class='editable' contenteditable='true' data-column='orderID' data-id='{$row['orderID']}'>{$row['orderID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='customerID' data-id='{$row['orderID']}'>{$row['customerID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='productID' data-id='{$row['orderID']}'>{$row['productID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='quantity' data-id='{$row['orderID']}'>{$row['quantity']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='price_of_product' data-id='{$row['orderID']}'>{$row['price_of_product']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='order_date' data-id='{$row['orderID']}'>{$row['order_date']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='total_amount' data-id='{$row['orderID']}'>{$row['total_amount']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='addressID' data-id='{$row['orderID']}'>{$row['addressID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='paymentInfoID' data-id='{$row['orderID']}'>{$row['paymentInfoID']}</span></td>";
                 echo "<td>";
-                echo "<button class='update-btn' data-id='{$user['orderID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$user['orderID']}'>Delete</button>"; 
+                echo "<button class='update-btn' data-id='{$row['orderID']}'>Update</button>"; 
+                echo "<button class='delete-btn' data-id='{$row['orderID']}'>Delete</button>"; 
                 echo "</td>";
                 echo "</tr>";
             }
@@ -174,7 +174,7 @@ updateButtons.forEach(button => {
             dataToUpdate[column] = value;
         });
         if (confirm("Are you sure you want to update this order?")) {
-            updateUserData(orderID, dataToUpdate);
+            updateOrderData(orderID, dataToUpdate);
         }
     });
 });
@@ -185,7 +185,7 @@ updateButtons.forEach(button => {
         button.addEventListener('click', () => {
             const orderID = button.dataset.id; 
             if (confirm("Are you sure you want to delete this order?")) {
-                deleteUserData(orderID);
+                deleteOrderData(orderID);
             }
         });
     });
@@ -208,22 +208,23 @@ updateButtons.forEach(button => {
 }
 
 
-    function deleteOrderData(orderID) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '', true); 
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                console.log(xhr.responseText);
-                
-                const deletedRow = document.querySelector(`tr[data-id="${orderID}"]`);
-                if (deletedRow) {
-                    deletedRow.remove();
-                }
+function deleteOrderData(orderID) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '', true); 
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            console.log(xhr.responseText);
+            
+            const deletedRow = document.querySelector(`tr[data-id="${orderID}"]`);
+            if (deletedRow) {
+                deletedRow.remove();
             }
-        };
-        xhr.send(`delete-btn=true&CustomerID=${orderID}`);
-    }
+        }
+    };
+    xhr.send(`delete-btn=true&orderID=${orderID}`);
+}
+
 //Adding order
 document.addEventListener("DOMContentLoaded", function() {
         const addOrderButton = document.getElementById("addOrder");

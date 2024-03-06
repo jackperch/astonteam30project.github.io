@@ -4,14 +4,15 @@ include("connectionDB.php");
 
 // Update User
 if(isset($_POST['update-btn'])) {
-    $query = "UPDATE customers SET CustomerID= $CustomerID, username= $username, password= $password, first_name= $first_name, last_name= $last_name, email= $email WHERE CustomerID= $CustomerID";
+    $query = "UPDATE customers SET customerID=:customerID, username=:username, password=:password, first_name=:first_name, last_name=:last_name, email=:email WHERE customerID=:customerID";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':CustomerID', $CustomerID);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $password);
-    $stmt->bindParam(':first_name', $first_name);
-    $stmt->bindParam(':last_name', $last_name);
-    $stmt->bindParam(':email', $email);
+    $customerID = $_POST['customerID']; 
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    
     $stmt->execute();
     exit;
 }
@@ -19,11 +20,11 @@ if(isset($_POST['update-btn'])) {
 
 // Delete User
 if(isset($_POST['delete-btn'])) {
-    $CustomerID = $_POST['CustomerID'];
+    $customerID = $_POST['customerID'];
 
-    $query = "DELETE FROM customers WHERE CustomerID=:CustomerID";
+    $query = "DELETE FROM customers WHERE customerID=:customerID";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':CustomerID', $CustomerID);
+    $stmt->bindParam(':customerID', $customerID);
     $stmt->execute();
     exit;
 }
@@ -118,15 +119,15 @@ if(isset($_POST['delete-btn'])) {
             $query = "SELECT * FROM customers";
             $stmt = $db->query($query);
             while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr data-id='{$user['CustomerID']}'>"; 
-                echo "<td><span class='editable' contenteditable='true' data-column='CustomerID' data-id='{$user['CustomerID']}'>{$user['CustomerID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='first_name' data-id='{$user['CustomerID']}'>{$user['first_name']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='last_name' data-id='{$user['CustomerID']}'>{$user['last_name']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='email' data-id='{$user['CustomerID']}'>{$user['email']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='username' data-id='{$user['CustomerID']}'>{$user['username']}</span></td>";
+                echo "<tr data-id='{$user['customerID']}'>"; 
+                echo "<td><span class='editable' contenteditable='true' data-column='customerID' data-id='{$user['customerID']}'>{$user['customerID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='first_name' data-id='{$user['customerID']}'>{$user['first_name']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='last_name' data-id='{$user['customerID']}'>{$user['last_name']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='email' data-id='{$user['customerID']}'>{$user['email']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='username' data-id='{$user['customerID']}'>{$user['username']}</span></td>";
                 echo "<td>";
-                echo "<button class='update-btn' data-id='{$user['CustomerID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$user['CustomerID']}'>Delete</button>"; 
+                echo "<button class='update-btn' data-id='{$user['customerID']}'>Update</button>"; 
+                echo "<button class='delete-btn' data-id='{$user['customerID']}'>Delete</button>"; 
                 echo "</td>";
                 echo "</tr>";
             }
@@ -152,7 +153,7 @@ if(isset($_POST['delete-btn'])) {
 const updateButtons = document.querySelectorAll('.update-btn');
 updateButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const CustomerID = button.dataset.id; 
+        const customerID = button.dataset.id; 
         const row = button.parentNode.parentNode;
         const editableFields = row.querySelectorAll('.editable');
         const dataToUpdate = {};
@@ -162,7 +163,7 @@ updateButtons.forEach(button => {
             dataToUpdate[column] = value;
         });
         if (confirm("Are you sure you want to update this user?")) {
-            updateUserData(CustomerID, dataToUpdate);
+            updateUserData(customerID, dataToUpdate);
         }
     });
 });
@@ -171,14 +172,14 @@ updateButtons.forEach(button => {
     const deleteButtons = document.querySelectorAll('.delete-btn');
     deleteButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const CustomerID = button.dataset.id; 
+            const customerID = button.dataset.id; 
             if (confirm("Are you sure you want to delete this user?")) {
-                deleteUserData(CustomerID);
+                deleteUserData(customerID);
             }
         });
     });
 
-    function updateUserData(CustomerID, data) {
+    function updateUserData(customerID, data) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '', true); 
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -192,11 +193,11 @@ updateButtons.forEach(button => {
             }
         }
     };
-    xhr.send(JSON.stringify({ CustomerID, data }));
+    xhr.send(JSON.stringify({ customerID, data }));
 }
 
 
-    function deleteUserData(CustomerID) {
+    function deleteUserData(customerID) {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '', true); 
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -204,13 +205,13 @@ updateButtons.forEach(button => {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 console.log(xhr.responseText);
                 
-                const deletedRow = document.querySelector(`tr[data-id="${CustomerID}"]`);
+                const deletedRow = document.querySelector(`tr[data-id="${customerID}"]`);
                 if (deletedRow) {
                     deletedRow.remove();
                 }
             }
         };
-        xhr.send(`delete-btn=true&CustomerID=${CustomerID}`);
+        xhr.send(`delete-btn=true&CustomerID=${customerID}`);
     }
 //Adding user
 document.addEventListener("DOMContentLoaded", function() {
