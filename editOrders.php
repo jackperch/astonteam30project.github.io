@@ -229,8 +229,8 @@ function deleteOrderData(orderID) {
 document.addEventListener("DOMContentLoaded", function() {
         const addOrderButton = document.getElementById("addOrder");
 
-        addUserButton.addEventListener("click", function() {
-            window.location.href = "addorder.php";
+        addOrderButton.addEventListener("click", function() {
+            window.location.href = "addOrder.php";
         });
     });
 

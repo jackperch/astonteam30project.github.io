@@ -2,9 +2,8 @@
 session_start();
 include("connectionDB.php");
 
-// Add New User
+// Add New Order
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
-    $orderID = $_POST['orderID'];
     $productID = $_POST['productID'];
     $customerID = $_POST['customerID'];
     $quantity = $_POST['quantity'];
@@ -14,7 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $addressID = $_POST['addressID'];
     $paymentInfoID = $_POST['paymentInfoID'];
 
-    $query = "INSERT INTO orders (orderID, productID, customerID, quantity, price_of_product, order_date, total_amount, addressID, paymentInfoID)";
+    $query="SELECT * FROM payment_information WHERE paymentInfoID='$paymentInfoID";
+    
+    $query = "INSERT INTO orders (orderID, customerID, productID, quantity, price_of_product, order_date, total_amount, addressID, paymentInfoID) VALUES (:orderID, :customerID, :productID, :quantity, :price_of_product, :order_date, :total_amount, :addressID, :paymentInfoID)";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':orderID', $orderID);
     $stmt->bindParam(':productID', $productID);
@@ -28,11 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        // Redirect to edituser.php after adding the user
         header("Location: editOrders.php");
         exit;
     } else {
-        echo "Failed to add user.";
+        echo "Failed to add order.";
     }
 }
 ?>
@@ -105,21 +105,33 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
     <div class="content-container">
         <div class="signup-container">
-                <h2>ADD New Order</h2>
+                <h2>Add New Order</h2>
     <form method="post">
-    <input type="text" id="first-name" name="first_name"  placeholder="Quantity">
+    <input type="text" id="customerID" name="customerID"  placeholder="Customer ID">
     <span id="first-name-error"></span>
 
-    <input type="text" id="last-name" name="last_name"  placeholder="Price of Product">
+    <input type="text" id="productID" name="productID"  placeholder="Product ID">
+    <span id="first-name-error"></span>
+
+    <input type="text" id="addressID" name="addressID"  placeholder="Address ID">
+    <span id="first-name-error"></span>
+
+    <!-- <input type="text" id="paymentInfoID" name="paymentInfoID"  placeholder="Payment ID">
+    <span id="first-name-error"></span> -->
+
+    <input type="text" id="quantity" name="quantity"  placeholder="Quantity">
+    <span id="first-name-error"></span>
+
+    <input type="text" id="price_of_product" name="price_of_product"  placeholder="Price of Product">
     <span id="last-name-error"></span>
 
-    <input type="text" id="username" name="username"  placeholder="Total Amount">
+    <input type="text" id="total_amount" name="total_amount"  placeholder="Total Amount">
     <span id="username-error"></span>
     
-    <input type="password" id="password" name="password"  placeholder="Order Data">
+    <input type="date" id="order_date" name="order_date"  placeholder="Order Data">
     <span id="password-error"></span>
 
-    <input name="submit" type="submit" value="Add new user">
+    <input name="submit" type="submit" value="Add new Order">
     <input type="reset" value="Clear">
     <input type="hidden" name="signupsubmitted" value="TRUE">
     <span id="signup-error"></span>

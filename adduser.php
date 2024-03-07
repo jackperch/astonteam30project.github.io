@@ -99,8 +99,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
     <div class="content-container">
         <div class="signup-container">
-                <h2>ADD New User</h2>
+                <h2>Add New User</h2>
     <form method="post">
+    <input type="text" id="customerID" name="customerID"  placeholder="Customer ID"  onblur="validateFirstName()">
+    <span id="first-name-error"></span>
+
     <input type="text" id="first-name" name="first_name"  placeholder="First Name"  onblur="validateFirstName()">
     <span id="first-name-error"></span>
 
