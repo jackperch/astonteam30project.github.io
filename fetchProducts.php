@@ -40,4 +40,4 @@ if (isset($_GET['categoryId'])) {
     // categoryId parameter is missing
     echo "<p>Error: Category ID is required.</p>";
 }
-?>
+
