@@ -4,7 +4,7 @@ include("connectionDB.php");
 
 // Update product
 if(isset($_POST['update-btn'])) {
-    $query = "UPDATE product SET productID=:productID, image=:image, product_name=:product_name, price=:price, description=:description, categoryID=:categoryID, colour=:colour, size=:size, stock=:stock, is_featured=:is_featured, is_new=:is_new, is_popular=:is_popular WHERE productID=:productID";
+    $query = "UPDATE products SET productID=:productID, image=:image, product_name=:product_name, price=:price, description=:description, categoryID=:categoryID, colour=:colour, size=:size, stock=:stock, is_featured=:is_featured, is_new=:is_new, is_popular=:is_popular WHERE productID=:productID";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':productID', $productID);
     $stmt->bindParam(':image', $image);
@@ -26,7 +26,7 @@ if(isset($_POST['update-btn'])) {
 
 // Delete product
 if(isset($_POST['delete-btn'])) {
-    $orderID = $_POST['orderID'];
+    $orderID = $_POST['productID'];
 
     $query = "DELETE FROM products WHERE productID=:productID";
     $stmt = $db->prepare($query);
@@ -126,7 +126,7 @@ if(isset($_POST['delete-btn'])) {
 
             <tr>
             <?php
-            $query = "SELECT * FROM orders";
+            $query = "SELECT * FROM products";
             $stmt = $db->query($query);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo "<tr data-id='{$row['productID']}'>"; 
@@ -196,7 +196,7 @@ updateButtons.forEach(button => {
         });
     });
 
-    function updateOrderData(orderID, data) {
+    function updateOrderData(productID, data) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '', true); 
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -214,7 +214,7 @@ updateButtons.forEach(button => {
 }
 
 
-function deleteOrderData(orderID) {
+function deleteOrderData(productID) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '', true); 
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -231,7 +231,7 @@ function deleteOrderData(orderID) {
     xhr.send(`delete-btn=true&orderID=${productID}`);
 }
 
-//Adding order
+//Adding product
 document.addEventListener("DOMContentLoaded", function() {
         const addOrderButton = document.getElementById("addOrder");
 
