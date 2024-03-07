@@ -2,32 +2,35 @@
 session_start();
 include("connectionDB.php");
 
-// Update order
+// Update product
 if(isset($_POST['update-btn'])) {
-    $query = "UPDATE orders SET productID=:productID, customerID=:customerID, quantity=:quantity, price_of_product=:price_of_product, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, paymentInfoID=:paymentInfoID WHERE orderID=:orderID";
+    $query = "UPDATE products SET productID=:productID, image=:image, product_name=:product_name, price=:price, description=:description, categoryID=:categoryID, colour=:colour, size=:size, stock=:stock, is_featured=:is_featured, is_new=:is_new, is_popular=:is_popular WHERE productID=:productID";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':orderID', $orderID);
     $stmt->bindParam(':productID', $productID);
-    $stmt->bindParam(':customerID', $customerID);
-    $stmt->bindParam(':quantity', $quantity);
-    $stmt->bindParam(':price_of_product', $price_of_product);
-    $stmt->bindParam(':order_date', $order_date);
-    $stmt->bindParam(':total_amount', $total_amount);
-    $stmt->bindParam(':addressID', $addressID);
-    $stmt->bindParam(':aymentInfoID', $aymentInfoID);
+    $stmt->bindParam(':image', $image);
+    $stmt->bindParam(':product_name', $product_name);
+    $stmt->bindParam(':price', $price);
+    $stmt->bindParam(':description', $description);
+    $stmt->bindParam(':total_amount', $categoryID);
+    $stmt->bindParam(':colour', $colour);
+    $stmt->bindParam(':size', $size);
+    $stmt->bindParam(':is_featured', $is_featured);
+    $stmt->bindParam(':is_new', $is_new);
+    $stmt->bindParam(':is_popular', $is_popular);
+    $stmt->bindParam(':stock', $stock);
     $stmt->execute();
     exit;
 }
 
 
 
-// Delete order
+// Delete product
 if(isset($_POST['delete-btn'])) {
-    $orderID = $_POST['orderID'];
+    $orderID = $_POST['productID'];
 
-    $query = "DELETE FROM orders WHERE orderID=:orderID";
+    $query = "DELETE FROM products WHERE productID=:productID";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':orderID', $orderID);
+    $stmt->bindParam(':productID', $productID);
     $stmt->execute();
     exit;
 }
@@ -123,22 +126,25 @@ if(isset($_POST['delete-btn'])) {
 
             <tr>
             <?php
-            $query = "SELECT * FROM orders";
+            $query = "SELECT * FROM products";
             $stmt = $db->query($query);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr data-id='{$row['orderID']}'>"; 
-                echo "<td><span class='editable' contenteditable='true' data-column='orderID' data-id='{$row['orderID']}'>{$row['orderID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='customerID' data-id='{$row['orderID']}'>{$row['customerID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='productID' data-id='{$row['orderID']}'>{$row['productID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='quantity' data-id='{$row['orderID']}'>{$row['quantity']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='price_of_product' data-id='{$row['orderID']}'>{$row['price_of_product']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='order_date' data-id='{$row['orderID']}'>{$row['order_date']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='total_amount' data-id='{$row['orderID']}'>{$row['total_amount']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='addressID' data-id='{$row['orderID']}'>{$row['addressID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='paymentInfoID' data-id='{$row['orderID']}'>{$row['paymentInfoID']}</span></td>";
+                echo "<tr data-id='{$row['productID']}'>"; 
+                echo "<td><span class='editable' contenteditable='true' data-column='productID' data-id='{$row['productID']}'>{$row['productID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='image' data-id='{$row['productID']}'>{$row['image']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='product_name' data-id='{$row['productID']}'>{$row['product_name']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='price' data-id='{$row['productID']}'>{$row['price']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='price_of_product' data-id='{$row['productID']}'>{$row['description']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='categoryID' data-id='{$row['productID']}'>{$row['categoryID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='colour' data-id='{$row['productID']}'>{$row['colour']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='size' data-id='{$row['productID']}'>{$row['size']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='stock' data-id='{$row['productID']}'>{$row['stock']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='is_featured' data-id='{$row['productID']}'>{$row['is_featured']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='is_new' data-id='{$row['productID']}'>{$row['is_new']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='is_popular' data-id='{$row['productID']}'>{$row['is_popular']}</span></td>";
                 echo "<td>";
-                echo "<button class='update-btn' data-id='{$row['orderID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$row['orderID']}'>Delete</button>"; 
+                echo "<button class='update-btn' data-id='{$row['productID']}'>Update</button>"; 
+                echo "<button class='delete-btn' data-id='{$row['productID']}'>Delete</button>"; 
                 echo "</td>";
                 echo "</tr>";
             }
@@ -173,8 +179,8 @@ updateButtons.forEach(button => {
             const value = field.textContent.trim();
             dataToUpdate[column] = value;
         });
-        if (confirm("Are you sure you want to update this order?")) {
-            updateOrderData(orderID, dataToUpdate);
+        if (confirm("Are you sure you want to update this product?")) {
+            updateOrderData(productID, dataToUpdate);
         }
     });
 });
@@ -184,13 +190,13 @@ updateButtons.forEach(button => {
     deleteButtons.forEach(button => {
         button.addEventListener('click', () => {
             const orderID = button.dataset.id; 
-            if (confirm("Are you sure you want to delete this order?")) {
-                deleteOrderData(orderID);
+            if (confirm("Are you sure you want to delete this product?")) {
+                deleteOrderData(productID);
             }
         });
     });
 
-    function updateOrderData(orderID, data) {
+    function updateOrderData(productID, data) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '', true); 
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -198,17 +204,17 @@ updateButtons.forEach(button => {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 console.log(xhr.responseText);
-                alert('Order data updated successfully.');
+                alert('Product data updated successfully.');
             } else {
-                alert('Failed to update order data.');
+                alert('Failed to update data.');
             }
         }
     };
-    xhr.send(JSON.stringify({ orderID, data }));
+    xhr.send(JSON.stringify({ productID, data }));
 }
 
 
-function deleteOrderData(orderID) {
+function deleteOrderData(productID) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '', true); 
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -216,16 +222,16 @@ function deleteOrderData(orderID) {
         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
             console.log(xhr.responseText);
             
-            const deletedRow = document.querySelector(`tr[data-id="${orderID}"]`);
+            const deletedRow = document.querySelector(`tr[data-id="${productID}"]`);
             if (deletedRow) {
                 deletedRow.remove();
             }
         }
     };
-    xhr.send(`delete-btn=true&orderID=${orderID}`);
+    xhr.send(`delete-btn=true&orderID=${productID}`);
 }
 
-//Adding order
+//Adding product
 document.addEventListener("DOMContentLoaded", function() {
         const addOrderButton = document.getElementById("addOrder");
 
