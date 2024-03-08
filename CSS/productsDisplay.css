@@ -54,6 +54,9 @@
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+    border-radius: 5px;
+    /* background-color: white;
+    color: black; */
 }
 
 .product-image {
@@ -74,6 +77,7 @@
     padding: 5px 10px;
     border: 1px solid #ccc;
     background-color: #f0f0f0;
+    border-radius: 50%;
     cursor: pointer;
 }
 
@@ -81,12 +85,33 @@
     width: 50px;
     text-align: center;
     margin: 0 5px;
+    border-radius: 20px;
 }
 
-.add-to-cart-btn {
+/* .add-to-cart-btn {
     background-color: #c2ee0a;
     color: black;
     padding: 10px 15px;
     border: none;
     cursor: pointer;
+} */
+
+.add-to-cart-btn, .add-to-cart {
+    background-color: #c2ee0a; /* Bright yellow-green background */
+    color: black; /* Text color */
+    padding: 10px 15px; /* Padding around the text */
+    border: 2px solid black; /* Adds a solid border */
+    border-radius: 5px; /* Slightly rounded corners for a softer look */
+    cursor: pointer; /* Changes the cursor to indicate it's clickable */
+    text-transform: uppercase; /* Makes the text uppercase for emphasis */
+    font-weight: bold; /* Makes the font bold */
+    display: inline-block; /* Ensures the button doesn't take the full width */
+    text-decoration: none; /* Removes underline from text if it's an <a> tag */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for hover effects */
+}
+
+.add-to-cart-btn:hover, .add-to-cart:hover {
+    background-color: #aada07; /* Slightly lighter shade when hovered */
+    transform: translateY(-2px); /* Slightly raise the button to imply it's being pressed */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adds a shadow to give depth */
 }
