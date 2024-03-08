@@ -121,37 +121,29 @@
                 return [];
             }
         }
-        $categoryProducts = fetchProductsByCategory($db, $categoryId);
+        //$categoryProducts = fetchProductsByCategory($db, $categoryId);
         ?>
 
-        <section id="products">
+         <section id="products">
+            <!-- Products will be loaded here -->
             <h2><center>Products:</center></h2>
-            <div class="product-grid">
-                <!-- Products will be loaded here -->
-                <?php echo count($products); ?>
+            <div id="category-product-grid" class="product-grid">
+                <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" class="product-image">
+                <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
+                <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
+                <div class="quantity-input">
+                    <button class="quantity-decrease" onclick="changeQuantity(false, '<?= $product['productID'] ?>')">-</button>
+                    <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
+                    <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
+                </div> 
+                <?php
+                    echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
+                    echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
+                    echo "<div class='price'>£{$product['price']}</div>";
+                    echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                ?>
             </div>
-            <?php
-           // if(isset($_GET['categoryId'])) {
-             //   $categoryId = $_GET['categoryId'];
-            
-
-                foreach ($categoryProducts as $product) {
-                    echo "<h3>" . $categoryId . "</h3>";
-                    echo "<div class='product'>";
-                    echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
-                    echo "<h3 class='product-name'>" . htmlspecialchars($product['product_name']) . "</h3>";
-                    echo "<p class='product-price'>£" . htmlspecialchars($product['price']) . "</p>";
-                    echo "<div class='quantity-input'>";
-                    echo "<button class='quantity-decrease' onclick='changeQuantity(false, \"" . $product["productID"] . "\")'>-</button>";
-                    echo "<input type=\"number\" id=\"quantity-" . $product['productID'] . "\" name=\"quantity\" value=\"1\" min=\"1\" class=\"quantity-field\">";
-                    echo "<button class=\"quantity-increase\" onclick=\"changeQuantity(true, '{$product['productID']}')\">+</button>";
-                    echo "</div>";
-                    echo "<button class='add-to-cart-btn' onclick='addToCart(\"{$product['productID']}\")'>Add to Cart</button>";
-                    echo "</div>";
-                }
-          //  }
-            ?>
-
+        </section>
 
 
 
@@ -314,8 +306,8 @@
 
     $(document).ready(function() {
         // Initial setup
-        var categories = $('.category');
-        var currentCategoryIndex = 0; // Starts with the first category selected
+        //var categories = $('.category');
+        //var currentCategoryIndex = 0; // Starts with the first category selected
 
         // Function to show only the current category
         function showCurrentCategory() {
@@ -353,10 +345,10 @@
         }
 
         // Call fetchProductsForCategory when a category is clicked
-        categories.click(function() {
-            var categoryId = $(this).data('category-id');
-            fetchProductsForCategory(categoryId);
-        });
+        // categories.click(function() {
+        //     var categoryId = $(this).data('category-id');
+        //     fetchProductsForCategory(categoryId);
+        // });
     });
 
                     
@@ -370,12 +362,12 @@
     // Function to fetch and display products for a given category
     function fetchProductsForCategory(categoryId) {
         $.ajax({
-            url: 'fetchProducts.php', // Your PHP script to return products HTML
+            url: 'fetchProducts.php', // PHP script to return products HTML
             type: 'GET',
             data: {categoryId: categoryId},
             success: function(response) {
                 // Assuming response contains the HTML for the products
-                $('#category-products .product-grid').html(response);
+                $('#category-product-grid').html(response);
             },
             error: function(xhr, status, error) {
                 console.error("AJAX Error:", status, error);

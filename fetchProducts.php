@@ -29,7 +29,11 @@ if (isset($_GET['categoryId'])) {
             echo "<input type='number' id='quantity-" . $product['productID'] . "' name='quantity' value='1' min='1' class='quantity-field'>";
             echo "<button class='quantity-increase' onclick='changeQuantity(true, '{$product['productID']}')'>+</button>";
             echo "</div>";
-            echo "<button class='add-to-cart-btn' onclick='addToCart(\"{$product['productID']}\")'>Add to Cart</button>";
+                    echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
+                    echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
+                    echo "<div class='price'>£{$product['price']}</div>";
+                    echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                    echo "</form>";
             echo "</div>";
         }
     } else {
