@@ -141,6 +141,7 @@
                     echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
                     echo "<div class='price'>£{$product['price']}</div>";
                     echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                    echo "</form>";
                 ?>
             </div>
         </section>
@@ -215,7 +216,10 @@
             <div class="product-grid">
                 <?php foreach ($featuredProducts as $product): ?>
                     <div class="product">
-                        <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" class="product-image">
+                        <?php // Make the product image a clickable link
+                        echo "<a href='productDetail.php?productID={$product['productID']}'>";
+                        echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
+                        echo "</a>"; ?>                       
                         <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
                         <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
                         <div class="quantity-input">
@@ -228,6 +232,7 @@
                             echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
                             echo "<div class='price'>£{$product['price']}</div>";
                             echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                            echo "</form>";
                         ?>
                     </div>
                 <?php endforeach; ?>
@@ -242,7 +247,10 @@
             <div class="product-grid">
                 <?php foreach ($popularProducts as $product): ?>
                     <div class="product">
-                        <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" class="product-image">
+                        <?php // Make the product image a clickable link
+                            echo "<a href='productDetail.php?productID={$product['productID']}'>";
+                            echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
+                            echo "</a>"; ?>                        
                         <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
                         <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
                         <div class="quantity-input">
@@ -250,7 +258,13 @@
                             <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
                             <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart('<?= $product['productID'] ?>')">Add to Cart</button>
+                        <?php
+                            echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
+                            echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
+                            echo "<div class='price'>£{$product['price']}</div>";
+                            echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                            echo "</form>";
+                        ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -264,7 +278,10 @@
             <div class="product-grid">
                 <?php foreach ($newProducts as $product): ?>
                     <div class="product">
-                        <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" class="product-image">
+                    <?php // Make the product image a clickable link
+                        echo "<a href='productDetail.php?productID={$product['productID']}'>";
+                        echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
+                        echo "</a>"; ?>
                         <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
                         <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
                         <div class="quantity-input">
@@ -272,7 +289,13 @@
                             <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
                             <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
                         </div>
-                        <button class="add-to-cart-btn" onclick="addToCart('<?= $product['productID'] ?>')">Add to Cart</button>
+                        <?php
+                            echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
+                            echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
+                            echo "<div class='price'>£{$product['price']}</div>";
+                            echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                            echo "</form>";
+                        ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -377,16 +400,18 @@
 
     // Previous category button
     $('.left-arrow').click(function() {
-        currentCategoryIndex = (currentCategoryIndex - 1 + categories.length) % categories.length;
+        currentCategoryIndex = (currentCategoryIndex) % categories.length;
         var categoryId = $(categories[currentCategoryIndex]).data("category-id");
         fetchProductsForCategory(categoryId);
+        console.log("Category ID: " + categoryId);
     });
 
     // Next category button
     $('.right-arrow').click(function() {
-        currentCategoryIndex = (currentCategoryIndex + 1) % categories.length;
+        currentCategoryIndex = (currentCategoryIndex) % (categories.length + 1);
         var categoryId = $(categories[currentCategoryIndex]).data("category-id");
         fetchProductsForCategory(categoryId);
+        console.log("Category ID: " + categoryId);
     });
 
  

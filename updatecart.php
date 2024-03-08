@@ -69,8 +69,8 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
 
 
-        // Redirect to cart page or display a success message
-        header("Location: products.php?addedToCart={$productID}");
+        // Redirect to products page or display a success message
+        header("Location: productsDisplay.php?addedToCart={$productID}");
         echo "Item added to cart";
         exit;
 

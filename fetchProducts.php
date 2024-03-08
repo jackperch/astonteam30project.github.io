@@ -11,8 +11,11 @@ function fetchProductsByCategory($db, $categoryId) {
 }
 
 // Check if categoryId is provided
-if (isset($_GET['categoryId'])) {
+if (!isset($_GET['categoryId'])) {
+    $categoryId = 1; // Default category ID
+} else {
     $categoryId = intval($_GET['categoryId']);
+}
     // Fetch products for the given category
     $products = fetchProductsByCategory($db, $categoryId);
 
@@ -21,8 +24,11 @@ if (isset($_GET['categoryId'])) {
         // Loop through each product and generate the HTML
         foreach ($products as $product) {
             echo "<div class='product'>";
+            // Make the product image a clickable link
+            echo "<a href='productDetail.php?productID={$product['productID']}'>";
             echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
-            echo "<h3 class='product-name'>" . htmlspecialchars($product['product_name']) . "</h3>";
+            echo "</a>";
+            echo "<h2>{$product['product_name']}</h2>";
             echo "<p class='product-price'>£" . htmlspecialchars($product['price']) . "</p>";
             echo "<div class='quantity-input'>";
             echo "<button class='quantity-decrease' onclick='changeQuantity(false, \"" . $product["productID"] . "\")'>-</button>";
@@ -40,8 +46,8 @@ if (isset($_GET['categoryId'])) {
         // No products found for the given category
         echo "<p>No products found in this category.</p>";
     }
-} else {
-    // categoryId parameter is missing
-    echo "<p>Error: Category ID is required.</p>";
-}
+// } else {
+//     // categoryId parameter is missing
+//     echo "<p>Error: Category ID is required.</p>";
 
+?>

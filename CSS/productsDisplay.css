@@ -81,6 +81,12 @@
     cursor: pointer;
 }
 
+.quantity-input button:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 .quantity-field {
     width: 50px;
     text-align: center;
