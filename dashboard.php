@@ -44,7 +44,9 @@
 } else {
 	echo "Please <a href='./adminLogin.php'>Login</a> first!";
 }
-<footer>
+?>
+
+	<footer>
             <div class="footer-container">
                 <div class="footer-links">
                     <a href="reviews.php">Reviews</a>
@@ -54,8 +56,6 @@
                 </div>
             </div>
         </footer>
-
-?>
  </body>
 
 
