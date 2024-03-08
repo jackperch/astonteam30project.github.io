@@ -343,4 +343,20 @@
         </div>
     </footer>
 
+    <script>
+        // JavaScript for toggling footer visibility on scroll
+        window.addEventListener('scroll', function() {
+            var footer = document.querySelector('footer');
+            var main = document.querySelector('main');
+            var scrollPosition = window.scrollY + window.innerHeight;
+            var mainHeight = main.offsetHeight;
+
+            if (scrollPosition >= mainHeight) {
+                footer.style.opacity = '1';
+            } else {
+                footer.style.opacity = '0';
+            }
+        });
+    </script>
+
 </html>
