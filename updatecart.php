@@ -81,7 +81,7 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         // Handle errors, maybe log them and show user-friendly message
         echo "Error updating cart: " . $ex->getMessage();
         // Redirect to product page or display error
-        header("Location: product.php?id=" . $productID . "&error=cart-update-failed");
+        header("Location: productsDisplay.php?id=" . $productID . "&error=cart-update-failed");
         exit;
     }
 } else {
@@ -121,7 +121,7 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default to 1 if quantity is not specified
         $_SESSION["guest_shopping_cart"][$productID] = $quantity;
         
-        header("Location: products.php"); // Redirect to the products page after adding a product to cart for a guest user
+        header("Location: productsDisplay.php"); // Redirect to the products page after adding a product to cart for a guest user
         exit;
     }
 }
