@@ -20,19 +20,21 @@
                 <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
                 <h1 id="nav-bar-text">ADMIN DASHBOARD</h1>
             </div>
-            <div id="search-container">
-                <input type="text" id="search-bar" placeholder="Search...">
-                <button id="search-button">Search</button>
-            </div>
-            <nav>
-                <a href="addProduct.php">Add Product</a>
-                <a href="adduser.php">Add User</a>
-                <a href="addAdmin.php">Add Admin</a>
-		<a href="editAdmins.php">Edit Admins</a>
-                <a href="addOrder.php">Add Order</a>
-		<a href="editOrders.php">Edit Orders</a>
-		<a href="editProducts.php">Edit Products</a>
-		<a href="editusers.php">Edit Users</a>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Dashboard Options
+  </button>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="addProduct.php">Add Product</a></li>
+    <li><a class="dropdown-item" href="editProducts.php">Edit Products</a></li>
+    <li><a class="dropdown-item" href="adduser.php">Add User</a></li>
+    <li><a class="dropdown-item" href="editusers.php">Edit Users</a></li>
+    <li><a class="dropdown-item" href="addAdmin.php">Add Admin</a></li>
+    <li><a class="dropdown-item" href="editAdmins.php">Edit Admins</a></li>
+    <li><a class="dropdown-item" href="addOrder.php">Add Order</a></li>
+    <li><a class="dropdown-item" href="editOrders.php">Edit Orders</a></li>
+  </ul>
+</div>
                 <?php 
                 session_start();
                 if (isset($_SESSION['adminID'])) {
@@ -41,7 +43,7 @@
                     echo "<a href='adminLogin.php'>Login</a>";
                 }
                 ?>
-            </nav>
+</header>
 		
 		<footer>
             <div class="footer-container">
