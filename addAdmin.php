@@ -2,29 +2,22 @@
 session_start();
 include("connectionDB.php");
 
-// Add New User
+// Add New admin
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO customers (first_name, last_name, email, username, password) VALUES (:first_name, :last_name, :email, :username, :password)";
+    $query = "INSERT INTO admin (username, password) VALUES (:username, :password)";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':first_name', $first_name);
-    $stmt->bindParam(':last_name', $last_name);
-    $stmt->bindParam(':email', $email);
     $stmt->bindParam(':username', $username);
     $stmt->bindParam(':password', $password);
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        // Redirect to edituser.php after adding the user
-        header("Location: editusers.php");
+        header("Location: editAdmins.php");
         exit;
     } else {
-        echo "Failed to add user.";
+        echo "Failed to add admin.";
     }
 }
 ?>
@@ -99,11 +92,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         <div class="signup-container">
                 <h2>Add New User</h2>
     <form method="post">
-    <input type="text" id="first-name" name="first_name"  placeholder="First Name"  onblur="validateFirstName()">
-    <span id="first-name-error"></span>
-
-    <input type="text" id="last-name" name="last_name"  placeholder="Last Name"   onblur="validateLastName()">
-    <span id="last-name-error"></span>
 
     <input type="text" id="username" name="username"  placeholder="Username" onblur="validateUsername()">
     <span id="username-error"></span>
@@ -111,10 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <input type="password" id="password" name="password"  placeholder="Password" onblur="validatePassword()">
     <span id="password-error"></span>
 
-    <input type="text" id="email" name="email"  placeholder="E-mail" onblur="validateEmail()">
-    <span id="email-error"></span>
-
-    <input name="submit" type="submit" value="Add new user">
+    <input name="submit" type="submit" value="Add new admin">
     <input type="reset" value="Clear">
     <input type="hidden" name="signupsubmitted" value="TRUE">
     <span id="signup-error"></span>
