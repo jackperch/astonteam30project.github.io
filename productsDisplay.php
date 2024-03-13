@@ -290,9 +290,9 @@
                         <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
                         <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
                         <div class="quantity-input">
-                            <button class="quantity-decrease" onclick="changeQuantity(false, '<?= $product['productID'] ?>')">-</button>
+                            <button class="quantity-decrease" data-product-id="<?= $product['productID'] ?>" onclick="changeQuantity(false, '<?= $product['productID'] ?>')">-</button>
                             <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
-                            <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
+                            <button class="quantity-increase" data-product-id="<?= $product['productID'] ?>" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
                         </div>
                         <?php
                             echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
@@ -377,47 +377,109 @@
         //     var categoryId = $(this).data('category-id');
         //     fetchProductsForCategory(categoryId);
         // });
-    });
+
+
+        // Function to handle the quantity change
+        function changeProductQuantity(isIncrease, productID) {
+            var quantityInput = $('#quantity-' + productID);
+            var currentQuantity = parseInt(quantityInput.val());
+            var newQuantity = isIncrease ? currentQuantity + 1 : currentQuantity - 1;
+            // Ensure the quantity is at least 1
+            newQuantity = newQuantity < 1 ? 1 : newQuantity;
+            quantityInput.val(newQuantity);
+        }
+
+        // Increase quantity
+        $('.quantity-increase').click(function() {
+            var productID = $(this).attr('data-product-id');
+            changeProductQuantity(true, productID);
+        });
+
+        // Decrease quantity
+        $('.quantity-decrease').click(function() {
+            var productID = $(this).attr('data-product-id');
+            changeProductQuantity(false, productID);
+        });
+
+        // Function to display an alert when the "Add to cart" button is clicked
+        window.displayAlert = function() {
+            alert("Item added to cart!");
+        };
+
+        $('.add-to-cart-form').on('submit', function(e) {
+        e.preventDefault(); // Prevent the form from submitting normally
+
+        var form = $(this);
+        var url = form.attr('action'); // Get the URL to which the form submits
+        var productId = form.find('input[name="productID"]').val(); // Get the product ID
+        var quantity = $('#quantity-' + productId).val(); // Get the quantity
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: { productId: productId, quantity: quantity, action: 'add' }, // Add an action parameter for the backend to know this is an add to cart action
+            success: function(data) {
+                alert('Product added to cart successfully!');
+                // Optionally, update the cart count or any other elements on the page
+                // Update the cart count
+                var cartCount = parseInt($('#cart-count').text()); // Get the current cart count
+                var newCartCount = cartCount + 1; // Increment the cart count by 1
+                $('#cart-count').text(newCartCount); // Update the cart count on the page
+
+                // Optionally, update any other elements on the page
+
+                // Display a success message
+                alert('Product added to cart successfully!');
+                },
+            
+            error: function(xhr, status, error) {
+                alert('Error adding product to cart.');
+            }
+            });
+        });
+        
+        
+    
 
                     
 
-     var currentCategoryIndex = 0;  // setting it at 0 to start with 
-     var categories = $(".category"); // Selecting all the categories from the array
+        var currentCategoryIndex = 0;  // setting it at 0 to start with 
+        var categories = $(".category"); // Selecting all the categories from the array
 
-    // Show the first category's products initially or on page load
-    fetchProductsForCategory($(categories[currentCategoryIndex]).data("category-id"));
+        // Show the first category's products initially or on page load
+        fetchProductsForCategory($(categories[currentCategoryIndex]).data("category-id"));
 
-    // Function to fetch and display products for a given category
-    function fetchProductsForCategory(categoryId) {
-        $.ajax({
-            url: 'fetchProducts.php', // PHP script to return products HTML
-            type: 'GET',
-            data: {categoryId: categoryId},
-            success: function(response) {
-                // Assuming response contains the HTML for the products
-                $('#category-product-grid').html(response);
-            },
-            error: function(xhr, status, error) {
-                console.error("AJAX Error:", status, error);
-            }
+        // Function to fetch and display products for a given category
+        function fetchProductsForCategory(categoryId) {
+            $.ajax({
+                url: 'fetchProducts.php', // PHP script to return products HTML
+                type: 'GET',
+                data: {categoryId: categoryId},
+                success: function(response) {
+                    // Assuming response contains the HTML for the products
+                    $('#category-product-grid').html(response);
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX Error:", status, error);
+                }
+            });
+        }
+
+        // Previous category button
+        $('.left-arrow').click(function() {
+            currentCategoryIndex = (currentCategoryIndex) % categories.length;
+            var categoryId = $(categories[currentCategoryIndex]).data("category-id");
+            fetchProductsForCategory(categoryId);
+            console.log("Category ID: " + categoryId);
         });
-    }
 
-    // Previous category button
-    $('.left-arrow').click(function() {
-        currentCategoryIndex = (currentCategoryIndex) % categories.length;
-        var categoryId = $(categories[currentCategoryIndex]).data("category-id");
-        fetchProductsForCategory(categoryId);
-        console.log("Category ID: " + categoryId);
-    });
-
-    // Next category button
-    $('.right-arrow').click(function() {
-        currentCategoryIndex = (currentCategoryIndex) % (categories.length + 1);
-        var categoryId = $(categories[currentCategoryIndex]).data("category-id");
-        fetchProductsForCategory(categoryId);
-        console.log("Category ID: " + categoryId);
-    });
+        // Next category button
+        $('.right-arrow').click(function() {
+            currentCategoryIndex = (currentCategoryIndex) % (categories.length + 1);
+            var categoryId = $(categories[currentCategoryIndex]).data("category-id");
+            fetchProductsForCategory(categoryId);
+            console.log("Category ID: " + categoryId);
+        });
 
  
 
