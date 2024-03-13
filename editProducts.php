@@ -26,7 +26,7 @@ if(isset($_POST['update-btn'])) {
 
 // Delete product
 if(isset($_POST['delete-btn'])) {
-    $orderID = $_POST['productID'];
+    $productID = $_POST['productID'];
 
     $query = "DELETE FROM products WHERE productID=:productID";
     $stmt = $db->prepare($query);
@@ -108,20 +108,22 @@ if(isset($_POST['delete-btn'])) {
 
 <div class="content-container">
     <div class="user-management-container">
-        <h1>Orders Management</h1>
+        <h1>Products Management</h1>
 
         <table>
             <tr>
-                <th>Order ID</th>
-                <th>Customer ID</th>
                 <th>Product ID</th>
-                <th>Quantity</th>
-                <th>Price of product</th>
-                <th>Order Date</th>
-                <th>Total Amount</th>
-                <th>Adress ID</th>
-                <th>Payment ID</th>
-                <th>Action</th>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Category ID</th>
+                <th>Colour</th>
+                <th>Size</th>
+                <th>Is Featured</th>
+                <th>Is New</th>
+                <th>Is Popular</th>
+                <th>Stock</th>
             </tr>
 
             <tr>
@@ -151,7 +153,7 @@ if(isset($_POST['delete-btn'])) {
             ?>
         </table>
         <!-- Add Order Button -->
-        <button id="addOrder">Add Order</button>
+        <button id="addProduct">Add Product</button>
     </div>
 </div>
 
@@ -170,7 +172,7 @@ if(isset($_POST['delete-btn'])) {
 const updateButtons = document.querySelectorAll('.update-btn');
 updateButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const orderID = button.dataset.id; 
+        const productID = button.dataset.id; 
         const row = button.parentNode.parentNode;
         const editableFields = row.querySelectorAll('.editable');
         const dataToUpdate = {};
@@ -185,18 +187,18 @@ updateButtons.forEach(button => {
     });
 });
 
-    // Delete order Functionality
+    // Delete product Functionality
     const deleteButtons = document.querySelectorAll('.delete-btn');
     deleteButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const orderID = button.dataset.id; 
+            const productID = button.dataset.id; 
             if (confirm("Are you sure you want to delete this product?")) {
-                deleteOrderData(productID);
+                deleteProductData(productID);
             }
         });
     });
 
-    function updateOrderData(productID, data) {
+    function updateProductData(productID, data) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '', true); 
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -214,7 +216,7 @@ updateButtons.forEach(button => {
 }
 
 
-function deleteOrderData(productID) {
+function deleteProductData(productID) {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '', true); 
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -228,15 +230,15 @@ function deleteOrderData(productID) {
             }
         }
     };
-    xhr.send(`delete-btn=true&orderID=${productID}`);
+    xhr.send(`delete-btn=true&productID=${productID}`);
 }
 
 //Adding product
 document.addEventListener("DOMContentLoaded", function() {
-        const addOrderButton = document.getElementById("addOrder");
+        const addProductButton = document.getElementById("addProduct");
 
-        addOrderButton.addEventListener("click", function() {
-            window.location.href = "addOrder.php";
+        addProductButton.addEventListener("click", function() {
+            window.location.href = "addProduct.php";
         });
     });
 

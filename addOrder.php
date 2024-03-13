@@ -4,36 +4,51 @@ include("connectionDB.php");
 
 // Add New Order
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
-    $productID = $_POST['productID'];
-    $customerID = $_POST['customerID'];
+    $username = $_POST['username'];
+    $product_name = $_POST['product_name'];
     $quantity = $_POST['quantity'];
-    $price_of_product = $_POST['price_of_product'];
     $order_date = $_POST['order_date'];
     $total_amount = $_POST['total_amount'];
-    $addressID = $_POST['addressID'];
-    $paymentInfoID = $_POST['paymentInfoID'];
 
-    $query="SELECT * FROM payment_information WHERE paymentInfoID='$paymentInfoID";
-    
-    $query = "INSERT INTO orders (orderID, customerID, productID, quantity, price_of_product, order_date, total_amount, addressID, paymentInfoID) VALUES (:orderID, :customerID, :productID, :quantity, :price_of_product, :order_date, :total_amount, :addressID, :paymentInfoID)";
+    // Fetch customerID based on username
+    $query = "SELECT customerID FROM customers WHERE username = :username";
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':orderID', $orderID);
-    $stmt->bindParam(':productID', $productID);
-    $stmt->bindParam(':customerID', $customerID);
-    $stmt->bindParam(':quantity', $quantity);
-    $stmt->bindParam(':price_of_product', $price_of_product);
-    $stmt->bindParam(':order_date', $order_date);
-    $stmt->bindParam(':total_amount', $total_amount);
-    $stmt->bindParam(':addressID', $addressID);
-    $stmt->bindParam(':paymentInfoID', $paymentInfoID);
+    $stmt->bindParam(':username', $username);
     $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($stmt->rowCount() > 0) {
-        header("Location: editOrders.php");
-        exit;
+    if ($result) {
+        $customerID = $result['customerID'];
+
+        $query = "SELECT productID FROM products WHERE product_name = :product_name";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':product_name', $product_name);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $productID = $result['productID'];
+        $query = "INSERT INTO orders (customerID, productID, quantity, price, order_date, total_amount, addressID) VALUES (:customerID, :productID, :quantity, :price, :order_date, :total_amount, :addressID)";
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':customerID', $customerID);
+        $stmt->bindParam(':productID', $productID);
+        $stmt->bindParam(':quantity', $quantity);
+        $stmt->bindParam(':price', $price);
+        $stmt->bindParam(':order_date', $order_date);
+        $stmt->bindParam(':total_amount', $total_amount);
+        $stmt->bindParam(':addressID', $addressID);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            header("Location: editOrders.php");
+            exit;
+        } else {
+            echo "Failed to add order.";
+        }
     } else {
-        echo "Failed to add order.";
+        echo "Customer not found.";
     }
+}
 }
 ?>
 
@@ -107,23 +122,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         <div class="signup-container">
                 <h2>Add New Order</h2>
     <form method="post">
-    <input type="text" id="customerID" name="customerID"  placeholder="Customer ID">
+    <input type="text" id="username" name="username"  placeholder="Username">
     <span id="first-name-error"></span>
 
-    <input type="text" id="productID" name="productID"  placeholder="Product ID">
+    <input type="text" id="product_name" name="product_name"  placeholder="Product Name">
     <span id="first-name-error"></span>
-
-    <input type="text" id="addressID" name="addressID"  placeholder="Address ID">
-    <span id="first-name-error"></span>
-
-    <!-- <input type="text" id="paymentInfoID" name="paymentInfoID"  placeholder="Payment ID">
-    <span id="first-name-error"></span> -->
 
     <input type="text" id="quantity" name="quantity"  placeholder="Quantity">
     <span id="first-name-error"></span>
-
-    <input type="text" id="price_of_product" name="price_of_product"  placeholder="Price of Product">
-    <span id="last-name-error"></span>
 
     <input type="text" id="total_amount" name="total_amount"  placeholder="Total Amount">
     <span id="username-error"></span>
