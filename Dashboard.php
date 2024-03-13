@@ -20,6 +20,8 @@
                 <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
                 <h1 id="nav-bar-text">ADMIN DASHBOARD</h1>
             </div>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
 <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
     Dashboard Options
@@ -35,6 +37,8 @@
     <li><a class="dropdown-item" href="editOrders.php">Edit Orders</a></li>
   </ul>
 </div>
+</nav>
+	
                 <?php 
                 session_start();
                 if (isset($_SESSION['adminID'])) {
