@@ -15,11 +15,6 @@
 
  <body>
         <header>
-            <div id="logo-container">
-                <!-- logo image -->
-                <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
-                <h1 id="nav-bar-text">ADMIN DASHBOARD</h1>
-	 </div>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">ADMIN DASHBOARD</a>
