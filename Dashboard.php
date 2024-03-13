@@ -9,8 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
     </style>
-    <!-- Uncomment the following line if Bootstrap JS is not included -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script> 
 </head>
 
 <body>
