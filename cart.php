@@ -130,11 +130,9 @@
                     foreach ($cartItems as $item) {
                         echo "<div class='cart-item'>";
                         echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['productName']}' width=50 height=50>";
-                        echo "<div class='item-details'>";
                         echo "<h2>{$item['productName']}</h2>";
                         echo "<p>Price: {$item['price']}</p>";
                         echo "<p>Quantity: {$item['quantity']}</p>";
-                        echo "</div>";
                         // Form for updating quantity or removing item
                         echo "<form method='post' action='updateCart.php'>";
                         echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
@@ -142,7 +140,6 @@
                         echo "<button type='submit' name='action' value='update'>Update</button>";
                         echo "<button type='submit' name='action' value='remove'>Remove</button>";
                         echo "</form>";
-                        echo "</div>";
                     }
 
                     if (empty($cartItems)) {
@@ -181,18 +178,15 @@
                                 echo "<div class='cart-item'>";
                                 echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=50 height=50>";
                                 echo "<h2>{$item['product_name']}</h2>";
-                                echo "<div class='item-details'>";
                                 echo "<p>Price: {$item['price']}</p>";
                                 echo "<p>Quantity: {$quantity}</p>";
-                                echo "</div>";
                                 echo "<form method='post' action='updateCart.php'>";
                                 echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
                                 echo "<input type='number' name='quantity' value='{$quantity}' min='1'>";
                                 echo "<button type='submit' name='action' value='updateGuest'>Update</button>";
                                 echo "<button type='submit' name='action' value='removeGuest'>Remove</button>";
                                 echo "</form>";
-                                echo "</div>";
-                            }                          
+                            }                            
                         }
                         if (empty($guestItems)) {
                             echo "<p>Your cart is empty</p>";
