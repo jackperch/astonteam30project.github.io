@@ -71,6 +71,7 @@
     </div>
 
 </nav>
+	  </header>
                 <?php 
                 session_start();
                 if (isset($_SESSION['adminID'])) {
@@ -79,7 +80,6 @@
                     echo "<a href='adminLogin.php'>Login</a>";
                 }
                 ?>
-</header>
 		
 		<footer>
             <div class="footer-container">
