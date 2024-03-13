@@ -9,7 +9,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
     </style>
-    <!--<script src="/js/main.js"></script> -->
+    <script src="/js/main.js"></script>
 </head>
 
 <body>
@@ -67,8 +67,6 @@
             </div>
         </nav>
     </header>
-
-   
 
     <footer>
         <div class="footer-container">
