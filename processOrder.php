@@ -137,13 +137,15 @@
             $stmtInsertOrder->execute();
 
             // Retrieve orderID
-            $retrieveOrderIDQuery = "SELECT orderID FROM orders WHERE customerID=:customerID  AND total_amount=:total_amount AND addressID=:addressID AND paymentInfoID=:paymentInfoID";
+            $retrieveOrderIDQuery = "SELECT orderID FROM orders WHERE customerID=:customerID  AND order_date=CURDATE()  AND total_amount=:total_amount AND addressID=:addressID AND paymentInfoID=:paymentInfoID AND order_completed=:onGoing";
             $stmtRetrieveOrderID = $db->prepare($retrieveOrderIDQuery);
             $stmtRetrieveOrderID->bindParam(':customerID', $customerID);
-            //$stmtRetrieveOrderID->bindParam(':order_date', $order_date);
             $stmtRetrieveOrderID->bindParam(':total_amount', $totalPrice);
             $stmtRetrieveOrderID->bindParam(':addressID', $addressID);
             $stmtRetrieveOrderID->bindParam(':paymentInfoID', $paymentInfoID);
+            $stmtRetrieveOrderID->bindParam(':onGoing', $onGoing);
+            $stmtRetrieveOrderID->execute();
+
             $stmtRetrieveOrderID->execute();
             $result = $stmtRetrieveOrderID->fetch(PDO::FETCH_ASSOC);
             $orderID = $result['orderID'];
