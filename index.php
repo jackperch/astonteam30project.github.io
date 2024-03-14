@@ -26,7 +26,7 @@
             </div>
             <nav>
                 <a href="index.php">Home</a>
-                <a href="products.php">Products</a>
+                <a href="productsDisplay.php">Products</a>
                 <a href="about.php">About</a>
                 <a href="contact.php">Contact</a>
                 <?php 
@@ -98,8 +98,8 @@
             </div>
 
             <div class = products-button-container>
-                <!--<button onclick href="products.php" class="ProductsBtn" title="Go to Products Page">VIEW PRODUCTS</button>-->
-                <a href="products.php" class="ProductsBtn" title="Go to Products Page">VIEW PRODUCTS</a> 
+                <!--<button onclick href="productsDisplay.php" class="ProductsBtn" title="Go to Products Page">VIEW PRODUCTS</button>-->
+                <a href="productsDisplay.php" class="ProductsBtn" title="Go to Products Page">VIEW PRODUCTS</a> 
             </div>
             
         </div>

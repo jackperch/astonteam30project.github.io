@@ -48,7 +48,7 @@
 
 
             //loads these website
-            header("Location:products.php"); 
+            header("Location:productsDisplay.php"); 
             
             echo "Log in sucessfull";
             exit();
@@ -99,7 +99,7 @@
             </div>
             <nav>
                 <a href="index.php">Home</a>
-                <a href="products.php">Products</a>
+                <a href="productsDisplay.php">Products</a>
                 <a href="about.php">About</a>
                 <a href="contact.php">Contact</a>
                 <a href="login.php">Login</a>

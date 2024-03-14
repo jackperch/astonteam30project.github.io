@@ -54,7 +54,7 @@ if (isset($_POST['signupsubmitted'])) {
            echo "Sign up successful! You can now log in.";
            if( $_SESSION["username"]=$_POST['username']);
            //loads these website
-            header("Location:products.php"); 
+            header("Location:productsDisplay.php"); 
             exit();
         }
     } catch (PDOException $ex) {
@@ -98,7 +98,7 @@ if (isset($_POST['signupsubmitted'])) {
             </div>
             <nav>
                 <a href="index.php">Home</a>
-                <a href="products.php">Products</a>
+                <a href="productsDisplay.php">Products</a>
                 <a href="about.php">About</a>
                 <a href="members-blog.php">Blog</a>
                 <a href="contact.php">Contact</a>
