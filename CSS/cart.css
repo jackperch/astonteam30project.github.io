@@ -1,4 +1,9 @@
 /* Cart items container */
+#page-title {
+    text-align: center;
+    /*margin-bottom: 30px;*/
+    padding: 20px;
+}
 #cart-items {
     display: flex;
     flex-direction: column;

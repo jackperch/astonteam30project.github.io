@@ -79,7 +79,7 @@
 
 
         <main>
-            <h1>Your Shopping Cart</h1>
+            <h1 id="page-title"><center>Your Shopping Cart<center></h1>
             <div id="cart-items">
 
                 <?php
@@ -128,18 +128,20 @@
                     $cartItems = fetchCartItems();
 
                     foreach ($cartItems as $item) {
+                        $_total_item_price = $item['price'] * $item['quantity'];
                         echo "<div class='cart-item'>";
                         echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['productName']}' width=50 height=50>";
                         echo "<h2>{$item['productName']}</h2>";
                         echo "<p>Price: {$item['price']}</p>";
-                        echo "<p>Quantity: {$item['quantity']}</p>";
+                        //echo "<p>Quantity: {$item['quantity']}</p>";
                         // Form for updating quantity or removing item
                         echo "<form method='post' action='updateCart.php'>";
                         echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
                         echo "<input type='number' name='quantity' value='{$item['quantity']}' min='1'>";
-                        echo "<button type='submit' name='action' value='update'>Update</button>";
-                        echo "<button type='submit' name='action' value='remove'>Remove</button>";
+                        echo "<button type='submit' name='action' value='update'>Update Quantity</button>";
+                        echo "<button type='submit' name='action' value='remove'>Remove Item</button>";
                         echo "</form>";
+                        echo "Item Total: £" . $_total_item_price;
                         echo "</div>";
                     }
 
@@ -176,6 +178,7 @@
                            // echo "Product ID: " . $productID . ", Quantity: " . $quantity . "<br>"; Testing
                             $guestItems = fetchGuestItems($db, $productID);
                             foreach ($guestItems as $item) {
+                                $_total_item_price = $item['price'] * $quantity;
                                 echo "<div class='cart-item'>";
                                 echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=50 height=50>";
                                 echo "<h2>{$item['product_name']}</h2>";
@@ -183,10 +186,11 @@
                                 echo "<p>Quantity: {$quantity}</p>";
                                 echo "<form method='post' action='updateCart.php'>";
                                 echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
-                                echo "<input type='number' name='quantity' value='{$quantity}' min='1'>";
-                                echo "<button type='submit' name='action' value='updateGuest'>Update</button>";
-                                echo "<button type='submit' name='action' value='removeGuest'>Remove</button>";
+                                //echo "<input type='number' name='quantity' value='{$quantity}' min='1'>";
+                                echo "<button type='submit' name='action' value='updateGuest'>Update Quantity</button>";
+                                echo "<button type='submit' name='action' value='removeGuest'>Remove Item</button>";
                                 echo "</form>";
+                                echo "Item Total: £" . $_total_item_price;
                                 echo "</div>";
                             }                            
                         }
@@ -195,7 +199,7 @@
                         } else {
                             // Checkout button form
                             //echo "<form action='checkout.php' method='get'>";
-                            echo "<input type='submit' id='checkOutButton' value='Continue to Checkout' class='button'>";
+                            echo "<input type='submit' id='checkout-btn' value='Continue to Checkout' class='button'>";
                             echo "<div class='modal' id='modal'>";
                             echo "<div class='modal-content'>";
                             echo "<button type='submit'  name='action' id='checkOutAsGuest' class='style' value='checkOutAsGuest'>Checkout as Guest</button>";
