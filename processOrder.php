@@ -181,7 +181,7 @@
             $db->commit();
 
             // Redirect to a confirmation page or display the success message
-            echo "Order placed successfully. Your order number is: " . $orderID;
+           // echo "Order placed successfully. Your order number is: " . $orderID; Testing
             // A proper redirect after successful order placement is highly recommended
             // header('Location: orderConfirmation.php?orderID=' . $orderID);
             // exit;
@@ -228,7 +228,7 @@
                 echo "<br>";
                 echo "Your payment details have been saved.";
                 echo "<br>";
-                echo "Your order number is: " . $db->lastInsertId(); // wont work
+                echo "Your order number is: " .  $orderID;
                 echo "<br>";
                 echo "You will receive an email confirmation shortly.";
                 echo "<br>";
