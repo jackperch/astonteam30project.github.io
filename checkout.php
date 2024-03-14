@@ -89,6 +89,9 @@
                         $totalPrice = 0;
                         foreach ($cartItems as $item) {
                             echo "<div class='cart-item'>";
+                            $price = $item['price'];
+                            $quantity = $item['quantity'];
+                            $_total_item_price = $price * $quantity;
                             echo "<p>{$item['product_name']} (Quantity: {$item['quantity']}) - $" . ($item['quantity'] * $item['price']) . "</p>";
                             echo "</div>";
                             $totalPrice += ($item['quantity'] * $item['price']);

@@ -164,7 +164,7 @@
             $stmtInsertOrderProducts->bindParam(':orderID', $orderID);
             $stmtInsertOrderProducts->bindParam(':productID', $productID);
             $stmtInsertOrderProducts->bindParam(':quantity', $quantity);
-            $stmtInsertOrderProducts->bindParam(':total_price', $price_of_product= 0);
+            $stmtInsertOrderProducts->bindParam(':total_price', $_total_item_price);
             $stmtInsertOrderProducts->execute();
             $db->commit();
             
