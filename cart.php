@@ -148,7 +148,7 @@
                     } else {
                         // Checkout button form
                         echo "<form action='checkout.php' method='get'>";
-                        echo "<input type='submit' value='Continue to Checkout' class='button'>";
+                        echo "<input type='submit' id='checkout-btn' value='Continue to Checkout' class='button'>";
                         echo "</form>";
                         //echo "</div>";
                     }

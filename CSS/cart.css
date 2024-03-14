@@ -85,3 +85,41 @@
     transform: translateY(-5px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
+
+
+/* Pulsing animation for emphasis */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Styles for the checkout button with animation */
+#checkout-btn {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border: 2px solid #c2ee0a; /* Adjust the border color*/
+    background-color: #fff; /* White background */
+    color: #000; /* Black text */
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+    text-transform: uppercase;
+    animation: pulse 2s infinite;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#checkout-btn:hover {
+    background-color: #c2ee0a; /* Change background color on hover */
+    transform: scale(1.1); /* Scale the button for emphasis */
+}

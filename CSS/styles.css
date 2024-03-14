@@ -120,6 +120,7 @@ nav a:hover {
 /* Code below is for the Footer */
 
 footer {
+  padding: 10px 20px;
   background-color: #ccfe06;
   color: #333;
   padding: 20px 0;

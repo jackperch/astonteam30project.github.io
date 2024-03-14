@@ -82,7 +82,7 @@
                         $customerID = $_SESSION['customerID']; // Using customerID is stored in session
 
                         // Fetch cart items for the user
-                        $stmt = $db->prepare("SELECT c.productID, p.product_name, c.quantity, p.price FROM cart c JOIN products p ON c.productID = p.productID WHERE c.customerID = :customerID");
+                        $stmt = $db->prepare("SELECT c.productID, p.product_name, c.quantity, p.price, p.image FROM cart c JOIN products p ON c.productID = p.productID WHERE c.customerID = :customerID");
                         $stmt->execute(['customerID' => $customerID]);
                         $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -92,7 +92,8 @@
                             $price = $item['price'];
                             $quantity = $item['quantity'];
                             $_total_item_price = $price * $quantity;
-                            echo "<p>{$item['product_name']} (Quantity: {$item['quantity']}) - $" . ($item['quantity'] * $item['price']) . "</p>";
+                            //echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=80 height=80>";
+                            echo "<p><img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=80 height=80> {$item['product_name']} (Quantity: {$item['quantity']}) - £" . ($item['quantity'] * $item['price']) . "</p>";
                             echo "</div>";
                             $totalPrice += ($item['quantity'] * $item['price']);
                         }

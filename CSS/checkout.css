@@ -1,0 +1,50 @@
+/* Main content and checkout container styles */
+main {
+    padding: 20px;
+    color: black;
+}
+
+.checkout-container {
+    width: 90%;
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto;
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+form input[type='text'],
+form select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form .button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #c2ee0a; /* Yellowish green */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+form .button:hover {
+    background-color: darken(#c2ee0a, 10%);
+}
