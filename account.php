@@ -50,7 +50,8 @@
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
         <script src="/js/main.js"></script>
-        <link rel="stylesheet" href="CSS/products.css">
+        <link rel="stylesheet" href="CSS/styles.css">
+        <link rel="stylesheet" href="CSS/account.css">
     </head>
 <body>
     
