@@ -92,6 +92,9 @@
         $card_expiry = $_POST['card_expiry'];
         $card_cvv = $_POST['card_cvv'];
 
+        // Retrievin  order details needed to be inserted for the  order, order_products table 
+        $onGoing = 1;
+
 
         try {
             $db->beginTransaction();
@@ -124,17 +127,43 @@
             $addressID = $addressResult['addressID'];
         
             // Insert order details into orders table including the addressID
-            $orderSql = "INSERT INTO orders (customerID, addressID, total_amount, paymentInfoID) VALUES (:customerID, :addressID, :total_amount, :paymentInfoID)";
-            //$payment_details = "Card Name: $card_name, Card Number: $card_number, Expiry: $card_expiry, CVV: $card_cvv";
-            
-            $orderStmt = $db->prepare($orderSql);
-            $orderStmt->execute([
-                ':customerID' => $customerID,
-                ':addressID' => $addressID,
-                ':total_amount' => $totalPrice,
-                ':paymentInfoID' => $paymentInfoID
-            ]);
-        
+            $insertOrderQuery = "INSERT INTO orders (customerID, order_date, total_amount, addressID, paymentInfoID, order_completed) VALUES (:customerID, CURDATE(), :total_amount, :addressID, :paymentInfoID, :onGoing)";
+            $stmtInsertOrder = $db->prepare($insertOrderQuery);
+            $stmtInsertOrder->bindParam(':customerID', $customerID);
+            $stmtInsertOrder->bindParam(':total_amount', $totalPrice);
+            $stmtInsertOrder->bindParam(':addressID', $addressID);
+            $stmtInsertOrder->bindParam(':paymentInfoID', $paymentInfoID);
+            $stmtInsertOrder->bindParam(':onGoing', $onGoing);
+            $stmtInsertOrder->execute();
+
+            // Retrieve orderID
+            $retrieveOrderIDQuery = "SELECT orderID FROM orders WHERE customerID=:customerID  AND total_amount=:total_amount AND addressID=:addressID AND paymentInfoID=:paymentInfoID";
+            $stmtRetrieveOrderID = $db->prepare($retrieveOrderIDQuery);
+            $stmtRetrieveOrderID->bindParam(':customerID', $customerID);
+            //$stmtRetrieveOrderID->bindParam(':order_date', $order_date);
+            $stmtRetrieveOrderID->bindParam(':total_amount', $totalPrice);
+            $stmtRetrieveOrderID->bindParam(':addressID', $addressID);
+            $stmtRetrieveOrderID->bindParam(':paymentInfoID', $paymentInfoID);
+            $stmtRetrieveOrderID->execute();
+            $result = $stmtRetrieveOrderID->fetch(PDO::FETCH_ASSOC);
+            $orderID = $result['orderID'];
+
+            if ($result !== false && isset($result['orderID'])) {
+                $orderID = $result['orderID'];
+            } else {
+                // Handle the case where no orderID was found
+                // For example, you could set a default value or display an error message
+                echo "Error: No orderID found for the specified criteria.";
+            }
+
+            // Insert into order_products table
+            $insertOrderProductsQuery = "INSERT INTO order_products (orderID, productID, quantity, total_price) VALUES (:orderID, :productID, :quantity, :total_price)";
+            $stmtInsertOrderProducts = $db->prepare($insertOrderProductsQuery);
+            $stmtInsertOrderProducts->bindParam(':orderID', $orderID);
+            $stmtInsertOrderProducts->bindParam(':productID', $productID);
+            $stmtInsertOrderProducts->bindParam(':quantity', $quantity);
+            $stmtInsertOrderProducts->bindParam(':total_price', $price_of_product= 0);
+            $stmtInsertOrderProducts->execute();
             $db->commit();
             
             // Success message or redirect
@@ -146,7 +175,7 @@
             echo "<br>";
             echo "Your payment details have been saved.";
             echo "<br>";
-            echo "Your order number is: " . $db->lastInsertId();
+            echo "Your order number is: " . $db->lastInsertId(); // wont work
             echo "<br>";
             echo "You will receive an email confirmation shortly.";
             echo "<br>";
@@ -160,19 +189,19 @@
 
 
             //Decrements the stock level of the products in the order
-            if ($orderStmt) {
-                $sql = "SELECT productID, quantity FROM orders WHERE customerID = :customerID";
-                $stmt = $db->prepare($sql);
-                $stmt->execute(['customerID' => $customerID]);
-                $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($cartItems as $item) {
-                    $productID = $item['productID'];
-                    $quantity = $item['quantity'];
-                    $sql = "UPDATE products SET stock_level = stock_level - :quantity WHERE productID = :productID";
-                    $stmt = $db->prepare($sql);
-                    $stmt->execute(['quantity' => $quantity, 'productID' => $productID]);
-                }
-            }
+            // if ($orderStmt) {
+            //     $sql = "SELECT productID, quantity FROM orders WHERE customerID = :customerID";
+            //     $stmt = $db->prepare($sql);
+            //     $stmt->execute(['customerID' => $customerID]);
+            //     $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            //     foreach ($cartItems as $item) {
+            //         $productID = $item['productID'];
+            //         $quantity = $item['quantity'];
+            //         $sql = "UPDATE products SET stock_level = stock_level - :quantity WHERE productID = :productID";
+            //         $stmt = $db->prepare($sql);
+            //         $stmt->execute(['quantity' => $quantity, 'productID' => $productID]);
+            //     }
+            // }
             
               // Clear the cart here code can go here
               $sqlEmptyCart = "DELETE FROM cart WHERE customerID = :customerID";
