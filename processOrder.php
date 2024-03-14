@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Checkout - ACE GEAR</title>
     <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="CSS/checkout.css"> <!-- need to create this --> 
+    <link rel="stylesheet" href="CSS/processOrder.css"> <!-- need to create this --> 
 </head>
 <body>
     <header>
@@ -92,7 +92,7 @@
         $card_expiry = $_POST['card_expiry'];
         $card_cvv = $_POST['card_cvv'];
 
-        // Retrievin  order details needed to be inserted for the  order, order_products table 
+        // Retrievin  order details needed to be inserted for the  order, orders_products table 
         $onGoing = 1;
 
 
@@ -136,58 +136,110 @@
             $stmtInsertOrder->bindParam(':onGoing', $onGoing);
             $stmtInsertOrder->execute();
 
-            // Retrieve orderID
-            $retrieveOrderIDQuery = "SELECT orderID FROM orders WHERE customerID=:customerID  AND order_date=CURDATE()  AND total_amount=:total_amount AND addressID=:addressID AND paymentInfoID=:paymentInfoID AND order_completed=:onGoing";
-            $stmtRetrieveOrderID = $db->prepare($retrieveOrderIDQuery);
-            $stmtRetrieveOrderID->bindParam(':customerID', $customerID);
-            $stmtRetrieveOrderID->bindParam(':total_amount', $totalPrice);
-            $stmtRetrieveOrderID->bindParam(':addressID', $addressID);
-            $stmtRetrieveOrderID->bindParam(':paymentInfoID', $paymentInfoID);
-            $stmtRetrieveOrderID->bindParam(':onGoing', $onGoing);
-            $stmtRetrieveOrderID->execute();
 
-            $stmtRetrieveOrderID->execute();
-            $result = $stmtRetrieveOrderID->fetch(PDO::FETCH_ASSOC);
-            $orderID = $result['orderID'];
+            // After the successful insertion of the order into the orders table
+            $orderID = $db->lastInsertId();
 
-            if ($result !== false && isset($result['orderID'])) {
-                $orderID = $result['orderID'];
-            } else {
-                // Handle the case where no orderID was found
-                // For example, you could set a default value or display an error message
-                echo "Error: No orderID found for the specified criteria.";
+            // Fetch all items from the user's cart
+            $cartItemsStmt = $db->prepare("SELECT productID, quantity FROM cart WHERE customerID = :customerID");
+            $cartItemsStmt->execute(['customerID' => $customerID]);
+            $cartItems = $cartItemsStmt->fetchAll(PDO::FETCH_ASSOC);
+
+            // For each cart item, insert into the orders_products table and update product stock
+            foreach ($cartItems as $cartItem) {
+                $productID = $cartItem['productID'];
+                $quantity = $cartItem['quantity'];
+
+                // Retrieve the price of the product
+                $productStmt = $db->prepare("SELECT price FROM products WHERE productID = :productID");
+                $productStmt->execute(['productID' => $productID]);
+                $product = $productStmt->fetch(PDO::FETCH_ASSOC);
+                $totalItemPrice = $product['price'] * $quantity;
+
+                // Insert order-product association
+                $insertOrderProductsStmt = $db->prepare("INSERT INTO orders_products (orderID, productID, quantity, total_price) VALUES (:orderID, :productID, :quantity, :total_price)");
+                $insertOrderProductsStmt->execute([
+                    'orderID' => $orderID,
+                    'productID' => $productID,
+                    'quantity' => $quantity,
+                    'total_price' => $totalItemPrice
+                ]);
+
+                // Update product stock
+                $updateStockStmt = $db->prepare("UPDATE products SET stock = stock - :quantity WHERE productID = :productID");
+                $updateStockStmt->execute([
+                    'quantity' => $quantity,
+                    'productID' => $productID
+                ]);
             }
 
-            // Insert into order_products table
-            $insertOrderProductsQuery = "INSERT INTO order_products (orderID, productID, quantity, total_price) VALUES (:orderID, :productID, :quantity, :total_price)";
-            $stmtInsertOrderProducts = $db->prepare($insertOrderProductsQuery);
-            $stmtInsertOrderProducts->bindParam(':orderID', $orderID);
-            $stmtInsertOrderProducts->bindParam(':productID', $productID);
-            $stmtInsertOrderProducts->bindParam(':quantity', $quantity);
-            $stmtInsertOrderProducts->bindParam(':total_price', $_total_item_price);
-            $stmtInsertOrderProducts->execute();
+            // Clear the user's cart
+            $clearCartStmt = $db->prepare("DELETE FROM cart WHERE customerID = :customerID");
+            $clearCartStmt->execute(['customerID' => $customerID]);
+
+            // Commit the transaction
             $db->commit();
+
+            // Redirect to a confirmation page or display the success message
+            echo "Order placed successfully. Your order number is: " . $orderID;
+            // A proper redirect after successful order placement is highly recommended
+            // header('Location: orderConfirmation.php?orderID=' . $orderID);
+            // exit;
+
+            // Retrieve orderID
+            // $retrieveOrderIDQuery = "SELECT orderID FROM orders WHERE customerID=:customerID  AND order_date=CURDATE()  AND total_amount=:total_amount AND addressID=:addressID AND paymentInfoID=:paymentInfoID AND order_completed=:onGoing";
+            // $stmtRetrieveOrderID = $db->prepare($retrieveOrderIDQuery);
+            // $stmtRetrieveOrderID->bindParam(':customerID', $customerID);
+            // $stmtRetrieveOrderID->bindParam(':total_amount', $totalPrice);
+            // $stmtRetrieveOrderID->bindParam(':addressID', $addressID);
+            // $stmtRetrieveOrderID->bindParam(':paymentInfoID', $paymentInfoID);
+            // $stmtRetrieveOrderID->bindParam(':onGoing', $onGoing);
+            // $stmtRetrieveOrderID->execute();
+
+            // $stmtRetrieveOrderID->execute();
+            // $result = $stmtRetrieveOrderID->fetch(PDO::FETCH_ASSOC);
+            // $orderID = $result['orderID'];
+
+            // if ($result !== false && isset($result['orderID'])) {
+            //     $orderID = $result['orderID'];
+            // } else {
+            //     // Handle the case where no orderID was found
+            //     // For example, you could set a default value or display an error message
+            //     echo "Error: No orderID found for the specified criteria.";
+            // }
+
+            // Insert into orders_products table
+            // $insertOrderProductsQuery = "INSERT INTO orders_products (orderID, productID, quantity, total_price) VALUES (:orderID, :productID, :quantity, :total_price)";
+            // $stmtInsertOrderProducts = $db->prepare($insertOrderProductsQuery);
+            // $stmtInsertOrderProducts->bindParam(':orderID', $orderID);
+            // $stmtInsertOrderProducts->bindParam(':productID', $productID);
+            // $stmtInsertOrderProducts->bindParam(':quantity', $quantity);
+            // $stmtInsertOrderProducts->bindParam(':total_price', $_total_item_price);
+            // $stmtInsertOrderProducts->execute();
+            // $db->commit();
             
             // Success message or redirect
-            echo "<h1> <center>Thank you for your order! <center></h1> ";
-            echo "<br>";
-            echo "Order placed successfully. Your order will be shipped to your address.";
-            echo "<br>";
-            echo "Your order total is: £" . $totalPrice;
-            echo "<br>";
-            echo "Your payment details have been saved.";
-            echo "<br>";
-            echo "Your order number is: " . $db->lastInsertId(); // wont work
-            echo "<br>";
-            echo "You will receive an email confirmation shortly.";
-            echo "<br>";
-            echo "<br>";
-            echo "<br>";
-            echo "<br>";
-            echo "<a href='account.php'><center>Click here to view your orders<center></a>";
-            echo "<br>";
-            echo "<a href='index.php'><center>or Click here to go to Home page<center></a>";
-            echo "<br>";
+            echo "<div class= container>";
+                echo "<h1> <center>Thank you for your order! <center></h1> ";
+                echo "<br>";
+                echo "Order placed successfully. Your order will be shipped to your address.";
+                echo "<br>";
+                echo "Your order total is: £" . $totalPrice;
+                echo "<br>";
+                echo "Your payment details have been saved.";
+                echo "<br>";
+                echo "Your order number is: " . $db->lastInsertId(); // wont work
+                echo "<br>";
+                echo "You will receive an email confirmation shortly.";
+                echo "<br>";
+                echo "<br>";
+                echo "<br>";
+                echo "<br>";
+                echo "<a href='account.php'><center>Click here to view your orders<center></a>";
+                echo "<br>";
+                echo "<a href='index.php'><center>or Click here to go to Home page<center></a>";
+                echo "<br>";
+            echo "</div>";
 
 
             //Decrements the stock level of the products in the order

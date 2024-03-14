@@ -147,27 +147,30 @@
         //$categoryProducts = fetchProductsByCategory($db, $categoryId);
         ?>
 
+        <?php //foreach ($categoryProducts as $product) ?>
          <section id="products">
             <!-- Products will be loaded here -->
             <h2><center>Products:</center></h2>
             <div id="category-product-grid" class="product-grid">
-                <img src="Images/Product-Images/<?php echo htmlspecialchars($product['image']); ?>" alt="<?php echo htmlspecialchars($product['product_name']); ?>" class="product-image">
-                <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
-                <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
+                <!-- <img src="Images/Product-Images/<?php// echo htmlspecialchars($product['image']); ?>" alt="<?php// echo htmlspecialchars($product['product_name']); ?>" class="product-image">
+                <h3 class="product-name"><?php// echo htmlspecialchars($product['product_name']); ?></h3>
+                <p class="product-price">£<?php// echo htmlspecialchars($product['price']); ?></p>
                 <div class="quantity-input">
-                    <button class="quantity-decrease" onclick="changeQuantity(false, '<?= $product['productID'] ?>')">-</button>
-                    <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
-                    <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
+                    <button class="quantity-decrease" onclick="changeQuantity(false, '<?//= $product['productID'] ?>')">-</button>
+                    <input type="number" id="quantity-<?//= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
+                    <button class="quantity-increase" onclick="changeQuantity(true, '<?//= $product['productID'] ?>')">+</button>
                 </div> 
                 <?php
-                    echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
-                    echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
-                    echo "<div class='price'>£{$product['price']}</div>";
-                    echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
-                    echo "</form>";
-                ?>
+                    // echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
+                    // echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
+                    // echo "<div class='price'>£{$product['price']}</div>";
+                    // echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                    // echo "</form>";
+                ?> -->
             </div>
         </section>
+
+        
 
 
 
@@ -244,12 +247,12 @@
                         echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
                         echo "</a>"; ?>                       
                         <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
-                        <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
-                        <div class="quantity-input">
-                            <button class="quantity-decrease" onclick="changeQuantity(false, '<?= $product['productID'] ?>')">-</button>
-                            <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
-                            <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
-                        </div>
+                        <!-- <p class="product-price">£<?php// echo htmlspecialchars($product['price']); ?></p> -->
+                        <!-- <div class="quantity-input">
+                            <button class="quantity-decrease" onclick="changeQuantity(false, '<?//= $product['productID'] ?>')">-</button>
+                            <input type="number" id="quantity-<?//= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
+                            <button class="quantity-increase" onclick="changeQuantity(true, '<?//= $product['productID'] ?>')">+</button>
+                        </div> -->
                         <?php
                             echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
                             echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
@@ -486,4 +489,5 @@
     </script>
 
 </body>
+<!--  </html> -->
 </html>
