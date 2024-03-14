@@ -140,6 +140,7 @@
                         echo "<button type='submit' name='action' value='update'>Update</button>";
                         echo "<button type='submit' name='action' value='remove'>Remove</button>";
                         echo "</form>";
+                        echo "</div>";
                     }
 
                     if (empty($cartItems)) {
@@ -149,7 +150,7 @@
                         echo "<form action='checkout.php' method='get'>";
                         echo "<input type='submit' value='Continue to Checkout' class='button'>";
                         echo "</form>";
-                        echo "</div>";
+                        //echo "</div>";
                     }
 
                 }else{
@@ -186,6 +187,7 @@
                                 echo "<button type='submit' name='action' value='updateGuest'>Update</button>";
                                 echo "<button type='submit' name='action' value='removeGuest'>Remove</button>";
                                 echo "</form>";
+                                echo "</div>";
                             }                            
                         }
                         if (empty($guestItems)) {
@@ -204,7 +206,7 @@
                             echo "<close class='close'>&times;</close>";
 
                             echo "</div>";
-                            echo "</div>";
+                            //echo "</div>";
                            // echo "</form>";
                             echo "</div>";
                             echo "<div id='overlay'</div>";
@@ -213,10 +215,10 @@
                         }
                     }
                     
-            }
+                }
             
-            ?>
-
+                ?>
+            </div>
             <!-- CSS for modal ( NEEDS IMPROVING!!!!) -->
             <style>
             .modal {
@@ -274,7 +276,6 @@
         }
        
 </style>
-            </div>
         </main>
     </body>
    

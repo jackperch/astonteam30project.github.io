@@ -55,13 +55,36 @@
                     }
                 }
                 ?>
-                <div id="cart-container">
-                    <!-- cart icon image with link to cart page -->
-                    <a href="cart.php">
-                        <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
-                        <span id="cart-count"><?php echo $totalQuantity; ?></span>
-                    </a>
-                </div>
+                <?php
+        // Initialize the total quantity variable
+        $totalQuantity = 0;
+
+        // Check if the user is logged in
+        if (isset($_SESSION['customerID'])) {
+            require_once("connectionDB.php"); // Adjust this path as necessary
+
+            // Fetch the total quantity of items in the user's cart
+            $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE customerID = :customerID");
+            $stmt->execute(['customerID' => $_SESSION['customerID']]);
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($result && $result['totalQuantity'] > 0) {
+                $totalQuantity = $result['totalQuantity'];
+            }
+        }else{
+            // Fetch the total quantity of items in the guest's cart
+              if (isset($_SESSION['guest_shopping_cart'])) {
+                  $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);}
+          
+      } 
+        ?>
+        <div id="cart-container">
+            <!-- cart icon image with link to cart page -->
+            <a href="cart.php">
+                <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
+                <span id="cart-count"><?php echo $totalQuantity; ?></span>
+            </a>
+        </div>
     </header>
 
 
@@ -285,15 +308,15 @@
                         <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
                         <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
                         <div class="quantity-input">
-                            <button class="quantity-decrease" onclick="changeQuantity(false, '<?= $product['productID'] ?>')">-</button>
+                            <button class="quantity-decrease" data-product-id="<?= $product['productID']?>">-</button>
                             <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
-                            <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
+                            <button class="quantity-increase" data-product-id="<?= $product['productID']?>">+</button>
                         </div>
                         <?php
                             echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
                             echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
                             echo "<div class='price'>£{$product['price']}</div>";
-                            echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                            echo "<button class='add-to-cart' data-product-id='{$product['productID']}' onclick='displayAlert()'>Add to cart!</button>";
                             echo "</form>";
                         ?>
                     </div>
@@ -415,6 +438,50 @@
     });
 
  
+
+    $(document).ready(function() {
+        // Increase quantity
+        $(".quantity-increase").click(function() {
+            var productId = $(this).data("product-id");
+            updateQuantity(productId, "increase");
+        });
+
+        // Decrease quantity
+        $(".quantity-decrease").click(function() {
+            var productId = $(this).data("product-id");
+            updateQuantity(productId, "decrease");
+        });
+
+        // Add to cart
+        $(".add-to-cart-btn").click(function() {
+            var productId = $(this).data("product-id");
+            var quantity = $("#quantity-" + productId).val();
+            addToCart(productId, quantity);
+        });
+
+        function updateQuantity(productId, action) {
+            var quantityInput = $("#quantity-" + productId);
+            var currentQuantity = parseInt(quantityInput.val());
+            var newQuantity = action === "increase" ? currentQuantity + 1 : currentQuantity - 1;
+
+            if (newQuantity < 1) newQuantity = 1; // Ensure quantity never goes below 1
+            quantityInput.val(newQuantity);
+
+            // Optionally, send an AJAX request to update the session/cart
+            // $.post('updatecart.php', { productID: productId, quantity: newQuantity, action: 'update', ajax: 1 }, function(response) {
+            //     console.log(response); // Handle response
+            // }, 'json');
+        }
+
+        function addToCart(productId, quantity) {
+            $.post('updatecart.php', { productID: productId, quantity: quantity, action: 'add', ajax: 1 }, function(response) {
+                console.log(response); // Handle response
+                alert('Product added to cart.');
+                // Update cart count or redirect as needed
+            }, 'json');
+        }
+    });
+
 
     </script>
 

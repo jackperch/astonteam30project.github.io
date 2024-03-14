@@ -11,6 +11,7 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     $action = $_POST['action'];
     $quantity = isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1; // Default to 1 if quantity is not specified
     
+    
 
     try {
         // Check if the item already exists in the cart
@@ -69,7 +70,7 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
 
 
-        // Redirect to products page or display a success message
+        // Redirect to cart page or display a success message
         header("Location: productsDisplay.php?addedToCart={$productID}");
         echo "Item added to cart";
         exit;
@@ -127,4 +128,3 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 //echo "Not Logged in or not a POST request";
 //echo 'cutomer Id is ',$_SESSION['customerID'];
-
