@@ -129,73 +129,61 @@
                 //foreach ($orders as $order) {
                    // echo "<li><a href='order.php?id=" . $order['id'] . "'>Order #" . $order['id'] . "</a></li>";
                 //}
-                 try
-                 {
+                try {
+                    $customerID = $_SESSION['customerID'];
                     $query = $db->prepare('SELECT * FROM orders WHERE customerID = ?');
                     $query->execute([$customerID]);
-                    $customerID = $_SESSION['customerID'];
-                    $rowCount = $query->rowCount();
-                    
-                    $query2 = $db->prepare('SELECT  productID FROM orders WHERE customerID = ?');
-                    $query2->execute([$customerID]);
-                    $retrivedProductID = $query2->fetch(PDO::FETCH_ASSOC);
-                    //var_dump($retrivedProductID); Testing
-
+                    $retrievedOrderIDs = $query->fetchAll(PDO::FETCH_ASSOC);
+                
                     // Check if any rows were returned
-                    if ($rowCount > 0) 
-                    {
-                        // Fetch customer data
-                        $orders = $query->fetchAll(PDO::FETCH_ASSOC);
-                        foreach ($orders as $order)
-                        {
-                            echo "<div class='product-container'>";
-                            echo  "<p>Order ID:  {$order['orderID']};</p>";
-                            echo "<p>Quantity: {$order['quantity']};</p>";
-                            echo "<p>Price of Product: {$order['price_of_product']};</p>";
-                            echo "<p>Order Date: {$order['order_date']};</p>";
-                            echo "<p>Total Amount: {$order['total_amount']};</p>";
-
-                            // Fetch product data
-                            $retrieveProductSQL = $db->prepare('SELECT * FROM products WHERE productID = ?');
-                            $retrieveProductSQL->execute([$retrivedProductID['productID']]);
-                            $products = $retrieveProductSQL->fetchAll(PDO::FETCH_ASSOC);
-                            //var_dump($products);
-
-                            foreach ($products as $product) {
+                    if (!empty($retrievedOrderIDs)) {
+                        foreach ($retrievedOrderIDs as $retrievedOrderID) {
+                            echo "Order ID: {$retrievedOrderID['orderID']}<br>";
+                            echo "<p>Order Date: {$retrievedOrderID['order_date']}</p>";
+                            echo "<p>Total amount: {$retrievedOrderID['total_amount']}</p>";;
+                
+                            $retrieveProductQuery = $db->prepare('SELECT * FROM orders_products WHERE orderID = ?');
+                            $retrieveProductQuery->execute([$retrievedOrderID['orderID']]);
+                            $orders = $retrieveProductQuery->fetchAll(PDO::FETCH_ASSOC);
+                
+                            // Check if any products were found for this order
+                            if (!empty($orders)) {
+                                foreach ($orders as $order) {
+                                    // Output order details
+                                    echo "<div class='product-container'>";
                                 
-                             
-
-                                // Make the product name a clickable link
-                                echo "{$product['product_name']}";
-
-                                echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['product_name']}' width=80 height=80>";                        
-                                
-                        
-                                echo "<div class='product-details'>";
-                                echo "<p>Colour: {$product['colour']}</p>";
-                                echo "<p>Size: {$product['size']}</p>";
-                                echo "</div>";
-                                echo "<div class='product-description'>";
-                                echo "<p>Description: {$product['description']}</p>";
-                                echo "</div>";
-                        
-                                
+                
+                                    // Fetch product data
+                                    $retrieveProductSQL = $db->prepare('SELECT * FROM products WHERE productID = ?');
+                                    $retrieveProductSQL->execute([$order['productID']]);
+                                    $products = $retrieveProductSQL->fetchAll(PDO::FETCH_ASSOC);
+                
+                                    // Output product details
+                                    foreach ($products as $product) {
+                                        echo "{$product['product_name']}<br>";
+                                        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['product_name']}' width=80 height=80>";
+                                        echo "<div class='product-details'>";
+                                        echo "<p>Colour: {$product['colour']}</p>";
+                                        echo "<p>Size: {$product['size']}</p>";
+                                        echo "</div>";
+                                        echo "<div class='product-description'>";
+                                        echo "<p>Description: {$product['description']}</p>";
+                                        echo "</div>";
+                                    }
+                
+                                    echo "</div>";
+                                    echo "<hr class='hr-line'>";
                                 }
-                                echo "</div>"; 
-                                echo "<hr class='hr-line'>";
-                            
+                            } else {
+                                echo "No products found for this order.";
                             }
-                   
-
-                        } else 
-                        {
-                        echo "No matching orders found.";
                         }
-                    }catch (PDOException $ex) 
-                    {
-                        echo("Failed to fetch order data.<br>");
-                        echo($ex->getMessage());
-                        exit;
+                    } else {
+                        echo "No matching orders found.";
+                    }
+                } catch (PDOException $e) {
+                    // Handle PDO exceptions
+                    echo "Error: " . $e->getMessage();
                 }
             
                 ?>
