@@ -4,17 +4,15 @@ include("connectionDB.php");
 
 // Update order
 if(isset($_POST['update-btn'])) {
-    $query = "UPDATE orders SET productID=:productID, customerID=:customerID, quantity=:quantity, price_of_product=:price_of_product, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, paymentInfoID=:paymentInfoID WHERE orderID=:orderID";
+    $query = "UPDATE orders SET customerID=:customerID, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, paymentInfoID=:paymentInfoID, order_completed=:order_completed WHERE orderID=:orderID";
     $stmt = $db->prepare($query);
     $stmt->bindParam(':orderID', $orderID);
-    $stmt->bindParam(':productID', $productID);
     $stmt->bindParam(':customerID', $customerID);
-    $stmt->bindParam(':quantity', $quantity);
-    $stmt->bindParam(':price_of_product', $price_of_product);
     $stmt->bindParam(':order_date', $order_date);
     $stmt->bindParam(':total_amount', $total_amount);
     $stmt->bindParam(':addressID', $addressID);
-    $stmt->bindParam(':aymentInfoID', $aymentInfoID);
+    $stmt->bindParam(':paymentInfoID', $paymentInfoID);
+    $stmt->bindParam(':order_completed', $order_completed);
     $stmt->execute();
     exit;
 }
@@ -58,7 +56,7 @@ if(isset($_POST['delete-btn'])) {
         </div>
         <nav>
             <a href="index.php">Home</a>
-            <a href="productsDisplay.php">Products</a>
+            <a href="products.php">Products</a>
             <a href="about.php">About</a>
             <a href="contact.php">Contact</a>
             <?php 
@@ -111,13 +109,11 @@ if(isset($_POST['delete-btn'])) {
             <tr>
                 <th>Order ID</th>
                 <th>Customer ID</th>
-                <th>Product ID</th>
-                <th>Quantity</th>
-                <th>Price of product</th>
                 <th>Order Date</th>
                 <th>Total Amount</th>
                 <th>Adress ID</th>
                 <th>Payment ID</th>
+                <th>Order Completed</th>
                 <th>Action</th>
             </tr>
 
@@ -129,13 +125,11 @@ if(isset($_POST['delete-btn'])) {
                 echo "<tr data-id='{$row['orderID']}'>"; 
                 echo "<td><span class='editable' contenteditable='true' data-column='orderID' data-id='{$row['orderID']}'>{$row['orderID']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='customerID' data-id='{$row['orderID']}'>{$row['customerID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='productID' data-id='{$row['orderID']}'>{$row['productID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='quantity' data-id='{$row['orderID']}'>{$row['quantity']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='price_of_product' data-id='{$row['orderID']}'>{$row['price_of_product']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='order_date' data-id='{$row['orderID']}'>{$row['order_date']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='total_amount' data-id='{$row['orderID']}'>{$row['total_amount']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='addressID' data-id='{$row['orderID']}'>{$row['addressID']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='paymentInfoID' data-id='{$row['orderID']}'>{$row['paymentInfoID']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='order_completed' data-id='{$row['orderID']}'>{$row['order_completed']}</span></td>";
                 echo "<td>";
                 echo "<button class='update-btn' data-id='{$row['orderID']}'>Update</button>"; 
                 echo "<button class='delete-btn' data-id='{$row['orderID']}'>Delete</button>"; 
