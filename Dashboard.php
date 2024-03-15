@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="CSS/index.css">
+    <link rel="stylesheet" href="CSS/dashboard.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
     </style>
@@ -14,7 +14,64 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <header>
+            <div id="logo-container">
+                <!-- logo image -->
+                <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
+                <h1 id="nav-bar-text">ACE GEAR</h1>
+            </div>
+            <div id="search-container">
+                <input type="text" id="search-bar" placeholder="Search...">
+                <button id="search-button">Search</button>
+            </div>
+            <nav>
+                <a href="index.php">Home</a>
+                <a href="productsDisplay.php">Products</a>
+                <a href="about.php">About</a>
+                <a href="contact.php">Contact</a>
+                <a href="login.php">Login</a>
+            </nav>
+            <?php
+            // Initialize the total quantity variable
+            $totalQuantity = 0;
+
+            // Check if the user is logged in
+            if (isset($_SESSION['customerID'])) {
+                require_once("connectionDB.php"); // Adjust this path as necessary
+
+                // Fetch the total quantity of items in the user's cart
+                $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE customerID = :customerID");
+                $stmt->execute(['customerID' => $_SESSION['customerID']]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($result && $result['totalQuantity'] > 0) {
+                    $totalQuantity = $result['totalQuantity'];
+                }
+            }else{
+                // Fetch the total quantity of items in the guest's cart
+                  if (isset($_SESSION['guest_shopping_cart'])) {
+                      $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);}
+              
+          } 
+            ?>
+            <div id="cart-container">
+                <!-- cart icon image with link to cart page -->
+                <a href="cart.php">
+                    <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
+                    <span id="cart-count"><?php echo $totalQuantity; ?></span>
+                </a>
+            </div>
+
+            <?php
+            // Check if adminID is in session
+            if (isset($_SESSION['adminID'])) {
+                // Add admin option to the nav bar
+                echo '<a href="dashboard.php">Admin</a>';
+            }
+            ?>
+            
+        </header>
+        <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">ADMIN DASHBOARD</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -65,9 +122,68 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> -->
     </header>
 
+    <div class="title">
+        <h1 class="text-center">Welcome to the Admin Dashboard</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Products</h5>
+                        <p class="card-text">Add, Edit and Delete Products here:</p>
+                        <a href="editProducts.php" class="btn btn-primary">Go to Products</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Orders</h5>
+                        <p class="card-text">Manage Orders here:</p>
+                        <a href="editOrders.php" class="btn btn-primary">Go to Orders</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Users</h5>
+                        <p class="card-text">Manage Users here:</p>
+                        <a href="editusers.php" class="btn btn-primary">Go to Users</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Admin</h5>
+                        <p class="card-text">Manage Admins here:</p>
+                        <a href="editAdmins.php" class="btn btn-primary">Go to Admins</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Stock Management</h5>
+                        <p class="card-text">Manage items low on Stock here:</p>
+                        <a href="editAdmins.php" class="btn btn-primary">Go to Stock</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                        
     <footer>
         <div class="footer-container">
             <div class="footer-links">

@@ -38,7 +38,8 @@ if(isset($_POST['delete-btn'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
     <link rel="stylesheet" href="CSS/styles.css">
-    <style>
+    <link rel="stylesheet" href="CSS/admin.css">
+<style>
         @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
     </style>
 </head>
@@ -138,7 +139,7 @@ if(isset($_POST['delete-btn'])) {
     </div>
 </div>
 
-<footer style=" bottom: 0; margin-top: auto; position: absolute;">
+<footer>
         <div class="footer-container">
             <div class="footer-links">
                 <a href="reviews.php">Reviews</a>
