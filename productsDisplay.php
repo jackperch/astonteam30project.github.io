@@ -152,21 +152,6 @@
             <!-- Products will be loaded here -->
             <h2><center>Products:</center></h2>
             <div id="category-product-grid" class="product-grid">
-                <!-- <img src="Images/Product-Images/<?php// echo htmlspecialchars($product['image']); ?>" alt="<?php// echo htmlspecialchars($product['product_name']); ?>" class="product-image">
-                <h3 class="product-name"><?php// echo htmlspecialchars($product['product_name']); ?></h3>
-                <p class="product-price">£<?php// echo htmlspecialchars($product['price']); ?></p>
-                <div class="quantity-input">
-                    <button class="quantity-decrease" onclick="changeQuantity(false, '<?//= $product['productID'] ?>')">-</button>
-                    <input type="number" id="quantity-<?//= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
-                    <button class="quantity-increase" onclick="changeQuantity(true, '<?//= $product['productID'] ?>')">+</button>
-                </div> 
-                <?php
-                    // echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
-                    // echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
-                    // echo "<div class='price'>£{$product['price']}</div>";
-                    // echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
-                    // echo "</form>";
-                ?> -->
             </div>
         </section>
 
@@ -178,20 +163,6 @@
 
         <?php
         // Fetch Popular New and Featured products functions
-
-        // function fetchProductsByCategory($db, $categoryId) {
-        //     try {
-        //         $sql = "SELECT * FROM products WHERE categoryID = :categoryId"; // Fetching products in productlisting table that have current category id
-        //         $stmt = $db->prepare($sql);
-        //         $stmt->bindParam(':categoryId', $categoryId, PDO::PARAM_INT);
-        //         $stmt->execute();
-        //         //echo "Fetching products for category ID: " . $categoryId;
-        //         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        //     } catch (PDOException $e) {
-        //         echo "Error fetching products: " . $e->getMessage();
-        //         return [];
-        //     }
-        // }
 
         function fetchFeaturedProducts($db) {
             $sql = "SELECT * FROM products WHERE is_featured = 1"; // Fetching products in productlisting table that are marked as featured
