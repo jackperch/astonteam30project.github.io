@@ -1,12 +1,12 @@
 /* Base styles for the account page */
 body {
     font-family: Arial, sans-serif;
-    color: #f9f9f9;
+    color: black;
     padding: 20px;
 }
 h1 {
     text-align: center;
-    color: #333;
+    color: white;
     margin-bottom: 30px;
 }
 
@@ -57,7 +57,7 @@ h1 {
     margin-top: 20px;
     padding: 10px 15px;
     text-decoration: none;
-    background-color: #c2ee0a;
+    background-color: black;
     color: #fff;
     border-radius: 4px;
     transition: background-color 0.3s ease;
@@ -65,7 +65,7 @@ h1 {
 
 .my-details a:hover,
 .my-orders a:hover {
-    background-color: #0056b3;
+    background-color: #c2ee0a;
 }
 
 .product-container {
