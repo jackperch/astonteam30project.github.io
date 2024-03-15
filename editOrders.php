@@ -113,7 +113,7 @@ if(isset($_POST['delete-btn'])) {
                 <th>Total Amount</th>
                 <th>Adress ID</th>
                 <th>Payment ID</th>
-                <th>Order Complete</th>
+                <th>Order Completed</th>
                 <th>Action</th>
             </tr>
 
@@ -129,7 +129,7 @@ if(isset($_POST['delete-btn'])) {
                 echo "<td><span class='editable' contenteditable='true' data-column='total_amount' data-id='{$row['orderID']}'>{$row['total_amount']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='addressID' data-id='{$row['orderID']}'>{$row['addressID']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='paymentInfoID' data-id='{$row['orderID']}'>{$row['paymentInfoID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='order_complete' data-id='{$row['orderID']}'>{$row['order_complete']}</span></td>";
+                echo "<td><span class='editable' contenteditable='true' data-column='order_completed' data-id='{$row['orderID']}'>{$row['order_completed']}</span></td>";
                 echo "<td>";
                 echo "<button class='update-btn' data-id='{$row['orderID']}'>Update</button>"; 
                 echo "<button class='delete-btn' data-id='{$row['orderID']}'>Delete</button>"; 
