@@ -14,29 +14,27 @@
             {
                 echo "Product ID: $productID, Customer ID: $customerID";
                 if (isset($_POST['review'])) 
-                  {
+                   {
                      $review = $_POST['review'];
                      echo $review; //Testing if it get the review
-                     try
-                        {
-                            require_once("connectionDB.php");
-                            $sql = "INSERT INTO review (productID, customerID, review) VALUES (?, ?, ?)";
-                            $stmt = $db->prepare($sql);
-                            $stmt->execute([$productID, $customerID, $review]);
-                            header("Location: productDetail.php?productID=$productID");
-                            exit;
-                        } 
-                        catch (PDOException $exception) 
-                        {
-                            echo "Error: " . $exception->getMessage();
-                        }
-                   }
+                     try 
+                      {
+                        require_once("connectionDB.php");
+                        $sql = "INSERT INTO review (productID, customerID, review) VALUES (?, ?, ?)";
+                        $stmt = $db->prepare($sql);
+                        $stmt->execute([$productID, $customerID, $review]);
+                        header("Location: productDetail.php?productID=$productID");
+                      }catch (PDOException $e) 
+                     {
+                        echo "Error: " . $e->getMessage();
+                     }
 
-            } else {
-                     echo "Product ID or Customer ID is empty";
-                    }
+                    } else 
+                      {
+                        echo "Product ID or Customer ID is empty";
+                      }
 
-        }
+            }
     }
 
 ?>
@@ -53,11 +51,30 @@
 <body>
 
 <header>
-    
+        <div id="logo-container">
+            <!-- logo image -->
+            <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
+            <h1 id="nav-bar-text">ACE GEAR</h1>
+        </div>
+        <div id="search-container">
+            <input type="text" id="search-bar" placeholder="Search...">
+            <button id="search-button">Search</button>
+        </div>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="productsDisplay.php">Products</a>
+            <a href="about.php">About</a>
+            <a href="contact.php">Contact</a>
 
             <?php 
-               
-               
+                session_start();
+                if (isset($_SESSION['username'])) {
+                    echo "<a href='members-blog.php'>Blog</a>";
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+                } else {
+                    echo "<a href='login.php'>Login</a>";
+                }
                 //echo 'cutomer Id is ',$_SESSION['customerID'];
                 //echo 'username is ',$_SESSION['username'];
                 
