@@ -193,6 +193,7 @@ updateButtons.forEach(button => {
             }
         }
     };
+    
     xhr.send(JSON.stringify({ customerID, data }));
 }
 

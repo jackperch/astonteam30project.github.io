@@ -4,7 +4,6 @@ include("connectionDB.php");
 
 // Update Admin
 if(isset($_POST['update-btn'])) {
-    $requestData = json_decode(file_get_contents("php://input"), true);
     $query = "UPDATE admin SET adminID=:adminID, username=:username, password=:password WHERE adminID=:adminID";
     $stmt = $db->prepare($query);
     $adminID = $_POST['adminID']; 
