@@ -1,0 +1,87 @@
+/* Reset margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply a default font to the whole page */
+body {
+    font-family: 'Arial', sans-serif;
+    color: white;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Center the title and add some spacing */
+.title h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Basic styling for the container */
+.container {
+    border-radius: 5px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Grid styling for the row */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -15px; /* offset the margin for .col-md-4 */
+}
+
+/* Column and card styling */
+.col-md-4 {
+    padding: 15px; /* spacing between columns */
+    flex: 0 0 auto;
+    width: 33.3333%;
+}
+
+.card {
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 30px; /* spacing between cards */
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto; /* maintain aspect ratio */
+    border-bottom: 1px solid #ddd; /* a line to separate image from the body */
+}
+
+.card-body {
+    padding: 15px;
+    text-align: center; /* center text and button */
+}
+
+.card-title {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.card-text {
+    margin-bottom: 15px;
+    color: #777;
+}
+
+.btn-primary {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: inline-block; /* make it inline */
+    text-decoration: none; /* remove underline from links */
+    border-radius: 5px; /* rounded corners for the button */
+    transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #ccfe06;
+}

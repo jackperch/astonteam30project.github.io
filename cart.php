@@ -292,7 +292,7 @@
                 var modal = document.getElementById('modal');
             
                 // Retrieves the button that opens the modal
-                var checkOutButton = document.getElementById("checkOutButton");
+                var checkOutButton = document.getElementById("checkout-btn");
             
                 // Get the <close> element that closes the modal
                 var close = document.getElementsByClassName("close")[0];

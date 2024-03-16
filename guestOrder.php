@@ -64,7 +64,7 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                     $paymentInfoID = $retrievePaymentInfoID->fetch(PDO::FETCH_ASSOC)['paymentInfoID'];
 
                     //$insertOrder = $db->prepare('INSERT INTO orders (customerID, productID, quantity, price_of_product, total_amount, addressID, paymentInfoID,order_date) VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE())');
-                    $insertOrderQuery = "INSERT INTO orders (customerID, order_date, total_amount, addressID, paymentInfoID) VALUES (:customerID, CURDATE(), :total_amount, :addressID, :paymentInfoID,)";
+                    $insertOrderQuery = "INSERT INTO orders (customerID, order_date, total_amount, addressID, paymentInfoID) VALUES (:customerID, CURDATE(), :total_amount, :addressID, :paymentInfoID)";
                     $stmtInsertOrder = $db->prepare($insertOrderQuery);
                     $stmtInsertOrder->bindParam(':customerID', $customerID);
                     $stmtInsertOrder->bindParam(':total_amount', $totalPrice);
@@ -78,17 +78,15 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                         //Displays the items in the shopping cart array session varaible 
                         require_once("connectionDB.php");
                          foreach ($_SESSION['guest_shopping_cart'] as $productID => $quantity) {
-                            //  $stmt = $db->prepare("SELECT * FROM products WHERE productID = :productID");
-                            //  $stmt->execute(['productID' => $productID]);
-                            //  $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $stmt = $db->prepare("SELECT * FROM products WHERE productID = :productID");
+                            $stmt->execute(['productID' => $productID]);
+                            $product = $stmt->fetch(PDO::FETCH_ASSOC);
             
                              //Calculates the total price of the products 
                              $totalPrice += ($quantity * $product['price']);
                              $stmtInsertOrder->bindParam(':total_amount', $totalPrice);
                              $stmtInsertOrder->execute();
                              $orderID = $db->lastInsertId();
-
-                              $insertOrdersProducts->execute(array($customerID, $product['productID'], $quantity, $product['price'], $totalPrice, $addressID, $paymentInfoID));
                               
                               $insertOrderProductsStmt = $db->prepare("INSERT INTO orders_products (orderID, productID, quantity, total_price) VALUES (:orderID, :productID, :quantity, :total_price)");
                               $insertOrderProductsStmt->execute([

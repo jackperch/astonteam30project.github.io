@@ -108,8 +108,13 @@ session_start();
                 echo "<input type='number' name='quantity' min='1' value='1' class='quantity-input'>";
                 echo "<button type='submit' class='add-to-cart-btn'>Add to Cart</button>";
                 echo "</form>";
-
+                echo "<br>";
+                echo "<br>";
                 // Close product-details
+                echo"<br>";
+                //echo "<button type='submit' class='add-to-review-btn'>Add Review</button>";
+                echo " <a href='addReview.php' class='signup-button'>";
+                echo"<button>Add Review</button>";
                 echo "</div>"; 
 
             // Close product-container

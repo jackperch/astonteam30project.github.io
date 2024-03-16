@@ -1,0 +1,99 @@
+/* Overall content container */
+.content-container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Users management specific styling */
+.user-management-container h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Table styling */
+table {
+    color: #333;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th,
+table td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+/* Header row */
+table th {
+    background-color: #f8f8f8;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Zebra striping for rows */
+table tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Hover effect for rows */
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Editable cells */
+span.editable {
+    display: block;
+    min-width: 100px;
+    border-bottom: 1px dotted #ccc;
+    cursor: pointer;
+}
+
+/* Buttons within table cells */
+.update-btn,
+.delete-btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.update-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.update-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #da190b;
+}
+
+/* Add User Button */
+#addUser {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#addUser:hover {
+    background-color: #4CAF50;
+}
