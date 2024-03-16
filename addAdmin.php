@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
 
     <div class="content-container">
         <div class="signup-container">
-                <h2>Add New User</h2>
+                <h2>Add New Admin</h2>
     <form method="post">
 
     <input type="text" id="username" name="username"  placeholder="Username" onblur="validateUsername()">

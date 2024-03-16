@@ -101,14 +101,11 @@ if(isset($_POST['delete-btn'])) {
 
 <div class="content-container">
     <div class="user-management-container">
-        <h1>Users Management</h1>
+        <h1>Admins Management</h1>
 
         <table>
             <tr>
-                <th>Customer ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email Address</th>
+                <th>Admin ID</th>
                 <th>Username</th>
                 <th>Action</th>
             </tr>
