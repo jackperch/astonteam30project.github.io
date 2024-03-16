@@ -137,7 +137,6 @@ if(isset($_POST['delete-btn'])) {
                 echo "<td><span class='editable' contenteditable='true' data-column='image' data-id='{$row['productID']}'>{$row['image']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='product_name' data-id='{$row['productID']}'>{$row['product_name']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='price' data-id='{$row['productID']}'>{$row['price']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='price_of_product' data-id='{$row['productID']}'>{$row['description']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='categoryID' data-id='{$row['productID']}'>{$row['categoryID']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='colour' data-id='{$row['productID']}'>{$row['colour']}</span></td>";
                 echo "<td><span class='editable' contenteditable='true' data-column='size' data-id='{$row['productID']}'>{$row['size']}</span></td>";

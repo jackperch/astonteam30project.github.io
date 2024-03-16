@@ -3,7 +3,8 @@ session_start();
 include("connectionDB.php");
 
 $sql = "SELECT * FROM products ORDER BY stock ASC";
-$result = $conn->query($sql);
+$stmt = $db->prepare($sql);
+$stmt->execute();
 ?>
 
 <!DOCTYPE html>
@@ -86,44 +87,23 @@ $result = $conn->query($sql);
                 <th>Image</th>
                 <th>Product Name</th>
                 <th>Price</th>
-                <th>Description</th>
-                <th>Category ID</th>
-                <th>Colour</th>
-                <th>Size</th>
-                <th>Is Featured</th>
-                <th>Is New</th>
-                <th>Is Popular</th>
                 <th>Stock</th>
             </tr>
 
             <tr>
             <?php
-            $query = "SELECT * FROM products";
-            $stmt = $db->query($query);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo "<tr data-id='{$row['productID']}'>"; 
-                echo "<td><span class='editable' contenteditable='true' data-column='productID' data-id='{$row['productID']}'>{$row['productID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='image' data-id='{$row['productID']}'>{$row['image']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='product_name' data-id='{$row['productID']}'>{$row['product_name']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='price' data-id='{$row['productID']}'>{$row['price']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='price_of_product' data-id='{$row['productID']}'>{$row['description']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='categoryID' data-id='{$row['productID']}'>{$row['categoryID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='colour' data-id='{$row['productID']}'>{$row['colour']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='size' data-id='{$row['productID']}'>{$row['size']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='stock' data-id='{$row['productID']}'>{$row['stock']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='is_featured' data-id='{$row['productID']}'>{$row['is_featured']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='is_new' data-id='{$row['productID']}'>{$row['is_new']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='is_popular' data-id='{$row['productID']}'>{$row['is_popular']}</span></td>";
+                echo "<td>{$row['productID']}</td>";
+                echo "<td>{$row['image']}</td>";
+                echo "<td>{$row['product_name']}</td>";
+                echo "<td>{$row['price']}</td>";
+                echo "<td>{$row['stock']}</td>";
                 echo "<td>";
-                echo "<button class='update-btn' data-id='{$row['productID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$row['productID']}'>Delete</button>"; 
-                echo "</td>";
                 echo "</tr>";
             }
             ?>
         </table>
-        <!-- Add Order Button -->
-        <button id="addProduct">Add Product</button>
     </div>
 </div>
 
