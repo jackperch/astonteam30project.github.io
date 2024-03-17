@@ -130,7 +130,11 @@ session_start();
                             $stmt2->execute([$customerUsername]);
                             $customer = $stmt2->fetch(PDO::FETCH_ASSOC);
                             echo "<div class='review'>";
-                            echo "<p> {$customer['username']} : {$review['review']}</p>";
+                    
+                            $reviewDate = strtotime($review['review_date']); // convertd UNIX timestamp
+                            $formattedDate = date('d F, Y', $reviewDate); // Formats  timestamp to date month  year
+                            echo "<p>  By: {$customer['username']} on $formattedDate </p>";
+                            echo "<p>  {$review['review']}</p>";
                           
                             echo "</div>";
                         }

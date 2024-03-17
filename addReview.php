@@ -17,7 +17,7 @@
                     try 
                     {
                         require_once("connectionDB.php");
-                        $sql = "INSERT INTO review (customerID, productID, review) VALUES (?, ?, ?)";
+                        $sql = "INSERT INTO review (customerID, productID, review,review_date) VALUES (?, ?, ?,CURDATE())";
                         $stmt = $db->prepare($sql);
                         $stmt->execute([$customerID, $productID, $review]);
                         header("Location: productDetail.php?productID=$productID");
