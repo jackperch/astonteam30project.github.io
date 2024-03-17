@@ -134,13 +134,12 @@ if(isset($_POST['delete-btn'])) {
                 echo "<td>";
                 echo "<button class='update-btn' data-id='{$row['orderID']}'>Update</button>"; 
                 echo "<button class='delete-btn' data-id='{$row['orderID']}'>Delete</button>"; 
+                echo "<button class='products-btn' data-id='{$row['orderID']}' onclick=\"window.location.href='orderProducts.php?id={$row['orderID']}'\">View Products</button>";
                 echo "</td>";
                 echo "</tr>";
             }
             ?>
         </table>
-        <!-- Add Order Button -->
-        <button id="addOrder">Add Order</button>
     </div>
 </div>
 
@@ -219,15 +218,6 @@ function deleteOrderData(orderID) {
     };
     xhr.send(`delete-btn=true&orderID=${orderID}`);
 }
-
-//Adding order
-document.addEventListener("DOMContentLoaded", function() {
-        const addOrderButton = document.getElementById("addOrder");
-
-        addOrderButton.addEventListener("click", function() {
-            window.location.href = "addOrder.php";
-        });
-    });
 
 </script>
 
