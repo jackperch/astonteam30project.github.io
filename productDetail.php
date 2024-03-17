@@ -124,19 +124,24 @@ session_start();
                     $reviews = $stmt1->fetchAll(PDO::FETCH_ASSOC);
                     if ($reviews) {
                         foreach ($reviews as $review) {
-                            $customerUsername=$review['customerID'];
-                            $retrieveCustomerSQL="SELECT username FROM customers WHERE customerID = ?";
-                            $stmt2 = $db->prepare($retrieveCustomerSQL);
-                            $stmt2->execute([$customerUsername]);
-                            $customer = $stmt2->fetch(PDO::FETCH_ASSOC);
-                            echo "<div class='review'>";
-                    
-                            $reviewDate = strtotime($review['review_date']); // convertd UNIX timestamp
-                            $formattedDate = date('d F, Y', $reviewDate); // Formats  timestamp to date month  year
-                            echo "<p>  By: {$customer['username']} on $formattedDate </p>";
-                            echo "<p>  {$review['review']}</p>";
-                          
+                            if ($review['customerID'] !== null) {
+                                $retrieveCustomerSQL = "SELECT username FROM customers WHERE customerID = ?";
+                                $stmt2 = $db->prepare($retrieveCustomerSQL);
+                                $stmt2->execute([$review['customerID']]);
+                                $loggedInCustomer = $stmt2->fetch(PDO::FETCH_ASSOC);
+                                echo "<div class='review'>";
+                                $reviewDate = strtotime($review['review_date']); // Convert UNIX timestamp
+                                $formattedDate = date('d F, Y', $reviewDate); // Format timestamp to date month year
+                                echo "<p>  By: {$loggedInCustomer['username']} on $formattedDate </p>";
+                                echo "<p>  {$review['review']}</p>";
+                            } else {
+                                $reviewDate = strtotime($review['review_date']); // Convert UNIX timestamp
+                                $formattedDate = date('d F, Y', $reviewDate); // Format timestamp to date month year
+                                echo "<p>  Guest User: {$review['first_name']} {$review['last_name']} on $formattedDate</p>";
+                                echo "<p>  {$review['review']}</p>";
+                            }
                             echo "</div>";
+                        
                         }
                     } else {
                         echo "<p>No reviews found.</p>";

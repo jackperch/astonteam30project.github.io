@@ -1,20 +1,18 @@
 <?php
 session_start(); // Start the session
 
-$productID = isset($_GET['productID']) ? $_GET['productID'] : null; // Get the product ID from the URL; if it's not set, it will be null
-
 if (isset($_POST['addReview'])) {
-    if (isset($productID) && is_numeric($productID)) {
+    echo "Review submitted";
         $customerID = isset($_SESSION['customerID']) ? $_SESSION['customerID'] : null; // Get the customer ID from the session; if it's not set, it will be null
         if (!is_null($customerID)) {
             if (isset($_POST['review'])) {
                 $review = $_POST['review'];
                 try {
                     require_once("connectionDB.php");
-                    $sql = "INSERT INTO review (customerID, productID, review, review_date) VALUES (?, ?, ?, CURDATE())";
+                    $sql = "INSERT INTO review (customerID, review, review_date) VALUES ( ?, ?, CURDATE())";
                     $stmt = $db->prepare($sql);
-                    $stmt->execute([$customerID, $productID, $review]);
-                    header("Location: productDetail.php?productID=$productID");
+                    $stmt->execute([$customerID, $review]);
+                    header("Location: reviews.php");
                     exit(); // Ensure that script execution stops after redirection
                 } catch (PDOException $exception) {
                     echo "Error: " . $exception->getMessage();
@@ -22,6 +20,7 @@ if (isset($_POST['addReview'])) {
             } else {
                 echo "Review is empty";
             }
+            //Guest user review 
         } else {
             if (isset($_POST['firstName'], $_POST['lastName'], $_POST['review']) && !empty($_POST['firstName']) && !empty($_POST['lastName']) && !empty($_POST['review'])) {
                 $firstName = $_POST['firstName'];
@@ -30,10 +29,10 @@ if (isset($_POST['addReview'])) {
 
                 try {
                     require_once("connectionDB.php");
-                    $sql = "INSERT INTO review (productID,review, review_date, first_name, last_name) VALUES (?,?, CURDATE(), ?, ?)";
+                    $sql = "INSERT INTO review (review, review_date, first_name, last_name) VALUES (?, CURDATE(), ?, ?)";
                     $stmt = $db->prepare($sql);
-                    $stmt->execute([$productID,$review, $firstName, $lastName]);
-                    header("Location: productDetail.php?productID=$productID");
+                    $stmt->execute([$review, $firstName, $lastName]);
+                    header("Location: reviews.php");
                     exit(); // Ensure that script execution stops after redirection
                 } catch (PDOException $exception) {
                     echo "Error: " . $exception->getMessage();
@@ -42,10 +41,8 @@ if (isset($_POST['addReview'])) {
                 echo "First name, last name, or review is empty";
             }
         }
-    } else {
-        echo "Invalid product ID";
     }
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -132,9 +129,9 @@ if (isset($_POST['addReview'])) {
         </div>
     </header>
 <body>
-    <p><center>Write a review for this product</center></p>
+    <p><center>Ace Gear Review</center></p>
     <div class="container">    
-        <form action="addReview.php?productID=<?php echo $productID; ?>" method="post">
+        <form action="addCompanyReview.php" method="post">
          <?php
             if (!isset($_SESSION['customerID'])) {
                 echo "<label for='firstName'>Enter your first name</label>";
@@ -143,7 +140,6 @@ if (isset($_POST['addReview'])) {
                 echo "<input type='text' id='lastName' name='lastName'>";
 
             }
-
 
          ?>
             <label for="review">Review:</label>
