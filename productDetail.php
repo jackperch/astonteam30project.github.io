@@ -113,8 +113,41 @@ session_start();
                 // Close product-details
                 echo"<br>";
                 //echo "<button type='submit' class='add-to-review-btn'>Add Review</button>";
-                echo " <a href='addReview.php' class='signup-button'>";
-                echo"<button>Add Review</button>";
+                echo "<a href='addReview.php?productID={$product['productID']}'><button>Add Review</button></a>";
+                
+                echo "<div class='product-reviews'>";
+                    echo "<h2>Reviews</h2>";
+                    try{
+                    $retrieveReviewsSQL="SELECT * FROM review WHERE productID = ?";
+                    $stmt1 = $db->prepare($retrieveReviewsSQL);
+                    $stmt1->execute([$productID]);
+                    $reviews = $stmt1->fetchAll(PDO::FETCH_ASSOC);
+                    if ($reviews) {
+                        foreach ($reviews as $review) {
+                            $customerUsername=$review['customerID'];
+                            $retrieveCustomerSQL="SELECT username FROM customers WHERE customerID = ?";
+                            $stmt2 = $db->prepare($retrieveCustomerSQL);
+                            $stmt2->execute([$customerUsername]);
+                            $customer = $stmt2->fetch(PDO::FETCH_ASSOC);
+                            echo "<div class='review'>";
+                    
+                            $reviewDate = strtotime($review['review_date']); // convertd UNIX timestamp
+                            $formattedDate = date('d F, Y', $reviewDate); // Formats  timestamp to date month  year
+                            echo "<p>  By: {$customer['username']} on $formattedDate </p>";
+                            echo "<p>  {$review['review']}</p>";
+                          
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "<p>No reviews found.</p>";
+                    }
+                }catch(PDOException $exception){
+                    echo "Error: " . $exception->getMessage();
+                }
+
+                
+                
+                
                 echo "</div>"; 
 
             // Close product-container
