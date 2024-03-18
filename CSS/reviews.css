@@ -1,28 +1,76 @@
+/* Style for the review container */
 .container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: var(--color4); /* White 1 */
-    box-shadow: 0 0 10px var(--color3);
-    color: var(--color1);
+    width: 80%;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: #f9f9f9;
     border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Style for each review */
 .review {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    padding: 1em;
+    border-bottom: 1px solid #e1e1e1; /* Light border for separating reviews */
+    margin-bottom: 1em;
 }
-    .review:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
+
+.review:last-child {
+    border-bottom: none;
+}
+
+.review p {
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Style for the title of the reviews section */
+.title {
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    margin-top: 1em;
+}
+
+/* Style for the 'Add Review' button */
+a button {
+    display: block;
+    width: 200px;
+    margin: 2em auto;
+    padding: 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: grey; /* A  grey button which changes to black */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+a button:hover {
+    background-color: black; /* A  black colour on hover */
+}
+
+/* some basic padding to the body to prevent content from sticking to the edges */
+body {
+    padding: 1em;
+}
+
+
+/* Ensure that the button does not appear in print media */
+@media print {
+    a button {
+        display: none;
     }
-    .review .author {
-        font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
     }
-    .review .date {
-        color: #777;
+
+    .review {
+        padding: 0.5em;
     }
-    .review .content {
-        margin-top: 10px;
-    }
+}

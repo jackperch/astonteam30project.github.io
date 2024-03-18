@@ -52,7 +52,7 @@ if (isset($_POST['addReview'])) {
     <meta charset="UTF-8">
     <title>Product Details</title>
     <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="CSS/productDetail.css">
+    <link rel="stylesheet" href="CSS/addReview.css">
     </head>
 <header>
     <div id="logo-container">
@@ -148,5 +148,20 @@ if (isset($_POST['addReview'])) {
             <input type="hidden" name="addReview" value="true">
         </form>
     </div>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="reviews.php">Reviews</a>
+                <a href="contact.php">Contact Us</a>
+                <a href="about.php">About Us</a>
+                <a href="privacy-policy.php">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+
+    
 </body>
 </html>
