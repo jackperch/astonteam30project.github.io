@@ -1,0 +1,66 @@
+.container {
+    background: #fff;
+    padding: 20px;
+    max-width: 700px;
+    margin: 20px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    color: black;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+form input[type='text'],
+form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+form input[type='text']:focus,
+form textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+}
+
+form input[type='submit'] {
+    padding: 10px 15px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+form input[type='submit']:hover,
+form input[type='submit']:focus {
+    background-color: #0056b3;
+}
+
+/*style for fancy looks */
+form input[type='text'],
+form textarea {
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's width and height */
+}
+
+/* Style for the centered text above the form */
+p > center {
+    font-size: 1.2em;
+    color: #007bff;
+    margin-bottom: 20px;
+}

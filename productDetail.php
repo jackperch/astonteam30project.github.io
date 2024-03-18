@@ -117,7 +117,7 @@ session_start();
                 // Close product-details
                 echo"<br>";
                 //echo "<button type='submit' class='add-to-review-btn'>Add Review</button>";
-                echo "<a href='addReview.php?productID={$product['productID']}'><button>Add Review</button></a>";
+                echo "<a href='addReview.php?productID={$product['productID']}' width='40' height='30'><button  class='review-btn'>Add Review</button></a>";
                 
                 echo "<div class='product-reviews'>";
                     echo "<h2>Reviews</h2>";

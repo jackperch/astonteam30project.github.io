@@ -50,12 +50,63 @@
 }
 
 .add-to-cart-btn:hover {
-    background-color: darken(var(--color2), 10%);
+    background-color: #555; /* Darker black */
+    animation: pulse 1s infinite;
 }
 
 /* Responsive design */
 @media screen and (max-width: 768px) {
     .product-details {
         grid-template-columns: 1fr;
+    }
+}
+
+
+.review-btn {
+    background-color: #000; /* Black */
+    color: #fff; /* White */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.review-btn:hover {
+    background-color: #555; /* Darker black */
+    animation: pulse 1s infinite;
+}
+
+/* Keyframes for the button pulse animation */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
+    }
+}.review-btn {
+    background-color: #000; /* Black */
+    color: #fff; /* White */
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.review-btn:hover {
+    background-color: #555; /* Darker black */
+    animation: pulse 1s infinite;
+}
+
+/* Keyframes for the button pulse animation */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 0 15px rgba(0, 0, 0, 0);
     }
 }
