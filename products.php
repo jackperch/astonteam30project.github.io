@@ -136,7 +136,7 @@ $allOfTheProducts = fetchProducts();
 
         // Make the product name a clickable link
         echo "<a href='productDetail.php?productID={$product['productID']}'>";
-        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['productName']}' width=80 height=80>";
+        echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['product_name']}' width=80 height=80>";
         echo "<h2>{$product['productName']}</h2>";
         echo "</a>";
 
@@ -155,7 +155,6 @@ $allOfTheProducts = fetchProducts();
             echo "<p>Out of stock</p>";
         } else{
             
-        
         echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
         echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
         echo "<div class='price'>£{$product['price']}</div>";

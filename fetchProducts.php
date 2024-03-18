@@ -4,7 +4,7 @@
 
     // Define a function to fetch products by category if it's not defined elsewhere
     function fetchProductsByCategory($db, $categoryId) {
-        $sql = "SELECT productID, product_name, price, image, description FROM products WHERE categoryID = :categoryId";
+        $sql = "SELECT productID, product_name, price, image, description,stock FROM products WHERE categoryID = :categoryId";
         $stmt = $db->prepare($sql);
         $stmt->execute([':categoryId' => $categoryId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -30,17 +30,22 @@
                 echo "</a>";
                 echo "<h2>{$product['product_name']}</h2>";
                 echo "<p class='product-price'>£" . htmlspecialchars($product['price']) . "</p>";
-                echo "<div class='quantity-input'>";
-                echo "<button class='quantity-decrease' onclick='changeQuantity(false, \"" . $product["productID"] . "\")'>-</button>";
-                echo "<input type='number' id='quantity-" . $product['productID'] . "' name='quantity' value='1' min='1' class='quantity-field'>";
-                echo "<button class='quantity-increase' onclick='changeQuantity(true, '{$product['productID']}')'>+</button>";
+                if ($product['stock'] == 0) {
+                    echo "<p>Out of stock</p>";
+                } else{
+                // echo "<div class='quantity-input'>";
+                // echo "<button class='quantity-decrease' onclick='changeQuantity(false, \"" . $product["productID"] . "\")'>-</button>";
+                // echo "<input type='number' id='quantity-" . $product['productID'] . "' name='quantity' value='1' min='1' class='quantity-field'>";
+                // echo "<button class='quantity-increase' onclick='changeQuantity(true, '{$product['productID']}')'>+</button>";
+                // echo "</div>";
+                echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
+                echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
+                // echo "<div class='price'>£{$product['price']}</div>";
+                echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
+                echo "</form>";
+            }
                 echo "</div>";
-                        echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
-                        echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
-                        echo "<div class='price'>£{$product['price']}</div>";
-                        echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
-                        echo "</form>";
-                echo "</div>";
+                
             }
         } else {
             // No products found for the given category

@@ -29,7 +29,19 @@
                 <a href="productsDisplay.php">Products</a>
                 <a href="about.php">About</a>
                 <a href="contact.php">Contact</a>
-                <a href="login.php">Login</a>
+                
+                <?php
+                session_start();
+                if (isset($_SESSION['adminID'])) {
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='adminLogout.php'>Logout</a>";
+
+                }else{
+                    echo "<a href='login.php'>Login</a>";
+                }
+
+
+                ?>
             </nav>
             <?php
             // Initialize the total quantity variable
@@ -62,13 +74,13 @@
                 </a>
             </div>
 
-            <?php
+            <!-- <?php
             // Check if adminID is in session
-            if (isset($_SESSION['adminID'])) {
+           // if (isset($_SESSION['adminID'])) {
                 // Add admin option to the nav bar
-                echo '<a href="dashboard.php">Admin</a>';
-            }
-            ?>
+                //echo '<a href="dashboard.php">Admin</a>';
+           // }
+            ?> -->
             
         </header>
         <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
