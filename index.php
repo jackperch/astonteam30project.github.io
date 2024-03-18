@@ -106,56 +106,81 @@
 
         <div class="container">
             <div class="row">
+                <!-- Racket Sports Category -->
                 <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Racket Sports</h5>
-                            <p class="card-text">View Racket Sport products here:</p>
-                            <a href="editProducts.php" class="btn btn-primary">Go to Products</a>
+                    <form action="categoryProducts.php" method="post">
+                        <div class="card" style="width: 18rem;">
+                            <img src="images/racket-sports.png" class="card-img-top" alt="Racket Sports">
+                            <div class="card-body">
+                                <h5 class="card-title">Racket Sports</h5>
+                                <p class="card-text">View Racket Sport products here:</p>
+                                <input type="hidden" name="categoryId" value="1">
+                                <button type="submit" class="btn btn-primary">Go to Products</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+
+                <!-- Combat Sports Category -->
                 <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Combat sports</h5>
-                            <p class="card-text">View Combat Sport products here:</p>
-                            <a href="editOrders.php" class="btn btn-primary">Go to Orders</a>
+                    <form action="categoryProducts.php" method="post">
+                        <div class="card" style="width: 18rem;">
+                            <img src="images/combat-sports.png" class="card-img-top" alt="Combat Sports">
+                            <div class="card-body">
+                                <h5 class="card-title">Combat Sports</h5>
+                                <p class="card-text">View Combat Sport products here:</p>
+                                <input type="hidden" name="categoryId" value="2">
+                                <button type="submit" class="btn btn-primary">Go to Products</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+
+                <!-- Climbing Sports Category -->
                 <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">XYZ</h5>
-                            <p class="card-text">Manage XYZ here:</p>
-                            <a href="editusers.php" class="btn btn-primary">Go to XYZ</a>
+                    <form action="categoryProducts.php" method="post">
+                        <div class="card" style="width: 18rem;">
+                            <img src="images/combat-sports.png" class="card-img-top" alt="Combat Sports">
+                            <div class="card-body">
+                                <h5 class="card-title">Climbing Sports</h5>
+                                <p class="card-text">View Climbing Sport products here:</p>
+                                <input type="hidden" name="categoryId" value="3">
+                                <button type="submit" class="btn btn-primary">Go to Products</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+
+                <!-- Football Sports Category -->
                 <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">XYZ</h5>
-                            <p class="card-text">Manage XYZ here:</p>
-                            <a href="editAdmins.php" class="btn btn-primary">Go to XYZ</a>
+                    <form action="categoryProducts.php" method="post">
+                        <div class="card" style="width: 18rem;">
+                            <img src="images/combat-sports.png" class="card-img-top" alt="Combat Sports">
+                            <div class="card-body">
+                                <h5 class="card-title">Football Sports</h5>
+                                <p class="card-text">View Football products here:</p>
+                                <input type="hidden" name="categoryId" value="4">
+                                <button type="submit" class="btn btn-primary">Go to Products</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+
+                <!-- Home fitness  Category -->
                 <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
-                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">XYZ</h5>
-                            <p class="card-text">Manage XYZ here:</p>
-                            <a href="editAdmins.php" class="btn btn-primary">Go to XYZ</a>
+                    <form action="categoryProducts.php" method="post">
+                        <div class="card" style="width: 18rem;">
+                            <img src="images/combat-sports.png" class="card-img-top" alt="Combat Sports">
+                            <div class="card-body">
+                                <h5 class="card-title">Home Fitness </h5>
+                                <p class="card-text">View Home Fitness products here:</p>
+                                <input type="hidden" name="categoryId" value="5">
+                                <button type="submit" class="btn btn-primary">Go to Products</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+        
             </div>
         </div>
      
