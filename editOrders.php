@@ -65,6 +65,8 @@ if(isset($_POST['delete-btn'])) {
                 if (isset($_SESSION['adminID'])) {
                     echo "<a href='Dashboard.php'>Dashboard</a>";
                     echo "<a href='logout.php'>Logout</a>";
+                }else{
+                    exit;
                 }
                 ?>
         <?php
