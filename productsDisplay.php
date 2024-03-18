@@ -225,11 +225,15 @@
                             <button class="quantity-increase" onclick="changeQuantity(true, '<?//= $product['productID'] ?>')">+</button>
                         </div> -->
                         <?php
+                         if ($product['stock'] == 0) {
+                            echo "<p>Out of stock</p>"; // // Checks the stock availability
+                        } else{
                             echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
                             echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
                             echo "<div class='price'>£{$product['price']}</div>";
                             echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
                             echo "</form>";
+                        }
                         ?>
                     </div>
                 <?php endforeach; ?>
@@ -256,11 +260,15 @@
                             <button class="quantity-increase" onclick="changeQuantity(true, '<?= $product['productID'] ?>')">+</button>
                         </div>
                         <?php
+                         if ($product['stock'] == 0) {
+                            echo "<p>Out of stock</p>"; //// Checks the stock availability
+                        } else{
                             echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
                             echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
                             echo "<div class='price'>£{$product['price']}</div>";
                             echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
                             echo "</form>";
+                        }
                         ?>
                     </div>
                 <?php endforeach; ?>
@@ -286,12 +294,16 @@
                             <input type="number" id="quantity-<?= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
                             <button class="quantity-increase" data-product-id="<?= $product['productID']?>">+</button>
                         </div>
-                        <?php
+                        <?php 
+                         if ($product['stock'] == 0) { // Checks the stock availability
+                            echo "<p>Out of stock</p>";
+                        } else{
                             echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
                             echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
                             echo "<div class='price'>£{$product['price']}</div>";
                             echo "<button class='add-to-cart' data-product-id='{$product['productID']}' onclick='displayAlert()'>Add to cart!</button>";
                             echo "</form>";
+                        }
                         ?>
                     </div>
                 <?php endforeach; ?>

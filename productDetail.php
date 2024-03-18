@@ -103,11 +103,15 @@ session_start();
                 echo "<p>Size: {$product['size']}</p>";
                 echo "<p>Category: {$product['categoryName']}</p>";
                 // Add to Cart Form
+                if ($product['stock'] == 0) {
+                    echo "<p>Out of stock</p>";
+                } else{
                 echo "<form method='post' action='updatecart.php'>";
                 echo "<input type='hidden' name='productID' value='{$productID}'>";
                 echo "<input type='number' name='quantity' min='1' value='1' class='quantity-input'>";
                 echo "<button type='submit' class='add-to-cart-btn'>Add to Cart</button>";
                 echo "</form>";
+                }
                 echo "<br>";
                 echo "<br>";
                 // Close product-details
