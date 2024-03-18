@@ -78,4 +78,4 @@ foreach ($products as $product) {
 }
 
 // End of script
-?>
+
