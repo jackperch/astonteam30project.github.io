@@ -114,6 +114,23 @@
 
     <h1><center>Contact Us<center></h1>
 
+    <div class="contact-container">
+        <div class="contact-info">
+            <h2>Our Address</h2>
+            <p>ACE GEAR</p>
+            <p>123 Fake Street</p>
+            <p>London</p>
+            <p>M40 AK7</p>
+            <p>United Kingdom</p>
+        </div>
+        <div class="contact-info">
+            <h2>Phone</h2>
+            <p>120 1258 5678</p>
+        </div>
+        <div class="contact-info">
+            <h2>Email AstonGear@outlook.com</h2>
+        </div>
+
 
     <div class="contact-form-container">
         <h2>Get in contact with us by filling out the form below :</h2>
