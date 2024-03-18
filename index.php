@@ -97,11 +97,66 @@
                 <img src="Images/index-img-5.jpg" alt="Image 5">
             </div>
 
-            <div class = products-button-container>
-                <!--<button onclick href="productsDisplay.php" class="ProductsBtn" title="Go to Products Page">VIEW PRODUCTS</button>-->
+            <!-- <div class = products-button-container>
                 <a href="productsDisplay.php" class="ProductsBtn" title="Go to Products Page">VIEW PRODUCTS</a> 
-            </div>
+            </div> -->
             
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Racket Sports</h5>
+                            <p class="card-text">View Racket Sport products here:</p>
+                            <a href="editProducts.php" class="btn btn-primary">Go to Products</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Combat sports</h5>
+                            <p class="card-text">View Combat Sport products here:</p>
+                            <a href="editOrders.php" class="btn btn-primary">Go to Orders</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">XYZ</h5>
+                            <p class="card-text">Manage XYZ here:</p>
+                            <a href="editusers.php" class="btn btn-primary">Go to XYZ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">XYZ</h5>
+                            <p class="card-text">Manage XYZ here:</p>
+                            <a href="editAdmins.php" class="btn btn-primary">Go to XYZ</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">XYZ</h5>
+                            <p class="card-text">Manage XYZ here:</p>
+                            <a href="editAdmins.php" class="btn btn-primary">Go to XYZ</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
      
         <footer>
