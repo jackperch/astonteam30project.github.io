@@ -109,7 +109,7 @@
                 <!-- Racket Sports Category -->
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card" style="width: 14rem;">
                             <img src="images/racket-sports.png" class="card-img-top" alt="Racket Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Racket Sports</h5>
@@ -124,7 +124,7 @@
                 <!-- Combat Sports Category -->
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
-                        <div class="card" style="width: 18rem;">
+                        <div class="card" style="width: 14rem;">
                             <img src="images/combat-sports.png" class="card-img-top" alt="Combat Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Combat Sports</h5>
@@ -139,8 +139,8 @@
                 <!-- Climbing Sports Category -->
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
-                        <div class="card" style="width: 18rem;">
-                            <img src="images/combat-sports.png" class="card-img-top" alt="Combat Sports">
+                        <div class="card" style="width: 14rem;">
+                            <img src="images/climbing.png" class="card-img-top" alt="Combat Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Climbing Sports</h5>
                                 <p class="card-text">View Climbing Sport products here:</p>
@@ -154,8 +154,8 @@
                 <!-- Football Sports Category -->
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
-                        <div class="card" style="width: 18rem;">
-                            <img src="images/combat-sports.png" class="card-img-top" alt="Combat Sports">
+                        <div class="card" style="width: 14rem;">
+                            <img src="images/football.png" class="card-img-top" alt="Combat Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Football Sports</h5>
                                 <p class="card-text">View Football products here:</p>
@@ -169,8 +169,8 @@
                 <!-- Home fitness  Category -->
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
-                        <div class="card" style="width: 18rem;">
-                            <img src="images/combat-sports.png" class="card-img-top" alt="Combat Sports">
+                        <div class="card" style="width: 14rem;">
+                            <img src="images/home-fitness.png" class="card-img-top" alt="Combat Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Home Fitness </h5>
                                 <p class="card-text">View Home Fitness products here:</p>

@@ -127,6 +127,23 @@ function fetchProducts() {
 $allOfTheProducts = fetchProducts();
 ?>
 
+    <div class="search-sort-filter">
+        <input type="text" id="search-input" placeholder="Search products..." onkeyup="filterProducts()">
+        <select id="filter-category" onchange="filterProducts()">
+            <option value="">Filter by Category</option>
+            <!-- Dynamically populate categories -->
+            <?php foreach ($categories as $category): ?>
+                <option value="<?= $category['categoryID'] ?>"><?= htmlspecialchars($category['name']) ?></option>
+            <?php endforeach; ?>
+        </select>
+        <select id="sort-option" onchange="filterProducts()">
+            <option value="">Sort by</option>
+            <option value="price_low_high">Price Low to High</option>
+            <option value="price_high_low">Price High to Low</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+        </select>
+    </div>
     <?php
     // Display fetched product details
     //The allOfTheProducts is an array of all the products  that  is going to be iterated through and the product is the current product that is being iterated through
@@ -287,8 +304,30 @@ $allOfTheProducts = fetchProducts();
                 }
                 });
             </script> -->
+    <script>
+        function filterProducts() {
+            var searchQuery = $('#search-input').val();
+            var categoryId = $('#filter-category').val();
+            var sortBy = $('#sort-option').val();
 
-
+            $.ajax({
+                url: 'fetchFilteredProducts.php', // This is the PHP script that will return filtered and sorted products
+                type: 'POST',
+                data: {
+                    search: searchQuery,
+                    category: categoryId,
+                    sort: sortBy
+                },
+                success: function(response) {
+                    // Assuming the response is the HTML content of filtered and sorted products
+                    $('#product-container').html(response);
+                },
+                error: function(error) {
+                    console.error("Error fetching products:", error);
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
