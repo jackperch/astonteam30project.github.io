@@ -232,6 +232,11 @@
             <a href="about.php">About</a>
             <a href="members-blog.php">Blog</a>
             <a href="contact.php">Contact</a>
+            <?php
+            if (isset($_SESSION['adminID'])) {
+                echo "<a href='Dashboard.php'>Dashboard</a>";
+            }
+            ?>
             <a href="logout.php">Logout</a>
         </nav>
         <?php
