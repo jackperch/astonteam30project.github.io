@@ -15,16 +15,9 @@ if(isset($_GET['id'])) {
 
 // Adding product
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $productName = $_POST['productName'];
+    $productID = $_POST['productID'];
     $quantity = $_POST['quantity'];
 
-    // Fetch productID from products table
-    $stmt = $db->prepare("SELECT productID FROM products WHERE product_name = :productName");
-    $stmt->execute(['productName' => $productName]);
-    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-    $productID = $row['productID'];
-
-    // Insert product into orders_products table
     $query = "INSERT INTO orders_products (productID, quantity, total_price) VALUES (:productID, :quantity, :total_price)";
     $stmt = $db->prepare($query);
     $stmt->execute(['orderID' => $orderID, 'productID' => $productID, 'quantity' => $quantity, 'total_price' => $total_price]);
@@ -36,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
+    <title>Order Product Management</title>
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/admin.css">
     <style>
@@ -136,8 +129,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div id="addProductFormContainer" style="display: none;">
             <h2>Add Product</h2>
             <form id="addProductForm">
-                <label for="productName">Product Name:</label>
-                <input type="text" id="productName" name="productName" required><br>
+                <label for="productID">Product ID:</label>
+                <input type="text" id="productID" name="productID" required><br>
                 <label for="quantity">Quantity:</label>
                 <input type="number" id="quantity" name="quantity" required><br>
                 <button type="submit">Add Product</button>
@@ -157,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </footer>
 
-<!-- Script for form submission -->
+
 <script>
 const addProductButton = document.getElementById('addProductButton');
 const addProductFormContainer = document.getElementById('addProductFormContainer');
@@ -169,34 +162,30 @@ addProductButton.addEventListener('click', function() {
 // Form submission
 const addProductForm = document.getElementById('addProductForm');
 addProductForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
-    const productName = document.getElementById('productName').value;
+    const productID = document.getElementById('productID').value; // Updated to get product ID
     const quantity = document.getElementById('quantity').value;
 
-    // AJAX to fetch product ID and insert into orders_products table
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '<?php echo $_SERVER["PHP_SELF"]; ?>', true); // PHP_SELF refers to the current script
+    xhr.open('POST', '<?php echo $_SERVER["PHP_SELF"]; ?>', true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
         if (xhr.status === 200) {
-            // Handle successful response
             console.log(xhr.responseText);
             alert('Product added successfully.');
-            // You might want to reload the page or update the product list after adding a new product
+
             location.reload();
         } else {
-            // Handle error response
             console.error('Error adding product:', xhr.statusText);
             alert('Failed to add product.');
         }
     };
     xhr.onerror = function() {
-        // Handle network errors
         console.error('Network error while adding product.');
         alert('Network error. Please try again.');
     };
-    xhr.send(`productName=${productName}&quantity=${quantity}`);
+    xhr.send(`productID=${productID}&quantity=${quantity}`); // Updated to send product ID
 });
 </script>
 </body>
