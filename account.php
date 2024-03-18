@@ -9,32 +9,61 @@
 
     if (isset($_SESSION['customerID'])) {
         $customerID = $_SESSION['customerID'];
-    }
-    
-    try {
-        $query = $db->prepare('SELECT * FROM customers WHERE customerID = ?');
-        $success = $query->execute([$customerID]);
+        try {
+            $query = $db->prepare('SELECT * FROM customers WHERE customerID = ?');
+            $success = $query->execute([$customerID]);
 
-        // Check if the query was successful
-        if ($success) {
-            $rowCount = $query->rowCount();
+            // Check if the query was successful
+            if ($success) {
+                $rowCount = $query->rowCount();
 
-            // Check if any rows were returned
-            if ($rowCount > 0) {
-                // Fetch customer data
-                $customerData = $query->fetch(PDO::FETCH_ASSOC);
+                // Check if any rows were returned
+                if ($rowCount > 0) {
+                    // Fetch customer data
+                    $customerData = $query->fetch(PDO::FETCH_ASSOC);
 
-                // Add similar lines for other details you want to display
+                    // Add similar lines for other details you want to display
+                } else {
+                    echo "No matching customer found.";
+                }
             } else {
-                echo "No matching customer found.";
+                echo "Error executing the query.";
             }
-        } else {
-            echo "Error executing the query.";
+        } catch (PDOException $ex) {
+            echo("Failed to fetch customer data.<br>");
+            echo($ex->getMessage());
+            exit;
         }
-    } catch (PDOException $ex) {
-        echo("Failed to fetch customer data.<br>");
-        echo($ex->getMessage());
-        exit;
+    }elseif(isset($_SESSION['adminID'])){
+        $adminID = $_SESSION['adminID'];
+        try {
+            $query = $db->prepare('SELECT * FROM admin WHERE adminID = ?');
+            $success = $query->execute([$adminID]);
+
+            // Check if the query was successful
+            if ($success) {
+                $rowCount = $query->rowCount();
+
+                // Check if any rows were returned
+                if ($rowCount > 0) {
+                    // Fetch customer data
+                    $customerData = $query->fetch(PDO::FETCH_ASSOC);
+
+                    // Add similar lines for other details you want to display
+                } else {
+                    echo "No matching admin found.";
+                }
+            } else {
+                echo "Error executing the query.";
+            }
+        } catch (PDOException $ex) {
+            echo("Failed to fetch customer data.<br>");
+            echo($ex->getMessage());
+            exit;
+        }
+    } else {
+        echo "Error  customerID not found or admin not found.";
+        exit; 
     }
 ?>
 
@@ -73,6 +102,9 @@
             <a href="members-blog.php">Blog</a>
             <a href="contact.php">Contact</a>
             <a href="logout.php">Logout</a>
+            
+
+        
         </nav>
         <?php
         // Initialize the total quantity variable
@@ -129,6 +161,7 @@
                 //foreach ($orders as $order) {
                    // echo "<li><a href='order.php?id=" . $order['id'] . "'>Order #" . $order['id'] . "</a></li>";
                 //}
+                if (isset($_SESSION['customerID'])){
                 try {
                     $customerID = $_SESSION['customerID'];
                     $query = $db->prepare('SELECT * FROM orders WHERE customerID = ?');
@@ -185,7 +218,7 @@
                     // Handle PDO exceptions
                     echo "Error: " . $e->getMessage();
                 }
-            
+                }
                 ?>
             </ul>
         </section>
