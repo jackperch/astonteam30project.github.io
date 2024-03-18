@@ -59,15 +59,13 @@ if(isset($_POST['delete-btn'])) {
             <a href="productsDisplay.php">Products</a>
             <a href="about.php">About</a>
             <a href="contact.php">Contact</a>
-            <?php 
+             <?php 
 
                 if (isset($_SESSION['adminID'])) {
-                echo "<a href='Dashboard.php'>Dashboard</a>";
-                echo "<a href='logout.php'>Logout</a>";
-                }else{
-                    exit;
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='logout.php'>Logout</a>";
                 }
-?>
+                ?>
         <?php
         // Initialize the total quantity variable
         $totalQuantity = 0;
