@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2024 at 05:31 PM
+-- Generation Time: Mar 18, 2024 at 01:41 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -35,38 +35,39 @@ CREATE TABLE `address` (
   `address_line_2` varchar(50) NOT NULL,
   `post_code` varchar(50) NOT NULL,
   `city` varchar(30) NOT NULL,
-  `country` varchar(30) NOT NULL
+  `country` varchar(30) NOT NULL,
+  `adminID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `address`
 --
 
-INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_1`, `address_line_2`, `post_code`, `city`, `country`) VALUES
-(6, 10, 11, 'cc', 'cc', 'ccc', 'c', 'c'),
-(7, 11, 12, 'user strt', 'user area', 'us1 2er', 'user', 'user'),
-(8, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy'),
-(9, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy'),
-(10, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy'),
-(11, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy'),
-(12, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy'),
-(13, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy'),
-(14, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy'),
-(15, 12, 11, 'dwewj', 'wjqwdw', 'jde w', 'jeqw', 'jwqd'),
-(16, 12, 11, 'dwewj', 'wjqwdw', 'jde w', 'jeqw', 'jwqd'),
-(17, 12, 11, 'dwewj', 'wjqwdw', 'jde w', 'jeqw', 'jwqd'),
-(18, 12, 11, 'dwewj', 'wjqwdw', 'jde w', 'jeqw', 'jwqd'),
-(19, 32, 11, 'aa', 'aa', 'aa', 'aa', 'aa`'),
-(20, 33, 11, '1FEWF', 'ewwfew', 'udwq ', 'uecewf', 'u'),
-(21, 34, 11, 'ccc', 'cc', 'cc', 'cc', 'cc'),
-(22, 35, 22, 'eee', 'eee', 'ee2 e', 'eee ee', 'eee'),
-(23, 36, 11, 'EFW', 'NEVEWF', 'EWFW', 'EWFEQ', 'EWFEQ'),
-(24, 37, 11, 'sss', 'ss', 'ss ss', 'ss', 'sks'),
-(25, 38, 2, 'aaaa', 'aaa', 'a23 345', 'ccc', 'cwd'),
-(26, 39, 11, 'mm', 'mm', 'h33 2', 'ww', 'mdd'),
-(27, 39, 11, 'mm', 'mm', 'h33 2', 'ww', 'mdd'),
-(28, 12, 11, '11', '11', 'H24 MC', 'RMS', 'MWE'),
-(29, 12, 11, '11', '11', 'H24 MC', 'RMS', 'MWE');
+INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_1`, `address_line_2`, `post_code`, `city`, `country`, `adminID`) VALUES
+(6, 10, 0, 'Address line 1:aa', 'Address line 2:aa', 'Post code:aa', 'City: aa', 'Country:aa', 1),
+(7, 11, 12, 'user strt', 'user area', 'us1 2er', 'user', 'user', NULL),
+(8, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
+(9, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
+(10, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
+(11, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
+(12, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
+(13, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
+(14, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
+(15, 12, 11, 'dwewj', 'wjqwdw', 'jde w', 'jeqw', 'jwqd', NULL),
+(16, 12, 11, 'dwewj', 'wjqwdw', 'jde w', 'jeqw', 'jwqd', NULL),
+(17, 12, 11, 'dwewj', 'wjqwdw', 'jde w', 'jeqw', 'jwqd', NULL),
+(18, 12, 11, 'dwewj', 'wjqwdw', 'jde w', 'jeqw', 'jwqd', NULL),
+(19, 32, 11, 'aa', 'aa', 'aa', 'aa', 'aa`', NULL),
+(20, 33, 11, '1FEWF', 'ewwfew', 'udwq ', 'uecewf', 'u', NULL),
+(21, 34, 11, 'ccc', 'cc', 'cc', 'cc', 'cc', NULL),
+(22, 35, 22, 'eee', 'eee', 'ee2 e', 'eee ee', 'eee', NULL),
+(23, 36, 11, 'EFW', 'NEVEWF', 'EWFW', 'EWFEQ', 'EWFEQ', NULL),
+(24, 37, 11, 'sss', 'ss', 'ss ss', 'ss', 'sks', NULL),
+(25, 38, 2, 'aaaa', 'aaa', 'a23 345', 'ccc', 'cwd', NULL),
+(26, 39, 11, 'mm', 'mm', 'h33 2', 'ww', 'mdd', NULL),
+(27, 39, 11, 'mm', 'mm', 'h33 2', 'ww', 'mdd', NULL),
+(28, 12, 11, '11', '11', 'H24 MC', 'RMS', 'MWE', NULL),
+(29, 12, 11, '11', '11', 'H24 MC', 'RMS', 'MWE', NULL);
 
 -- --------------------------------------------------------
 
@@ -77,16 +78,20 @@ INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_
 CREATE TABLE `admin` (
   `adminID` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(50) NOT NULL,
+  `first_name` varchar(225) NOT NULL,
+  `last_name` varchar(225) NOT NULL,
+  `email` varchar(225) NOT NULL,
+  `addressID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`adminID`, `username`, `password`) VALUES
-(1, 'admin1', 'admin1'),
-(2, 'admin1', 'admin1');
+INSERT INTO `admin` (`adminID`, `username`, `password`, `first_name`, `last_name`, `email`, `addressID`) VALUES
+(1, 'adminT1', '$2y$10$93boFUbiGaQ0t1NsVphz3.AkXj0KkSaZeNPArOfiG3f', 'Saad', 'Saad', 'Saad@admin.com', 6),
+(2, 'admin2', 'admin2', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -110,7 +115,7 @@ INSERT INTO `cart` (`cartID`, `customerID`, `productID`, `quantity`, `totat_cost
 (8, 9, 2, 3, 0),
 (12, 9, 1, 1, 0),
 (13, 9, 3, 1, 0),
-(22, 38, 6, 4, 0),
+(22, 38, 6, 1, 0),
 (23, 38, 10, 1, 0);
 
 -- --------------------------------------------------------
@@ -423,7 +428,8 @@ INSERT INTO `review` (`reviewID`, `customerID`, `productID`, `review`, `review_d
 --
 ALTER TABLE `address`
   ADD PRIMARY KEY (`addressID`),
-  ADD KEY `customerID` (`customerID`);
+  ADD KEY `customerID` (`customerID`),
+  ADD KEY `adminID` (`adminID`);
 
 --
 -- Indexes for table `admin`
@@ -562,7 +568,8 @@ ALTER TABLE `review`
 -- Constraints for table `address`
 --
 ALTER TABLE `address`
-  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`);
+  ADD CONSTRAINT `address_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`),
+  ADD CONSTRAINT `address_ibfk_2` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
 
 --
 -- Constraints for table `cart`

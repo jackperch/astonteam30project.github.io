@@ -84,10 +84,12 @@
                     require_once("connectionDB.php");  // connects to the dtb
                     $addressID = $adminAddressData['addressID'];
 
-                    $updateAdminSQL = $db->prepare('UPDATE admin SET username = ?, password = ?, first_name = ?, last_name = ?, email = ? WHERE adminID = ?');
-                    $updateAdminSQL->execute(array($userName, $newPassword, $first_name, $last_name, $email,$adminID ));
-                    $updateAddressSQL = $db->prepare('UPDATE address SET house_number = ?, address_line_1 = ?, address_line_2 = ?, post_code = ?, city = ?, country = ? WHERE addressID = ?');
-                    $updateAddressSQL->execute(array($houseNumber, $addressLine1, $addressLine2, $postCode, $city, $country, $addressID));
+                    $updateAdminSQL ='UPDATE admin SET username = ?, password = ?, first_name = ?, last_name = ?, email = ? WHERE adminID = ?';
+                    $smt= $db ->prepare($updateAdminSQL);
+                    $smt->execute([$userName, $newPassword, $first_name, $last_name, $email,$adminID ]);
+                    $updateAddressSQL = 'UPDATE address SET house_number = ?, address_line_1 = ?, address_line_2 = ?, post_code = ?, city = ?, country = ? WHERE adminID = ?';
+                    $smt= $db ->prepare($updateAddressSQL);
+                    $smt->execute([$houseNumber, $addressLine1, $addressLine2, $postCode, $city, $country, $adminID]);
             
                     echo "Account updated successfully";
                 
