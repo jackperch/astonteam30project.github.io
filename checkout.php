@@ -26,12 +26,21 @@
 
             <?php 
                 session_start();
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['customerID'])) {
                     echo "<a href='members-blog.php'>Blog</a>";
                     echo "<a href='account.php'>Account</a>";
                     echo "<a href='logout.php'>Logout</a>";
-                } else {
+                } elseif (isset($_SESSION['adminID'])) 
+                {
+        
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+
+                }else
+                {
                     echo "<a href='login.php'>Login</a>";
+
                 }
                 ?>
         </nav>
@@ -78,48 +87,75 @@
                     <div id="cart-items">
                         <?php
                         require_once("connectionDB.php");
-                        if(isset($_SESSION['customerID'])){ 
-                        $customerID = $_SESSION['customerID']; // Using customerID is stored in session
+                        if(isset($_SESSION['customerID']))
+                        { 
+                            $customerID = $_SESSION['customerID']; // Using customerID is stored in session
 
-                        // Fetch cart items for the user
-                        $stmt = $db->prepare("SELECT c.productID, p.product_name, c.quantity, p.price, p.image FROM cart c JOIN products p ON c.productID = p.productID WHERE c.customerID = :customerID");
-                        $stmt->execute(['customerID' => $customerID]);
-                        $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            // Fetch cart items for the user
+                            $stmt = $db->prepare("SELECT c.productID, p.product_name, c.quantity, p.price, p.image FROM cart c JOIN products p ON c.productID = p.productID WHERE c.customerID = :customerID");
+                            $stmt->execute(['customerID' => $customerID]);
+                            $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                        $totalPrice = 0;
-                        foreach ($cartItems as $item) {
-                            echo "<div class='cart-item'>";
-                            $price = $item['price'];
-                            $quantity = $item['quantity'];
-                            $_total_item_price = $price * $quantity;
-                            //echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=80 height=80>";
-                            echo "<p><img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=80 height=80> {$item['product_name']} (Quantity: {$item['quantity']}) - £" . ($item['quantity'] * $item['price']) . "</p>";
-                            echo "</div>";
-                            $totalPrice += ($item['quantity'] * $item['price']);
-                        }
-                        $_SESSION['totalPrice'] = $totalPrice;
-                        echo "<p>Total Price: £$totalPrice</p>";
-                    }else{
-                        // For the guest users 
-                        $totalPrice = 0;
-                        if (isset($_SESSION['guest_shopping_cart'])) {
-                           //Displays the items in the shopping cart array session varaible 
-                            foreach ($_SESSION['guest_shopping_cart'] as $productID => $quantity) {
-                                $stmt = $db->prepare("SELECT product_name, price FROM products WHERE productID = :productID");
-                                $stmt->execute(['productID' => $productID]);
-                                $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                            $totalPrice = 0;
+                            foreach ($cartItems as $item) {
                                 echo "<div class='cart-item'>";
-                                echo "<p>{$product['product_name']} (Quantity: $quantity) - $" . ($quantity * $product['price']) . "</p>";
+                                $price = $item['price'];
+                                $quantity = $item['quantity'];
+                                $_total_item_price = $price * $quantity;
+                                //echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=80 height=80>";
+                                echo "<p><img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=80 height=80> {$item['product_name']} (Quantity: {$item['quantity']}) - £" . ($item['quantity'] * $item['price']) . "</p>";
                                 echo "</div>";
-                                //Calculates the total price of the products 
-                                $totalPrice += ($quantity * $product['price']);
+                                $totalPrice += ($item['quantity'] * $item['price']);
                             }
+                            $_SESSION['totalPrice'] = $totalPrice;
+                            echo "<p>Total Price: £$totalPrice</p>";
+                        }elseif(isset($_SESSION['adminID']))
+                        {
+                            $adminID = $_SESSION['adminID']; // Using customerID is stored in session
+
+                            // Fetch cart items for the user
+                            $stmt = $db->prepare("SELECT c.productID, p.product_name, c.quantity, p.price, p.image FROM cart c JOIN products p ON c.productID = p.productID WHERE c.adminID = :adminID");
+                            $stmt->execute(['adminID' => $adminID]);
+                            $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                            $totalPrice = 0;
+                            foreach ($cartItems as $item) {
+                                echo "<div class='cart-item'>";
+                                $price = $item['price'];
+                                $quantity = $item['quantity'];
+                                $_total_item_price = $price * $quantity;
+                                //echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=80 height=80>";
+                                echo "<p><img src='Images/Product-Images/{$item['image']}' alt='{$item['product_name']}' width=80 height=80> {$item['product_name']} (Quantity: {$item['quantity']}) - £" . ($item['quantity'] * $item['price']) . "</p>";
+                                echo "</div>";
+                                $totalPrice += ($item['quantity'] * $item['price']);
+                            }
+                            $_SESSION['totalPrice'] = $totalPrice;
+                            echo "<p>Total Price: £$totalPrice</p>";
+
+                        }else
+                        {
+                            // For the guest users 
+                            $totalPrice = 0;
+                            if (isset($_SESSION['guest_shopping_cart'])) 
+                                {
+                                    //Displays the items in the shopping cart array session varaible 
+                                    foreach ($_SESSION['guest_shopping_cart'] as $productID => $quantity) 
+                                    {
+                                        $stmt = $db->prepare("SELECT product_name, price FROM products WHERE productID = :productID");
+                                        $stmt->execute(['productID' => $productID]);
+                                        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+                                        echo "<div class='cart-item'>";
+                                        echo "<p>{$product['product_name']} (Quantity: $quantity) - $" . ($quantity * $product['price']) . "</p>";
+                                        echo "</div>";
+                                        //Calculates the total price of the products 
+                                        $totalPrice += ($quantity * $product['price']);
+                                    }
+                                }
                         }
-                    }
 
 
                         // Initialize variables to hold address details
-                        $house_number = $address_line_1 = $address_line_2 = $city = $state = $postal_code = $country = "";
+                        $house_number = $address_line_1 = $address_line_2 = $city = $state = $post_code = $country = "";
 
                         // Check if user is logged in
                         if (isset($_SESSION['customerID'])) {
@@ -131,6 +167,22 @@
                             $stmt->execute(['customerID' => $customerID]);
                             $address = $stmt->fetch(PDO::FETCH_ASSOC);
 
+                            if ($address) {
+                                // Set variables if address exists
+                                $house_number = $address['house_number'];
+                                $address_line_1 = $address['address_line_1'];
+                                $address_line_2 = $address['address_line_2'];
+                                $city = $address['city'];
+                                $post_code = $address['post_code'];
+                                $country = $address['country'];
+                            }
+                        } elseif(isset($_SESSION['adminID'])){
+                            $adminID= $_SESSION['adminID'];
+                            $sql = "SELECT * FROM address WHERE adminID = :adminID LIMIT 1"; // Adjust table/column names as per your database schema
+                            $stmt = $db->prepare($sql);
+                            $stmt->execute(['adminID' => $adminID]);
+                            $address = $stmt->fetch(PDO::FETCH_ASSOC);
+                        
                             if ($address) {
                                 // Set variables if address exists
                                 $house_number = $address['house_number'];

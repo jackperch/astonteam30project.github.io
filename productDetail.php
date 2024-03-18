@@ -33,12 +33,21 @@ session_start();
 
             <?php 
                 //session_start();
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['customerID'])) 
+                {
                     echo "<a href='members-blog.php'>Blog</a>";
                     echo "<a href='account.php'>Account</a>";
                     echo "<a href='logout.php'>Logout</a>";
-                } else {
+                } elseif (isset($_SESSION['adminID'])) 
+                {
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+
+                }else
+                {
                     echo "<a href='login.php'>Login</a>";
+
                 }
                 ?>
         </nav>
@@ -47,7 +56,8 @@ session_start();
         $totalQuantity = 0;
 
         // Check if the user is logged in
-        if (isset($_SESSION['customerID'])) {
+        if (isset($_SESSION['customerID'])) 
+        {
             require_once("connectionDB.php"); // Adjust this path as necessary
 
             // Fetch the total quantity of items in the user's cart
@@ -58,6 +68,24 @@ session_start();
             if ($result && $result['totalQuantity'] > 0) {
                 $totalQuantity = $result['totalQuantity'];
             }
+        }elseif (isset($_SESSION['adminID']))
+        {
+            require_once("connectionDB.php"); // Adjust this path as necessary
+             // Fetch the total quantity of items in the user's cart
+             $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE adminID = :adminID");
+             $stmt->execute(['adminID' => $_SESSION['adminID']]);
+             $result = $stmt->fetch(PDO::FETCH_ASSOC);
+ 
+             if ($result && $result['totalQuantity'] > 0) 
+             {
+                 $totalQuantity = $result['totalQuantity'];
+             }
+
+        }else
+        {
+            // Fetch the total quantity of items in the guest's cart
+            if (isset($_SESSION['guest_shopping_cart'])) {
+                $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);}
         }
         ?>
         <div id="cart-container">
@@ -138,7 +166,21 @@ session_start();
                                 $formattedDate = date('d F, Y', $reviewDate); // Format timestamp to date month year
                                 echo "<p>  By: {$loggedInCustomer['username']} on $formattedDate </p>";
                                 echo "<p>  {$review['review']}</p>";
-                            } else {
+                            }elseif($review['adminID'] !== null)
+                            {
+                                $retrieveAdminSQL = "SELECT username FROM admin WHERE adminID = ?";
+                                $stmt3 = $db->prepare($retrieveAdminSQL);
+                                $stmt3->execute([$review['adminID']]);
+                                $loggedInAdmin = $stmt3->fetch(PDO::FETCH_ASSOC);
+                                echo "<div class='review'>";
+                                $reviewDate = strtotime($review['review_date']); // Convert UNIX timestamp
+                                $formattedDate = date('d F, Y', $reviewDate); // Format timestamp to date month year
+                                echo "<p>  By: {$loggedInAdmin['username']} on $formattedDate</p>";
+                                echo "<p>  {$review['review']}</p>";
+                            
+                            
+                             } else 
+                             {
                                 $reviewDate = strtotime($review['review_date']); // Convert UNIX timestamp
                                 $formattedDate = date('d F, Y', $reviewDate); // Format timestamp to date month year
                                 echo "<p>  Guest User: {$review['first_name']} {$review['last_name']} on $formattedDate</p>";
@@ -147,7 +189,8 @@ session_start();
                             echo "</div>";
                         
                         }
-                    } else {
+                    } else 
+                    {
                         echo "<p>No reviews found.</p>";
                     }
                 }catch(PDOException $exception){

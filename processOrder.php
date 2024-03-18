@@ -26,12 +26,21 @@
 
             <?php 
                 session_start();
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['customerID'])) {
                     echo "<a href='members-blog.php'>Blog</a>";
                     echo "<a href='account.php'>Account</a>";
                     echo "<a href='logout.php'>Logout</a>";
-                } else {
+                } elseif (isset($_SESSION['adminID'])) 
+                {
+        
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+
+                }else
+                {
                     echo "<a href='login.php'>Login</a>";
+
                 }
                 ?>
         </nav>
@@ -51,7 +60,19 @@
             if ($result && $result['totalQuantity'] > 0) {
                 $totalQuantity = $result['totalQuantity'];
             }
+        }elseif(isset($_SESSION['adminID'])){
+            require_once("connectionDB.php"); // Adjust this path as necessary
+            $smt=$db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE  adminID = :adminID");
+            $smt->execute(['adminID' => $_SESSION['adminID']]);
+            $result = $smt->fetch(PDO::FETCH_ASSOC);
+            if ($result && $result['totalQuantity'] > 0) {
+                $totalQuantity = $result['totalQuantity'];
+            }
+        }else{
+            echo "Erroro retriving  the user's  ID";
+            exit;
         }
+    
         ?>
         <div id="cart-container">
             <!-- cart icon image with link to cart page -->
@@ -67,23 +88,32 @@
 
         <?php
         require_once("connectionDB.php");
+      //OLD CODE **************
+        // // Check if the user is logged in
+        // if (!isset($_SESSION['customerID'])) {
+        //     // Redirect to login page if not logged in
+        //     header('Location: login.php');
+        //     exit;
+        // }elseif(isset($_SESSION['adminID'])){
+        //     // Redirect to login page if not logged in
+        //     header('Location: adminLogin.php');
+        //     exit;
+        // }
 
-        // Check if the user is logged in
-        if (!isset($_SESSION['customerID'])) {
-            // Redirect to login page if not logged in
-            header('Location: login.php');
-            exit;
-        }
+        // $customerID = $_SESSION['customerID'];
+        // $totalPrice = $_SESSION['totalPrice']; // Check if it is passed from the form
+        // OLD CODE **************
 
-        $customerID = $_SESSION['customerID'];
-        $totalPrice = $_SESSION['totalPrice']; // Check if it is passed from the form
+        if (isset($_SESSION['customerID'])) {
+            $customerID = $_SESSION['customerID'];
+            $totalPrice = $_SESSION['totalPrice']; // Check if it is passed from the form
 
-        //Customer Address details
-        //$address_line_1 = $_POST['address_line_1'];
-        //$address_line_2 = $_POST['address_line_2'];
-        //$city = $_POST['city'];
-        //$post_code = $_POST['post_code'];
-        //$country = $_POST['country'];
+        // Customer Address details
+        $address_line_1 = $_POST['address_line_1'];
+        $address_line_2 = $_POST['address_line_2'];
+        $city = $_POST['city'];
+        $post_code = $_POST['post_code'];
+        $country = $_POST['country'];
 
         //Customer Card details
         $card_type = $_POST['card_type'];
@@ -177,8 +207,7 @@
             $clearCartStmt = $db->prepare("DELETE FROM cart WHERE customerID = :customerID");
             $clearCartStmt->execute(['customerID' => $customerID]);
 
-            // Commit the transaction
-            $db->commit();
+       
 
             // Redirect to a confirmation page or display the success message
            // echo "Order placed successfully. Your order number is: " . $orderID; Testing
@@ -261,23 +290,158 @@
               $sqlEmptyCart = "DELETE FROM cart WHERE customerID = :customerID";
               $stmtEmptyCart = $db->prepare($sqlEmptyCart);
               $stmtEmptyCart->execute(['customerID' => $customerID]);
-  
+             //Commit the transaction
               $db->commit();
-  
-            
-            
-            
-
-            
-            
         
         } catch (Exception $e) {
             $db->rollBack();
             echo "Error placing order: " . $e->getMessage();
         }
-        
-        ?>
+    }elseif(isset($_SESSION['adminID'])){
+        $adminID = $_SESSION['adminID'];
+        $totalPrice = $_SESSION['totalPrice']; // Check if it is passed from the form
 
+             // Admin Address details
+             $address_line_1 = $_POST['address_line_1'];
+             $address_line_2 = $_POST['address_line_2'];
+             $city = $_POST['city'];
+             $post_code = $_POST['post_code'];
+             $country = $_POST['country'];
+     
+             //Admin Card details
+             $card_type = $_POST['card_type'];
+             $card_name = $_POST['card_name'];
+             $card_number = $_POST['card_number'];
+             $card_expiry = $_POST['card_expiry'];
+             $card_cvv = $_POST['card_cvv'];
+     
+             // Retrivin  order details needed to be inserted for the  order, orders_products table 
+             $onGoing = 1;
+     
+     
+             try {
+                 $db->beginTransaction();
+                 
+     
+                  // Insert Payment Information
+                 $paymentSql = "INSERT INTO payment_information (adminID, card_type, card_number, expiry_date, CVV) VALUES (:adminID, :card_type, :card_number, :expiryy_date, :CVV)";
+                 $paymentStmt = $db->prepare($paymentSql);
+                 $paymentStmt->execute([
+                     ':adminID' => $adminID,
+                     ':card_type' => $card_type,
+                     ':card_number' => $card_number,
+                     ':expiryy_date' => $card_expiry,
+                     ':CVV' => $card_cvv
+                 ]);
+                 $paymentInfoID = $db->lastInsertId();
+    
+                 // Fetch the addressID for the logged-in admin
+                 $addressQuery = "SELECT addressID FROM address WHERE adminID = :adminID LIMIT 1";
+                 $addressStmt = $db->prepare($addressQuery);
+                 $addressStmt->execute(['adminID' => $adminID]);
+                 $addressResult = $addressStmt->fetch(PDO::FETCH_ASSOC);
+             
+                 if (!$addressResult) {
+                     throw new Exception("No address found for the admin.");
+                 }
+             
+                 $addressID = $addressResult['addressID'];
+             
+                 // Insert order details into orders table including the addressID
+                 $insertOrderQuery = "INSERT INTO orders (adminID, order_date, total_amount, addressID, paymentInfoID, order_completed) VALUES (:adminID, CURDATE(), :total_amount, :addressID, :paymentInfoID, :onGoing)";
+                 $stmtInsertOrder = $db->prepare($insertOrderQuery);
+                 $stmtInsertOrder->bindParam(':adminID', $adminID);
+                 $stmtInsertOrder->bindParam(':total_amount', $totalPrice);
+                 $stmtInsertOrder->bindParam(':addressID', $addressID);
+                 $stmtInsertOrder->bindParam(':paymentInfoID', $paymentInfoID);
+                 $stmtInsertOrder->bindParam(':onGoing', $onGoing);
+                 $stmtInsertOrder->execute();
+     
+     
+                 // After the successful insertion of the order into the orders table
+                 $orderID = $db->lastInsertId();
+     
+                 // Fetch all items from the user's cart
+                 $cartItemsStmt = $db->prepare("SELECT productID, quantity FROM cart WHERE adminID = :adminID");
+                 $cartItemsStmt->execute(['adminID' => $adminID]);
+                 $cartItems = $cartItemsStmt->fetchAll(PDO::FETCH_ASSOC);
+     
+                 // For each cart item, insert into the orders_products table and update product stock
+                 foreach ($cartItems as $cartItem) {
+                     $productID = $cartItem['productID'];
+                     $quantity = $cartItem['quantity'];
+     
+                     // Retrieve the price of the product
+                     $productStmt = $db->prepare("SELECT price FROM products WHERE productID = :productID");
+                     $productStmt->execute(['productID' => $productID]);
+                     $product = $productStmt->fetch(PDO::FETCH_ASSOC);
+                     $totalItemPrice = $product['price'] * $quantity;
+     
+                     // Insert order-product association
+                     $insertOrderProductsStmt = $db->prepare("INSERT INTO orders_products (orderID, productID, quantity, total_price) VALUES (:orderID, :productID, :quantity, :total_price)");
+                     $insertOrderProductsStmt->execute([
+                         'orderID' => $orderID,
+                         'productID' => $productID,
+                         'quantity' => $quantity,
+                         'total_price' => $totalItemPrice
+                     ]);
+     
+                     // Update product stock
+                     $updateStockStmt = $db->prepare("UPDATE products SET stock = stock - :quantity WHERE productID = :productID");
+                     $updateStockStmt->execute([
+                         'quantity' => $quantity,
+                         'productID' => $productID
+                     ]);
+                 }
+     
+         
+     
+               
+     
+                 // Redirect to a confirmation page or display the success message
+             
+                 echo "<div class= container>";
+                     echo "<h1> <center>Thank you for your order! <center></h1> ";
+                     echo "<br>";
+                     echo "Order placed successfully. Your order will be shipped to your address.";
+                     echo "<br>";
+                     echo "Your order total is: £" . $totalPrice;
+                     echo "<br>";
+                     echo "Your payment details have been saved.";
+                     echo "<br>";
+                     echo "Your order number is: " .  $orderID;
+                     echo "<br>";
+                     echo "You will receive an email confirmation shortly.";
+                     echo "<br>";
+                     echo "<br>";
+                     echo "<br>";
+                     echo "<br>";
+                     echo "<a href='account.php'><center>Click here to view your orders<center></a>";
+                     echo "<br>";
+                     echo "<a href='index.php'><center>or Click here to go to Home page<center></a>";
+                     echo "<br>";
+                 echo "</div>";
+     
+     
+
+                   // Clear the cart here code can go here
+                   $sqlEmptyCart = "DELETE FROM cart WHERE adminID = :adminID";
+                   $stmtEmptyCart = $db->prepare($sqlEmptyCart);
+                   $stmtEmptyCart->execute(['adminID' => $adminID]);
+                //Commit the transaction
+                   $db->commit();
+       
+                }catch (Exception $e) {
+                    $db->rollBack();
+                    echo "Error placing order: " . $e->getMessage();
+                }
+
+    }else //Was not able to retrieve the user's ID
+    {
+        echo "Error retriving the user's ID";
+        exit;
+    }
+    ?>
 
     </main>
 
@@ -295,3 +459,4 @@
 
 </body>
 </html>
+ 

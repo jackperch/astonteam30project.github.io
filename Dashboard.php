@@ -59,12 +59,27 @@
                 if ($result && $result['totalQuantity'] > 0) {
                     $totalQuantity = $result['totalQuantity'];
                 }
-            }else{
+            }elseif(isset($_SESSION['adminID'])) {
+                require_once("connectionDB.php"); // Adjust this path as necessary
+    
+                // Fetch the total quantity of items in the user's cart
+                $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE adminID = :adminID");
+                $stmt->execute(['adminID' => $_SESSION['adminID']]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+                if ($result && $result['totalQuantity'] > 0) 
+                {
+                    $totalQuantity = $result['totalQuantity'];
+                }
+    
+    
+            }elseif(isset($_SESSION['guest_shopping_cart']))
+            {
+    
                 // Fetch the total quantity of items in the guest's cart
-                  if (isset($_SESSION['guest_shopping_cart'])) {
-                      $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);}
-              
-          } 
+                    $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);
+            
+            }
             ?>
             <div id="cart-container">
                 <!-- cart icon image with link to cart page -->

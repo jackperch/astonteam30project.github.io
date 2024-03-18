@@ -32,12 +32,21 @@
 
             <?php 
                 session_start();
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['customerID'])) {
                     echo "<a href='members-blog.php'>Blog</a>";
                     echo "<a href='account.php'>Account</a>";
                     echo "<a href='logout.php'>Logout</a>";
-                } else {
+                } elseif (isset($_SESSION['adminID'])) 
+                {
+        
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+
+                }else
+                {
                     echo "<a href='login.php'>Login</a>";
+
                 }
                 //echo 'cutomer Id is ',$_SESSION['customerID'];
                 //echo 'username is ',$_SESSION['username'];

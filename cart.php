@@ -33,12 +33,21 @@
                 <a href="contact.php">Contact</a>
                 <?php 
                 session_start();
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['customerID'])) {
                     echo "<a href='members-blog.php'>Blog</a>";
                     echo "<a href='account.php'>Account</a>";
                     echo "<a href='logout.php'>Logout</a>";
-                } else {
+                } elseif (isset($_SESSION['adminID'])) 
+                {
+        
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+
+                }else
+                {
                     echo "<a href='login.php'>Login</a>";
+
                 }
                 ?>
             </nav>
@@ -59,11 +68,21 @@
                 if ($result && $result['totalQuantity'] > 0) {
                     $totalQuantity = $result['totalQuantity'];
                 }
+            }elseif(isset($_SESSION['adminID'])){
+                require_once("connectionDB.php"); // Adjust this path as necessary
+                $smt=$db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE  adminID = :adminID");
+                $smt->execute(['adminID' => $_SESSION['adminID']]);
+                $result = $smt->fetch(PDO::FETCH_ASSOC);
+                if ($result && $result['totalQuantity'] > 0) {
+                    $totalQuantity = $result['totalQuantity'];
+                }
             }else{
                   // Fetch the total quantity of items in the guest's cart
                     if (isset($_SESSION['guest_shopping_cart'])) {
                         $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);}
-                
+                    else{
+                        exit; // Error handling
+                    }
             } 
             
             ?>
@@ -154,6 +173,71 @@
                         echo "</form>";
                         //echo "</div>";
                     }
+                //for admin users
+                }elseif(isset($_SESSION['adminID'])){
+                    $adminID = $_SESSION['adminID'];
+                    // Function to fetch cart items
+                    function fetchCartItems() {
+                        global $db;
+                        $adminID = $_SESSION['adminID']; // checking to see if user is logged by comparing adminID to value stored in session
+                        //echo 'cutomer Id is ',$_SESSION['productID'];
+                        try {
+                            $sql = "
+                            SELECT
+                                pr.productID,
+                                pr.product_name AS productName,
+                                pr.price,
+                                c.quantity,
+                                pr.image
+                            FROM
+                                cart c
+                            JOIN
+                                products pr ON c.productID = pr.productID
+                            WHERE
+                                c.adminID = :adminID;
+                            ";
+
+                            $stmt = $db->prepare($sql);
+                            $stmt->bindParam(':adminID', $adminID, PDO::PARAM_INT);
+                            $stmt->execute();
+
+                            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        } catch(PDOException $ex) {
+                            echo "Error fetching cart items: " . $ex->getMessage();
+                            exit;
+                        }
+                    }
+
+                    $cartItems = fetchCartItems();
+
+                    foreach ($cartItems as $item) {
+                        $_total_item_price = $item['price'] * $item['quantity'];
+                        echo "<div class='cart-item'>";
+                        echo "<img src='Images/Product-Images/{$item['image']}' alt='{$item['productName']}' width=50 height=50>";
+                        echo "<h2>{$item['productName']}</h2>";
+                        echo "<p>Price: {$item['price']}</p>";
+                        //echo "<p>Quantity: {$item['quantity']}</p>";
+                        // Form for updating quantity or removing item
+                        echo "<form method='post' action='updateCart.php'>";
+                        echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
+                        echo "<input type='number' name='quantity' value='{$item['quantity']}' min='1'>";
+                        echo "<button type='submit' name='action' value='update'>Update Quantity</button>";
+                        echo "<button type='submit' name='action' value='remove'>Remove Item</button>";
+                        echo "</form>";
+                        echo "Item Total: £" . $_total_item_price;
+                        echo "</div>";
+                    }
+
+                    if (empty($cartItems)) {
+                        echo "<p>Your cart is empty</p>";
+                    } else {
+                        // Checkout button form
+                        echo "<form action='checkout.php' method='get'>";
+                        echo "<input type='submit' id='checkout-btn' value='Continue to Checkout' class='button'>";
+                        echo "</form>";
+                        //echo "</div>";
+                    }
+
 
                 }else{
                     require_once("connectionDB.php");

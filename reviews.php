@@ -30,12 +30,21 @@
                 <a href="contact.php">Contact</a>
                 <?php 
                 session_start();
-                if (isset($_SESSION['username'])) {
+                if (isset($_SESSION['customerID'])) {
                     echo "<a href='members-blog.php'>Blog</a>";
                     echo "<a href='account.php'>Account</a>";
                     echo "<a href='logout.php'>Logout</a>";
-                } else {
+                } elseif (isset($_SESSION['adminID'])) 
+                {
+        
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+
+                }else
+                {
                     echo "<a href='login.php'>Login</a>";
+
                 }
                 ?>
             </nav>
@@ -55,12 +64,27 @@
                 if ($result && $result['totalQuantity'] > 0) {
                     $totalQuantity = $result['totalQuantity'];
                 }
-            }else{
+            }elseif(isset($_SESSION['adminID'])) {
+                require_once("connectionDB.php"); // Adjust this path as necessary
+
+                // Fetch the total quantity of items in the user's cart
+                $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE adminID = :adminID");
+                $stmt->execute(['adminID' => $_SESSION['adminID']]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($result && $result['totalQuantity'] > 0) 
+                {
+                    $totalQuantity = $result['totalQuantity'];
+                }
+
+
+            }elseif(isset($_SESSION['guest_shopping_cart']))
+            {
+
                 // Fetch the total quantity of items in the guest's cart
-                  if (isset($_SESSION['guest_shopping_cart'])) {
-                      $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);}
-              
-          } 
+                    $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);
+            
+            }
             ?>
             <div id="cart-container">
                 <!-- cart icon image with link to cart page -->
@@ -79,15 +103,18 @@
     <div class="container">
         <div class="review">
             <?php
-                try{
+                try
+                {
                         require_once("connectionDB.php");
                         $retrieveReviewsSQL = "SELECT * FROM review WHERE productID IS NULL ORDER BY review_date DESC";
                         $stmt1 = $db->prepare($retrieveReviewsSQL);
                         $stmt1->execute();
                         $reviews = $stmt1->fetchAll(PDO::FETCH_ASSOC);
                         if ($reviews) {
-                            foreach ($reviews as $review) {
-                                if ($review['customerID'] !== null) {
+                            foreach ($reviews as $review) 
+                            {
+                                if ($review['customerID'] !== null ) 
+                                {
                                     $retrieveCustomerSQL = "SELECT username FROM customers WHERE customerID = ?";
                                     $stmt2 = $db->prepare($retrieveCustomerSQL);
                                     $stmt2->execute([$review['customerID']]);
@@ -97,21 +124,39 @@
                                     $formattedDate = date('d F, Y', $reviewDate); // Format timestamp to date month year
                                     echo "<p>  By: {$loggedInCustomer['username']} on $formattedDate </p>";
                                     echo "<p>  {$review['review']}</p>";
-                                } else {
+                                } elseif ($review['adminID'] !== null) 
+                                {
+                                    $retrieveCustomerSQL = "SELECT username FROM admin WHERE adminID = ?";
+                                    $stmt2 = $db->prepare($retrieveCustomerSQL);
+                                    $stmt2->execute([$review['adminID']]);
+                                    $loggedInAdmin = $stmt2->fetch(PDO::FETCH_ASSOC);
+                                   // echo "<div class='review'>";
+                                    $reviewDate = strtotime($review['review_date']); // Convert UNIX timestamp
+                                    $formattedDate = date('d F, Y', $reviewDate); // Format timestamp to date month year
+                                    echo "<p>  By: {$loggedInAdmin['username']} on $formattedDate </p>";
+                                    echo "<p>  {$review['review']}</p>";
+
+
+                                }else
+                                {
+
                                     $reviewDate = strtotime($review['review_date']); // Convert UNIX timestamp
                                     $formattedDate = date('d F, Y', $reviewDate); // Format timestamp to date month year
                                     echo "<p>  Guest User: {$review['first_name']} {$review['last_name']} on $formattedDate</p>";
                                     echo "<p>  {$review['review']}</p>";
                                 }
+
                                 //echo "</div>";
                             
                             }
-                        } else {
+                        } else 
+                        {
                             echo "<p>No reviews found.</p>";
                         }
-                    }catch(PDOException $exception){
-                        echo "Error: " . $exception->getMessage();
-                    }
+                }catch(PDOException $exception)
+                {
+                    echo "Error: " . $exception->getMessage();
+                }
             
             
             ?>
