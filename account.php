@@ -173,7 +173,7 @@
                 <li><strong>Last Name:</strong> <?php echo $customerData['last_name']; ?></li>
                 <li><strong>Email:</strong> <?php echo $customerData['email']; ?></li>
             </ul>
-            <a href="editAccount.php">Edit Account</a>
+            <a href="editAccount.php">Edit Account Information</a>
         </section>
 
         <section class="my-orders">
