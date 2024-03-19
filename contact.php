@@ -139,24 +139,24 @@
 
     <h1><center>Contact Us<center></h1>
 
-    <div class="contact-container">
+    <div class="contact-details-container">
         <div class="contact-info">
-            <h1>ACE GEAR</h1>
-            <h2>Address:</h2>
-            <p>123 Fake Street</p>
-            <p>London</p>
-            <p>M40 AK7</p>
-            <p>United Kingdom</p>
+            <h2 id="sub-heading">Address:</h2>
+            <p id="contact-detail">Ace Gear Sports</p>
+            <p id="contact-detail">123 Fake Street</p>
+            <p id="contact-detail">London</p>
+            <p id="contact-detail">M40 AK7</p>
+            <p id="contact-detail">United Kingdom</p>
         </div>
         <div class="contact-info">
-            <h2>Phone:</h2>
-            <p>120 1258 5678</p>
+            <h2 id="sub-heading">Phone:</h2>
+            <p id="contact-detail">+(00)120 1258 5678</p>
         </div>
         <div class="contact-info">
-            <h2>Email:</h2>
-            <p>info@acegear.com</p>
+            <h2 id="sub-heading">Email:</h2>
+            <p id="contact-detail">info@acegear.com</p>
         </div>
-
+    </div>
 
     <div class="contact-form-container">
         <h2>Or, Get in contact with us by filling out the form below :</h2>
