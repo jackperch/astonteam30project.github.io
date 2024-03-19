@@ -61,7 +61,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
                 <a href="about.php">About</a>
                 <a href="members-blog.php">Blog</a>
                 <a href="contact.php">Contact</a>
-                <a href="login.php">Login</a>
+                <?php 
+                if (isset($_SESSION['adminID'])) {
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+                }
+                ?>
             </nav>
             <?php
             // Initialize the total quantity variable

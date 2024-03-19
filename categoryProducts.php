@@ -39,6 +39,11 @@
                     echo "<a href='login.php'>Login</a>";
                 }
                 ?>
+                <?php 
+                if (isset($_SESSION['adminID'])) {
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                }
+                ?>
             </nav>
             <?php
             // Initialize the total quantity variable

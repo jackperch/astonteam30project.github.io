@@ -122,6 +122,12 @@ if (isset($_POST['addReview'])) {
                     <a href="about.php">About</a>
                     <a href="contact.php">Contact</a>
                     <?php 
+                    if (isset($_SESSION['adminID'])) {
+                        echo "<a href='Dashboard.php'>Dashboard</a>";
+                        echo "<a href='logout.php'>Logout</a>";
+                    }
+                    ?>
+                    <?php 
                      if (isset($_SESSION['customerID'])) {
                         echo "<a href='members-blog.php'>Blog</a>";
                         echo "<a href='account.php'>Account</a>";
@@ -247,6 +253,6 @@ if (isset($_POST['addReview'])) {
     </footer>
 
 
-    
+
 </body>
 </html>

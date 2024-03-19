@@ -141,24 +141,25 @@
 
     <div class="contact-container">
         <div class="contact-info">
-            <h2>Our Address</h2>
-            <p>ACE GEAR</p>
+            <h1>ACE GEAR</h1>
+            <h2>Address:</h2>
             <p>123 Fake Street</p>
             <p>London</p>
             <p>M40 AK7</p>
             <p>United Kingdom</p>
         </div>
         <div class="contact-info">
-            <h2>Phone</h2>
+            <h2>Phone:</h2>
             <p>120 1258 5678</p>
         </div>
         <div class="contact-info">
-            <h2>Email AstonGear@outlook.com</h2>
+            <h2>Email:</h2>
+            <p>info@acegear.com</p>
         </div>
 
 
     <div class="contact-form-container">
-        <h2>Get in contact with us by filling out the form below :</h2>
+        <h2>Or, Get in contact with us by filling out the form below :</h2>
 
         <form action="contact.php" method="post">
 

@@ -1,7 +1,5 @@
 <?php
-// Assuming you have a file that handles your database connection.
-// If not, you would need to set up your PDO connection to the database here.
-require 'connectionDB.php'; // Replace with the actual path to your database connection script
+require 'connectionDB.php'; 
 
 // Collect POST data
 $search = $_POST['search'] ?? '';
