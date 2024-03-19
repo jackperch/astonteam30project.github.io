@@ -25,6 +25,7 @@
                     // Add similar lines for other details you want to display
                 } else {
                     echo "No matching customer found.";
+
                 }
             } else {
                 echo "Error executing the query.";
@@ -62,8 +63,9 @@
             exit;
         }
     } else {
-        echo "Error  customerID not found or admin not found.";
-        exit; 
+        header("Location: error.php?error=no_session");
+        exit;
+        ; 
     }
 ?>
 

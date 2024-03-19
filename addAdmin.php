@@ -18,6 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         exit;
     } else {
         echo "Failed to add admin.";
+        header("Location:error.php?error=Failed to add admin.");
+        exit;
     }
 }
 ?>

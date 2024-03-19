@@ -60,6 +60,7 @@ if (isset($_POST['signupsubmitted'])) {
     } catch (PDOException $ex) {
         echo("Failed to connect to the database.<br>");
         echo($ex->getMessage());
+        header("Location: error.php?error=dtbError"); // Redirect to error page
         exit;
     }
 }
