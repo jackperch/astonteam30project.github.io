@@ -407,7 +407,7 @@
 
 
 
-    <footer>
+    
     <footer>
             <div class="footer-container">
                 <div class="footer-links">
@@ -418,7 +418,6 @@
                 </div>
             </div>
         </footer>
-    </footer>
 
 
 

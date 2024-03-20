@@ -84,11 +84,11 @@
     <main>
         
             <body>
-             <section class="container">
+             <section class="content-container">
 
              
-                <h1>404 Error</h1>
-                <p>Sorry for the incovenience , the page you are looking for does not exist.</p>
+                <h1><center>404 Error<center></h1>
+                <p><center>Sorry for the incovenience , the page you are looking for does not exist.</center></p>
             </section>
             </body>
 
