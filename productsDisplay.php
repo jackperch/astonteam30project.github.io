@@ -240,11 +240,17 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        function fetchAllProducts($db, $orderBy) {
+            $query = "SELECT * FROM products ORDER BY $orderBy"; // Fetch all products
+            return fetchProducts($db, $query);
+        }
+
         // Fetch the products
         $featuredProducts = fetchFeaturedProducts($db, $orderBy);
         $popularProducts = fetchPopularProducts($db, $orderBy);
         $newProducts = fetchNewProducts($db, $orderBy);
-        
+        $allProducts = fetchAllProducts($db, $orderBy);
+
         ?>
 
         <!-- Sorting form -->
@@ -304,7 +310,7 @@
                             echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
                             echo "</a>"; ?>                        
                         <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
-                        <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
+                        <!-- <p class="product-price">£<?//php echo htmlspecialchars($product['price']); ?></p> -->
                         <!-- <div class="quantity-input">
                             <button class="quantity-decrease" onclick="changeQuantity(false, ' $product['productID'] ?>')">-</button>
                             <input type="number" id="quantity- //$product['productID']" name="quantity" value="1" min="1" class="quantity-field">
@@ -316,7 +322,7 @@
                         } else{
                             echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
                             echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
-                            //echo "<div class='price'>£{$product['price']}</div>";
+                            echo "<div class='price'>£{$product['price']}</div>";
                             echo "<button class='add-to-cart' onclick='displayAlert()'>Add to cart!</button>";
                             echo "</form>";
                         }
@@ -339,7 +345,7 @@
                         echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
                         echo "</a>"; ?>
                         <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
-                        <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
+                        <!-- <p class="product-price">£<?//php echo htmlspecialchars($product['price']); ?></p> -->
                         <!-- <div class="quantity-input">
                             <button class="quantity-decrease" data-product-id="< $product['productID']?>">-</button>
                             <input type="number" id="quantity- $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
@@ -351,7 +357,7 @@
                         } else{
                             echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
                             echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
-                           // echo "<div class='price'>£{$product['price']}</div>";
+                            echo "<div class='price'>£{$product['price']}</div>";
                             echo "<button class='add-to-cart' data-product-id='{$product['productID']}' onclick='displayAlert()'>Add to cart!</button>";
                             echo "</form>";
                         }
@@ -361,6 +367,37 @@
             </div>
         </section>
 
+
+        <section id="all-products">
+            <h2><center>All Products:</center></h2>
+            <div class="product-grid">
+                <?php foreach ($allProducts as $product): ?>
+                    <div class="product">
+                        <?php // Make the product image a clickable link
+                        echo "<a href='productDetail.php?productID={$product['productID']}'>";
+                        echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
+                        echo "</a>"; ?>
+                        <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
+                        <!-- <p class="product-price">£<?//php echo htmlspecialchars($product['price']); ?></p> -->
+                        <!-- <div class="quantity-input">
+                            <button class="quantity-decrease" data-product-id="<?//= $product['productID'] ?>">-</button>
+                            <input type="number" id="quantity-<?//= $product['productID'] ?>" name="quantity" value="1" min="1" class="quantity-field">
+                            <button class="quantity-increase" data-product-id="<?//= $product['productID'] ?>">+</button>
+                        </div> -->
+                        <?php 
+                         if ($product['stock'] == 0) {
+                            echo "<p>Out of stock</p>"; // Checks the stock availability
+                        } else{
+                            echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
+                            echo "<input type='hidden' name='productID' value='{$product['productID']}'>";
+                            echo "<div class='price'>£{$product['price']}</div>";
+                            echo "<button class='add-to-cart' data-product-id='{$product['productID']}' onclick='displayAlert()'>Add to cart!</button>";
+                            echo "</form>";
+                        }
+                        ?>
+                    </div>
+                <?php endforeach; ?>
+        </section>
 
     </main>
 
