@@ -2,32 +2,33 @@
 session_start();
 include("connectionDB.php");
 
+//Asia's old code that did not work 
 // Update User
-if(isset($_POST['update-btn'])) {
-    $query = "UPDATE customers SET customerID=:customerID, username=:username, password=:password, first_name=:first_name, last_name=:last_name, email=:email WHERE customerID=:customerID";
-    $stmt = $db->prepare($query);
-    $customerID = $_POST['customerID']; 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
+// if(isset($_POST['update-btn'])) {
+//     $query = "UPDATE customers SET customerID=:customerID, username=:username, password=:password, first_name=:first_name, last_name=:last_name, email=:email WHERE customerID=:customerID";
+//     $stmt = $db->prepare($query);
+//     $customerID = $_POST['customerID']; 
+//     $username = $_POST['username'];
+//     $password = $_POST['password'];
+//     $first_name = $_POST['first_name'];
+//     $last_name = $_POST['last_name'];
+//     $email = $_POST['email'];
     
-    $stmt->execute();
-    exit;
-}
+//     $stmt->execute();
+//     exit;
+// }
 
 
-// Delete User
-if(isset($_POST['delete-btn'])) {
-    $customerID = $_POST['customerID'];
+// // Delete User
+// if(isset($_POST['delete-btn'])) {
+//     $customerID = $_POST['customerID'];
 
-    $query = "DELETE FROM customers WHERE customerID=:customerID";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':customerID', $customerID);
-    $stmt->execute();
-    exit;
-}
+//     $query = "DELETE FROM customers WHERE customerID=:customerID";
+//     $stmt = $db->prepare($query);
+//     $stmt->bindParam(':customerID', $customerID);
+//     $stmt->execute();
+//     exit;
+// }
 ?>
 
 
@@ -38,7 +39,7 @@ if(isset($_POST['delete-btn'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Management</title>
     <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="CSS/admin.css">
+    <link rel="stylesheet" href="CSS/admin.css">>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
     </style>
@@ -99,34 +100,39 @@ if(isset($_POST['delete-btn'])) {
         <table>
             <tr>
                 <th>Customer ID</th>
+                <th>Username</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email Address</th>
-                <th>Username</th>
-                <th>Action</th>
+                <th>Update</th>
+                <th>Delete</th>
+            
             </tr>
 
-            <tr>
+            
             <?php
             $query = "SELECT * FROM customers";
             $stmt = $db->query($query);
             while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr data-id='{$user['customerID']}'>"; 
-                echo "<td><span class='editable' contenteditable='true' data-column='customerID' data-id='{$user['customerID']}'>{$user['customerID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='first_name' data-id='{$user['customerID']}'>{$user['first_name']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='last_name' data-id='{$user['customerID']}'>{$user['last_name']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='email' data-id='{$user['customerID']}'>{$user['email']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='username' data-id='{$user['customerID']}'>{$user['username']}</span></td>";
-                echo "<td>";
-                echo "<button class='update-btn' data-id='{$user['customerID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$user['customerID']}'>Delete</button>"; 
-                echo "</td>";
-                echo "</tr>";
+                echo "<form method='post' action='updateUsers.php'>";
+                    echo "<tr>";
+                    echo "<input type='hidden' name='customerID' value='{$user['customerID']}'>"; 
+                    echo "<td>{$user['customerID']}</td>";
+                    echo "<td><input type='text' name='username' value='{$user['username']}'>";
+                    echo "<td><input type='text' name='first_name' value='{$user['first_name']}' ></td>";
+                    echo "<td><input type='text' name='last_name' value='{$user['last_name']}' ></td>";
+                    echo "<td><input type='text' name='email' value='{$user['email']}' ></td>";
+                    echo "<td><button type='submit' name='update' class='update-btn'>Update</button></td>";
+                    echo "<td><button type='submit' name='delete' class='delete-btn'>Delete</button></td>";
+                    echo "</tr>";
+                echo "</form>";
+
             }
             ?>
         </table>
         <!-- Add User Button -->
-        <button id="addUser">Add User</button>
+        <a href="adduser.php"><button id="addUser"> Add customer</button> </a>
+
     </div>
 </div>
 
@@ -141,7 +147,9 @@ if(isset($_POST['delete-btn'])) {
         </div>
     </footer>
 
-<script>
+
+    <!-- Asais old code that did not work -->
+<!-- <script>
 const updateButtons = document.querySelectorAll('.update-btn');
 updateButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -215,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-</script>
+</script> -->
 
 
 </body>

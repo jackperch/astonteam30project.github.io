@@ -107,15 +107,15 @@ include("connectionDB.php");
 
 
 // Delete product
-if(isset($_POST['delete-btn'])) {
-    $productID = $_POST['productID'];
+// if(isset($_POST['delete-btn'])) {
+//     $productID = $_POST['productID'];
 
-    $query = "DELETE FROM products WHERE productID=:productID";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':productID', $productID);
-    $stmt->execute();
-    exit;
-}
+//     $query = "DELETE FROM products WHERE productID=:productID";
+//     $stmt = $db->prepare($query);
+//     $stmt->bindParam(':productID', $productID);
+//     $stmt->execute();
+//     exit;
+// }
 ?>
 
 
