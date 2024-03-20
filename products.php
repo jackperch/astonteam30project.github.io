@@ -136,23 +136,63 @@ function fetchProducts() {
 $allOfTheProducts = fetchProducts();
 ?>
 
-    <div class="search-sort-filter">
-        <input type="text" id="search-input" placeholder="Search products..." onkeyup="filterProducts()">
-        <select id="filter-category" onchange="filterProducts()">
-            <option value="">Filter by Category</option>
-            <!-- Dynamically populate categories -->
-            <?php foreach ($categories as $category): ?>
-                <option value="<?= $category['categoryID'] ?>"><?= htmlspecialchars($category['name']) ?></option>
-            <?php endforeach; ?>
-        </select>
-        <select id="sort-option" onchange="filterProducts()">
-            <option value="">Sort by</option>
-            <option value="price_low_high">Price Low to High</option>
-            <option value="price_high_low">Price High to Low</option>
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-        </select>
-    </div>
+
+<!-- Sorting form -->
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <select id="sort-option" name="sort_option" onchange="this.form.submit()">
+        <option value="">Sort by</option>
+        <option value="price_low_high" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'price_low_high') ? 'selected' : ''; ?>>Price Low to High</option>
+        <option value="price_high_low" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'price_high_low') ? 'selected' : ''; ?>>Price High to Low</option>
+        <option value="newest" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'newest') ? 'selected' : ''; ?>>Newest</option>
+        <option value="oldest" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'oldest') ? 'selected' : ''; ?>>Oldest</option>
+    </select>
+</form>
+
+
+<?php
+// Assuming you have a database connection established in $db
+$sortOption = isset($_POST['sort_option']) ? $_POST['sort_option'] : '';
+
+$orderBy = "product_name"; // Default order by
+$orderDirection = "ASC"; // Default order direction
+
+switch ($sortOption) {
+    case 'price_low_high':
+        $orderBy = "price";
+        $orderDirection = "ASC";
+        break;
+    case 'price_high_low':
+        $orderBy = "price";
+        $orderDirection = "DESC";
+        break;
+    case 'aplphabetical':
+        $orderBy = "product_name";
+        $orderDirection = "ASC";
+        break;
+    case 'oldest':
+        $orderBy = "productID";
+        $orderDirection = "ASC";
+        break;
+}
+
+$query = "SELECT * FROM products ORDER BY $orderBy $orderDirection";
+$stmt = $db->prepare($query);
+$stmt->execute();
+$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+foreach ($products as $product) {
+    // Display your products
+    echo "<div class='product'>";
+    // Product details here
+    echo "<a href='productDetail.php?productID={$product['productID']}'>";
+                            echo "<img src='Images/Product-Images/" . htmlspecialchars($product['image']) . "' alt='" . htmlspecialchars($product['product_name']) . "' class='product-image'>";
+                            echo "</a>"; ?>                        
+                        <h3 class="product-name"><?php echo htmlspecialchars($product['product_name']); ?></h3>
+                        <p class="product-price">£<?php echo htmlspecialchars($product['price']); ?></p>
+    <?php echo "</div>";
+}
+?>
+
     <?php
     // Display fetched product details
     //The allOfTheProducts is an array of all the products  that  is going to be iterated through and the product is the current product that is being iterated through

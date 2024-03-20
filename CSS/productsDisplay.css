@@ -121,3 +121,46 @@
     transform: translateY(-2px); /* Slightly raise the button to imply it's being pressed */
     box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Adds a shadow to give depth */
 }
+
+
+
+
+
+
+/* Container for the form */
+#sorting-form {
+    padding-right: 120px;
+    margin-right: auto;
+    text-align: center;
+    width: fit-content;
+    transition: transform 0.3s ease;
+}
+
+#sorting-form:hover {
+    transform: scale(1.05);
+}
+
+/* Styling for the select dropdown */
+#sort-option {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 2px solid var(--color2);
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    color: black;
+    transition: all 0.3s ease;
+}
+
+/* Styling for the select dropdown on hover/focus */
+#sort-option:hover, #sort-option:focus {
+    background-color: var(--color2);
+    color: black;
+    border-color: var(--color2);
+}
+
+/* Apply a slight box-shadow for depth */
+#sort-option:focus {
+    box-shadow: 0 0 8px var(--color2);
+}
