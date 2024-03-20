@@ -2,25 +2,107 @@
 session_start();
 include("connectionDB.php");
 
+
 // Update product
-if(isset($_POST['update-btn'])) {
-    $query = "UPDATE products SET productID=:productID, image=:image, product_name=:product_name, price=:price, description=:description, categoryID=:categoryID, colour=:colour, size=:size, stock=:stock, is_featured=:is_featured, is_new=:is_new, is_popular=:is_popular WHERE productID=:productID";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':productID', $productID);
-    $stmt->bindParam(':image', $image);
-    $stmt->bindParam(':product_name', $product_name);
-    $stmt->bindParam(':price', $price);
-    $stmt->bindParam(':description', $description);
-    $stmt->bindParam(':total_amount', $categoryID);
-    $stmt->bindParam(':colour', $colour);
-    $stmt->bindParam(':size', $size);
-    $stmt->bindParam(':is_featured', $is_featured);
-    $stmt->bindParam(':is_new', $is_new);
-    $stmt->bindParam(':is_popular', $is_popular);
-    $stmt->bindParam(':stock', $stock);
-    $stmt->execute();
-    exit;
-}
+// if(isset($_POST['update-btn'])) {
+//     $productID = $_POST['productID'];
+//     $image = $_POST['image'];
+//     $product_name = $_POST['product_name'];
+//     $price = $_POST['price'];
+//     $description = $_POST['description'];
+//     $categoryID = $_POST['categoryID'];
+//     $colour = $_POST['colour'];
+//     $size = $_POST['size'];
+//     $stock = $_POST['stock'];
+//     $is_featured = $_POST['is_featured'];
+//     $is_new = $_POST['is_new'];
+//     $is_popular = $_POST['is_popular'];
+
+//     try {
+//         $query = "UPDATE products SET image=:image, product_name=:product_name, price=:price, description=:description, categoryID=:categoryID, colour=:colour, size=:size, stock=:stock, is_featured=:is_featured, is_new=:is_new, is_popular=:is_popular WHERE productID=:productID";
+//         $stmt = $db->prepare($query);
+//         $stmt->bindParam(':productID', $productID);
+//         $stmt->bindParam(':image', $image);
+//         $stmt->bindParam(':product_name', $product_name);
+//         $stmt->bindParam(':price', $price);
+//         $stmt->bindParam(':description', $description);
+//         $stmt->bindParam(':categoryID', $categoryID);
+//         $stmt->bindParam(':colour', $colour);
+//         $stmt->bindParam(':size', $size);
+//         $stmt->bindParam(':stock', $stock);
+//         $stmt->bindParam(':is_featured', $is_featured);
+//         $stmt->bindParam(':is_new', $is_new);
+//         $stmt->bindParam(':is_popular', $is_popular);
+//         $stmt->execute();
+//     } catch(PDOException $e) {
+//         echo "Error: " . $e->getMessage();
+//         exit;
+//     } 
+//     exit;
+// }
+
+// // Update product
+// if(isset($_POST['update-btn'])) {
+//     $productID = $_POST['productID'];
+//     $image = $_POST['image'];
+//     $product_name = $_POST['product_name'];
+//     $price = $_POST['price'];
+//     $description = $_POST['description'];
+//     $categoryID = $_POST['categoryID'];
+//     $colour = $_POST['colour'];
+//     $size = $_POST['size'];
+//     $stock = $_POST['stock'];
+//     $is_featured = $_POST['is_featured'];
+//     $is_new = $_POST['is_new'];
+//     $is_popular = $_POST['is_popular'];
+
+// echo "The new prie is"+$price;
+
+//     try{
+
+//     $query = "UPDATE products SET image=:image, product_name=:product_name, price=:price, description=:description, categoryID=:categoryID, colour=:colour, size=:size, stock=:stock, is_featured=:is_featured, is_new=:is_new, is_popular=:is_popular WHERE productID=:productID";
+//     $stmt = $db->prepare($query);
+//     $stmt->bindParam(':productID', $productID);
+//     $stmt->bindParam(':image', $image);
+//     $stmt->bindParam(':product_name', $product_name);
+//     $stmt->bindParam(':price', $price);
+//     $stmt->bindParam(':description', $description);
+//     $stmt->bindParam(':categoryID', $categoryID);
+//     $stmt->bindParam(':colour', $colour);
+//     $stmt->bindParam(':size', $size);
+//     $stmt->bindParam(':stock', $stock);
+//     $stmt->bindParam(':is_featured', $is_featured);
+//     $stmt->bindParam(':is_new', $is_new);
+//     $stmt->bindParam(':is_popular', $is_popular);
+//     $stmt->execute();
+//     }catch(PDOException $e){
+//         echo "Error: " . $e->getMessage();
+//         exit;
+
+//     } 
+//   //  $db->commit();
+//     exit;
+// }
+
+     
+//     $query = "UPDATE products SET productID=:productID, image=:image, product_name=:product_name, price=:price, description=:description, categoryID=:categoryID, colour=:colour, size=:size, stock=:stock, is_featured=:is_featured, is_new=:is_new, is_popular=:is_popular WHERE productID=:productID";
+//     $stmt = $db->prepare($query);
+//     $stmt->bindParam(':productID', $productID);
+//     $stmt->bindParam(':image', $image);
+//     $stmt->bindParam(':product_name', $product_name);
+//     $stmt->bindParam(':price', $price);
+//     $stmt->bindParam(':description', $description);
+//     $stmt->bindParam(':total_amount', $categoryID);
+//     $stmt->bindParam(':colour', $colour);
+//     $stmt->bindParam(':size', $size);
+//     $stmt->bindParam(':is_featured', $is_featured);
+//     $stmt->bindParam(':is_new', $is_new);
+//     $stmt->bindParam(':is_popular', $is_popular);
+//     $stmt->bindParam(':stock', $stock);
+//     $stmt->execute();
+//     exit; 
+
+// }
 
 
 
@@ -102,6 +184,9 @@ if(isset($_POST['delete-btn'])) {
         </div>
     </header>
 
+
+
+
 <div class="content-container">
     <div class="user-management-container">
         <h1>Products Management</h1>
@@ -113,8 +198,8 @@ if(isset($_POST['delete-btn'])) {
                 <th>Product Name</th>
                 <th>Price</th>
                 <th>Description</th>
-                <th>Category ID</th>
                 <th>Colour</th>
+                <th>Category ID</th>
                 <th>Size</th>
                 <th>Is Featured</th>
                 <th>Is New</th>
@@ -122,31 +207,34 @@ if(isset($_POST['delete-btn'])) {
                 <th>Stock</th>
             </tr>
 
-            <tr>
+            
             <?php
             $query = "SELECT * FROM products";
             $stmt = $db->query($query);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr data-id='{$row['productID']}'>"; 
-                echo "<td><span class='editable' contenteditable='true' data-column='productID' data-id='{$row['productID']}'>{$row['productID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='image' data-id='{$row['productID']}'>{$row['image']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='product_name' data-id='{$row['productID']}'>{$row['product_name']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='price' data-id='{$row['productID']}'>{$row['price']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='categoryID' data-id='{$row['productID']}'>{$row['categoryID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='colour' data-id='{$row['productID']}'>{$row['colour']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='size' data-id='{$row['productID']}'>{$row['size']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='stock' data-id='{$row['productID']}'>{$row['stock']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='is_featured' data-id='{$row['productID']}'>{$row['is_featured']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='is_new' data-id='{$row['productID']}'>{$row['is_new']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='is_popular' data-id='{$row['productID']}'>{$row['is_popular']}</span></td>";
-                echo "<td>";
-                echo "<button class='update-btn' data-id='{$row['productID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$row['productID']}'>Delete</button>"; 
-                echo "</td>";
-                echo "</tr>";
+                echo "<form method='post' action='updateProducts.php'>";
+                    echo "<tr>"; 
+                    echo "<input type='hidden' name='productID' value='{$row['productID']}'>"; // Add a hidden input to store the productID
+                    echo "<td>{$row['productID']}</td>";
+                    echo "<td><input type='text' name='product_name' value='{$row['product_name']}'></td>";
+                    echo "<td><input type='text' name='image' value='{$row['image']}'></td>";
+                    echo "<td><input type='text' name='price' value='{$row['price']}'></td>";
+                    echo "<td><input type='text' name='description' value='{$row['description']}'></td>";
+                    echo "<td><input type='text' name='colour' value='{$row['colour']}'></td>";
+                    echo "<td><input type='text' name='categoryID' value='{$row['categoryID']}'></td>";
+                    echo "<td><input type='text' name='size' value='{$row['size']}'></td>";
+                    echo "<td><input type='text' name='is_featured' value='{$row['is_featured']}'></td>";
+                    echo "<td><input type='text' name='is_new' value='{$row['is_new']}'></td>";
+                    echo "<td><input type='text' name='is_popular' value='{$row['is_popular']}'></td>";
+                    echo "<td><input type='text' name='stock' value='{$row['stock']}'></td>";
+                    echo "<td><button type='submit' name='update' class='update-btn'>Update</button></td>";
+                    echo "<td><button type='submit' name='delete' class='delete-btn'>Delete</button></td>";
+                    echo "</tr>";
+                echo "</form>";
             }
-            ?>
+            ?>        
         </table>
+
         <!-- Add Order Button -->
         <button id="addProduct">Add Product</button>
     </div>
@@ -177,38 +265,43 @@ updateButtons.forEach(button => {
             dataToUpdate[column] = value;
         });
         if (confirm("Are you sure you want to update this product?")) {
-            updateOrderData(productID, dataToUpdate);
+            updateProductData(productID, dataToUpdate); // Changed function name from 'updateOrderData' to 'updateProductData'
         }
     });
 });
 
-    // Delete product Functionality
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const productID = button.dataset.id; 
-            if (confirm("Are you sure you want to delete this product?")) {
-                deleteProductData(productID);
-            }
-        });
-    });
-
-    function updateProductData(productID, data) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '', true); 
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                console.log(xhr.responseText);
-                alert('Product data updated successfully.');
-            } else {
-                alert('Failed to update data.');
-            }
+// Delete product Functionality
+const deleteButtons = document.querySelectorAll('.delete-btn');
+deleteButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const productID = button.dataset.id; 
+        if (confirm("Are you sure you want to delete this product?")) {
+            deleteProductData(productID);
         }
-    };
-    xhr.send(JSON.stringify({ productID, data }));
-}
+    });
+});
+
+// function updateProductData(productID, dataToUpdate) {
+//     const xhr = new XMLHttpRequest();
+//     xhr.open('POST', window.location.href, true); // If the handler is the current script
+//     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // Since we're sending form data
+//     xhr.onreadystatechange = function () {
+//         if (xhr.readyState === XMLHttpRequest.DONE) {
+//             if (xhr.status === 200) {
+//                 console.log(xhr.responseText);
+//                 alert('Product data updated successfully.');
+//             } else {
+//                 alert('Failed to update product data.');
+//             }
+//         }
+//     };
+//     // Construct form data string
+//     let formData = `update-btn=true&productID=${productID}`;
+//     for (const [key, value] of Object.entries(dataToUpdate)) {
+//         formData += `&${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+//     }
+//     xhr.send(formData);
+// }
 
 
 function deleteProductData(productID) {
