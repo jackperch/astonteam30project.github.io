@@ -107,15 +107,15 @@ include("connectionDB.php");
 
 
 // Delete product
-if(isset($_POST['delete-btn'])) {
-    $productID = $_POST['productID'];
+// if(isset($_POST['delete-btn'])) {
+//     $productID = $_POST['productID'];
 
-    $query = "DELETE FROM products WHERE productID=:productID";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':productID', $productID);
-    $stmt->execute();
-    exit;
-}
+//     $query = "DELETE FROM products WHERE productID=:productID";
+//     $stmt = $db->prepare($query);
+//     $stmt->bindParam(':productID', $productID);
+//     $stmt->execute();
+//     exit;
+// }
 ?>
 
 
@@ -138,7 +138,10 @@ if(isset($_POST['delete-btn'])) {
             <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
             <h1 id="nav-bar-text">ACE GEAR</h1>
         </div>
-        
+        <div id="search-container">
+            <input type="text" id="search-bar" placeholder="Search...">
+            <button id="search-button">Search</button>
+        </div>
         <nav>
             <a href="index.php">Home</a>
             <a href="productsDisplay.php">Products</a>

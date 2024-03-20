@@ -85,11 +85,68 @@
             </a>
         </div>
 
-        
+            <!-- <?php
+            // Check if adminID is in session
+           // if (isset($_SESSION['adminID'])) {
+                // Add admin option to the nav bar
+                //echo '<a href="dashboard.php">Admin</a>';
+           // }
+            ?> -->
             
+        </header>
+        <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">ADMIN DASHBOARD</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                PRODUCTS
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="addProduct.php">Add Product</a></li>
+                                <li><a class="dropdown-item" href="editProducts.php">Edit Products</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                ORDERS
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="addOrder.php">Add Order</a></li>
+                                <li><a class="dropdown-item" href="editOrders.php">Edit Orders</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                USER
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="adduser.php">Add User</a></li>
+                                <li><a class="dropdown-item" href="editusers.php">Edit Users</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                ADMIN
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="addAdmin.php">Add Admin</a></li>
+                                <li><a class="dropdown-item" href="editAdmins.php">Edit Admins</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="adminLogout.php">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> -->
     </header>
-        
-    
 
     <div class="title">
         <h1 class="text-center">Welcome to the Admin Dashboard</h1>

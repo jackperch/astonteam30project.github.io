@@ -2,26 +2,26 @@
 session_start();
 include("connectionDB.php");
 
-if(isset($_GET['id'])) {
-    $orderID = $_GET['id'];
+// if(isset($_GET['id'])) {
+//     $orderID = $_GET['id'];
 
-    $query = "SELECT op.productID, op.quantity, op.total_price, p.product_name 
-              FROM orders_products op 
-              JOIN products p ON op.productID = p.productID 
-              WHERE op.orderID = :orderID";
-    $stmt = $db->prepare($query);
-    $stmt->execute(['orderID' => $orderID]);
-}
+//     $query = "SELECT op.productID, op.quantity, op.total_price, p.product_name 
+//               FROM orders_products op 
+//               JOIN products p ON op.productID = p.productID 
+//               WHERE op.orderID = :orderID";
+//     $stmt = $db->prepare($query);
+//     $stmt->execute(['orderID' => $orderID]);
+// }
 
-// Adding product
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $productID = $_POST['productID'];
-    $quantity = $_POST['quantity'];
+// // Adding product
+// if ($_SERVER["REQUEST_METHOD"] == "POST") {
+//     $productID = $_POST['productID'];
+//     $quantity = $_POST['quantity'];
 
-    $query = "INSERT INTO orders_products (productID, quantity, total_price) VALUES (:productID, :quantity, :total_price)";
-    $stmt = $db->prepare($query);
-    $stmt->execute(['orderID' => $orderID, 'productID' => $productID, 'quantity' => $quantity, 'total_price' => $total_price]);
-}
+//     $query = "INSERT INTO orders_products (productID, quantity, total_price) VALUES (:productID, :quantity, :total_price)";
+//     $stmt = $db->prepare($query);
+//     $stmt->execute(['orderID' => $orderID, 'productID' => $productID, 'quantity' => $quantity, 'total_price' => $total_price]);
+// }
 ?>
 
 <!DOCTYPE html>
@@ -96,25 +96,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h1>Products Management</h1>
 
         <table>
-            <tr>
+            <tr> 
+                <th>Order Product ID</th>
+                <th>Order ID</th>
                 <th>Product ID</th>
                 <th>Quantity</th>
                 <th>Total Price</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
 
             <?php
             $query = "SELECT * FROM orders_products";
             $stmt = $db->query($query);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr data-id='{$row['ordersProductID']}'>"; 
-                echo "<td>{$row['productID']}</td>";
-                echo "<td>{$row['quantity']}</td>";
-                echo "<td>{$row['total_price']}</td>";
-                echo "<td>";
-                echo "<button class='update-btn' data-id='{$row['ordersProductID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$row['ordersProductID']}'>Delete</button>"; 
-                echo "</td>";
-                echo "</tr>";
+
+
+                echo "<form method='post' action='updateOrderProducts.php'>";
+                echo "<tr>"; 
+                echo "<input type='hidden' name='ordersProductID' value='{$row['ordersProductID']}'>"; // Add a hidden input to store the productID
+                echo "<td>{$row['ordersProductID']}</td>";
+                echo "<td> <input type='text' name='orderID' value='{$row['orderID']}'></td>";
+                echo "<td> <input type='text' name='productID' value='{$row['productID']}'></td>";
+                echo "<td> <input type='text' name='quantity' value='{$row['quantity']}'></td>";
+                echo "<td> <input type='text' name='total_price' value='{$row['total_price']}'></td>";
+                echo "<td><button type='submit' name='update' class='update-btn'>Update</button></td>";
+                echo "<td><button type='submit' name='delete' class='delete-btn'>Delete</button></td>";
+                echo "</form>";        
+                echo "</tr>";                
+
             }
             ?>
         </table>

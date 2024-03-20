@@ -1,31 +1,31 @@
 <?php
 session_start();
 include("connectionDB.php");
+//Asai's old code that did not work for the buttons 
+// // Update Admin
+// if(isset($_POST['update-btn'])) {
+//     $query = "UPDATE admin SET adminID=:adminID, adminname=:adminname, password=:password WHERE adminID=:adminID";
+//     $stmt = $db->prepare($query);
+//     $adminID = $_POST['adminID']; 
+//     $adminname = $_POST['adminname']; 
+//     $stmt->bindParam(':adminID', $adminID);
+//     $stmt->bindParam(':adminname', $adminname);
+//     $stmt->bindParam(':password', $password); 
+//     $stmt->execute();
+//     exit;
+// }
 
-// Update Admin
-if(isset($_POST['update-btn'])) {
-    $query = "UPDATE admin SET adminID=:adminID, username=:username, password=:password WHERE adminID=:adminID";
-    $stmt = $db->prepare($query);
-    $adminID = $_POST['adminID']; 
-    $username = $_POST['username']; 
-    $stmt->bindParam(':adminID', $adminID);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $password); 
-    $stmt->execute();
-    exit;
-}
 
+// // Delete admin
+// if(isset($_POST['delete-btn'])) {
+//     $adminID = $_POST['adminID'];
 
-// Delete admin
-if(isset($_POST['delete-btn'])) {
-    $adminID = $_POST['adminID'];
-
-    $query = "DELETE FROM admin WHERE adminID=:adminID";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':adminID', $adminID);
-    $stmt->execute();
-    exit;
-}
+//     $query = "DELETE FROM admin WHERE adminID=:adminID";
+//     $stmt = $db->prepare($query);
+//     $stmt->bindParam(':adminID', $adminID);
+//     $stmt->execute();
+//     exit;
+// }
 ?>
 
 
@@ -34,7 +34,7 @@ if(isset($_POST['delete-btn'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Management</title>
+    <title>admin Management</title>
     <link rel="stylesheet" href="CSS/styles.css">
     <link rel="stylesheet" href="CSS/admin.css">
     <style>
@@ -91,34 +91,43 @@ if(isset($_POST['delete-btn'])) {
     </header>
 
 <div class="content-container">
-    <div class="user-management-container">
+    <div class="admin-management-container">
         <h1>Admins Management</h1>
 
         <table>
             <tr>
                 <th>Admin ID</th>
-                <th>Username</th>
-                <th>Action</th>
+                <th>username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
 
             <tr>
             <?php
             $query = "SELECT * FROM admin";
             $stmt = $db->query($query);
-            while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr data-id='{$user['adminID']}'>"; 
-                echo "<td><span class='editable' contenteditable='true' data-column='adminID' data-id='{$user['adminID']}'>{$user['adminID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='username' data-id='{$user['adminID']}'>{$user['username']}</span></td>";
-                echo "<td>";
-                echo "<button class='update-btn' data-id='{$user['adminID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$user['adminID']}'>Delete</button>"; 
-                echo "</td>";
-                echo "</tr>";
+            while ($admin = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo "<form method='post' action='updateAdmin.php'>";
+                    echo "<tr>";
+                    echo "<input type='hidden' name='adminID' value='{$admin['adminID']}'>"; 
+                    echo "<td>{$admin['adminID']}</td>";
+                    echo "<td><input type='text' name='username' value='{$admin['username']}'>";
+                    echo "<td><input type='text' name='first_name' value='{$admin['first_name']}' ></td>";
+                    echo "<td><input type='text' name='last_name' value='{$admin['last_name']}' ></td>";
+                    echo "<td><input type='text' name='email' value='{$admin['email']}' ></td>";
+                    echo "<td><button type='submit' name='update' class='update-btn'>Update</button></td>";
+                    echo "<td><button type='submit' name='delete' class='delete-btn'>Delete</button></td>";
+                    echo "</tr>";
+                echo "</form>";
             }
             ?>
         </table>
         <!-- Add admin Button -->
-        <button id="addAdmin">Add Admin</button>
+        <a href="addAdmin.php"><button id="addAdmin"> Add Admin</button> </a>
     </div>
 </div>
 
@@ -133,7 +142,7 @@ if(isset($_POST['delete-btn'])) {
         </div>
     </footer>
 
-<script>
+<!-- <script>
 
 const updateButtons = document.querySelectorAll('.update-btn');
 updateButtons.forEach(button => {
@@ -208,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-</script>
+</script> -->
 
 
 </body>
