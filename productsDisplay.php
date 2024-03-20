@@ -100,6 +100,7 @@
             //echo "Category ID: " . $categoryId;
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
+            header ("Location: error.php?error=dtbError");
             exit;
         }
 
@@ -135,6 +136,8 @@
             } catch (PDOException $e) {
                 error_log("Error fetching products by category: " . $e->getMessage());
                 return [];
+                header ("Location: error.php?error=dtbError");
+                exit;
             }
         }
         //$categoryProducts = fetchProductsByCategory($db, $categoryId);
