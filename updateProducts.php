@@ -70,4 +70,3 @@ require_once("connectionDB.php");
             echo "Error deleting product";
         }
     }
-?>

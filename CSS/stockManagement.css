@@ -1,0 +1,75 @@
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+}
+
+h1 {
+    color: #ffffff;
+    text-align: center;
+}
+
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    text-align: left;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+th {
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.stock-green {
+    background-color: #32CD32; /* Green */
+    background-image: linear-gradient(315deg, #32CD32 0%, #32CD32 74%);
+    color: #ffffff;
+}
+
+.stock-amber {
+    background-color: #FFBF00;
+    background-image: linear-gradient(315deg, #FFBF00 0%, #FFC247 74%);
+    color: #ffffff;
+}
+
+.stock-orange {
+    background-color: #FFA500;
+    background-image: linear-gradient(315deg, #FFA500 0%, #FF7E00 74%);
+    color: #ffffff;
+}
+
+.stock-red {
+    background-color: #FF4500;
+     background-image: linear-gradient(315deg, #FF4500 0%, #FF4500 74%); 
+    color: #ffffff;
+}
+
+a.manage-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: black;
+    color: #ffffff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+
+a.manage-btn:hover {
+    background-color: var(--color3);
+    color: black;
+    text-decoration: none;
+}

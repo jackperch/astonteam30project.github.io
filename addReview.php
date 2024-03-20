@@ -111,10 +111,7 @@ if (isset($_POST['addReview']))
                     <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
                     <h1 id="nav-bar-text">ACE GEAR</h1>
                 </div>
-                <div id="search-container">
-                    <input type="text" id="search-bar" placeholder="Search...">
-                    <button id="search-button">Search</button>
-                </div>
+                
                 <nav>
                     <a href="index.php">Home</a>
                     <a href="productsDisplay.php">Products</a>
@@ -241,7 +238,7 @@ if (isset($_POST['addReview']))
         </div>
     </footer>
 
-    
+
 </body>
 
 </html>

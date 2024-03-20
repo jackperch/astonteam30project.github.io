@@ -14,15 +14,10 @@
 
 <body>
     <header>
-    <header>
             <div id="logo-container">
                 <!-- logo image -->
                 <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
                 <h1 id="nav-bar-text">ACE GEAR</h1>
-            </div>
-            <div id="search-container">
-                <input type="text" id="search-bar" placeholder="Search...">
-                <button id="search-button">Search</button>
             </div>
             <nav>
                 <a href="index.php">Home</a>
@@ -34,6 +29,7 @@
                 session_start();
                 if (isset($_SESSION['adminID'])) {
                     echo "<a href='account.php'>Account</a>";
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
                     echo "<a href='adminLogout.php'>Logout</a>";
 
                 }else{
@@ -204,7 +200,17 @@
                     <div class="card-body">
                         <h5 class="card-title">Stock Management</h5>
                         <p class="card-text">Manage items low on Stock here:</p>
-                        <a href="editAdmins.php" class="btn btn-primary">Go to Stock</a>
+                        <a href="stockManagement.php" class="btn btn-primary">Go to Stock</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="images/admin-icon.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Contact Requests</h5>
+                        <p class="card-text">View Contact Requests here:</p>
+                        <a href="contactRequests.php" class="btn btn-primary">Go to Requests</a>
                     </div>
                 </div>
             </div>

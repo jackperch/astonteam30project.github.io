@@ -206,10 +206,48 @@ th {
 
 tr:hover {background-color: #f5f5f5;}
 
-.admin-management-container h1{
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
-    max-width: 100%;
-    overflow-x: auto;
+
+
+
+
+
+
+
+/* Styles for the request-details row */
+.request-details {
+    background-color: #f9f9f9; /* Light grey background */
 }
+
+.request-details td {
+    padding: 10px; /* Adds some padding inside each cell for spacing */
+    border-bottom: 1px solid #e0e0e0; /* Light grey border for the bottom of each cell */
+    text-align: left; /* Aligns text to the left */
+}
+
+/* Styles for hover effect */
+.request-details:hover {
+    background-color: #e0f7fa; /* Changes background color when hovered */
+}
+
+/* Style to indicate membership status */
+.request-details td:last-child {
+    font-weight: bold; /* Makes the text of the last cell (is_member) bold */
+}
+
+/* Further styling to differentiate member status */
+.request-details td:last-child:after {
+    content: " (Member)"; /* Adds text to indicate membership */
+    color: #388e3c; /* Green text color */
+    display: block; /* Ensures the content is displayed */
+}
+
+.request-details td:last-child[data-is-member="no"]:after {
+    content: " (Non-Member)"; /* Text for non-members */
+    color: #d32f2f; /* Red text color */
+}
+
+
+
+
+
+
