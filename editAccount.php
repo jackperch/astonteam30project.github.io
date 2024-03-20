@@ -193,8 +193,9 @@
 
 
         } else {
-            echo "You are not logged in";
+            header("Location: error.php?code=unexpected_error");
             exit;
+            
         }
         
 ?>

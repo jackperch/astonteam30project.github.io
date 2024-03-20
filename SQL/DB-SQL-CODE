@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 18, 2024 at 11:25 PM
+-- Generation Time: Mar 19, 2024 at 10:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -118,7 +118,8 @@ INSERT INTO `cart` (`cartID`, `customerID`, `adminID`, `productID`, `quantity`, 
 (13, 9, NULL, 3, 1, 0),
 (22, 38, NULL, 6, 1, 0),
 (23, 38, NULL, 10, 1, 0),
-(27, NULL, 1, 7, 1, 0);
+(27, NULL, 1, 7, 1, 0),
+(28, NULL, 2, 8, 5, 0);
 
 -- --------------------------------------------------------
 
@@ -414,8 +415,8 @@ CREATE TABLE `review` (
   `productID` int(11) DEFAULT NULL,
   `review` text NOT NULL,
   `review_date` date NOT NULL,
-  `first_name` text NOT NULL,
-  `last_name` text NOT NULL
+  `first_name` text DEFAULT NULL,
+  `last_name` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -535,7 +536,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `category`
