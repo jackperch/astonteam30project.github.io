@@ -12,6 +12,8 @@
     color: #333;
     text-align: center;
     margin-bottom: 20px;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
 /* Table styling */
@@ -20,6 +22,9 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    width: 100%; /* This makes the table take up as much space as it can within its container */
+    border-collapse: collapse; /* This ensures borders are collapsed into a single border */
+    table-layout: fixed; /*  to prevent the table from expanding beyond the width set */
 }
 
 table th,
@@ -83,6 +88,30 @@ span.editable {
     background-color: #da190b;
 }
 
+#addAdmin {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#addProduct {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#addProduct:hover {
+    background-color: #4CAF50;
+}
+
 /* Add User Button */
 #addUser {
     padding: 10px 20px;
@@ -97,3 +126,82 @@ span.editable {
 #addUser:hover {
     background-color: #4CAF50;
 }
+
+
+/* Form styling */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Success/Error message styling */
+.message-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.message-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+/* Table styling */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+tr:hover {background-color: #f5f5f5;}

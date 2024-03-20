@@ -118,11 +118,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         <div class="signup-container">
                 <h2>Add New Product</h2>
     <form method="post">
-    <input type="text" id="productID" name="productID"  placeholder="product ID"  onblur="validateFirstName()">
-    <span id="first-name-error"></span>
+    <!-- <input type="text" id="productID" name="productID"  placeholder="product ID"  onblur="validateFirstName()">
+    <span id="first-name-error"></span> -->
 
     <input type="text" id="product_name" name="product_name"  placeholder="product name"  onblur="validateFirstName()">
     <span id="first-name-error"></span>
+
+    <input type="text" id="image" name="image"  placeholder="enter image file name"  onblur="validateFirstName()">
 
     <input type="text" id="price" name="price"  placeholder="price"   onblur="validateLastName()">
     <span id="last-name-error"></span>
