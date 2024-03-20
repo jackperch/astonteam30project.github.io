@@ -1,33 +1,73 @@
 <?php
 session_start();
-include("connectionDB.php");
+require_once("connectionDB.php");
 
-// Add New User
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+// Sign-up code...
+if (isset($_POST['signupsubmitted'])) {
 
-    $query = "INSERT INTO customers (first_name, last_name, email, username, password) VALUES (:first_name, :last_name, :email, :username, :password)";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':first_name', $first_name);
-    $stmt->bindParam(':last_name', $last_name);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':username', $username);
-    $stmt->bindParam(':password', $password);
-    $stmt->execute();
 
-    if ($stmt->rowCount() > 0) {
-        // Redirect to edituser.php after adding the user
-        header("Location: editusers.php");
+    $newUsername = isset($_POST['username']) ? $_POST['username'] : false;
+    $newPassword = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : false;
+    $newEmail = isset($_POST['email']) ? $_POST['email'] : false;
+    //$newAddress = isset($_POST['address']) ? $_POST['address'] : false;
+
+    $newFirstName = isset($_POST['first-name']) ? $_POST['first-name'] : false;
+    $newLastName = isset($_POST['last-name']) ? $_POST['last-name'] : false;
+
+    $newHouseNumber = isset($_POST['house-number']) ? $_POST['house-number'] : false;
+    $newAddressLine1 = isset($_POST['address-line1']) ? $_POST['address-line1'] : false;
+    $newAddressLine2 = isset($_POST['address-line2']) ? $_POST['address-line2'] : false;
+    $newPostCode = isset($_POST['post-code']) ? $_POST['post-code'] : false;
+    $newCity = isset($_POST['city']) ? $_POST['city'] : false;
+    $newCountry = isset($_POST['country']) ? $_POST['country'] : false;
+
+
+    if ($newUsername == false || $newPassword == false || $newEmail == false  ||  $newFirstName == false || $newLastName == false || $newHouseNumber == false || $newAddressLine1 == false || $newAddressLine2 == false || $newPostCode == false || $newCity == false || $newCountry == false) {
+        echo "One or more fields are empty. Please enter valid values.";
         exit;
-    } else {
-        echo "Failed to add user.";
+    }
+
+    try {
+        // Check if the username already exists
+        $checkUsernameSQL = $db->prepare('SELECT * FROM Customers WHERE username = ?');
+        $checkUsernameSQL->execute(array($newUsername));
+
+        if ($checkUsernameSQL->rowCount() > 0) {
+            echo "Username already exists. Please choose a different username.";
+        } else {
+            // Insert new user into the database
+            $insertUserSQL = $db->prepare('INSERT INTO Customers (username, password, first_name, last_name,email) VALUES (?, ?, ?, ?,?)');
+            $insertUserSQL->execute(array($newUsername, $newPassword, $newFirstName, $newLastName,$newEmail));
+           
+            $retrieveCustomerID = $db->prepare('SELECT customerID FROM Customers WHERE username = ?');
+            $retrieveCustomerID->execute(array($newUsername));
+            $customerID = $retrieveCustomerID->fetch(PDO::FETCH_ASSOC)['customerID'];
+
+            $insertUserAddress = $db->prepare('INSERT INTO address (customerID, house_number, address_line_1, address_line_2, post_code, city, country) VALUES (?, ?, ?, ?, ?, ?, ?)');
+            $insertUserAddress->execute(array($customerID, $newHouseNumber, $newAddressLine1, $newAddressLine2, $newPostCode, $newCity, $newCountry));
+            
+            
+                   
+             
+         
+
+           echo "Sign up successful! New User can now log in.";
+           //if( $_SESSION["username"]=$_POST['username']);
+           //loads these website
+            header("Location:editUser.php"); 
+            exit();
+        }
+    } catch (PDOException $ex) {
+        echo("Failed to connect to the database.<br>");
+        echo($ex->getMessage());
+        header("Location: error.php?error=dtbError"); // Redirect to error page
+        exit;
     }
 }
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +84,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         <script src="signup.js"></script>
 
     </head>
+
+
     <body>
         <header>
             <div id="logo-container">
@@ -57,16 +99,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
             </div>
             <nav>
                 <a href="index.php">Home</a>
-                <a href="products.php">Products</a>
+                <a href="productsDisplay.php">Products</a>
                 <a href="about.php">About</a>
                 <a href="members-blog.php">Blog</a>
                 <a href="contact.php">Contact</a>
-                <?php 
-                if (isset($_SESSION['adminID'])) {
-                    echo "<a href='Dashboard.php'>Dashboard</a>";
-                    echo "<a href='logout.php'>Logout</a>";
-                }
-                ?>
+                <a href="login.php">Login</a>
             </nav>
             <?php
             // Initialize the total quantity variable
@@ -100,33 +137,52 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
             </div>
         </header>
 
-    <div class="content-container">
-        <div class="signup-container">
-                <h2>Add New User</h2>
-    <form method="post">
-    <input type="text" id="first-name" name="first_name"  placeholder="First Name"  onblur="validateFirstName()">
-    <span id="first-name-error"></span>
+       
+       
+       <div class="content-container">
+            <div class="signup-container">
+                <h2>Sign Up</h2>
+                <form action="signup.php" method="post">
+                    
+                    <input type="text" id="first-name" name="first-name"  placeholder="First Name"  onblur="validateFirstName()">
+                    <span id="first-name-error"></span>
 
-    <input type="text" id="last-name" name="last_name"  placeholder="Last Name"   onblur="validateLastName()">
-    <span id="last-name-error"></span>
+                    <input type="text" id="last-name" name="last-name"  placeholder="Last Name"   onblur="validateLastName()">
+                    <span id="last-name-error"></span>
 
-    <input type="text" id="username" name="username"  placeholder="Username" onblur="validateUsername()">
-    <span id="username-error"></span>
-    
-    <input type="password" id="password" name="password"  placeholder="Password" onblur="validatePassword()">
-    <span id="password-error"></span>
+                    <input type="text" id="username" name="username"  placeholder="Username" onblur="validateUsername()">
+                    <span id="username-error"></span>
+                    
+                    <input type="password" id="password" name="password"  placeholder="Password" onblur="validatePassword()">
+                    <span id="password-error"></span>
 
-    <input type="text" id="email" name="email"  placeholder="E-mail" onblur="validateEmail()">
-    <span id="email-error"></span>
+                    <input type="text" id="email" name="email"  placeholder="E-mail" onblur="validateEmail()">
+                   <span id="email-error"></span>
 
-    <input name="submit" type="submit" value="Add new user">
-    <input type="reset" value="Clear">
-    <input type="hidden" name="signupsubmitted" value="TRUE">
-    <span id="signup-error"></span>
-</form>
+                    <input type="text" id="house-number" name="house-number" placeholder="house name or number" onblur="validateHouseNumber()">
+                    <span id="house-number-error"></span>
+                    <input type="text" id="address-line1" name="address-line1" placeholder="first line of address" onblur="validateAdressLine1()">
+                    <span id="address-line1-error"></span>
+                    <input type="text" id="address-line2" name="address-line2" placeholder="second line of address" onblur="validateAdressLine2()">
+                    <span id="address-line2-error"></span>
+                    <input type="text" id="post-code" name="post-code" placeholder="post code" onblur="validatePostCode()">
+                    <span id="post-code-error"></span>
+                    <input type="text" id="city" name="city" placeholder="city" onblur="validateCity()">
+                    <span id="city-error"></span>
+                    <input type="text" id="country" name="country" placeholder="country" onblur="validateCountry()">
+                    <span id="country-error"></span>
 
+
+                    <input onclick=" return validateForm()" type="submit" value="Register" >
+                    <input type="reset" value="clear">
+                    <input type="hidden" name="signupsubmitted" value="TRUE" >
+                    <span id="signup-error"></span>
+                
+                </form>
             </div>
         </div>
+
+
 
         <footer>
             <div class="footer-container">
@@ -140,5 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         </footer>
         
     </body>
+
+    <script src="signup.js"></script>
 
 </html>
