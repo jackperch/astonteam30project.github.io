@@ -183,6 +183,7 @@
     
                     } else {
                         echo "No matching customer found.";
+                        header("Location: error.php?code=no_session");
                     }
                 }  catch (PDOException $ex) 
                 {
