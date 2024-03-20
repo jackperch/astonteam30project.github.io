@@ -65,7 +65,7 @@
 </head>
 <body>
 
-        <header>
+<header>
             <div id="logo-container">
                 <!-- logo image -->
                 <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
@@ -80,9 +80,73 @@
                 <a href="productsDisplay.php">Products</a>
                 <a href="about.php">About</a>
                 <a href="contact.php">Contact</a>
-                <a href="login.php">Login</a>
+                <?php 
+                //session_start();
+                if (isset($_SESSION['customerID'])) {
+                    echo "<a href='members-blog.php'>Blog</a>";
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+                } elseif (isset($_SESSION['adminID'])) 
+                {
+        
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='account.php'>Account</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+
+                }else
+                {
+                    echo "<a href='login.php'>Login</a>";
+
+                }
+                ?>
+                ?>
             </nav>
-          
+            <?php
+            // Initialize the total quantity variable
+            $totalQuantity = 0;
+
+            // Check if the user is logged in
+            if (isset($_SESSION['customerID'])) {
+                require_once("connectionDB.php"); // Adjust this path as necessary
+
+                // Fetch the total quantity of items in the user's cart
+                $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE customerID = :customerID");
+                $stmt->execute(['customerID' => $_SESSION['customerID']]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($result && $result['totalQuantity'] > 0) {
+                    $totalQuantity = $result['totalQuantity'];
+                }
+            }elseif(isset($_SESSION['adminID'])) {
+                require_once("connectionDB.php"); // Adjust this path as necessary
+
+                // Fetch the total quantity of items in the user's cart
+                $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE adminID = :adminID");
+                $stmt->execute(['adminID' => $_SESSION['adminID']]);
+                $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($result && $result['totalQuantity'] > 0) 
+                {
+                    $totalQuantity = $result['totalQuantity'];
+                }
+
+
+            }elseif(isset($_SESSION['guest_shopping_cart']))
+            {
+
+                // Fetch the total quantity of items in the guest's cart
+                    $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);
+            
+            }
+            
+            ?>
+            <div id="cart-container">
+                <!-- cart icon image with link to cart page -->
+                <a href="cart.php">
+                    <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
+                    <span id="cart-count"><?php echo $totalQuantity; ?></span>
+                </a>
+            </div>
         </header>
 
 
