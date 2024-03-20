@@ -102,7 +102,7 @@ include("connectionDB.php");
                 <th>Order ID</th>
                 <th>Customer ID</th>
                 <th>Order Date</th>
-                <th>Total Amount £</th>
+                <th>Order Total £</th>
                 <th>Adress ID</th>
                 <th>Payment ID</th>
                 <th>Order Completed</th>
@@ -123,7 +123,7 @@ include("connectionDB.php");
                 echo "<td>{$row['orderID']}</td>";
                 echo "<td> <input type='text' name='customerID' value='{$row['customerID']}'></td>";
                 echo "<td> <input type='text'name='order_date' value='{$row['order_date']}'></td>";
-                echo "<td> <input type='text'name='total_amount' value='£{$row['total_amount']}'></td>";
+                echo "<td> <input type='text'name='total_amount' value='{$row['total_amount']}'></td>";
                 echo "<td><input type='text' name='addressID' value='{$row['addressID']}'></td>";
                 echo "<input type='hidden' name='paymentInfoID' value='{$row['paymentInfoID']}'>"; // Add a hidden input to store the productID
                 echo "<td>{$row['paymentInfoID']}</td>";
