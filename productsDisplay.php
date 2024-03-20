@@ -198,64 +198,65 @@
         // $newProducts = fetchNewProducts($db);
 
         // Handling form submission for sorting
-$sortOption = isset($_POST['sort_option']) ? $_POST['sort_option'] : '';
+        $sortOption = isset($_POST['sort_option']) ? $_POST['sort_option'] : '';
 
-// Determine the ORDER BY clause based on the sorting option
-switch ($sortOption) {
-    case 'price_low_high':
-        $orderBy = 'price ASC'; // Sort by price in ascending order
-        break;
-    case 'price_high_low':
-        $orderBy = 'price DESC'; // Sort by price in descending order
-        break;
-    case 'newest':
-        $orderBy = 'productID ASC'; // USind the auto incrementing productID as a reference for the newest product
-        break;
-    case 'oldest':
-        $orderBy = 'productID DESC'; // using the auto incrementing productID as a reference for the oldest product
-        break;
-    default:
-        $orderBy = 'product_name ASC'; // Default sorting
-}
+        // Determine the ORDER BY clause based on the sorting option
+        switch ($sortOption) {
+            case 'price_low_high':
+                $orderBy = 'price ASC'; // Sort by price in ascending order
+                break;
+            case 'price_high_low':
+                $orderBy = 'price DESC'; // Sort by price in descending order
+                break;
+            case 'newest':
+                $orderBy = 'productID ASC'; // USind the auto incrementing productID as a reference for the newest product
+                break;
+            case 'oldest':
+                $orderBy = 'productID DESC'; // using the auto incrementing productID as a reference for the oldest product
+                break;
+            default:
+                $orderBy = 'product_name ASC'; // Default sorting
+        }
 
-// Define functions to fetch featured, popular, and new products with dynamic sorting
-function fetchFeaturedProducts($db, $orderBy) {
-    $query = "SELECT * FROM products WHERE is_featured = 1 ORDER BY $orderBy"; // Fetching products in productlisting table that are marked as featured
-    return fetchProducts($db, $query);
-}
+        // Define functions to fetch featured, popular, and new products with dynamic sorting
+        function fetchFeaturedProducts($db, $orderBy) {
+            $query = "SELECT * FROM products WHERE is_featured = 1 ORDER BY $orderBy"; // Fetching products in productlisting table that are marked as featured
+            return fetchProducts($db, $query);
+        }
 
-function fetchPopularProducts($db, $orderBy) {
-    $query = "SELECT * FROM products WHERE is_popular = 1 ORDER BY $orderBy"; // Fetch popular products
-    return fetchProducts($db, $query);
-}
+        function fetchPopularProducts($db, $orderBy) {
+            $query = "SELECT * FROM products WHERE is_popular = 1 ORDER BY $orderBy"; // Fetch popular products
+            return fetchProducts($db, $query);
+        }
 
-function fetchNewProducts($db, $orderBy) {
-    $query = "SELECT * FROM products WHERE is_new = 1 ORDER BY $orderBy"; // Fetching products in productlisting table that are marked as new
-    return fetchProducts($db, $query);
-}
+        function fetchNewProducts($db, $orderBy) {
+            $query = "SELECT * FROM products WHERE is_new = 1 ORDER BY $orderBy"; // Fetching products in productlisting table that are marked as new
+            return fetchProducts($db, $query);
+        }
 
-function fetchProducts($db, $query) {
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+        function fetchProducts($db, $query) {
+            $stmt = $db->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
 
-// Fetch the products
-$featuredProducts = fetchFeaturedProducts($db, $orderBy);
-$popularProducts = fetchPopularProducts($db, $orderBy);
-$newProducts = fetchNewProducts($db, $orderBy);
+        // Fetch the products
+        $featuredProducts = fetchFeaturedProducts($db, $orderBy);
+        $popularProducts = fetchPopularProducts($db, $orderBy);
+        $newProducts = fetchNewProducts($db, $orderBy);
+        
         ?>
 
         <!-- Sorting form -->
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" id="sorting-form">
-                <select id="sort-option" name="sort_option" onchange="this.form.submit()">
-                    <option value="">Sort by</option>
-                    <option value="price_low_high" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'price_low_high') ? 'selected' : ''; ?>>Price Low to High</option>
-                    <option value="price_high_low" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'price_high_low') ? 'selected' : ''; ?>>Price High to Low</option>
-                    <option value="newest" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'newest') ? 'selected' : ''; ?>>Newest</option>
-                    <option value="oldest" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'oldest') ? 'selected' : ''; ?>>Oldest</option>
-                </select>
-            </form>
+            <select id="sort-option" name="sort_option" onchange="this.form.submit()">
+                <option value="">Sort by</option>
+                <option value="price_low_high" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'price_low_high') ? 'selected' : ''; ?>>Price Low to High</option>
+                <option value="price_high_low" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'price_high_low') ? 'selected' : ''; ?>>Price High to Low</option>
+                <option value="newest" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'newest') ? 'selected' : ''; ?>>Newest</option>
+                <option value="oldest" <?php echo (isset($_POST['sort_option']) && $_POST['sort_option'] == 'oldest') ? 'selected' : ''; ?>>Oldest</option>
+            </select>
+        </form>
 
         <!-- Featured products will be loaded here -->
         <section id="featured-products">
