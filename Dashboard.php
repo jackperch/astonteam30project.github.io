@@ -14,7 +14,6 @@
 
 <body>
     <header>
-    <header>
             <div id="logo-container">
                 <!-- logo image -->
                 <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
@@ -204,7 +203,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Stock Management</h5>
                         <p class="card-text">Manage items low on Stock here:</p>
-                        <a href="editAdmins.php" class="btn btn-primary">Go to Stock</a>
+                        <a href="stockManagement.php" class="btn btn-primary">Go to Stock</a>
                     </div>
                 </div>
             </div>
