@@ -48,7 +48,7 @@ try {
             <?php
             session_start();
             if (isset($_SESSION['adminID'])) {
-                echo "<a href='account.php'>Account</a>";
+                echo "<a href='Dashboard.php'>Dashboard</a>";
                 echo "<a href='adminLogout.php'>Logout</a>";
 
             }else{

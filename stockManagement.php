@@ -33,10 +33,6 @@ try {
             <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
             <h1 id="nav-bar-text">ACE GEAR</h1>
         </div>
-        <div id="search-container">
-            <input type="text" id="search-bar" placeholder="Search...">
-            <button id="search-button">Search</button>
-        </div>
         <nav>
             <a href="index.php">Home</a>
             <a href="productsDisplay.php">Products</a>
@@ -46,7 +42,7 @@ try {
             <?php
             session_start();
             if (isset($_SESSION['adminID'])) {
-                echo "<a href='account.php'>Account</a>";
+                echo "<a href='Dashboard.php'>Dashboard</a>";
                 echo "<a href='adminLogout.php'>Logout</a>";
 
             }else{
