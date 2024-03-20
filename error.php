@@ -41,6 +41,8 @@ else {
            echo" <p>Please <a href='login.php'>'log in'</a> to continue.</p>";
         }elseif ($errorCode === 'cartIssue'){
             echo" <p>Please <a href='cart.php'>'try again'</a> to continue.</p>";
+        }elseif("errorCode === 'dtbError'"){
+            echo" <p>There is something wrong with connecting to the database please try again  later'.</p>";
         }
          ?>
     </div>
