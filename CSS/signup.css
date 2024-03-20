@@ -19,7 +19,7 @@
     background-color: #aaaaaa;
     color: #000000;
     margin-bottom: 100px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 form {
@@ -52,7 +52,7 @@ h2{
     color: var(--color1);
     font-family: var(--font2);
     font-weight: 700;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     text-align: center;
 }
 
