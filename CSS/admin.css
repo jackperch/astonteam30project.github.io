@@ -88,6 +88,30 @@ span.editable {
     background-color: #da190b;
 }
 
+#addAdmin {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#addProduct {
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#addProduct:hover {
+    background-color: #4CAF50;
+}
+
 /* Add User Button */
 #addUser {
     padding: 10px 20px;
