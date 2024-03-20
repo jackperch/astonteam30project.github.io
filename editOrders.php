@@ -102,13 +102,13 @@ include("connectionDB.php");
                 <th>Order ID</th>
                 <th>Customer ID</th>
                 <th>Order Date</th>
-                <th>Total Amount</th>
+                <th>Total Amount £</th>
                 <th>Adress ID</th>
                 <th>Payment ID</th>
                 <th>Order Completed</th>
                 <th>Update</th>
                 <th>Delete</th>
-                <th>Products</th>
+                <th>View Order Products</th>
             </tr>
 
             
@@ -123,11 +123,11 @@ include("connectionDB.php");
                 echo "<td>{$row['orderID']}</td>";
                 echo "<td> <input type='text' name='customerID' value='{$row['customerID']}'></td>";
                 echo "<td> <input type='text'name='order_date' value='{$row['order_date']}'></td>";
-                echo "<td> <input type='text'name='total_amount' value='{$row['total_amount']}'></td>";
+                echo "<td> <input type='text'name='total_amount' value='£{$row['total_amount']}'></td>";
                 echo "<td><input type='text' name='addressID' value='{$row['addressID']}'></td>";
                 echo "<input type='hidden' name='paymentInfoID' value='{$row['paymentInfoID']}'>"; // Add a hidden input to store the productID
                 echo "<td>{$row['paymentInfoID']}</td>";
-                echo "<td> <input type='text'name='paymentInfoID' value='{$row['paymentInfoID']}'></td>";
+                //echo "<td> <input type='text'name='paymentInfoID' value='{$row['paymentInfoID']}'></td>";
                 echo "<td><input type='text' name='order_completed' value='{$row['order_completed']}'></td>";
                 echo "<td><button type='submit' name='update' class='update-btn'>Update</button></td>";
                 echo "<td><button type='submit' name='delete' class='delete-btn'>Delete</button></td>";

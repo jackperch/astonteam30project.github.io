@@ -14,14 +14,14 @@ require_once("connectionDB.php");
 
         // Prepare the SQL statement
         try{
-        $query ="UPDATE orders SET customerID=:customerID, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, paymentInfoID=:paymentInfoID, order_completed=:order_completed WHERE orderID=:orderID";
+        $query ="UPDATE orders SET customerID=:customerID, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, order_completed=:order_completed WHERE orderID=:orderID";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':orderID', $orderID);
         $stmt->bindParam(':customerID', $customerID);
         $stmt->bindParam(':order_date', $order_date);
         $stmt->bindParam(':total_amount', $total_amount);
         $stmt->bindParam(':addressID', $addressID);
-        $stmt->bindParam(':paymentInfoID', $paymentID);
+        //$stmt->bindParam(':paymentInfoID', $paymentID);
         $stmt->bindParam(':order_completed', $order_completed);
         $stmt->execute();
         }catch(PDOException $e){
@@ -50,7 +50,6 @@ require_once("connectionDB.php");
     
         // SQL statement to delete the product
         $sql = "DELETE FROM orders WHERE orderID = :orderID";
-        "DELETE FROM orders WHERE orderID = :orderID";
         $stmt = $db->prepare($sql);
         $stmt->bindParam(':orderID', $orderID, PDO::PARAM_INT);
     
