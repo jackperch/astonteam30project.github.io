@@ -52,7 +52,6 @@ require_once("connectionDB.php");
 
 
 
-    // Check if the delete button was clicked
 
     if (isset($_POST['delete'])) {
         $productID = $_POST['productID'];
@@ -69,4 +68,4 @@ require_once("connectionDB.php");
             // Handle failure
             echo "Error deleting product";
         }
-    }
+   }

@@ -3,32 +3,32 @@ session_start();
 include("connectionDB.php");
 
 // Update order
-if(isset($_POST['update-btn'])) {
-    $query = "UPDATE orders SET customerID=:customerID, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, paymentInfoID=:paymentInfoID, order_completed=:order_completed WHERE orderID=:orderID";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':orderID', $orderID);
-    $stmt->bindParam(':customerID', $customerID);
-    $stmt->bindParam(':order_date', $order_date);
-    $stmt->bindParam(':total_amount', $total_amount);
-    $stmt->bindParam(':addressID', $addressID);
-    $stmt->bindParam(':paymentInfoID', $paymentInfoID);
-    $stmt->bindParam(':order_completed', $order_completed);
-    $stmt->execute();
-    exit;
-}
+// if(isset($_POST['update-btn'])) {
+//     $query = "UPDATE orders SET customerID=:customerID, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, paymentInfoID=:paymentInfoID, order_completed=:order_completed WHERE orderID=:orderID";
+//     $stmt = $db->prepare($query);
+//     $stmt->bindParam(':orderID', $orderID);
+//     $stmt->bindParam(':customerID', $customerID);
+//     $stmt->bindParam(':order_date', $order_date);
+//     $stmt->bindParam(':total_amount', $total_amount);
+//     $stmt->bindParam(':addressID', $addressID);
+//     $stmt->bindParam(':paymentInfoID', $paymentInfoID);
+//     $stmt->bindParam(':order_completed', $order_completed);
+//     $stmt->execute();
+//     exit;
+// }
 
 
 
 // Delete order
-if(isset($_POST['delete-btn'])) {
-    $orderID = $_POST['orderID'];
+// if(isset($_POST['delete-btn'])) {
+//     $orderID = $_POST['orderID'];
 
-    $query = "DELETE FROM orders WHERE orderID=:orderID";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':orderID', $orderID);
-    $stmt->execute();
-    exit;
-}
+//     $query = "DELETE FROM orders WHERE orderID=:orderID";
+//     $stmt = $db->prepare($query);
+//     $stmt->bindParam(':orderID', $orderID);
+//     $stmt->execute();
+//     exit;
+// }
 ?>
 
 
@@ -106,26 +106,44 @@ if(isset($_POST['delete-btn'])) {
                 <th>Adress ID</th>
                 <th>Payment ID</th>
                 <th>Order Completed</th>
-                <th>Action</th>
+                <th>Update</th>
+                <th>Delete</th>
+                <th>Products</th>
             </tr>
 
-            <tr>
+            
             <?php
             $query = "SELECT * FROM orders";
             $stmt = $db->query($query);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                echo "<tr data-id='{$row['orderID']}'>"; 
-                echo "<td><span class='editable' contenteditable='true' data-column='orderID' data-id='{$row['orderID']}'>{$row['orderID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='customerID' data-id='{$row['orderID']}'>{$row['customerID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='order_date' data-id='{$row['orderID']}'>{$row['order_date']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='total_amount' data-id='{$row['orderID']}'>{$row['total_amount']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='addressID' data-id='{$row['orderID']}'>{$row['addressID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='paymentInfoID' data-id='{$row['orderID']}'>{$row['paymentInfoID']}</span></td>";
-                echo "<td><span class='editable' contenteditable='true' data-column='order_completed' data-id='{$row['orderID']}'>{$row['order_completed']}</span></td>";
-                echo "<td>";
-                echo "<button class='update-btn' data-id='{$row['orderID']}'>Update</button>"; 
-                echo "<button class='delete-btn' data-id='{$row['orderID']}'>Delete</button>"; 
-                echo "<button class='products-btn' data-id='{$row['orderID']}' onclick=\"window.location.href='orderProducts.php?id={$row['orderID']}'\">View Products</button>";
+
+                echo "<form method='post' action='updateOrders.php'>";
+                echo "<tr>"; 
+                echo "<input type='hidden' name='orderID' value='{$row['orderID']}'>"; // Add a hidden input to store the productID
+                echo "<td>{$row['orderID']}</td>";
+                echo "<td> <input type='text' name='customerID' value='{$row['customerID']}'></td>";
+                echo "<td> <input type='text'name='order_date' value='{$row['order_date']}'></td>";
+                echo "<td> <input type='text'name='total_amount' value='{$row['total_amount']}'></td>";
+                echo "<td><input type='text' name='addressID' value='{$row['addressID']}'></td>";
+                echo "<input type='hidden' name='paymentInfoID' value='{$row['paymentInfoID']}'>"; // Add a hidden input to store the productID
+                echo "<td>{$row['paymentInfoID']}</td>";
+                echo "<td> <input type='text'name='paymentInfoID' value='{$row['paymentInfoID']}'></td>";
+                echo "<td><input type='text' name='order_completed' value='{$row['order_completed']}'></td>";
+                echo "<td><button type='submit' name='update' class='update-btn'>Update</button></td>";
+                echo "<td><button type='submit' name='delete' class='delete-btn'>Delete</button></td>";
+                echo "</form>";        
+                echo "<td><button class='products-btn' data-id='{$row['orderID']}' onclick=\"window.location.href='orderProducts.php?id={$row['orderID']}'\">View Products</button></td";
+                echo "</tr>";
+                      
+
+
+
+
+
+
+
+
+
                 echo "</td>";
                 echo "</tr>";
             }
