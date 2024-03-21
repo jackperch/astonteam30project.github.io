@@ -2,7 +2,7 @@
 require_once("connectionDB.php");
 try {
     // SQL query to select all contact requests
-    $sql = "SELECT contactID, name, email, message, is_member FROM contact_request ORDER BY contactID DESC";
+    $sql = "SELECT contactID, name, email, message, is_member,request_status FROM contact_request ORDER BY contactID DESC";
     $stmt = $db->query($sql);
 
     // Fetch all the contact requests
@@ -110,22 +110,62 @@ try {
             <th>Email</th>
             <th>Message</th>
             <th>Member?</th>
+            <th>Request Status</th>
+            <th>Update</th>
+            <th>Delete</th>
+
         </tr>
-        <?php if(!empty($contactRequests)): ?>
-            <?php foreach($contactRequests as $request): ?>
-                <tr class="request-details">
-                    <td><?php echo htmlspecialchars($request['contactID']); ?></td>
-                    <td><?php echo htmlspecialchars($request['name']); ?></td>
-                    <td><?php echo htmlspecialchars($request['email']); ?></td>
-                    <td><?php echo nl2br(htmlspecialchars($request['message'])); ?></td>
-                    <td><?php echo htmlspecialchars($request['is_member']); ?></td>
-                </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr>
-                <td colspan="5">No contact requests found.</td>
-            </tr>
-        <?php endif; ?>
+        <?php 
+                if(!empty($contactRequests)){
+                    foreach($contactRequests as $request){
+                        echo "<form method='post' action='updateContactRequest.php'>";
+                          
+                        echo "<tr>";
+                        echo "<input type='hidden' name='contactID' value='{$request['contactID']}'>"; 
+                        echo "<td>{$request['contactID']}</td>";
+                        echo "<td>"; 
+                        echo "<input type='hidden' name='name' value='{$request['name']}'>"; 
+                        echo "{$request['name']}"; 
+                        echo "<td>"; 
+                        echo "<input type='hidden' name='email' value='{$request['email']}'>"; 
+                        echo "{$request['email']}"; 
+                        echo "</td>"; 
+                        echo "<td>"; 
+                        echo "<input type='hidden' name='message' value='{$request['message']}'>"; 
+                        echo "{$request['message']}"; 
+                        echo "</td>"; 
+                        echo "<td>";
+                        echo "<input type='hidden' name='is_member' value='{$request['is_member']}'>"; 
+                        echo "{$request['is_member']}"; 
+                        echo "</td>";              
+                        echo "<td>";
+                         echo "<select name='request_status'>";
+                    
+                            $options = array( 'Waiting response', 'Responded');
+                            foreach ($options as $option) {
+                                echo "<option value='{$option}'"; 
+                                if ($request['request_status'] == $option) { 
+                                    echo " selected"; 
+                                }
+                                echo ">{$option}</option>"; 
+                            }
+                            echo "</select>";
+                            echo "</td>";
+                            echo "<td><button type='submit' name='update' class='update-btn'>Update</button></td>";
+                            echo "<td><button type='submit' name='delete' class='delete-btn'>Delete</button></td>";
+                            echo "</tr>";
+                        echo "</form>";
+                    echo "</tr>";
+                        }
+                    }else{
+                        echo "<tr>";
+
+                        echo "<td colspan='5'>No contact requests found.</td>";
+                    echo "</tr>";
+                    }
+                    
+        ?>
+
     </table>    
 
 

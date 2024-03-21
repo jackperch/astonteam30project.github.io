@@ -63,13 +63,15 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                     $retrievePaymentInfoID->execute(array($customerID, $card_number));
                     $paymentInfoID = $retrievePaymentInfoID->fetch(PDO::FETCH_ASSOC)['paymentInfoID'];
 
+                    $order_status= "Processing";
                     //$insertOrder = $db->prepare('INSERT INTO orders (customerID, productID, quantity, price_of_product, total_amount, addressID, paymentInfoID,order_date) VALUES (?, ?, ?, ?, ?, ?, ?, CURDATE())');
-                    $insertOrderQuery = "INSERT INTO orders (customerID, order_date, total_amount, addressID, paymentInfoID) VALUES (:customerID, CURDATE(), :total_amount, :addressID, :paymentInfoID)";
+                    $insertOrderQuery = "INSERT INTO orders (customerID, order_date, total_amount, addressID, paymentInfoID,order_status) VALUES (:customerID, CURDATE(), :total_amount, :addressID, :paymentInfoID,:order_status)";
                     $stmtInsertOrder = $db->prepare($insertOrderQuery);
                     $stmtInsertOrder->bindParam(':customerID', $customerID);
                     $stmtInsertOrder->bindParam(':total_amount', $totalPrice);
                     $stmtInsertOrder->bindParam(':addressID', $addressID);
                     $stmtInsertOrder->bindParam(':paymentInfoID', $paymentInfoID);
+                    $stmtInsertOrder->bindParam(':order_status',$order_status);
 
 
 

@@ -20,9 +20,10 @@
         exit;
     }
     // Tries to  insert data to the contact table
+    $status= "Waiting response";
     try{
-        $insertToContactTable = $db->prepare('INSERT INTO contact_request (name, email, message, is_member) VALUES (?, ?, ?, ?)');
-        $insertToContactTable->execute(array($name, $email, $message, $member));
+        $insertToContactTable = $db->prepare('INSERT INTO contact_request (name, email, message, is_member,request_status) VALUES (?, ?, ?, ?,?)');
+        $insertToContactTable->execute(array($name, $email, $message, $member,$status));
 
 
     }catch(PDOException $excption) {
