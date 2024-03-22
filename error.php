@@ -34,6 +34,78 @@ else {
     </style>
 </head>
 <body>
+<header>
+        <div id="logo-container">
+            <!-- logo image -->
+            <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
+            <h1 id="nav-bar-text">ACE GEAR</h1>
+        </div>
+        
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="productsDisplay.php">Products</a>
+            <a href="about.php">About</a>
+            <a href="contact.php">Contact</a>
+             <?php 
+                if (isset($_SESSION['adminID'])) {
+                    echo "<a href='Dashboard.php'>Dashboard</a>";
+                    echo "<a href='logout.php'>Logout</a>";
+                }
+                ?>
+        <?php
+        // Initialize the total quantity variable
+        $totalQuantity = 0;
+
+        if(isset($_SESSION['adminID'])){
+            require_once("connectionDB.php"); // Adjust this path as necessary
+            $smt=$db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE  adminID = :adminID");
+            $smt->execute(['adminID' => $_SESSION['adminID']]);
+            $result = $smt->fetch(PDO::FETCH_ASSOC);
+            if ($result && $result['totalQuantity'] > 0) {
+                $totalQuantity = $result['totalQuantity'];
+            }
+        }else{
+            header("Location: error.php?error=no_session");
+            exit;
+        }
+        ?>
+        </nav>
+        <div id="cart-container">
+            <!-- cart icon image with link to cart page -->
+            <a href="cart.php">
+                <img id="cart-icon" src="Images/cart-no-bg.png" alt="Cart">
+                <span id="cart-count"><?php echo $totalQuantity; ?></span>
+            </a>
+        </div>
+    </header>
+    <style>
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            color: white;
+        }
+
+        a {
+            color: #c2ee0a;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
     <div class="container">
         <h1>Error</h1>
         <p><?php echo $errorMsg; ?></p>
@@ -42,7 +114,7 @@ else {
         }elseif ($errorCode === 'cartIssue'){
             echo" <p>Please <a href='cart.php'>'try again'</a> to continue.</p>";
         }elseif("errorCode === 'dtbError'"){
-            echo" <p>There is something wrong with connecting to the database please try again  later'.</p>";
+            echo" <p>There is something wrong with connecting to the database please try again later or <a href='contact.php'>'contact'</a> an admin.</p>";
         }
          ?>
     </div>
