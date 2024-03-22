@@ -14,8 +14,8 @@ class signUpTest extends TestCase
             $_POST['last-name'] = 'tester';
             $_POST['email'] = 'hello@hello.com';
             $_POST['house-number'] = '11';
-            $_POST['address-line1'] = 'teter Street';
-            $_POST['address-line2'] = 'tester Road';
+            $_POST['address-line1'] = 'tester street';
+            $_POST['address-line2'] = 'tester road';
             $_POST['post-code'] = 'ABC DEF';
             $_POST['city'] = 'London';
             $_POST['country'] = 'United Kingdom';
