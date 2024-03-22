@@ -50,7 +50,7 @@
             //loads these website
             header("Location:productsDisplay.php"); 
             
-            echo "Log in sucessfull";
+            echo "Log in sucessful";
             exit();
           
           } else {
