@@ -196,12 +196,13 @@
                                 echo "<li>Order ID: {$order['orderID']}</li>";
                                 echo "<li>Order Date: {$order['order_date']}</li>";
                                 echo "<li>Total amount: {$order['total_amount']}</li>";
+                                echo "<li>Order Status: {$order['order_status']}</li>";
                                 
                                 //retrieves productID, quantity and total price from the orders_products table
                                 $retrieveProductQuery = $db->prepare('SELECT * FROM orders_products WHERE orderID = ?');
                                 $retrieveProductQuery->execute([$order['orderID']]);
                                 $order_products = $retrieveProductQuery->fetchAll(PDO::FETCH_ASSOC);
-                            
+                             
                                 //if it's not empty
                                 if (!empty($order_products)) 
                                 {
@@ -259,6 +260,8 @@
                             echo "<li>Order ID: {$order['orderID']}</li>";
                             echo "<li>Order Date: {$order['order_date']}</li>";
                             echo "<li>Total amount: {$order['total_amount']}</li>";
+                            echo "<li>Order Status: {$order['order_status']}</li>";
+
 
                           //retrieves productID, quantity and total price from the orders_products table
                             $retrieveProductQuery = $db->prepare('SELECT * FROM orders_products WHERE orderID = ?');

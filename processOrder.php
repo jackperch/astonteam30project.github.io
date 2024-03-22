@@ -121,7 +121,7 @@
         $card_cvv = $_POST['card_cvv'];
 
         // Retrievin  order details needed to be inserted for the  order, orders_products table 
-        $onGoing = 1;
+        //$onGoing = 1;
 
 
         try {
@@ -153,15 +153,17 @@
             }
         
             $addressID = $addressResult['addressID'];
-        
+            $order_status = "Processing";
             // Insert order details into orders table including the addressID
-            $insertOrderQuery = "INSERT INTO orders (customerID, order_date, total_amount, addressID, paymentInfoID, order_completed) VALUES (:customerID, CURDATE(), :total_amount, :addressID, :paymentInfoID, :onGoing)";
+            $insertOrderQuery = "INSERT INTO orders (customerID, order_date, total_amount, addressID, paymentInfoID, order_status) VALUES (:customerID, CURDATE(), :total_amount, :addressID, :paymentInfoID, :order_status)";
             $stmtInsertOrder = $db->prepare($insertOrderQuery);
             $stmtInsertOrder->bindParam(':customerID', $customerID);
             $stmtInsertOrder->bindParam(':total_amount', $totalPrice);
             $stmtInsertOrder->bindParam(':addressID', $addressID);
             $stmtInsertOrder->bindParam(':paymentInfoID', $paymentInfoID);
-            $stmtInsertOrder->bindParam(':onGoing', $onGoing);
+            //$stmtInsertOrder->bindParam(':onGoing', $onGoing);
+            $stmtInsertOrder->bindParam(':order_status', $order_status);
+
             $stmtInsertOrder->execute();
 
 
@@ -314,13 +316,13 @@
              $card_cvv = $_POST['card_cvv'];
      
              // Retrivin  order details needed to be inserted for the  order, orders_products table 
-             $onGoing = 1;
+            // $onGoing = 1;
      
      
              try {
                  $db->beginTransaction();
                  
-     
+                  $order_status="Processing";
                   // Insert Payment Information
                  $paymentSql = "INSERT INTO payment_information (adminID, card_type, card_number, expiry_date, CVV) VALUES (:adminID, :card_type, :card_number, :expiryy_date, :CVV)";
                  $paymentStmt = $db->prepare($paymentSql);
@@ -346,13 +348,13 @@
                  $addressID = $addressResult['addressID'];
              
                  // Insert order details into orders table including the addressID
-                 $insertOrderQuery = "INSERT INTO orders (adminID, order_date, total_amount, addressID, paymentInfoID, order_completed) VALUES (:adminID, CURDATE(), :total_amount, :addressID, :paymentInfoID, :onGoing)";
+                 $insertOrderQuery = "INSERT INTO orders (adminID, order_date, total_amount, addressID, paymentInfoID, order_status) VALUES (:adminID, CURDATE(), :total_amount, :addressID, :paymentInfoID, :order_status)";
                  $stmtInsertOrder = $db->prepare($insertOrderQuery);
                  $stmtInsertOrder->bindParam(':adminID', $adminID);
                  $stmtInsertOrder->bindParam(':total_amount', $totalPrice);
                  $stmtInsertOrder->bindParam(':addressID', $addressID);
                  $stmtInsertOrder->bindParam(':paymentInfoID', $paymentInfoID);
-                 $stmtInsertOrder->bindParam(':onGoing', $onGoing);
+                 $stmtInsertOrder->bindParam(':order_status', $order_status);
                  $stmtInsertOrder->execute();
      
      

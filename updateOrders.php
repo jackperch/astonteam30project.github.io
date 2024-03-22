@@ -8,13 +8,13 @@ require_once("connectionDB.php");
        $total_amount= $_POST['total_amount'];
        $addressID= $_POST['addressID'];
        $paymentInfoID= $_POST['paymentInfoID'];
-       $order_completed= $_POST['order_completed'];
+       $order_status= $_POST['order_status'];
 
 
 
         // Prepare the SQL statement
         try{
-        $query ="UPDATE orders SET customerID=:customerID, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, paymentInfoID=:paymentInfoID, order_completed=:order_completed WHERE orderID=:orderID";
+        $query ="UPDATE orders SET customerID=:customerID, order_date=:order_date, total_amount=:total_amount, addressID=:addressID, paymentInfoID=:paymentInfoID, order_status=:order_status WHERE orderID=:orderID";
         $stmt = $db->prepare($query);
         $stmt->bindParam(':orderID', $orderID);
         $stmt->bindParam(':customerID', $customerID);
@@ -22,7 +22,7 @@ require_once("connectionDB.php");
         $stmt->bindParam(':total_amount', $total_amount);
         $stmt->bindParam(':addressID', $addressID);
         $stmt->bindParam(':paymentInfoID', $paymentInfoID);
-        $stmt->bindParam(':order_completed', $order_completed);
+        $stmt->bindParam(':order_status', $order_status);
         $stmt->execute();
         }catch(PDOException $e){
             echo "Error: " . $e->getMessage();

@@ -105,7 +105,7 @@ include("connectionDB.php");
                 <th>Order Total £</th>
                 <th>Adress ID</th>
                 <th>Payment ID</th>
-                <th>Order Completed</th>
+                <th>Order Status</th>
                 <th>Update</th>
                 <th>Delete</th>
                 <th>View Order Products</th>
@@ -128,7 +128,16 @@ include("connectionDB.php");
                 echo "<input type='hidden' name='paymentInfoID' value='{$row['paymentInfoID']}'>"; // Add a hidden input to store the productID
                 echo "<td>{$row['paymentInfoID']}</td>";
                 //echo "<td> <input type='text'name='paymentInfoID' value='{$row['paymentInfoID']}'></td>";
-                echo "<td><input type='text' name='order_completed' value='{$row['order_completed']}'></td>";
+                echo "<td>";
+                //drop list
+                echo "<select name='order_status'>";
+                $options = array( 'Processing', 'Shipped', 'Delivered');
+                foreach ($options as $option) {
+                    $selected = $option === $row['order_status'] ? 'selected' : '';
+                    echo "<option value='{$option}' {$selected}>{$option}</option>";
+                }
+                echo "</select>";
+                echo "</td>";
                 echo "<td><button type='submit' name='update' class='update-btn'>Update</button></td>";
                 echo "<td><button type='submit' name='delete' class='delete-btn'>Delete</button></td>";
                 echo "</form>";        

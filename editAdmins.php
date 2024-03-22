@@ -109,8 +109,10 @@ include("connectionDB.php");
             <tr>
             <?php
             $query = "SELECT * FROM admin";
+            
             $stmt = $db->query($query);
             while ($admin = $stmt->fetch(PDO::FETCH_ASSOC)) {
+               // echo $admin['adminID']; Test
                 echo "<form method='post' action='updateAdmin.php'>";
                     echo "<tr>";
                     echo "<input type='hidden' name='adminID' value='{$admin['adminID']}'>"; 
