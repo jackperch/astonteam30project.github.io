@@ -18,35 +18,35 @@
         //     echo "house number is null";
         
         if ($userName==false || $newPassword==false || $first_name==false || $last_name==false || $email==false || $houseNumberr==false || $addressLine1==false || $addressLine2==false || $postCode==false || $city==false || $country==false){
-            echo "username". $userName;
-            echo'<br>';
-            echo "password". $newPassword;
-            echo'<br>';
-            echo "first name" . $first_name;
-            echo'<br>';
-            echo "last name". $last_name;
-            echo'<br>';
+            // echo "username". $userName;
+            // echo'<br>';
+            // echo "password". $newPassword;
+            // echo'<br>';
+            // echo "first name" . $first_name;
+            // echo'<br>';
+            // echo "last name". $last_name;
+            // echo'<br>';
 
-            echo "email".$email;
-            echo'<br>';
+            // echo "email".$email;
+            // echo'<br>';
             
-            echo " no".$houseNumberr;
-            echo'<br>';
+            // echo " no".$houseNumberr;
+            // echo'<br>';
 
-            echo  "1".$addressLine1;
-            echo'<br>';
+            // echo  "1".$addressLine1;
+            // echo'<br>';
 
-            echo "2" .$addressLine2;
-            echo'<br>';
+            // echo "2" .$addressLine2;
+            // echo'<br>';
 
-            echo  "ps".$postCode;
-            echo'<br>';
+            // echo  "ps".$postCode;
+            // echo'<br>';
 
-            echo $city;
-            echo'<br>';
+            // echo $city;
+            // echo'<br>';
 
-            echo $country;
-            echo'<br>';
+            // echo $country;
+            // echo'<br>';
 
              echo "Please fill in all the fields";
             
