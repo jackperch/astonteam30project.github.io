@@ -266,7 +266,7 @@
                                 echo "<p>Quantity: {$quantity}</p>";
                                 echo "<form method='post' action='updateCart.php'>";
                                 echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
-                                //echo "<input type='number' name='quantity' value='{$quantity}' min='1'>";
+                                echo "<input type='number' name='quantity' value='{$quantity}' min='1'>";
                                 echo "<button type='submit' name='action' value='updateGuest'>Update Quantity</button>";
                                 echo "<button type='submit' name='action' value='removeGuest'>Remove Item</button>";
                                 echo "</form>";

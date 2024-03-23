@@ -190,8 +190,15 @@
                         $query = $db->prepare('SELECT * FROM orders WHERE customerID = ?');
                         $query->execute([$customerID]);
                         $retrievedOrders = $query->fetchAll(PDO::FETCH_ASSOC);
+                        //var_dump($retrievedOrders);
                              //iterates through the retrieved orders fromt he tabler and displays ID, date and total amount
-                            foreach ($retrievedOrders as $order) 
+                             if (empty($retrievedOrders))
+                             {
+                                echo "<li> No orders found</li>";
+                             }
+                             
+                           
+                             foreach ($retrievedOrders as $order) 
                             {
                                 echo "<li>Order ID: {$order['orderID']}</li>";
                                 echo "<li>Order Date: {$order['order_date']}</li>";
@@ -237,8 +244,7 @@
                                     // If no products are found for the order, display a message
                                     echo "<li>No products found for this order.</li>";
                                 }
-
-                            
+                         
                             } 
                     }catch (PDOException $exception) 
                         {
@@ -255,6 +261,11 @@
                         $query->execute([$adminID]);
                         $retrievedOrders = $query->fetchAll(PDO::FETCH_ASSOC);
                         //iterates through the retrieved orders fromt he tabler and displays ID, date and total amount
+                        if (empty($retrievedOrders))
+                             {
+                                echo "<li> No orders found</li>";
+                             }
+                     
                         foreach ($retrievedOrders as $order) 
                          {
                             echo "<li>Order ID: {$order['orderID']}</li>";
@@ -300,8 +311,7 @@
                             {
                                 echo "<li>No products found for this order.</li>";
                             }
-
-                        
+                    
                         } 
                         //Catchers any database related errors
                     }catch (PDOException $exception) 
