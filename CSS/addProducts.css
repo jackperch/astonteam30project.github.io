@@ -1,0 +1,83 @@
+/* Base styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: black;
+}
+
+.content-container {
+    padding: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.Products-Container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Products-Container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="submit"],
+input[type="reset"] {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Ensures padding doesn't increase size */
+    transition: all 0.3s ease; /* Smooth transition for focus effect */
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #c2ee0a;
+    box-shadow: 0 0 8px #c0ee0a94;
+}
+
+input[type="submit"], input[type="reset"] {
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #c2ee0a;
+    color: black;
+}
+
+input[type="reset"] {
+    background-color: #6c757d; /* Different color for clear button */
+}
+
+input[type="reset"]:hover {
+    background-color: #545b62;
+}
+
+/* Error message styling */
+span[id$="-error"] {
+    color: #d9534f;
+    font-size: 0.9rem;
+}
+
+/* Input reset and submit button container for additional styling */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Adjust the spacing around the form elements */
+input[type="submit"], input[type="reset"], input[type="text"] {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
