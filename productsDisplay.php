@@ -62,6 +62,10 @@
             $stmt->execute(['adminID' => $_SESSION['adminID']]);
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            if ($result && $result['totalQuantity'] > 0) {
+                $totalQuantity = $result['totalQuantity'];
+            }
+
             // Fetch the total quantity of items in the guest's cart
          } if (isset($_SESSION['guest_shopping_cart'])) {
                   $totalQuantity = array_sum($_SESSION['guest_shopping_cart']);}
