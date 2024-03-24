@@ -58,4 +58,3 @@ require_once("connectionDB.php");
             header("Location: error.php?status=delete_failed");
         }
     }
-?>
