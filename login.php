@@ -40,7 +40,7 @@
 
             //Makes the username accessible for other php 
             $_SESSION["username"] = $_POST['username'];
-            $_SESSION["customerID"] = $row['CustomerID'];
+            $_SESSION["customerID"] = $row['customerID'];
             
            // $_SESSION['customerID'] = $db->prepare('SELECT CustomerID FROM Customers WHERE username = $_SESSION["username"]'); // Set the customerID in the session
 
