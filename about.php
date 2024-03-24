@@ -107,7 +107,7 @@
         </div>
         <div class="about-content">
             <div class="content">
-                <img src="Images/about-img-1.jpg" alt="content-image">
+                <img src="Images/about-img-1.webp" alt="content-image">
                 <h1>Who we are</h1>
                 <p>Welcome to ACE GEAR SPORTS, your premier destination for high-quality sports and workout 
                     equipment. At Ace Gear Sports, our passion lies in helping individuals pursue their fitness 
@@ -116,7 +116,7 @@
                 </p>
             </div>
             <div class="content">
-            <img src="Images/about-img-2.jpg" alt="content-image">
+            <img src="Images/about-img-2.webp" alt="content-image">
                 <h1>our mission</h1>
                 <p>Our mission at Ace Gear Sports is to provide a one-stop online shop for a diverse range of sports and 
                     workout equipment, catering to the needs of fitness enthusiasts, athletes, and individuals seeking 
@@ -125,7 +125,7 @@
                 </p>
             </div>
             <div class="content">
-            <img src="Images/about-img-3.jpg" alt="content-image">
+            <img src="Images/about-img-3.webp" alt="content-image">
                 <h1>Why choose us</h1>
                 <p>At Ace Gear Sports, we prioritize Quality Assurance, handpicking each durable product. Our Diverse
                      Selection caters to cardio enthusiasts, weightlifters, yoga practitioners, and team sports players.
