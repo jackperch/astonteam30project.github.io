@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2024 at 01:31 AM
+-- Generation Time: Mar 24, 2024 at 07:34 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,6 +45,7 @@ CREATE TABLE `address` (
 
 INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_1`, `address_line_2`, `post_code`, `city`, `country`, `adminID`) VALUES
 (6, NULL, 0, 'Address line 1:aa', 'Address line 2:aa', 'Post code:aa', 'City: aa', 'Country:aa', 1),
+(7, NULL, 12, 'user strt', 'user area', 'us1 2er', 'user', 'user', 2),
 (8, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
 (9, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
 (10, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
@@ -67,8 +68,13 @@ INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_
 (27, 39, 11, 'mm', 'mm', 'h33 2', 'ww', 'mdd', NULL),
 (28, 12, 11, '11', '11', 'H24 MC', 'RMS', 'MWE', NULL),
 (29, 12, 11, '11', '11', 'H24 MC', 'RMS', 'MWE', NULL),
-(30, NULL, 11, 'sss', 'sss', 'ss2 s2', 'sss', 'sss', NULL),
-(31, NULL, 22, 'mcqa', 'user', 'CVM RG', 'ss', 'yy', NULL);
+(30, 43, 123, 'admin lane', 'admin area', 'ad1 2min', 'admin city', 'admin country', NULL),
+(31, 44, 123, 'test street', 'test area', 'TEST 123', 'Test City ', 'Test Country', NULL),
+(32, 45, 123, 'admin street', 'admin area', 'Admin 123', 'Admin city ', 'Admin country', NULL),
+(33, 46, 123, 'Admin street', 'Admin area', 'Admin 123', 'Admin city', 'Admin country', NULL),
+(34, NULL, 123, 'admin7', 'admin7', 'admin7 v', 'admin', 'admin', NULL),
+(35, NULL, 123, 'street', 'street', 'sdf 234', 'ccccc', 'xxxx', NULL),
+(36, NULL, 1231, 'street', 'area', 'post code ', 'city', 'country', NULL);
 
 -- --------------------------------------------------------
 
@@ -79,7 +85,7 @@ INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_
 CREATE TABLE `admin` (
   `adminID` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `first_name` varchar(225) NOT NULL,
   `last_name` varchar(225) NOT NULL,
   `email` varchar(225) NOT NULL,
@@ -92,7 +98,10 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`adminID`, `username`, `password`, `first_name`, `last_name`, `email`, `addressID`) VALUES
 (1, 'admin1', 'admin1', 'Saad', 'Saad', 'Saad@admin.com', 6),
-(4, 'admin3', '$2y$10$c8YDt4S9mU9AWzeDaxVYweZFujScrQHrsYC4wJ9UeUE', 'user', 'user', 'ASTON@ASTON.COM', 0);
+(2, 'admin2', 'admin2', '', '', '', 2),
+(3, 'admin7', '$2y$10$5BismDgkD29o4anjnZvMD.1Kheiq9H0OWLZZpgtmyxZ', 'xxxxx', 'xxxxx', 'admin7@admin7.com', 0),
+(4, 'admin13', '$2y$10$KoOyQ3BaIORTM7NbfXoNaeDPXHxzDL3muKkLdwJUN4n', 'admin', 'admi', 'admin13@test.com', 0),
+(5, 'admin12', '$2y$10$CG4udT2yKRo9C0cTITQ3jeyKVSvDPnnDifZMX1xD232/qow4KDUfi', 'aaaddd', 'mmiinn', 'admin12@admin12.com', 0);
 
 -- --------------------------------------------------------
 
@@ -106,19 +115,22 @@ CREATE TABLE `cart` (
   `adminID` int(11) DEFAULT NULL,
   `productID` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `totat_cost` decimal(10,0) NOT NULL
+  `total_cost` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`cartID`, `customerID`, `adminID`, `productID`, `quantity`, `totat_cost`) VALUES
+INSERT INTO `cart` (`cartID`, `customerID`, `adminID`, `productID`, `quantity`, `total_cost`) VALUES
 (8, 9, NULL, 2, 3, 0),
 (12, 9, NULL, 1, 1, 0),
 (13, 9, NULL, 3, 1, 0),
-(22, 38, NULL, 6, 1, 0),
-(23, 38, NULL, 10, 1, 0);
+(22, 38, NULL, 6, 2, 0),
+(23, 38, NULL, 10, 1, 0),
+(27, NULL, 1, 7, 1, 0),
+(28, 12, NULL, 6, 1, 0),
+(29, 12, NULL, 7, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -154,16 +166,15 @@ CREATE TABLE `contact_request` (
   `name` varchar(30) NOT NULL,
   `email` varchar(30) NOT NULL,
   `message` varchar(225) NOT NULL,
-  `is_member` varchar(20) NOT NULL,
-  `request_status` enum('Waiting response','Responded') NOT NULL
+  `is_member` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `contact_request`
 --
 
-INSERT INTO `contact_request` (`contactID`, `name`, `email`, `message`, `is_member`, `request_status`) VALUES
-(2, 'SIDERZ', 'LmsA@homtail.com', 'I NEED help  WITH SIGNING ', 'member', 'Responded');
+INSERT INTO `contact_request` (`contactID`, `name`, `email`, `message`, `is_member`) VALUES
+(0, 'watr', 'water@Water.com', 'testing', 'member');
 
 -- --------------------------------------------------------
 
@@ -185,9 +196,10 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `last_name`, `email`) VALUES
-(10, '', NULL, 'boss18', 'hello!s', 'M@KK.COm'),
-(11, 'userr', '$2y$10$XoTxm083uwwa11WxrIf.POe.lN7uRO7HL2lIkoNF.NiPs05QhJjXW', 'userr', 'userrrr', 'userrr@u.com'),
-(12, '', NULL, 'T', 'T', 't@t.comm'),
+(10, NULL, NULL, '', '', ''),
+(11, 'userr', '$2y$10$XoTxm083uwwa11WxrIf.POe.lN7uRO7HL2lIkoNF.NiPs05QhJjXW', 'userr', 'userr', 'userrr@u.com'),
+(12, NULL, NULL, 'T', 'T', 't@t.com'),
+(13, NULL, NULL, 'T', 'T', 't@t.com'),
 (14, NULL, NULL, 't', 't', 't@t.com'),
 (15, NULL, NULL, 't', 't', 't@t.com'),
 (16, NULL, NULL, 't', 't', 't@t.com'),
@@ -195,8 +207,10 @@ INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `la
 (18, NULL, NULL, 't', 't', 't@t.com'),
 (19, NULL, NULL, 't', 't', 't@t.com'),
 (20, NULL, NULL, 't', 't', 't@t.com'),
+(21, NULL, NULL, 't', 't', 't@t.com'),
 (22, NULL, NULL, 't', 't', 't@t.com'),
 (23, NULL, NULL, 't', 't', 't@t.com'),
+(24, NULL, NULL, 't', 't', 't@t.com'),
 (25, NULL, NULL, 't', 't', 't@t.com'),
 (26, NULL, NULL, 't', 't', 't@t.com'),
 (27, NULL, NULL, 't', 't', 't@t.com'),
@@ -206,12 +220,19 @@ INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `la
 (31, NULL, NULL, 't', 't', 't@t.com'),
 (32, NULL, NULL, 'aaa', 'aaa', 'aaa@aa.com'),
 (33, NULL, NULL, 'cc', 'cc', 'ccc@a.com'),
-(34, '', NULL, 'ccc', 'ccc', 'ccc@c.com'),
-(35, '', NULL, 'T', 'TTt', 'tt@t.com'),
+(34, NULL, NULL, 'ccc', 'ccc', 'ccc@c.com'),
+(35, NULL, NULL, 'T', 'TTt', 'tt@t.com'),
 (36, NULL, NULL, 'ccc', 'CC', 'CC@A.COM'),
 (37, NULL, NULL, 'sss', 'sss', 'sss@s.com'),
 (38, 'user1', '$2y$10$oF48XAQoAAbbjiTK1hHK.esMA0AEbg0FSIKvkiz0HRWpguTuMwCTi', 'aaa', 'aaa', 'user1@user1.com'),
-(39, '', NULL, 'Test100', 'Test110', 'test110@test.com');
+(39, NULL, NULL, 'Test100', 'Test110', 'test110@test.com'),
+(40, NULL, NULL, 'Test100', 'Test110', 'test110@test.com'),
+(41, NULL, NULL, 'T', 'T', 't@t.com'),
+(42, NULL, NULL, 'T', 'T', 't@t.com'),
+(43, 'Admin4', '$2y$10$TBc6t0Qi6UQkIzP5tbj1guPrh1o5oMycChNUsGHCBO4S.lFTWLnQm', 'Saad', 'Admin', 'admin4@gmail.com'),
+(44, 'saad1', '$2y$10$nKxwgGHhZhV.89LMT0BmuOWTmai8tcS.nWtpnUnYGsxv.gCy/SSVO', 'sss', 'sss', 'saad1@test.com'),
+(45, 'Admin5', '$2y$10$kx6o20EdPby1qP0GjEGWqeABdbFiH//hSJInXEYVXjFjUpYZfCsQG', 'xxx', 'xxxxx', 'Admin5@test.com'),
+(46, 'Admin6', '$2y$10$tnPwP2.ftsgwaxrpoe3CtuGkHdk2Ld7R/knj88vCwMmT9w2wmvHAe', 'admin', 'admin', 'Admin6@test.com');
 
 -- --------------------------------------------------------
 
@@ -227,16 +248,18 @@ CREATE TABLE `orders` (
   `total_amount` decimal(10,0) NOT NULL,
   `addressID` int(11) NOT NULL,
   `paymentInfoID` int(11) NOT NULL,
-  `order_status` enum('Processing','Shipped','Delivered','') NOT NULL
+  `order_completed` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`orderID`, `customerID`, `adminID`, `order_date`, `total_amount`, `addressID`, `paymentInfoID`, `order_status`) VALUES
-(40, 38, NULL, '2024-03-13', 32, 25, 6, 'Processing'),
-(57, 0, 1, '2024-03-20', 10, 6, 83, 'Delivered');
+INSERT INTO `orders` (`orderID`, `customerID`, `adminID`, `order_date`, `total_amount`, `addressID`, `paymentInfoID`, `order_completed`) VALUES
+(39, 38, NULL, '2024-03-13', 35, 25, 56, 1),
+(40, 38, NULL, '2024-03-13', 32, 25, 57, 1),
+(47, 12, NULL, '2024-03-15', 10, 8, 66, 0),
+(51, 0, 2, '2024-03-18', 0, 7, 76, 1);
 
 -- --------------------------------------------------------
 
@@ -251,6 +274,14 @@ CREATE TABLE `orders_products` (
   `quantity` int(11) NOT NULL,
   `total_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders_products`
+--
+
+INSERT INTO `orders_products` (`ordersProductID`, `orderID`, `productID`, `quantity`, `total_price`) VALUES
+(1, 47, 7, 1, 11),
+(8, 51, 8, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -339,7 +370,12 @@ INSERT INTO `payment_information` (`paymentInfoID`, `customerID`, `adminID`, `ca
 (65, 39, NULL, 'visa', 'mrenj', 234, '0000-00-00', 333, 11, 'mendwd', 'dwfew', 'de', 'mmm2', 'cdcw', 0),
 (66, 12, NULL, 'visa', 'CC', 232141, '0000-00-00', 223, 11, 'MWN', 'WD', '23e ssw', 'hee', 'uk', 0),
 (67, 12, NULL, 'visa', 'CC', 232141, '0000-00-00', 223, 11, 'MWN', 'WD', '23e ssw', 'hee', 'uk', 0),
-(83, NULL, 1, 'visa', '', 0, '0000-00-00', 232, 0, '', '', '', '', '', 0);
+(76, NULL, 2, 'visa', '', 0, '0000-00-00', 2424, 0, '', '', '', '', '', 0),
+(77, NULL, 2, 'visa', '', 0, '0000-00-00', 2424, 0, '', '', '', '', '', 0),
+(78, NULL, 2, 'visa', '', 0, '0000-00-00', 2424, 0, '', '', '', '', '', 0),
+(79, NULL, 2, 'visa', '', 0, '0000-00-00', 2424, 0, '', '', '', '', '', 0),
+(80, NULL, 2, 'visa', '', 0, '0000-00-00', 2424, 0, '', '', '', '', '', 0),
+(81, NULL, 2, 'visa', '', 0, '0000-00-00', 2424, 0, '', '', '', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -367,17 +403,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `image`, `product_name`, `price`, `description`, `categoryID`, `colour`, `size`, `stock`, `is_featured`, `is_new`, `is_popular`) VALUES
-(1, 'TennisRacket.jpeg', 'Tennis Racket', 10.98, 'A simple test for tennis racket', 1, 'Green', '10', 1, 1, 0, 0),
+(1, 'TennisRacket.jpeg', 'Tennis Racket', 20, 'A simple test for tennis racket', 1, 'Green', '10', 0, 1, 0, 0),
 (2, 'BoxingGloves.jpeg', 'Boxing Gloves', 5.99, 'Gloves used for boxing with premium padding for extra comfort', 2, 'Black', '1', 5, 1, 0, 0),
 (3, 'ClimbingRope.jpeg', 'Climbing Rope', 79.99, 'A rope used for climbing', 3, 'Brown', '5', 12, 0, 1, 0),
 (4, 'Football.jpeg', 'Football', 5.99, 'A round football', 4, 'White', '5', 20, 0, 0, 1),
 (5, 'ResistanceBand.jpeg', 'Resistance Band', 2.99, 'A band used for home workouts', 5, 'Blue', '2', 50, 1, 0, 0),
-(6, 'tennisballs.jpg', 'Tennis Ball', 7.99, 'A simple test for tennis balls', 1, 'Orange', '4', -42, 0, 0, 1),
-(7, 'badmintonracket.jpg', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1, 'Green', '2', 37, 1, 0, 0),
-(8, 'shuttlecock.jpg', 'Shuttlecocks', 10.98, 'A simple test for shuttlecock', 1, 'Green', '2', -6, 0, 1, 0),
+(6, 'tennisballs.jpg', 'Tennis Ball', 7.99, 'A simple test for tennis balls', 1, 'Orange', '4', 42, 0, 0, 1),
+(7, 'badmintonracket.jpg', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1, 'Green', '2', 38, 1, 0, 0),
+(8, 'shuttlecock.jpg', 'Shuttlecocks', 10.98, 'A simple test for shuttlecock', 1, 'Green', '2', 6, 0, 1, 0),
 (9, 'tenniswrap.jpg', 'Tennis Wrap', 5.99, 'A simple test for tennis wrap', 1, 'Purple', '7', 4, 1, 0, 0),
 (10, 'climbingshoe.jpg', 'Climbing Shoes', 112.99, 'Shoes used for climbing', 3, 'Pink', '5', 25, 1, 0, 1),
-(11, 'chalk.jpg', 'climbing chalk', 8.99, 'Shoes used for climbing', 3, 'White', '3', 66, 0, 1, 1),
 (12, 'harness.jpg', 'Climbing Harness', 39.99, 'A harness used for climbing', 3, 'Magenta', '6', 6, 1, 0, 0),
 (13, 'carabiner.jpg', 'Carabiner', 12.99, 'A carabiner used for climbing', 3, 'Yellow', '2', 24, 1, 1, 0);
 
@@ -394,8 +429,8 @@ CREATE TABLE `review` (
   `productID` int(11) DEFAULT NULL,
   `review` text NOT NULL,
   `review_date` date NOT NULL,
-  `first_name` text DEFAULT NULL,
-  `last_name` text DEFAULT NULL
+  `first_name` text NOT NULL,
+  `last_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -410,7 +445,10 @@ INSERT INTO `review` (`reviewID`, `customerID`, `adminID`, `productID`, `review`
 (8, NULL, NULL, 0, 'xx', '2024-03-17', 'x', 'xx'),
 (9, NULL, NULL, 6, 'x', '2024-03-17', 'x', 'xxx'),
 (10, NULL, NULL, 6, 'ccc', '2024-03-17', 'cc', 'ccc'),
-(11, NULL, NULL, 0, 'TTTTTTTTTT\r\n', '2024-03-17', 'TTTTTTT', 'TTTTTTT');
+(11, NULL, NULL, 0, 'TTTTTTTTTT\r\n', '2024-03-17', 'TTTTTTT', 'TTTTTTT'),
+(12, NULL, 2, 7, 'xxxxx', '2024-03-18', '', ''),
+(13, NULL, 2, NULL, 'xxxx', '2024-03-18', '', ''),
+(14, NULL, NULL, 1, 'amaazinggggg', '2024-03-22', 'ssssss', 'ssssss');
 
 --
 -- Indexes for dumped tables
@@ -446,12 +484,6 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`categoryID`);
 
 --
--- Indexes for table `contact_request`
---
-ALTER TABLE `contact_request`
-  ADD PRIMARY KEY (`contactID`);
-
---
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
@@ -481,7 +513,7 @@ ALTER TABLE `orders_products`
 ALTER TABLE `payment_information`
   ADD PRIMARY KEY (`paymentInfoID`),
   ADD KEY `customerID` (`customerID`),
-  ADD KEY `payment_information_ibfk_2` (`adminID`);
+  ADD KEY `adminID` (`adminID`);
 
 --
 -- Indexes for table `products`
@@ -507,19 +539,19 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -528,34 +560,28 @@ ALTER TABLE `category`
   MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `contact_request`
---
-ALTER TABLE `contact_request`
-  MODIFY `contactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `orders_products`
 --
 ALTER TABLE `orders_products`
-  MODIFY `ordersProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ordersProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `payment_information`
 --
 ALTER TABLE `payment_information`
-  MODIFY `paymentInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `paymentInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -606,21 +632,13 @@ ALTER TABLE `orders_products`
 --
 ALTER TABLE `payment_information`
   ADD CONSTRAINT `payment_information_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`),
-  ADD CONSTRAINT `payment_information_ibfk_2` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `payment_information_ibfk_2` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
 
 --
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `category` (`categoryID`);
-
---
--- Constraints for table `review`
---
-ALTER TABLE `review`
-  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`),
-  ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
-  ADD CONSTRAINT `review_ibfk_3` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

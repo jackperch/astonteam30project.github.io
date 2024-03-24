@@ -27,12 +27,12 @@
 .product h2 {
     margin-top: 10px;
     font-size: 1.2em;
-    color: #333; /* Adjust color as needed */
+    color: #333; 
 }
 
 .product p {
     margin: 5px 0;
-    color: #555; /* Adjust color as needed */
+    color: #555; 
     text-align: center;
     display: flex; /* Change to flex container */
     flex-direction: column;

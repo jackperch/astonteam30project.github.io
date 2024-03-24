@@ -43,7 +43,7 @@ session_destroy();
 
             // Check if the user is logged in
             if (isset($_SESSION['customerID'])) {
-                require_once("connectionDB.php"); // Adjust this path as necessary
+                require_once("connectionDB.php"); // Database connection path
 
                 // Fetch the total quantity of items in the user's cart
                 $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE customerID = :customerID");

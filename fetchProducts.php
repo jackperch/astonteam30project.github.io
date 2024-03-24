@@ -1,6 +1,5 @@
 <?php
-    // Assuming you have a file `connectionDB.php` with your database connection settings
-    require_once 'connectionDB.php';
+    require_once 'connectionDB.php'; //Database connection path
 
     // Define a function to fetch products by category if it's not defined elsewhere
     function fetchProductsByCategory($db, $categoryId) {

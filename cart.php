@@ -55,7 +55,7 @@
 
             // Check if the user is logged in
             if (isset($_SESSION['customerID'])) {
-                require_once("connectionDB.php"); // Adjust this path as necessary
+                require_once("connectionDB.php"); // Database connection path
 
                 // Fetch the total quantity of items in the user's cart
                 $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE customerID = :customerID");
@@ -66,7 +66,7 @@
                     $totalQuantity = $result['totalQuantity'];
                 }
             }elseif(isset($_SESSION['adminID'])){
-                require_once("connectionDB.php"); // Adjust this path as necessary
+                require_once("connectionDB.php"); // Database connection path
                 $smt=$db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE  adminID = :adminID");
                 $smt->execute(['adminID' => $_SESSION['adminID']]);
                 $result = $smt->fetch(PDO::FETCH_ASSOC);
