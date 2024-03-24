@@ -104,23 +104,23 @@
 
             <div class="mySlides">
                 
-                <img src="Images/index-img-1.jpg" alt="Image 1">
+                <img src="Images/index-img-1.webp" alt="Image 1">
             </div>
         
             <div class="mySlides">
-                <img src="Images/index-img-2.jpg" alt="Image 2">
+                <img src="Images/index-img-2.webp" alt="Image 2">
             </div>
         
             <div class="mySlides">
-                <img src="Images/index-img-3.jpg" alt="Image 3">
+                <img src="Images/index-img-3.webp" alt="Image 3">
             </div>
 
             <div class="mySlides">
-                <img src="Images/index-img-4.jpg" alt="Image 4">
+                <img src="Images/index-img-4.webp" alt="Image 4">
             </div>
 
             <div class="mySlides">
-                <img src="Images/index-img-5.jpg" alt="Image 5">
+                <img src="Images/index-img-5.webp" alt="Image 5">
             </div>
 
             <!-- <div class = products-button-container>
@@ -136,7 +136,7 @@
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
                         <div class="card" style="width: 14rem;">
-                            <img src="images/racket-sports.png" class="card-img-top" alt="Racket Sports">
+                            <img src="images/racket-sports.webp" class="card-img-top" alt="Racket Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Racket Sports</h5>
                                 <p class="card-text">View Racket Sport products here:</p>
@@ -151,7 +151,7 @@
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
                         <div class="card" style="width: 14rem;">
-                            <img src="images/combat-sports.png" class="card-img-top" alt="Combat Sports">
+                            <img src="images/combat-sports.webp" class="card-img-top" alt="Combat Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Combat Sports</h5>
                                 <p class="card-text">View Combat Sport products here:</p>
@@ -166,7 +166,7 @@
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
                         <div class="card" style="width: 14rem;">
-                            <img src="images/climbing.png" class="card-img-top" alt="Combat Sports">
+                            <img src="images/climbing.webp" class="card-img-top" alt="Combat Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Climbing Sports</h5>
                                 <p class="card-text">View Climbing Sport products here:</p>
@@ -181,7 +181,7 @@
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
                         <div class="card" style="width: 14rem;">
-                            <img src="images/football.png" class="card-img-top" alt="Combat Sports">
+                            <img src="images/football.webp" class="card-img-top" alt="Combat Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Football Sports</h5>
                                 <p class="card-text">View Football products here:</p>
@@ -196,7 +196,7 @@
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
                         <div class="card" style="width: 14rem;">
-                            <img src="images/home-fitness.png" class="card-img-top" alt="Combat Sports">
+                            <img src="images/home-fitness.webp" class="card-img-top" alt="Combat Sports">
                             <div class="card-body">
                                 <h5 class="card-title">Home Fitness </h5>
                                 <p class="card-text">View Home Fitness products here:</p>
@@ -211,7 +211,7 @@
                 <div class="col-md-4">
                     <form action="categoryProducts.php" method="post">
                         <div class="card" style="width: 14rem;">
-                            <img src="images/swimming.png" class="card-img-top" alt="Swimming">
+                            <img src="images/swimming.webp" class="card-img-top" alt="Swimming">
                             <div class="card-body">
                                 <h5 class="card-title">Swimming </h5>
                                 <p class="card-text">View Swimming products here:</p>
