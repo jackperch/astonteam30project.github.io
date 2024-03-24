@@ -16,16 +16,16 @@
         // Query DB to find the matching username/password
         // using prepare/bindparameter to prevent SQL injection.
         $SQL = $db->prepare('SELECT password, adminID FROM admin WHERE username = ?');
-        $SQL->execute(array($_POST['username']));
+        $SQL->execute(array($username));
 
         // fetch the result row and check 
         if ($SQL->rowCount() > 0) { // matching username
             $row = $SQL->fetch();
 
-            if (($_POST['password'] === $row['password'])) { // matching password with the user input password and database stored password
+            if (password_verify($password, $row['password'])) { // matching password with the user input password and database stored password
 
                 // Makes the username accessible for other php 
-                $_SESSION["username"] = $_POST['username'];
+                $_SESSION["username"] = $username;
                 $_SESSION["adminID"] = $row['adminID'];
 
                 // loads these website
