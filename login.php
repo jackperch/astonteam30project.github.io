@@ -25,7 +25,7 @@
     try {
       //Query DB to find the matching username/password
       //using prepare/bindparameter to prevent SQL injection.
-        $SQL = $db->prepare('SELECT password, CustomerID FROM Customers WHERE username = ?');
+        $SQL = $db->prepare('SELECT password, customerID FROM customers WHERE username = ?');
         $SQL->execute(array($_POST['username']));
           
         // fetch the result row and check 
@@ -50,7 +50,7 @@
             //loads these website
             header("Location:productsDisplay.php"); 
             
-            echo "Log in sucessfull";
+            echo "Log in sucessful";
             exit();
           
           } else {

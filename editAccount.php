@@ -7,7 +7,7 @@
         $first_name=isset($_POST['first_name'])?$_POST['first_name']:false;
         $last_name=isset($_POST['last_name'])?$_POST['last_name']:false;
         $email=isset($_POST['email'])?$_POST['email']:false;
-        $houseNumber=isset($_POST['house_number'])?$_POST['house_number']:false;
+        $houseNumberr=isset($_POST['house_number'])?$_POST['house_number']:false;
         $addressLine1=isset($_POST['address_line_1'])?$_POST['address_line_1']:false;
         $addressLine2=isset($_POST['address_line_2'])?$_POST['address_line_2']:false;
         $postCode=isset($_POST['postcode'])?$_POST['postcode']:false;
@@ -17,29 +17,29 @@
         // if (is_null($houseNumber)){
         //     echo "house number is null";
         
-        if ($userName==false || $newPassword==false || $first_name==false || $last_name==false || $email==false || $houseNumber==false || $addressLine1==false || $addressLine2==false || $postCode==false || $city==false || $country==false){
-            // echo $userName;
+        if ($userName==false || $newPassword==false || $first_name==false || $last_name==false || $email==false || $houseNumberr==false || $addressLine1==false || $addressLine2==false || $postCode==false || $city==false || $country==false){
+            // echo "username". $userName;
             // echo'<br>';
-            // echo $newPassword;
+            // echo "password". $newPassword;
             // echo'<br>';
-            // echo $first_name;
+            // echo "first name" . $first_name;
             // echo'<br>';
-            // echo $last_name;
+            // echo "last name". $last_name;
             // echo'<br>';
 
-            // echo $email;
+            // echo "email".$email;
             // echo'<br>';
             
-            // echo $houseNumber;
+            // echo " no".$houseNumberr;
             // echo'<br>';
 
-            // echo $addressLine1;
+            // echo  "1".$addressLine1;
             // echo'<br>';
 
-            // echo $addressLine2;
+            // echo "2" .$addressLine2;
             // echo'<br>';
 
-            // echo $postCode;
+            // echo  "ps".$postCode;
             // echo'<br>';
 
             // echo $city;
@@ -48,7 +48,7 @@
             // echo $country;
             // echo'<br>';
 
-            // echo "Please fill in all the fields";
+             echo "Please fill in all the fields";
             
             exit;
         }else{
@@ -330,7 +330,7 @@
             }elseif(isset($_SESSION['customerID'])){
                 echo "<label for='username'>Username:</label>";
                 echo "<br>";
-                echo "<input type='text' id='username' name='username' value='" . $customerData['username'] . " required>";
+                echo "<input type='text' id='username' name='username' value='" . $customerData['username'] . "' required>";
                 echo "<br>";
                 echo "<label for='password'>Password:</label>";
                 echo "<br>";
@@ -342,17 +342,19 @@
                 echo "<br>";
                 echo "<label for='last_name'>Last Name:</label>";
                 echo "<br>";
+                echo "<input type='text' id='last_name' name='last_name' value='" . $customerData['last_name'] . "' required>";
+                echo "<br>";
                 echo "<label for='email'>Email:</label>";
                 echo"<br>";
                 echo"<input type='email' id='email' name='email' value='". $customerData['email'] . "' required>";
                 echo"<br>";
                 echo"<label for = 'address'>Address:</label>";
                 echo"<br>";
-                echo"<input type='text' id='house_number' name=house number' value=' House number" . $addressData['house_number'] ."' required>";
+                echo "<input type='text' id='house_number' name='house_number' value='House number" . $addressData['house_number'] . "' required>";
                 echo "<input type='text' id='address_line_1' name='address line 1' value='Address line 1:" . $addressData['address_line_1']. "' required>";
                 echo"<input type='text' id='address_line_2' name='address line 2' value='Address line 2:" . $addressData['address_line_2']. "' required>";
                 echo"<input type='text' id='postcode' name='postcode' value='Post code:". $addressData['post_code']."' required>";
-                echo"<input type='text' id='city' name='city' value='City: ".$addressData['city']." required>";
+                echo"<input type='text' id='city' name='city' value='City: ".$addressData['city']."' required>";
                 echo"<input type='text' id='country' name='country' value='Country:". $addressData['country'] ."' required>";
                 echo"<br>";
     

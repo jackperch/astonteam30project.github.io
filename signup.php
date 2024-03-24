@@ -29,17 +29,17 @@ if (isset($_POST['signupsubmitted'])) {
 
     try {
         // Check if the username already exists
-        $checkUsernameSQL = $db->prepare('SELECT * FROM Customers WHERE username = ?');
+        $checkUsernameSQL = $db->prepare('SELECT * FROM customers WHERE username = ?');
         $checkUsernameSQL->execute(array($newUsername));
 
         if ($checkUsernameSQL->rowCount() > 0) {
             echo "Username already exists. Please choose a different username.";
         } else {
             // Insert new user into the database
-            $insertUserSQL = $db->prepare('INSERT INTO Customers (username, password, first_name, last_name,email) VALUES (?, ?, ?, ?,?)');
+            $insertUserSQL = $db->prepare('INSERT INTO customers (username, password, first_name, last_name,email) VALUES (?, ?, ?, ?,?)');
             $insertUserSQL->execute(array($newUsername, $newPassword, $newFirstName, $newLastName,$newEmail));
            
-            $retrieveCustomerID = $db->prepare('SELECT customerID FROM Customers WHERE username = ?');
+            $retrieveCustomerID = $db->prepare('SELECT customerID FROM customers WHERE username = ?');
             $retrieveCustomerID->execute(array($newUsername));
             $customerID = $retrieveCustomerID->fetch(PDO::FETCH_ASSOC)['customerID'];
 
