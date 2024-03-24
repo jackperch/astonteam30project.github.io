@@ -62,7 +62,7 @@
 
 .cart-item button {
     padding: 5px 10px;
-    background-color: #c2ee0a; /*theme color */
+    background-color: #c2ee0a; /* Use your theme's color */
     color: black;
     border: none;
     border-radius: 5px;

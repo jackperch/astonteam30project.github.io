@@ -31,7 +31,7 @@ form textarea {
 form input[type='text']:focus,
 form textarea:focus {
     outline: none;
-    border-color: #c2ee0a;
+    border-color: #007bff;
     box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
 }
 
@@ -48,7 +48,7 @@ form input[type='submit'] {
 
 form input[type='submit']:hover,
 form input[type='submit']:focus {
-    background-color: #c2ee0a;
+    background-color: #0056b3;
 }
 
 /*style for fancy looks */
@@ -61,6 +61,6 @@ form textarea {
 /* Style for the centered text above the form */
 p > center {
     font-size: 1.2em;
-    color: #c2ee0a;
+    color: #007bff;
     margin-bottom: 20px;
 }

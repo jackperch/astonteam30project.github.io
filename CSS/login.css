@@ -17,7 +17,7 @@
     padding: 20px;
     border: none;
     background-color: var(--formcolor);
-    box-shadow: 0 0 10px #c2ee0a;
+    /*box-shadow: 0 0 10px #c2ee0a;*/
     color: #000000;
     margin-bottom: 100px;
     text-transform: uppercase;

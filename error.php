@@ -29,8 +29,9 @@ else {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error</title>
-    <link rel="stylesheet" href="CSS/styles.css">
-    <link rel="stylesheet" href="CSS/error.css">
+    <style>
+        /* Your CSS styles */
+    </style>
 </head>
 <body>
 <header>
@@ -56,7 +57,7 @@ else {
         $totalQuantity = 0;
 
         if(isset($_SESSION['adminID'])){
-            require_once("connectionDB.php"); 
+            require_once("connectionDB.php"); // Adjust this path as necessary
             $smt=$db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE  adminID = :adminID");
             $smt->execute(['adminID' => $_SESSION['adminID']]);
             $result = $smt->fetch(PDO::FETCH_ASSOC);

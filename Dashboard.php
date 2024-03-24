@@ -45,7 +45,7 @@
 
         // Check if the user is logged in
         if (isset($_SESSION['customerID'])) {
-            require_once("connectionDB.php"); // Database connection path
+            require_once("connectionDB.php"); // Adjust this path as necessary
 
             // Fetch the total quantity of items in the user's cart
             $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE customerID = :customerID");
@@ -56,7 +56,7 @@
                 $totalQuantity = $result['totalQuantity'];
             }
         }elseif(isset($_SESSION['adminID'])) {
-            require_once("connectionDB.php"); // Database connection path
+            require_once("connectionDB.php"); // Adjust this path as necessary
 
             // Fetch the total quantity of items in the user's cart
             $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE adminID = :adminID");
@@ -94,8 +94,6 @@
             ?> -->
             
         </header>
-         <!-- Andrews old code that did not work -->
-         
         <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">ADMIN DASHBOARD</a>

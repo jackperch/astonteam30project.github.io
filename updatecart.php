@@ -48,10 +48,10 @@ if (isset($_SESSION['customerID']) && $_SERVER['REQUEST_METHOD'] == 'POST') #
                 exit;
             }
             $stmt = $db->prepare("UPDATE cart SET quantity = :quantity WHERE customerID = :customerID AND productID = :productID");
+            $stmt->bindParam(':quantity', $newQuantity, PDO::PARAM_INT);
             $stmt->bindParam(':customerID', $customerID, PDO::PARAM_INT);
             $stmt->bindParam(':productID', $productID, PDO::PARAM_INT);
-            //$stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-            $stmt->bindParam(':quantity', $newQuantity, PDO::PARAM_INT);
+            $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
             $stmt->execute();
     
         } else {

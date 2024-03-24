@@ -109,7 +109,7 @@ if (isset($_POST['adminsignupsubmitted'])) {
 
             // Check if the user is logged in
             if (isset($_SESSION['adminID'])) {
-                require_once("connectionDB.php"); // Database connection pathy
+                require_once("connectionDB.php"); // Adjust this path as necessary
 
                 // Fetch the total quantity of items in the user's cart
                 $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE adminID = :adminID");

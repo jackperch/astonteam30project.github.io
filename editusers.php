@@ -68,7 +68,7 @@ include("connectionDB.php");
         $totalQuantity = 0;
 
         if(isset($_SESSION['adminID'])){
-            require_once("connectionDB.php"); // Database connection path
+            require_once("connectionDB.php"); // Adjust this path as necessary
             $smt=$db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE  adminID = :adminID");
             $smt->execute(['adminID' => $_SESSION['adminID']]);
             $result = $smt->fetch(PDO::FETCH_ASSOC);
