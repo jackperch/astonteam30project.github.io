@@ -2,6 +2,8 @@
 <?php
 session_start();
 unset($_SESSION['customerID']); // Unset the customerID from the session
+unset($_SESSION['adminID']); // Unset the adminID from the session
+
 session_destroy();
 
 ?>
