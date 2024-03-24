@@ -112,6 +112,20 @@ span.editable {
     background-color: #4CAF50;
 }
 
+#manageCategory{
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#manageCategory:hover {
+    background-color: #4CAF50;
+}
+
 /* Add User Button */
 #addUser {
     padding: 10px 20px;

@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $product_name = $_POST['product_name'];
     $price = $_POST['price'];
     $description = $_POST['description'];
-    // $categoryID = $_POST['categoryID'];
+    $categoryID = $_POST['categoryID'];
     $colour = $_POST['colour'];
     $size = $_POST['size'];
     $stock = $_POST['stock'];
@@ -119,6 +119,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     <span id="first-name-error"></span> -->
 
     <input type="text" id="product_name" name="product_name"  placeholder="product name"  onblur="validateFirstName()">
+    <span id="first-name-error"></span>
+
+    <input type="text" id="categoryID" name="categoryID"  placeholder="category ID"  onblur="validateFirstName()">
     <span id="first-name-error"></span>
 
     <input type="text" id="image" name="image"  placeholder="enter image file name"  onblur="validateFirstName()">

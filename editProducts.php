@@ -138,10 +138,6 @@ include("connectionDB.php");
             <img id="logo" src="Images/Logo-no-bg.png" alt="Logo">
             <h1 id="nav-bar-text">ACE GEAR</h1>
         </div>
-        <div id="search-container">
-            <input type="text" id="search-bar" placeholder="Search...">
-            <button id="search-button">Search</button>
-        </div>
         <nav>
             <a href="index.php">Home</a>
             <a href="productsDisplay.php">Products</a>
@@ -235,21 +231,24 @@ include("connectionDB.php");
             ?>        
         </table>
 
-        <!-- Add Order Button -->
+        <!-- Add Product Button -->
         <button id="addProduct">Add Product</button>
+        <a href="manageCategory.php">
+            <button id="manageCategory">Manage Categories</button>
+        </a>
     </div>
 </div>
 
 <footer>
-        <div class="footer-container">
-            <div class="footer-links">
-                <a href="reviews.php">Reviews</a>
-                <a href="contact.php">Contact Us</a>
-                <a href="about.php">About Us</a>
-                <a href="privacy-policy.php">Privacy Policy</a>
-            </div>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="reviews.php">Reviews</a>
+            <a href="contact.php">Contact Us</a>
+            <a href="about.php">About Us</a>
+            <a href="privacy-policy.php">Privacy Policy</a>
         </div>
-    </footer>
+    </div>
+</footer>
 
 <script>
 const updateButtons = document.querySelectorAll('.update-btn');
