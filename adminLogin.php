@@ -10,7 +10,7 @@
     
     //Checks if the password parameter is there in the post request  if it is  it will get assigned to the variable $password and get hashed if not it will be assigned to false
 
-    $password = isset($_POST['password'])?$_POST['password']:false;
+    $password=isset($_POST['password'])?password_hash($_POST['password'],PASSWORD_DEFAULT):false;
 
     try {
         // Query DB to find the matching username/password
