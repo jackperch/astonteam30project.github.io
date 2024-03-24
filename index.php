@@ -206,6 +206,21 @@
                         </div>
                     </form>
                 </div>
+
+                <!-- Swimming  Category -->
+                <div class="col-md-4">
+                    <form action="categoryProducts.php" method="post">
+                        <div class="card" style="width: 14rem;">
+                            <img src="images/swimming.png" class="card-img-top" alt="Swimming">
+                            <div class="card-body">
+                                <h5 class="card-title">Swimming </h5>
+                                <p class="card-text">View Swimming products here:</p>
+                                <input type="hidden" name="categoryId" value="5">
+                                <button type="submit" class="btn btn-primary">Go to Products</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
         
             </div>
         </div>
