@@ -159,7 +159,7 @@
                     <img src="images/admin-icon.webp" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Products & Categories</h5>
-                        <p class="card-text">Add, Edit and Delete Products & Categories here:</p>
+                        <p class="card-text">Manage Products & Categories here:</p>
                         <a href="editProducts.php" class="btn btn-primary">Manage Products</a>
                     </div>
                 </div>

@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
         <link rel="stylesheet" href="CSS/styles.css">
-        <link rel="stylesheet" href="CSS/signup.css">
+        <link rel="stylesheet" href="CSS/addProducts.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Sono&display=swap');
         </style>
@@ -112,52 +112,52 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
         </header>
 
     <div class="content-container">
-        <div class="signup-container">
-                <h2>Add New Product</h2>
-    <form method="post">
-    <!-- <input type="text" id="productID" name="productID"  placeholder="product ID"  onblur="validateFirstName()">
-    <span id="first-name-error"></span> -->
+        <div class="Products-Container">
+            <h2>Add New Product</h2>
+            <form method="post">
+                <!-- <input type="text" id="productID" name="productID"  placeholder="product ID"  onblur="validateFirstName()">
+                <span id="first-name-error"></span> -->
 
-    <input type="text" id="product_name" name="product_name"  placeholder="product name"  onblur="validateFirstName()">
-    <span id="first-name-error"></span>
+                <input type="text" id="product_name" name="product_name"  placeholder="product name"  onblur="validateFirstName()">
+                <span id="first-name-error"></span>
 
-    <input type="text" id="categoryID" name="categoryID"  placeholder="category ID"  onblur="validateFirstName()">
-    <span id="first-name-error"></span>
+                <input type="text" id="categoryID" name="categoryID"  placeholder="category ID"  onblur="validateFirstName()">
+                <span id="first-name-error"></span>
 
-    <input type="text" id="image" name="image"  placeholder="enter image file name"  onblur="validateFirstName()">
+                <input type="text" id="image" name="image"  placeholder="enter image file name"  onblur="validateFirstName()">
 
-    <input type="text" id="price" name="price"  placeholder="price"   onblur="validateLastName()">
-    <span id="last-name-error"></span>
+                <input type="text" id="price" name="price"  placeholder="price"   onblur="validateLastName()">
+                <span id="last-name-error"></span>
 
-    <input type="text" id="description" name="description"  placeholder="description" onblur="validateUsername()">
-    <span id="username-error"></span>
+                <input type="text" id="description" name="description"  placeholder="description" onblur="validateUsername()">
+                <span id="username-error"></span>
 
-    <input type="text" id="colour" name="colour"  placeholder="colour" onblur="validateEmail()">
-    <span id="email-error"></span>
+                <input type="text" id="colour" name="colour"  placeholder="colour" onblur="validateEmail()">
+                <span id="email-error"></span>
 
-    <input type="text" id="size" name="size"  placeholder="size" onblur="validateEmail()">
-    <span id="email-error"></span>
+                <input type="text" id="size" name="size"  placeholder="size" onblur="validateEmail()">
+                <span id="email-error"></span>
 
-    <input type="text" id="is_featured" name="is_featured"  placeholder="is featured" onblur="validateEmail()">
-    <span id="email-error"></span>
+                <input type="text" id="is_featured" name="is_featured"  placeholder="is featured" onblur="validateEmail()">
+                <span id="email-error"></span>
 
-    <input type="text" id="is_new" name="is_new"  placeholder="is new" onblur="validateEmail()">
-    <span id="email-error"></span>
+                <input type="text" id="is_new" name="is_new"  placeholder="is new" onblur="validateEmail()">
+                <span id="email-error"></span>
 
-    <input type="text" id="is_popular" name="is_popular"  placeholder="is popular" onblur="validateEmail()">
-    <span id="email-error"></span>
+                <input type="text" id="is_popular" name="is_popular"  placeholder="is popular" onblur="validateEmail()">
+                <span id="email-error"></span>
 
-    <input type="text" id="stock" name="stock"  placeholder="stock" onblur="validateEmail()">
-    <span id="email-error"></span>
+                <input type="text" id="stock" name="stock"  placeholder="stock" onblur="validateEmail()">
+                <span id="email-error"></span>
 
-    <input name="submit" type="submit" value="Add New Product">
-    <input type="reset" value="Clear">
-    <input type="hidden" name="signupsubmitted" value="TRUE">
-    <span id="signup-error"></span>
-</form>
+                <input name="submit" type="submit" value="Add New Product">
+                <input type="reset" value="Clear">
+                <input type="hidden" name="signupsubmitted" value="TRUE">
+                <span id="signup-error"></span>
+            </form>
 
-            </div>
         </div>
+    </div>
 
         <footer>
             <div class="footer-container">
