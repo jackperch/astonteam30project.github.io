@@ -48,7 +48,7 @@
 
             // Check if the user is logged in
             if (isset($_SESSION['customerID'])) {
-                require_once("connectionDB.php"); // Adjust this path as necessary
+                require_once("connectionDB.php"); // Database connection path
 
                 // Fetch the total quantity of items in the user's cart
                 $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE customerID = :customerID");
@@ -102,7 +102,7 @@ if (isset($_POST['categoryId'])) {
         echo "<h3>{$product['product_name']}</h3>";
         echo "<p>{$product['description']}</p>";
         if ($product['stock'] == 0) {
-            echo "<p>Out of stock</p>"; // // Checks the stock availability
+            echo "<p>Out of stock</p>"; // Checks the stock availability
         } else{
             echo "<form class='add-to-cart-form' method='post' action='updatecart.php'>";
             echo "<input type='hidden' name='productID' value='{$product['productID']}'>";

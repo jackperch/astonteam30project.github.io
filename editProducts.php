@@ -2,7 +2,7 @@
 session_start();
 include("connectionDB.php");
 
-
+// Asais old code that did not work -->
 // Update product
 // if(isset($_POST['update-btn'])) {
 //     $productID = $_POST['productID'];
@@ -162,7 +162,7 @@ include("connectionDB.php");
         $totalQuantity = 0;
 
         if(isset($_SESSION['adminID'])){
-            require_once("connectionDB.php"); // Adjust this path as necessary
+            require_once("connectionDB.php"); // Database connection path
             $smt=$db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE  adminID = :adminID");
             $smt->execute(['adminID' => $_SESSION['adminID']]);
             $result = $smt->fetch(PDO::FETCH_ASSOC);
@@ -281,6 +281,8 @@ deleteButtons.forEach(button => {
     });
 });
 
+
+// <!-- Asais old code that did not work -->
 // function updateProductData(productID, dataToUpdate) {
 //     const xhr = new XMLHttpRequest();
 //     xhr.open('POST', window.location.href, true); // If the handler is the current script

@@ -47,7 +47,7 @@
 
             // Check if the user is logged in
             if (isset($_SESSION['customerID'])) {
-                require_once("connectionDB.php"); // Adjust this path as necessary
+                require_once("connectionDB.php"); // Database connection path
 
                 // Fetch the total quantity of items in the user's cart
                 $stmt = $db->prepare("SELECT SUM(quantity) AS totalQuantity FROM cart WHERE customerID = :customerID");
@@ -78,7 +78,7 @@
     <main>
         <h1>Checkout</h1>
         <div class="checkout-container">
-            <form action="processOrder.php" method="post"> <!-- !!!!!!! Need to Replace with processing page script !!!!!! -->
+            <form action="processOrder.php" method="post"> <!--  processing page script -->
                 <section class="cart-summary">
                     <h2>Your Cart</h2>
                     <div id="cart-items">
