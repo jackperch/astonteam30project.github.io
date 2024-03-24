@@ -75,6 +75,10 @@ body {
     width: 33.3333%;
 }
 
+.card :hover {
+    box-shadow: 0px 5px 5px  #ccfe06;
+}
+
 .card {
     border-radius: 5px;
     background: #fff;
@@ -118,6 +122,7 @@ body {
 
 .btn-primary:hover {
     background: #ccfe06;
+    color: #000000;
 }
 
 /* Responsive adjustments */

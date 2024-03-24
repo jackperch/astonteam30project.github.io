@@ -26,30 +26,20 @@
             <a href="about.php">About</a>
             <a href="contact.php">Contact</a>
             <?php 
-                if (isset($_SESSION['adminID'])) {
-                    echo "<a href='Dashboard.php'>Dashboard</a>";
-                    echo "<a href='logout.php'>Logout</a>";
-                }
-                ?>
-            <?php 
-                session_start();
-                if (isset($_SESSION['customerID'])) {
-                    echo "<a href='members-blog.php'>Blog</a>";
-                    echo "<a href='account.php'>Account</a>";
-                    echo "<a href='logout.php'>Logout</a>";
-                } elseif (isset($_SESSION['adminID'])) 
-                {
-        
-                    echo "<a href='Dashboard.php'>Dashboard</a>";
-                    echo "<a href='account.php'>Account</a>";
-                    echo "<a href='logout.php'>Logout</a>";
-
-                }else
-                {
-                    echo "<a href='login.php'>Login</a>";
-
-                }
-                ?>
+            session_start();
+            if (isset($_SESSION['username'])) {
+                echo "<a href='members-blog.php'>Blog</a>";
+                echo "<a href='account.php'>Account</a>";
+                echo "<a href='logout.php'>Logout</a>";
+            } elseif (isset($_SESSION['adminID'])) {
+                echo "<a href='Dashboard.php'>Login</a>";
+                echo "<a href='account.php'>Logout</a>";
+                echo "<a href='logout.php'>Logout</a>";
+                
+            }else{
+                echo "<a href='login.php'>Login</a>";
+            }
+            ?>
         </nav>
         <?php
         // Initialize the total quantity variable
