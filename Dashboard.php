@@ -156,7 +156,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="images/admin-icon.webp" class="card-img-top" alt="...">
+                    <img src="Images/admin-icon.webp" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Products & Categories</h5>
                         <p class="card-text">Manage Products & Categories here:</p>
@@ -166,7 +166,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="images/admin-icon.webp" class="card-img-top" alt="...">
+                    <img src="Images/admin-icon.webp" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Orders</h5>
                         <p class="card-text">Manage Orders here:</p>
@@ -176,7 +176,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="images/admin-icon.webp" class="card-img-top" alt="...">
+                    <img src="Images/admin-icon.webp" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Users</h5>
                         <p class="card-text">Manage Users here:</p>
@@ -186,7 +186,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="images/admin-icon.webp" class="card-img-top" alt="...">
+                    <img src="Images/admin-icon.webp" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Admin</h5>
                         <p class="card-text">Manage Admins here:</p>
@@ -196,7 +196,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="images/admin-icon.webp" class="card-img-top" alt="...">
+                    <img src="Images/admin-icon.webp" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Stock Management</h5>
                         <p class="card-text">Manage items low on Stock here:</p>
@@ -206,7 +206,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card" style="width: 18rem;">
-                    <img src="images/admin-icon.webp" class="card-img-top" alt="...">
+                    <img src="Images/admin-icon.webp" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Contact Requests</h5>
                         <p class="card-text">View Contact Requests here:</p>

@@ -29,7 +29,7 @@
                 $_SESSION["adminID"] = $row['adminID'];
 
                 // loads these website
-                 header("Location:dashboard.php"); 
+                 header("Location:Dashboard.php"); 
 
                 echo "<p>Welcome back Admin</p>";
                 exit();
