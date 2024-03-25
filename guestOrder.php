@@ -34,11 +34,11 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
             }
             try {
                 //Inserts the guest user into the customer table
-                $insertUserSQL = $db->prepare('INSERT INTO Customers (first_name, last_name, email) VALUES (?, ?, ?)');
+                $insertUserSQL = $db->prepare('INSERT INTO customers (first_name, last_name, email) VALUES (?, ?, ?)');
                 $insertUserSQL->execute(array($first_name, $last_name, $email));
 
                 //retrieves the customerID
-                $retrieveCustomerID = $db->prepare('SELECT customerID FROM Customers WHERE email = ? && first_name = ? && last_name = ? LIMIT 1');
+                $retrieveCustomerID = $db->prepare('SELECT customerID FROM customers WHERE email = ? && first_name = ? && last_name = ? LIMIT 1');
                 $retrieveCustomerID->execute(array($email, $first_name, $last_name));
                 $customerID = $retrieveCustomerID->fetch(PDO::FETCH_ASSOC)['customerID'];
 

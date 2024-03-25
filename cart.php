@@ -150,7 +150,7 @@
                         echo "<p>Price: {$item['price']}</p>";
                         //echo "<p>Quantity: {$item['quantity']}</p>";
                         // Form for updating quantity or removing item
-                        echo "<form method='post' action='updateCart.php'>";
+                        echo "<form method='post' action='updatecart.php'>";
                         echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
                         echo "<input type='number' name='quantity' value='{$item['quantity']}' min='1'>";
                         echo "<button type='submit' name='action' value='update'>Update Quantity</button>";
@@ -214,7 +214,7 @@
                         echo "<p>Price: {$item['price']}</p>";
                         //echo "<p>Quantity: {$item['quantity']}</p>";
                         // Form for updating quantity or removing item
-                        echo "<form method='post' action='updateCart.php'>";
+                        echo "<form method='post' action='updatecart.php'>";
                         echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
                         echo "<input type='number' name='quantity' value='{$item['quantity']}' min='1'>";
                         echo "<button type='submit' name='action' value='update'>Update Quantity</button>";
@@ -264,7 +264,7 @@
                                 echo "<h2>{$item['product_name']}</h2>";
                                 echo "<p>Price: {$item['price']}</p>";
                                 echo "<p>Quantity: {$quantity}</p>";
-                                echo "<form method='post' action='updateCart.php'>";
+                                echo "<form method='post' action='updatecart.php'>";
                                 echo "<input type='hidden' name='productID' value='{$item['productID']}'>";
                                 echo "<input type='number' name='quantity' value='{$quantity}' min='1'>";
                                 echo "<button type='submit' name='action' value='updateGuest'>Update Quantity</button>";
