@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 25, 2024 at 05:36 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Host: localhost
+-- Generation Time: Mar 25, 2024 at 12:05 PM
+-- Server version: 8.0.36-0ubuntu0.20.04.1
+-- PHP Version: 8.2.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ace gear`
+-- Database: `u_220099110_db`
 --
 
 -- --------------------------------------------------------
@@ -28,15 +28,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `address` (
-  `addressID` int(11) NOT NULL,
-  `customerID` int(11) DEFAULT NULL,
-  `house_number` int(11) NOT NULL,
-  `address_line_1` varchar(50) NOT NULL,
-  `address_line_2` varchar(50) NOT NULL,
-  `post_code` varchar(50) NOT NULL,
-  `city` varchar(30) NOT NULL,
-  `country` varchar(30) NOT NULL,
-  `adminID` int(11) DEFAULT NULL
+  `addressID` int NOT NULL,
+  `customerID` int DEFAULT NULL,
+  `house_number` int NOT NULL,
+  `address_line_1` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `address_line_2` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `post_code` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `city` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `country` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `adminID` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -94,7 +94,11 @@ INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_
 (53, 57, 123, 'sdadasd', 'asdas', 'asdasd', 'asdasd', 'sadsad', NULL),
 (54, 57, 123, 'sdadasd', 'asdas', 'asdasd', 'asdasd', 'sadsad', NULL),
 (55, 60, 12, 'road', 'area', 'ab1 2cd', 'city', 'country', NULL),
-(56, 61, 12, 'road', 'street', 'ab1 2cd', 'city', 'United Kingdom', NULL);
+(56, 61, 12, 'road', 'street', 'ab1 2cd', 'city', 'United Kingdom', NULL),
+(57, 62, 1, 'house street', 'house road', 'ho1 2se', 'city ', 'country', NULL),
+(58, 63, 1, 'test rd', 'test street', 'pst cde', 'city', 'country', NULL),
+(59, 63, 1, 'test rd', 'test street', 'pst cde', 'city', 'country', NULL),
+(60, 63, 1, 'test rd', 'test street', 'pst cde', 'city', 'country', NULL);
 
 -- --------------------------------------------------------
 
@@ -103,13 +107,13 @@ INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_
 --
 
 CREATE TABLE `admin` (
-  `adminID` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `first_name` varchar(225) NOT NULL,
-  `last_name` varchar(225) NOT NULL,
-  `email` varchar(225) NOT NULL,
-  `addressID` int(11) NOT NULL
+  `adminID` int NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `first_name` varchar(225) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(225) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(225) COLLATE utf8mb4_general_ci NOT NULL,
+  `addressID` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -119,7 +123,7 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`adminID`, `username`, `password`, `first_name`, `last_name`, `email`, `addressID`) VALUES
 (1, 'admin1', '$2y$10$SZssWqt2zIoQiSC7mZ92Qu7UR8MyaWX/.VSmoX7nWd3aQNbZ1pm7q', 'admin', 'admin', 'admin1@admn.com', 0),
 (2, 'saad1', '$2y$10$HjNqCYkVD3E5MWSQKjNqjuhUFwJf5l6Bc4Lvwz6yZ9PLBypEQeFyS', 'Saad', 'Admin', 'saad@admin.com', 0),
-(3, 'admin2', '$2y$10$hqvi3ROKOdc4hgYJyphg1.dnlNN8DfEtOvClsYOdfLURFBqoPIoUe', 'Admina', 'Xxxx', 'admin2@admin.com', 42);
+(3, 'admin2', '$2y$10$hqvi3ROKOdc4hgYJyphg1.dnlNN8DfEtOvClsYOdfLURFBqoPIoUe', 'Admina', 'adminn', 'admin2@admin.com', 42);
 
 -- --------------------------------------------------------
 
@@ -128,11 +132,11 @@ INSERT INTO `admin` (`adminID`, `username`, `password`, `first_name`, `last_name
 --
 
 CREATE TABLE `cart` (
-  `cartID` int(11) NOT NULL,
-  `customerID` int(11) DEFAULT NULL,
-  `adminID` int(11) DEFAULT NULL,
-  `productID` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
+  `cartID` int NOT NULL,
+  `customerID` int DEFAULT NULL,
+  `adminID` int DEFAULT NULL,
+  `productID` int NOT NULL,
+  `quantity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -143,13 +147,13 @@ INSERT INTO `cart` (`cartID`, `customerID`, `adminID`, `productID`, `quantity`) 
 (8, 9, NULL, 2, 3),
 (12, 9, NULL, 1, 1),
 (13, 9, NULL, 3, 1),
-(22, 38, NULL, 6, 2),
-(23, 38, NULL, 10, 1),
 (27, NULL, 1, 7, 1),
 (28, 12, NULL, 6, 1),
 (29, 12, NULL, 7, 1),
 (36, NULL, 1, 6, 1),
-(37, NULL, 1, 8, 1);
+(37, NULL, 1, 8, 1),
+(41, NULL, 2, 6, 1),
+(43, 38, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -158,9 +162,9 @@ INSERT INTO `cart` (`cartID`, `customerID`, `adminID`, `productID`, `quantity`) 
 --
 
 CREATE TABLE `category` (
-  `categoryID` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `description` varchar(225) NOT NULL
+  `categoryID` int NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` varchar(225) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -182,12 +186,12 @@ INSERT INTO `category` (`categoryID`, `name`, `description`) VALUES
 --
 
 CREATE TABLE `contact_request` (
-  `contactID` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `email` varchar(30) NOT NULL,
-  `message` varchar(225) NOT NULL,
-  `is_member` varchar(20) NOT NULL,
-  `request_status` enum('Waiting Response','Responded') NOT NULL
+  `contactID` int NOT NULL,
+  `name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `message` varchar(225) COLLATE utf8mb4_general_ci NOT NULL,
+  `is_member` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `request_status` enum('Waiting Response','Responded') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -197,7 +201,8 @@ CREATE TABLE `contact_request` (
 INSERT INTO `contact_request` (`contactID`, `name`, `email`, `message`, `is_member`, `request_status`) VALUES
 (1, 'watr', 'water@Water.com', 'testing', 'member', 'Responded'),
 (2, 'watr', 'water@Water.com', 'testing', 'member', 'Responded'),
-(4, 'John Smith', 'john@gmail.com', 'Hi i need help with an order', 'member', 'Waiting Response');
+(4, 'John Smith', 'john@gmail.com', 'Hi i need help with an order', 'member', 'Waiting Response'),
+(5, 'Test Test', 'ASTON@ASTON.COM', 'How do I buy a product', 'member', 'Waiting Response');
 
 -- --------------------------------------------------------
 
@@ -206,12 +211,12 @@ INSERT INTO `contact_request` (`contactID`, `name`, `email`, `message`, `is_memb
 --
 
 CREATE TABLE `customers` (
-  `customerID` int(11) NOT NULL,
-  `username` varchar(20) DEFAULT NULL,
-  `password` text DEFAULT NULL,
-  `first_name` varchar(30) NOT NULL,
-  `last_name` varchar(30) NOT NULL,
-  `email` varchar(50) NOT NULL
+  `customerID` int NOT NULL,
+  `username` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `password` text COLLATE utf8mb4_general_ci,
+  `first_name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `last_name` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -219,15 +224,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `last_name`, `email`) VALUES
-(10, NULL, NULL, '', '', ''),
 (11, 'userr', '$2y$10$XoTxm083uwwa11WxrIf.POe.lN7uRO7HL2lIkoNF.NiPs05QhJjXW', 'userr', 'userr', 'userrr@u.com'),
-(12, NULL, NULL, 'T', 'T', 't@t.com'),
-(13, NULL, NULL, 'T', 'T', 't@t.com'),
-(14, NULL, NULL, 't', 't', 't@t.com'),
-(15, NULL, NULL, 't', 't', 't@t.com'),
-(16, NULL, NULL, 't', 't', 't@t.com'),
-(17, NULL, NULL, 't', 't', 't@t.com'),
-(18, NULL, NULL, 't', 't', 't@t.com'),
+(12, '', NULL, 'T', 'T', 't@t.com'),
 (19, NULL, NULL, 't', 't', 't@t.com'),
 (20, NULL, NULL, 't', 't', 't@t.com'),
 (21, NULL, NULL, 't', 't', 't@t.com'),
@@ -270,7 +268,11 @@ INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `la
 (58, NULL, NULL, 'asdasd', 'sadsad', 'Guest@gmail.com'),
 (59, NULL, NULL, 'asdasd', 'sadsad', 'Guest@gmail.com'),
 (60, NULL, NULL, 'guest', 'user', 'guest@test.com'),
-(61, NULL, NULL, 'guestt', 'fuestt', 'g@g.om');
+(61, NULL, NULL, 'guestt', 'fuestt', 'g@g.om'),
+(62, 'sssss123', '$2y$10$JjUJslaFUnsRQTWpSoyp8eJAgUsMz8LFoSlNnwPyk9ZdJgxzxi1z6', 'sss', 'ssss', 'sssss@test.com'),
+(63, NULL, NULL, 'Saad', 'Guest', 'saad@test.com'),
+(64, NULL, NULL, 'Saad', 'Guest', 'saad@test.com'),
+(65, NULL, NULL, 'Saad', 'Guest', 'saad@test.com');
 
 -- --------------------------------------------------------
 
@@ -279,14 +281,14 @@ INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `la
 --
 
 CREATE TABLE `orders` (
-  `orderID` int(11) NOT NULL,
-  `customerID` int(11) DEFAULT NULL,
-  `adminID` int(11) DEFAULT NULL,
+  `orderID` int NOT NULL,
+  `customerID` int DEFAULT NULL,
+  `adminID` int DEFAULT NULL,
   `order_date` date NOT NULL,
   `total_amount` float NOT NULL,
-  `addressID` int(11) NOT NULL,
-  `paymentInfoID` int(11) DEFAULT NULL,
-  `order_status` enum('Processing','Shipped','Delivered','Return Requested','Return Processing','Return Processed') NOT NULL
+  `addressID` int NOT NULL,
+  `paymentInfoID` int DEFAULT NULL,
+  `order_status` enum('Processing','Shipped','Delivered','Return Requested','Return Processing','Return Processed') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -312,7 +314,10 @@ INSERT INTO `orders` (`orderID`, `customerID`, `adminID`, `order_date`, `total_a
 (68, 60, NULL, '2024-03-25', 14.98, 55, 99, 'Processing'),
 (69, 60, NULL, '2024-03-25', 83.97, 55, 99, 'Processing'),
 (70, 61, NULL, '2024-03-25', 5.99, 56, 100, 'Processing'),
-(71, 61, NULL, '2024-03-25', 85.98, 56, 100, 'Processing');
+(71, 61, NULL, '2024-03-25', 85.98, 56, 100, 'Processing'),
+(72, 38, NULL, '2024-03-25', 130.96, 25, 101, 'Processing'),
+(73, 63, NULL, '2024-03-25', 9.98, 58, 102, 'Processing'),
+(74, 63, NULL, '2024-03-25', 20.96, 58, 102, 'Processing');
 
 -- --------------------------------------------------------
 
@@ -321,10 +326,10 @@ INSERT INTO `orders` (`orderID`, `customerID`, `adminID`, `order_date`, `total_a
 --
 
 CREATE TABLE `orders_products` (
-  `ordersProductID` int(11) NOT NULL,
-  `orderID` int(11) NOT NULL,
-  `productID` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
+  `ordersProductID` int NOT NULL,
+  `orderID` int NOT NULL,
+  `productID` int NOT NULL,
+  `quantity` int NOT NULL,
   `total_price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -354,7 +359,12 @@ INSERT INTO `orders_products` (`ordersProductID`, `orderID`, `productID`, `quant
 (26, 68, 23, 1, 14.98),
 (27, 69, 22, 1, 83.97),
 (28, 70, 4, 1, 5.99),
-(29, 71, 3, 1, 85.98);
+(29, 71, 3, 1, 85.98),
+(30, 72, 6, 1, 7.99),
+(31, 72, 10, 1, 112.99),
+(32, 72, 7, 1, 9.98),
+(33, 73, 7, 1, 9.98),
+(34, 74, 8, 1, 20.96);
 
 -- --------------------------------------------------------
 
@@ -363,20 +373,20 @@ INSERT INTO `orders_products` (`ordersProductID`, `orderID`, `productID`, `quant
 --
 
 CREATE TABLE `payment_information` (
-  `paymentInfoID` int(11) NOT NULL,
-  `customerID` int(11) DEFAULT NULL,
-  `adminID` int(11) DEFAULT NULL,
-  `card_type` varchar(20) NOT NULL,
-  `name_on_card` varchar(255) NOT NULL,
-  `card_number` int(11) NOT NULL,
-  `expiry_date` varchar(4) NOT NULL,
-  `CVV` int(11) NOT NULL,
-  `house_number` int(11) NOT NULL,
-  `address_line1` varchar(255) NOT NULL,
-  `address_line2` varchar(255) NOT NULL,
-  `post_code` varchar(255) NOT NULL,
-  `city` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL
+  `paymentInfoID` int NOT NULL,
+  `customerID` int DEFAULT NULL,
+  `adminID` int DEFAULT NULL,
+  `card_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `name_on_card` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `card_number` int DEFAULT NULL,
+  `expiry_date` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `CVV` int DEFAULT NULL,
+  `house_number` int DEFAULT NULL,
+  `address_line1` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `address_line2` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `post_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -413,7 +423,9 @@ INSERT INTO `payment_information` (`paymentInfoID`, `customerID`, `adminID`, `ca
 (97, 57, NULL, 'visa', 'sadasd', 2147483647, '12/2', 123, 123, 'dsfdfs', 'dsfsdf', 'dsfsdf', 'sdfsd', 'sdfdsf'),
 (98, 57, NULL, 'visa', 'sadasd', 2147483647, '12/2', 123, 123, 'dsfdfs', 'dsfsdf', 'dsfsdf', 'sdfsd', 'sdfdsf'),
 (99, 60, NULL, 'visa', 'guest user', 6786, '10/2', 123, 12, 'road', 'street', 'ab1 2cd', 'city', 'country'),
-(100, 61, NULL, 'visa', 'guest user', 1234, '09/2', 456, 12, 'road', 'street', 'ab1 2cd', 'city', 'United Kingdom');
+(100, 61, NULL, 'visa', 'guest user', 1234, '09/2', 456, 12, 'road', 'street', 'ab1 2cd', 'city', 'United Kingdom'),
+(101, 38, NULL, 'visa', NULL, 2, 'x', 2, NULL, NULL, NULL, NULL, NULL, NULL),
+(102, 63, NULL, 'visa', 'Mrgruuu', 12, '2332', 123, 1, 'cheese rd', 'cheesee', 'pst cde', 'animal', 'country');
 
 -- --------------------------------------------------------
 
@@ -422,18 +434,18 @@ INSERT INTO `payment_information` (`paymentInfoID`, `customerID`, `adminID`, `ca
 --
 
 CREATE TABLE `products` (
-  `productID` int(11) NOT NULL,
-  `image` varchar(225) NOT NULL,
-  `product_name` varchar(40) NOT NULL,
+  `productID` int NOT NULL,
+  `image` varchar(225) COLLATE utf8mb4_general_ci NOT NULL,
+  `product_name` varchar(40) COLLATE utf8mb4_general_ci NOT NULL,
   `price` float NOT NULL,
-  `description` varchar(225) NOT NULL,
-  `categoryID` int(11) NOT NULL,
-  `colour` varchar(30) NOT NULL,
-  `size` varchar(30) NOT NULL,
-  `stock` int(11) NOT NULL,
-  `is_featured` int(11) NOT NULL,
-  `is_new` int(11) NOT NULL,
-  `is_popular` int(11) NOT NULL
+  `description` varchar(225) COLLATE utf8mb4_general_ci NOT NULL,
+  `categoryID` int NOT NULL,
+  `colour` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `size` varchar(30) COLLATE utf8mb4_general_ci NOT NULL,
+  `stock` int NOT NULL,
+  `is_featured` int NOT NULL,
+  `is_new` int NOT NULL,
+  `is_popular` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -441,23 +453,23 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `image`, `product_name`, `price`, `description`, `categoryID`, `colour`, `size`, `stock`, `is_featured`, `is_new`, `is_popular`) VALUES
-(1, 'TennisRacket.webp', 'Tennis Racket', 20, 'A simple test for tennis racket', 1, 'Green', 'One Size', 0, 1, 0, 0),
+(1, 'TennisRacket.webp', 'Tennis Racket', 20, 'A simple test for tennis racket', 1, 'Green', 'One Size', 10, 1, 0, 0),
 (2, 'BoxingGloves.webp', 'Boxing Gloves', 5.99, 'Gloves used for boxing with premium padding for extra comfort', 2, 'Black', 'Medium', 5, 1, 0, 0),
 (3, 'ClimbingRope.webp', 'Climbing Rope', 79.99, 'A rope used for climbing', 3, 'Brown', '5', 10, 0, 1, 0),
-(4, 'Football.webp', 'Football', 5.99, 'A round football', 4, 'White', '5', 20, 0, 0, 1),
+(4, 'football.webp	\n', 'Football', 5.99, 'A round football', 4, 'White', '5', 20, 0, 0, 1),
 (5, 'ResistanceBand.webp', 'Resistance Band', 2.99, 'A band used for home workouts', 5, 'Blue', '2', 50, 1, 0, 0),
-(6, 'tennisballs.webp', 'Tennis Ball', 7.99, 'A simple test for tennis balls', 1, 'Orange', '4', 41, 0, 0, 1),
-(7, 'badmintonracket.webp', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1, 'Green', '2', 36, 1, 0, 0),
+(6, 'tennisballs.webp', 'Tennis Ball', 7.99, 'A simple test for tennis balls', 1, 'Orange', '4', 40, 0, 0, 1),
+(7, 'badmintonracket.webp', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1, 'Green', '2', 35, 1, 0, 0),
 (8, 'shuttlecock.webp', 'Shuttlecocks', 10.98, 'A simple test for shuttlecock', 1, 'Green', '2', 4, 0, 1, 0),
 (9, 'tenniswrap.webp', 'Tennis Wrap', 5.99, 'A simple test for tennis wrap', 1, 'Purple', '7', 0, 1, 0, 0),
-(10, 'climbingshoe.webp', 'Climbing Shoes', 112.99, 'Shoes used for climbing', 3, 'Pink', '5', 25, 1, 0, 1),
+(10, 'climbingshoe.webp', 'Climbing Shoes', 112.99, 'Shoes used for climbing', 3, 'Pink', '5', 24, 1, 0, 1),
 (12, 'harness.webp', 'Climbing Harness', 39.99, 'A harness used for climbing', 3, 'Magenta', '6', 6, 1, 0, 0),
 (13, 'carabiner.webp', 'Carabiner', 12.99, 'A carabiner used for climbing', 3, 'Yellow', '2', 24, 1, 1, 0),
 (14, 'home-fitness-treadmill.webp', 'Treadmill', 399.99, 'treadmill', 5, 'Black', 'One Size', 12, 1, 1, 0),
 (15, 'home-fitness-push-up-board.webp', 'Push Up Board', 26.49, 'pushups', 5, 'Multi-coloured', 'One Size', 34, 0, 0, 1),
 (16, 'swimming-pool-float.webp', 'Swimming Pool Float', 8.99, 'a pool float', 8, 'pink', 'One Size', 7, 0, 1, 0),
 (17, 'swimming-pool-noodle.webp', 'Pool Noodle', 4.49, 'a floating foam noodle designed for swimming use', 8, 'Multi-Coloured', 'One Size', 13, 1, 0, 0),
-(18, 'swimming-Trunks.webp', 'Swimming Trunks', 8.99, 'Swimming Shorts', 8, 'Blue/White', 'Medium', 16, 1, 0, 1),
+(18, 'swimming-trunks.webp', 'Swimming Trunks', 8.99, 'Swimming Shorts', 8, 'Blue/White', 'Medium', 16, 1, 0, 1),
 (19, 'swimming-nose-clip.webp', 'Nose Clips', 4.49, 'Clips for swimming uses', 8, 'Multi-Coloured', 'One Size', 17, 0, 0, 0),
 (20, 'swimming-goggles.webp', 'Swimming Goggles', 6.89, 'Goggles used for swimming', 8, 'Blue', 'One Size', 12, 0, 0, 1),
 (21, 'swimming-cap.webp', 'Swimming Cap', 3.99, 'A latex cap made to keep your hair dry while swimming', 8, 'Blue', 'One Size', 4, 0, 0, 0),
@@ -477,14 +489,14 @@ INSERT INTO `products` (`productID`, `image`, `product_name`, `price`, `descript
 --
 
 CREATE TABLE `review` (
-  `reviewID` int(11) NOT NULL,
-  `customerID` int(11) DEFAULT NULL,
-  `adminID` int(11) DEFAULT NULL,
-  `productID` int(11) DEFAULT NULL,
-  `review` text NOT NULL,
+  `reviewID` int NOT NULL,
+  `customerID` int DEFAULT NULL,
+  `adminID` int DEFAULT NULL,
+  `productID` int DEFAULT NULL,
+  `review` text COLLATE utf8mb4_general_ci NOT NULL,
   `review_date` date NOT NULL,
-  `first_name` text NOT NULL,
-  `last_name` text NOT NULL
+  `first_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `last_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -502,7 +514,9 @@ INSERT INTO `review` (`reviewID`, `customerID`, `adminID`, `productID`, `review`
 (11, NULL, NULL, 0, 'TTTTTTTTTT\r\n', '2024-03-17', 'TTTTTTT', 'TTTTTTT'),
 (12, NULL, 2, 7, 'xxxxx', '2024-03-18', '', ''),
 (13, NULL, 2, NULL, 'xxxx', '2024-03-18', '', ''),
-(14, NULL, NULL, 1, 'amaazinggggg', '2024-03-22', 'ssssss', 'ssssss');
+(14, NULL, NULL, 1, 'amaazinggggg', '2024-03-22', 'ssssss', 'ssssss'),
+(15, 38, NULL, 1, 'The product got delivered the next day good service! The next tennis racket is next-level love the colour ', '2024-03-25', NULL, NULL),
+(16, 38, NULL, NULL, 'Test', '2024-03-25', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -599,67 +613,67 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `addressID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `adminID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `cartID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `categoryID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `contact_request`
 --
 ALTER TABLE `contact_request`
-  MODIFY `contactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `contactID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `customerID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `orderID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `orders_products`
 --
 ALTER TABLE `orders_products`
-  MODIFY `ordersProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `ordersProductID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `payment_information`
 --
 ALTER TABLE `payment_information`
-  MODIFY `paymentInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `paymentInfoID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `productID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `reviewID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `reviewID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
