@@ -128,12 +128,13 @@ include("connectionDB.php");
             }
             ?>
         </table>
-        
+
+        <!-- Code written by asia, Code is broken -->   
         <!-- Add Product Button -->
-        <button id="addProductButton">Add Product</button>
+        <!-- <button id="addProductButton">Add Product</button>-->
 
         <!-- Add Product Form -->
-        <div id="addProductFormContainer" style="display: none;">
+       <!-- <div id="addProductFormContainer">
             <h2>Add Product</h2>
             <form id="addProductForm">
                 <label for="productID">Product ID:</label>
@@ -142,7 +143,7 @@ include("connectionDB.php");
                 <input type="number" id="quantity" name="quantity" required><br>
                 <button type="submit">Add Product</button>
             </form>
-        </div>
+        </div> -->
     </div>
 </div>
 

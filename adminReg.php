@@ -41,11 +41,14 @@ if (isset($_POST['adminsignupsubmitted'])) {
            
             $retrieveAdminID = $db->prepare('SELECT adminID FROM admin WHERE username = ?');
             $retrieveAdminID->execute(array($newUsername));
-            $AdminID = $retrieveAdminID->fetch(PDO::FETCH_ASSOC)['adminID'];
+            $adminID = $retrieveAdminID->fetch(PDO::FETCH_ASSOC)['adminID'];
 
             $insertUserAddress = $db->prepare('INSERT INTO address (adminID, house_number, address_line_1, address_line_2, post_code, city, country) VALUES (?, ?, ?, ?, ?, ?, ?)');
             $insertUserAddress->execute(array($adminID, $newHouseNumber, $newAddressLine1, $newAddressLine2, $newPostCode, $newCity, $newCountry));
             
+            $addressID = $db->lastInsertId();
+            $updateAdminAddressID = $db->prepare('UPDATE admin SET addressID = ? WHERE adminID = ?');
+            $updateAdminAddressID->execute(array($addressID, $adminID));
             
                    
              
@@ -53,7 +56,7 @@ if (isset($_POST['adminsignupsubmitted'])) {
 
            echo "Sign up successful! You can now log in.";
            if( $_SESSION["username"]=$_POST['username']);
-           $_SESSION["adminID"]=$AdminID;
+           $_SESSION["adminID"]=$adminID;
            //loads these website
             header("Location:Dashboard.php"); 
             exit();
@@ -138,7 +141,7 @@ if (isset($_POST['adminsignupsubmitted'])) {
        
        
        <div class="content-container">
-            <div class="signup-container">
+            <div class="signup-container" id="admin-reg-title">
                 <h2>Admin Sign Up</h2>
                 <form action="adminReg.php" method="post">
                     

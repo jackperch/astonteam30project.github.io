@@ -50,7 +50,31 @@
     </header>
 
     <main>
-        
+        <?php
+            echo "<div class= container>";
+            echo "<h1> <center>Thank you for your order! <center></h1> ";
+            echo "<br>";
+            echo "Order placed successfully. Your order will be shipped to your address.";
+            echo "<br>";
+            echo "Your order total is: £" . $totalcost;
+            echo "<br>";
+            echo "Your payment details have been saved.";
+            echo "<br>";
+            echo "Your order number is: " .  $orderID;
+            echo "<br>";
+            echo "You will receive an email confirmation shortly.";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+            echo "<a href='account.php'><center>Click here to view your orders<center></a>";
+            echo "<br>";
+            echo "or";
+            echo "<br>";
+            echo "<a href='index.php'><center>Click here to go to Home page<center></a>";
+            echo "<br>";
+        echo "</div>";
+        ?>
 
                    
         

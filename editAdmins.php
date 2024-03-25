@@ -92,7 +92,7 @@ include("connectionDB.php");
 
 <div class="content-container">
     <div class="admin-management-container">
-        <h1>Admins Management</h1>
+        <h1 id="edit-admin-title">Admins Management</h1>
 
         <table>
             <tr>

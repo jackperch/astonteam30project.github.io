@@ -192,7 +192,7 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                     <div id="cart-items">
                         <?php
                         // For the guest users 
-                        $totalPrice = 0;
+                        $totalcost = 0;
                         if (isset($_SESSION['guest_shopping_cart'])) {
                            //Displays the items in the shopping cart array session varaible 
                            require_once("connectionDB.php");
@@ -201,11 +201,12 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                                 $stmt->execute(['productID' => $productID]);
                                 $product = $stmt->fetch(PDO::FETCH_ASSOC);
                                 echo "<div class='cart-item'>";
-                                echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['product_name']}' width=50 height=50>    {$product['product_name']} (Quantity: $quantity) - $" . ($quantity * $product['price']) . "</p>";
+                                echo "<img src='Images/Product-Images/{$product['image']}' alt='{$product['product_name']}' width=50 height=50>    {$product['product_name']} (Quantity: $quantity) - Each price £" .$product['price']. '___Total Unit Price -£' .($quantity * $product['price']) . "</p>";
+                                $totalcost += ($quantity * $product['price']);
                                 echo" </div>";
                                 //Calculates the total price of the products 
-                                $totalPrice += ($quantity * $product['price']);
                             }
+                            echo "<p>Order Total: £$totalcost</p>";
                         }
                         ?>
                     </div>
@@ -215,7 +216,7 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                                 <h2>Customer Information</h2>
                                 <input type="text" name="first_name" placeholder="First Name" value="" required>
                                 <input type="text" name="last_name" placeholder="Last Name" value="" required>
-                                <input type="email" name="email" placeholder="Email" value="" required>
+                                <input type="text" name="email" placeholder="Email" value="" required>
                             </section>
 
                             <section class="shipping-information">
