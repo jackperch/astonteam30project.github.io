@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2024 at 01:31 AM
+-- Generation Time: Mar 25, 2024 at 05:36 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,6 +45,7 @@ CREATE TABLE `address` (
 
 INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_1`, `address_line_2`, `post_code`, `city`, `country`, `adminID`) VALUES
 (6, NULL, 0, 'Address line 1:aa', 'Address line 2:aa', 'Post code:aa', 'City: aa', 'Country:aa', 1),
+(7, NULL, 12, 'user strt', 'user area', 'us1 2er', 'user', 'user', 2),
 (8, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
 (9, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
 (10, 12, 1, 'mj', 'hb', 'hu y', 'hbh', 'yy', NULL),
@@ -67,8 +68,33 @@ INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_
 (27, 39, 11, 'mm', 'mm', 'h33 2', 'ww', 'mdd', NULL),
 (28, 12, 11, '11', '11', 'H24 MC', 'RMS', 'MWE', NULL),
 (29, 12, 11, '11', '11', 'H24 MC', 'RMS', 'MWE', NULL),
-(30, NULL, 11, 'sss', 'sss', 'ss2 s2', 'sss', 'sss', NULL),
-(31, NULL, 22, 'mcqa', 'user', 'CVM RG', 'ss', 'yy', NULL);
+(30, 43, 123, 'admin lane', 'admin area', 'ad1 2min', 'admin city', 'admin country', NULL),
+(31, 44, 123, 'test street', 'test area', 'TEST 123', 'Test City ', 'Test Country', NULL),
+(32, 45, 123, 'admin street', 'admin area', 'Admin 123', 'Admin city ', 'Admin country', NULL),
+(33, 46, 123, 'Admin street', 'Admin area', 'Admin 123', 'Admin city', 'Admin country', NULL),
+(34, NULL, 123, 'admin7', 'admin7', 'admin7 v', 'admin', 'admin', NULL),
+(35, NULL, 123, 'street', 'street', 'sdf 234', 'ccccc', 'xxxx', NULL),
+(36, NULL, 1231, 'street', 'area', 'post code ', 'city', 'country', NULL),
+(37, NULL, 123, 'example stret', 'area', 'ad123 min', 'city', 'country', NULL),
+(38, 47, 321, 'Sample Street', 'Whitehall', 'LO12 4NZ', 'London', 'United Kingdom', NULL),
+(39, NULL, 123, 'admin street', 'adminton', 'AD12 MIN', 'Birmingham', 'United Kingdom', NULL),
+(40, NULL, 123, 'admin street', 'admin area', 'AD1 2MN', 'Admin City', 'Admin Country', NULL),
+(41, NULL, 123, 'admin street', 'admin area', 'AD12 MIN', 'admin city', 'admin country', 2),
+(42, NULL, 0, 'Address line 1:admin road', 'Address line 2:adminton', 'Post code:AD1 2MN', 'City: City', 'Country:Country', 3),
+(43, 48, 123, 'idk street', 'somwhere', 'cv12 1ds', 'city', 'United Kingdom', NULL),
+(44, 48, 123, 'idk street', 'somwhere', 'cv12 1ds', 'city', 'United Kingdom', NULL),
+(45, 48, 123, 'idk street', 'somwhere', 'cv12 1ds', 'city', 'United Kingdom', NULL),
+(46, 48, 123, 'idk street', 'somwhere', 'cv12 1ds', 'city', 'United Kingdom', NULL),
+(47, 48, 123, 'idk street', 'somwhere', 'cv12 1ds', 'city', 'United Kingdom', NULL),
+(48, 48, 123, 'idk street', 'somwhere', 'cv12 1ds', 'city', 'United Kingdom', NULL),
+(49, 48, 123, 'idk street', 'somwhere', 'cv12 1ds', 'city', 'United Kingdom', NULL),
+(50, 48, 123, 'idk street', 'somwhere', 'cv12 1ds', 'city', 'United Kingdom', NULL),
+(51, 56, 12, 'hjkkhk', 'hkjhkjh', 'jljl jklj', 'jklkl', 'jlkjl', NULL),
+(52, 57, 123, 'sdadasd', 'asdas', 'asdasd', 'asdasd', 'sadsad', NULL),
+(53, 57, 123, 'sdadasd', 'asdas', 'asdasd', 'asdasd', 'sadsad', NULL),
+(54, 57, 123, 'sdadasd', 'asdas', 'asdasd', 'asdasd', 'sadsad', NULL),
+(55, 60, 12, 'road', 'area', 'ab1 2cd', 'city', 'country', NULL),
+(56, 61, 12, 'road', 'street', 'ab1 2cd', 'city', 'United Kingdom', NULL);
 
 -- --------------------------------------------------------
 
@@ -79,7 +105,7 @@ INSERT INTO `address` (`addressID`, `customerID`, `house_number`, `address_line_
 CREATE TABLE `admin` (
   `adminID` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `first_name` varchar(225) NOT NULL,
   `last_name` varchar(225) NOT NULL,
   `email` varchar(225) NOT NULL,
@@ -91,8 +117,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`adminID`, `username`, `password`, `first_name`, `last_name`, `email`, `addressID`) VALUES
-(1, 'admin1', 'admin1', 'Saad', 'Saad', 'Saad@admin.com', 6),
-(4, 'admin3', '$2y$10$c8YDt4S9mU9AWzeDaxVYweZFujScrQHrsYC4wJ9UeUE', 'user', 'user', 'ASTON@ASTON.COM', 0);
+(1, 'admin1', '$2y$10$SZssWqt2zIoQiSC7mZ92Qu7UR8MyaWX/.VSmoX7nWd3aQNbZ1pm7q', 'admin', 'admin', 'admin1@admn.com', 0),
+(2, 'saad1', '$2y$10$HjNqCYkVD3E5MWSQKjNqjuhUFwJf5l6Bc4Lvwz6yZ9PLBypEQeFyS', 'Saad', 'Admin', 'saad@admin.com', 0),
+(3, 'admin2', '$2y$10$hqvi3ROKOdc4hgYJyphg1.dnlNN8DfEtOvClsYOdfLURFBqoPIoUe', 'Admina', 'Xxxx', 'admin2@admin.com', 42);
 
 -- --------------------------------------------------------
 
@@ -105,20 +132,24 @@ CREATE TABLE `cart` (
   `customerID` int(11) DEFAULT NULL,
   `adminID` int(11) DEFAULT NULL,
   `productID` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `totat_cost` decimal(10,0) NOT NULL
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`cartID`, `customerID`, `adminID`, `productID`, `quantity`, `totat_cost`) VALUES
-(8, 9, NULL, 2, 3, 0),
-(12, 9, NULL, 1, 1, 0),
-(13, 9, NULL, 3, 1, 0),
-(22, 38, NULL, 6, 1, 0),
-(23, 38, NULL, 10, 1, 0);
+INSERT INTO `cart` (`cartID`, `customerID`, `adminID`, `productID`, `quantity`) VALUES
+(8, 9, NULL, 2, 3),
+(12, 9, NULL, 1, 1),
+(13, 9, NULL, 3, 1),
+(22, 38, NULL, 6, 2),
+(23, 38, NULL, 10, 1),
+(27, NULL, 1, 7, 1),
+(28, 12, NULL, 6, 1),
+(29, 12, NULL, 7, 1),
+(36, NULL, 1, 6, 1),
+(37, NULL, 1, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -141,7 +172,8 @@ INSERT INTO `category` (`categoryID`, `name`, `description`) VALUES
 (2, 'Combat Sports', 'All equipment related to combat and fighting sports'),
 (3, 'Climbing Sports', 'Equipment for climbing sports'),
 (4, 'Football', 'Football equipment'),
-(5, 'Home Fitness', 'General home fitness and workout equipment');
+(5, 'Home Fitness', 'General home fitness and workout equipment'),
+(8, 'Swimming', 'Swimming Products for everyone');
 
 -- --------------------------------------------------------
 
@@ -155,7 +187,7 @@ CREATE TABLE `contact_request` (
   `email` varchar(30) NOT NULL,
   `message` varchar(225) NOT NULL,
   `is_member` varchar(20) NOT NULL,
-  `request_status` enum('Waiting response','Responded') NOT NULL
+  `request_status` enum('Waiting Response','Responded') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -163,7 +195,9 @@ CREATE TABLE `contact_request` (
 --
 
 INSERT INTO `contact_request` (`contactID`, `name`, `email`, `message`, `is_member`, `request_status`) VALUES
-(2, 'SIDERZ', 'LmsA@homtail.com', 'I NEED help  WITH SIGNING ', 'member', 'Responded');
+(1, 'watr', 'water@Water.com', 'testing', 'member', 'Responded'),
+(2, 'watr', 'water@Water.com', 'testing', 'member', 'Responded'),
+(4, 'John Smith', 'john@gmail.com', 'Hi i need help with an order', 'member', 'Waiting Response');
 
 -- --------------------------------------------------------
 
@@ -185,9 +219,10 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `last_name`, `email`) VALUES
-(10, '', NULL, 'boss18', 'hello!s', 'M@KK.COm'),
-(11, 'userr', '$2y$10$XoTxm083uwwa11WxrIf.POe.lN7uRO7HL2lIkoNF.NiPs05QhJjXW', 'userr', 'userrrr', 'userrr@u.com'),
-(12, '', NULL, 'T', 'T', 't@t.comm'),
+(10, NULL, NULL, '', '', ''),
+(11, 'userr', '$2y$10$XoTxm083uwwa11WxrIf.POe.lN7uRO7HL2lIkoNF.NiPs05QhJjXW', 'userr', 'userr', 'userrr@u.com'),
+(12, NULL, NULL, 'T', 'T', 't@t.com'),
+(13, NULL, NULL, 'T', 'T', 't@t.com'),
 (14, NULL, NULL, 't', 't', 't@t.com'),
 (15, NULL, NULL, 't', 't', 't@t.com'),
 (16, NULL, NULL, 't', 't', 't@t.com'),
@@ -195,8 +230,10 @@ INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `la
 (18, NULL, NULL, 't', 't', 't@t.com'),
 (19, NULL, NULL, 't', 't', 't@t.com'),
 (20, NULL, NULL, 't', 't', 't@t.com'),
+(21, NULL, NULL, 't', 't', 't@t.com'),
 (22, NULL, NULL, 't', 't', 't@t.com'),
 (23, NULL, NULL, 't', 't', 't@t.com'),
+(24, NULL, NULL, 't', 't', 't@t.com'),
 (25, NULL, NULL, 't', 't', 't@t.com'),
 (26, NULL, NULL, 't', 't', 't@t.com'),
 (27, NULL, NULL, 't', 't', 't@t.com'),
@@ -206,12 +243,34 @@ INSERT INTO `customers` (`customerID`, `username`, `password`, `first_name`, `la
 (31, NULL, NULL, 't', 't', 't@t.com'),
 (32, NULL, NULL, 'aaa', 'aaa', 'aaa@aa.com'),
 (33, NULL, NULL, 'cc', 'cc', 'ccc@a.com'),
-(34, '', NULL, 'ccc', 'ccc', 'ccc@c.com'),
-(35, '', NULL, 'T', 'TTt', 'tt@t.com'),
+(34, NULL, NULL, 'ccc', 'ccc', 'ccc@c.com'),
+(35, NULL, NULL, 'T', 'TTt', 'tt@t.com'),
 (36, NULL, NULL, 'ccc', 'CC', 'CC@A.COM'),
 (37, NULL, NULL, 'sss', 'sss', 'sss@s.com'),
 (38, 'user1', '$2y$10$oF48XAQoAAbbjiTK1hHK.esMA0AEbg0FSIKvkiz0HRWpguTuMwCTi', 'aaa', 'aaa', 'user1@user1.com'),
-(39, '', NULL, 'Test100', 'Test110', 'test110@test.com');
+(39, NULL, NULL, 'Test100', 'Test110', 'test110@test.com'),
+(40, NULL, NULL, 'Test100', 'Test110', 'test110@test.com'),
+(41, NULL, NULL, 'T', 'T', 't@t.com'),
+(42, NULL, NULL, 'T', 'T', 't@t.com'),
+(43, 'Admin4', '$2y$10$TBc6t0Qi6UQkIzP5tbj1guPrh1o5oMycChNUsGHCBO4S.lFTWLnQm', 'Saad', 'Admin', 'admin4@gmail.com'),
+(44, 'saad1', '$2y$10$nKxwgGHhZhV.89LMT0BmuOWTmai8tcS.nWtpnUnYGsxv.gCy/SSVO', 'sss', 'sss', 'saad1@test.com'),
+(45, 'Admin5', '$2y$10$kx6o20EdPby1qP0GjEGWqeABdbFiH//hSJInXEYVXjFjUpYZfCsQG', 'xxx', 'xxxxx', 'Admin5@test.com'),
+(46, 'Admin6', '$2y$10$tnPwP2.ftsgwaxrpoe3CtuGkHdk2Ld7R/knj88vCwMmT9w2wmvHAe', 'admin', 'admin', 'Admin6@test.com'),
+(47, 'john123', '$2y$10$wKEKdB5Xk/62ZPEEnZR3vO2a4BGoLc1Uji29fsmVjbLVRCZW9CyUm', 'John', 'Smith', 'john@gmail.com'),
+(48, NULL, NULL, 'Guest', 'Guest', 'Guest@gmail.com'),
+(49, NULL, NULL, 'Guest', 'Guest', 'Guest@gmail.com'),
+(50, NULL, NULL, 'Guest', 'Guest', 'Guest@gmail.com'),
+(51, NULL, NULL, 'Guest', 'Guest', 'Guest@gmail.com'),
+(52, NULL, NULL, 'Guest', 'Guest', 'Guest@gmail.com'),
+(53, NULL, NULL, 'Guest', 'Guest', 'Guest@gmail.com'),
+(54, NULL, NULL, 'Guest', 'Guest', 'Guest@gmail.com'),
+(55, NULL, NULL, 'Guest', 'Guest', 'Guest@gmail.com'),
+(56, NULL, NULL, 'guest', 'guest', 'g@g.com'),
+(57, NULL, NULL, 'asdasd', 'sadsad', 'Guest@gmail.com'),
+(58, NULL, NULL, 'asdasd', 'sadsad', 'Guest@gmail.com'),
+(59, NULL, NULL, 'asdasd', 'sadsad', 'Guest@gmail.com'),
+(60, NULL, NULL, 'guest', 'user', 'guest@test.com'),
+(61, NULL, NULL, 'guestt', 'fuestt', 'g@g.om');
 
 -- --------------------------------------------------------
 
@@ -224,10 +283,10 @@ CREATE TABLE `orders` (
   `customerID` int(11) DEFAULT NULL,
   `adminID` int(11) DEFAULT NULL,
   `order_date` date NOT NULL,
-  `total_amount` decimal(10,0) NOT NULL,
+  `total_amount` float NOT NULL,
   `addressID` int(11) NOT NULL,
-  `paymentInfoID` int(11) NOT NULL,
-  `order_status` enum('Processing','Shipped','Delivered','') NOT NULL
+  `paymentInfoID` int(11) DEFAULT NULL,
+  `order_status` enum('Processing','Shipped','Delivered','Return Requested','Return Processing','Return Processed') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -235,8 +294,25 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`orderID`, `customerID`, `adminID`, `order_date`, `total_amount`, `addressID`, `paymentInfoID`, `order_status`) VALUES
-(40, 38, NULL, '2024-03-13', 32, 25, 6, 'Processing'),
-(57, 0, 1, '2024-03-20', 10, 6, 83, 'Delivered');
+(39, 38, NULL, '2024-03-13', 35, 25, 56, 'Processing'),
+(40, 38, NULL, '2024-03-13', 32, 25, 57, 'Processing'),
+(47, 12, NULL, '2024-03-15', 10, 8, 66, ''),
+(51, 0, 2, '2024-03-18', 0, 7, 76, 'Processing'),
+(57, 47, NULL, '2024-03-25', 598, 38, 83, 'Shipped'),
+(58, 47, NULL, '2024-03-25', 598, 38, 84, 'Processing'),
+(59, 47, NULL, '2024-03-25', 598, 38, 85, 'Processing'),
+(60, NULL, 3, '2024-03-25', 44.92, 42, 86, 'Processing'),
+(61, 48, NULL, '2024-03-25', 22.45, 43, 87, 'Processing'),
+(62, 48, NULL, '2024-03-25', 48.94, 43, 87, 'Processing'),
+(63, 48, NULL, '2024-03-25', 55.93, 43, 87, 'Processing'),
+(64, 48, NULL, '2024-03-25', 64.92, 43, 87, 'Processing'),
+(65, 57, NULL, '2024-03-25', 9.98, 52, NULL, 'Processing'),
+(66, 57, NULL, '2024-03-25', 20.96, 52, NULL, 'Processing'),
+(67, 60, NULL, '2024-03-25', 8.99, 55, 99, 'Processing'),
+(68, 60, NULL, '2024-03-25', 14.98, 55, 99, 'Processing'),
+(69, 60, NULL, '2024-03-25', 83.97, 55, 99, 'Processing'),
+(70, 61, NULL, '2024-03-25', 5.99, 56, 100, 'Processing'),
+(71, 61, NULL, '2024-03-25', 85.98, 56, 100, 'Processing');
 
 -- --------------------------------------------------------
 
@@ -249,8 +325,36 @@ CREATE TABLE `orders_products` (
   `orderID` int(11) NOT NULL,
   `productID` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `total_price` int(11) NOT NULL
+  `total_price` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders_products`
+--
+
+INSERT INTO `orders_products` (`ordersProductID`, `orderID`, `productID`, `quantity`, `total_price`) VALUES
+(1, 47, 7, 1, 11),
+(8, 51, 8, 1, 11),
+(10, 57, 6, 1, 8),
+(11, 57, 7, 1, 10),
+(12, 57, 8, 1, 11),
+(13, 57, 3, 2, 160),
+(14, 57, 14, 1, 400),
+(15, 57, 29, 1, 9),
+(16, 60, 7, 1, 9.98),
+(17, 60, 8, 1, 10.98),
+(18, 60, 9, 4, 23.96),
+(19, 61, 17, 5, 22.45),
+(20, 62, 15, 1, 48.94),
+(21, 63, 27, 1, 55.93),
+(22, 64, 29, 1, 64.92),
+(23, 65, 7, 1, 9.98),
+(24, 66, 8, 1, 20.96),
+(25, 67, 16, 1, 8.99),
+(26, 68, 23, 1, 14.98),
+(27, 69, 22, 1, 83.97),
+(28, 70, 4, 1, 5.99),
+(29, 71, 3, 1, 85.98);
 
 -- --------------------------------------------------------
 
@@ -265,81 +369,51 @@ CREATE TABLE `payment_information` (
   `card_type` varchar(20) NOT NULL,
   `name_on_card` varchar(255) NOT NULL,
   `card_number` int(11) NOT NULL,
-  `expiry_date` date NOT NULL,
+  `expiry_date` varchar(4) NOT NULL,
   `CVV` int(11) NOT NULL,
   `house_number` int(11) NOT NULL,
   `address_line1` varchar(255) NOT NULL,
   `address_line2` varchar(255) NOT NULL,
   `post_code` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
-  `country` varchar(255) NOT NULL,
-  `default_` tinyint(1) NOT NULL
+  `country` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payment_information`
 --
 
-INSERT INTO `payment_information` (`paymentInfoID`, `customerID`, `adminID`, `card_type`, `name_on_card`, `card_number`, `expiry_date`, `CVV`, `house_number`, `address_line1`, `address_line2`, `post_code`, `city`, `country`, `default_`) VALUES
-(2, 11, NULL, 'visa', '', 1, '0000-00-00', 1, 0, '', '', '', '', '', 0),
-(3, 11, NULL, 'visa', '', 12, '0000-00-00', 12, 0, '', '', '', '', '', 0),
-(4, 11, NULL, 'visa', '', 123, '0000-00-00', 122, 0, '', '', '', '', '', 0),
-(5, 11, NULL, 'visa', '', 123123, '0000-00-00', 788, 0, '', '', '', '', '', 0),
-(6, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(7, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(8, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(9, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(10, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(11, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(12, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(13, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(14, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(15, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(16, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(17, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(18, 12, NULL, 'mastercard', '1F', 0, '0000-00-00', 3332, 0, '', '', '', '', '', 0),
-(19, 12, NULL, 'mastercard', 'wqdqw2', 23, '0000-00-00', 23, 0, '', '', '', '', '', 0),
-(20, 12, NULL, 'mastercard', 'wqdqw2', 23, '0000-00-00', 23, 11, '2', 'neeqnq', 'ewief', 'ewf', 'hiew', 0),
-(21, 12, NULL, 'mastercard', 'wqdqw2', 23, '0000-00-00', 23, 11, '2', 'neeqnq', 'ewief', 'ewf', 'hiew', 0),
-(22, 12, NULL, 'mastercard', 'wqdqw2', 23, '0000-00-00', 23, 11, '2', 'neeqnq', 'ewief', 'ewf', 'hiew', 0),
-(23, 32, NULL, 'visa', 'aa', 111, '0000-00-00', 11, 1, 'aa', 'aa', 'aa a', 'aa', 'aaa', 0),
-(24, 33, NULL, 'visa', '1wew', 211414, '0000-00-00', 232, 1111, 'efwfew', 'ewfnwf', 'ewewf', 'iewfwf', 'ewwf', 0),
-(25, 34, NULL, 'visa', 'ccc', 111111, '0000-00-00', 123, 11, 'ccc', 'cc', 'cc cc', 'cc', 'cc', 0),
-(26, 35, NULL, 'visa', 'eee1', 12421412, '0000-00-00', 223, 11, 'dwad', 'wfqef', 'feqf', 'ewf', 'wqawsqw', 0),
-(27, 36, NULL, 'visa', 'FEWFW', 111, '0000-00-00', 134, 11, 'EWD', 'EWW', 'EW ', 'EWW ', 'EQF', 0),
-(28, 37, NULL, 'visa', 'ttt', 1111, '0000-00-00', 111, 11, 'sss', 'sss', 'ss s ', 'ss', 's', 0),
-(29, 10, NULL, 'visa', '', 11, '0002-02-02', 222, 0, '', '', '', '', '', 0),
-(30, 10, NULL, 'visa', '', 1131, '2022-02-23', 333, 0, '', '', '', '', '', 0),
-(31, 38, NULL, 'visa', '', 2423423, '0000-00-00', 232, 0, '', '', '', '', '', 0),
-(32, 38, NULL, 'visa', '', 332523, '2034-03-23', 345, 0, '', '', '', '', '', 0),
-(33, 38, NULL, 'visa', '', 332523, '2034-03-23', 345, 0, '', '', '', '', '', 0),
-(34, 38, NULL, 'visa', '', 332523, '2034-03-23', 345, 0, '', '', '', '', '', 0),
-(35, 38, NULL, 'visa', '', 332523, '2034-03-23', 345, 0, '', '', '', '', '', 0),
-(36, 38, NULL, 'visa', '', 2222, '0000-00-00', 213, 0, '', '', '', '', '', 0),
-(37, 38, NULL, 'visa', '', 2222, '0000-00-00', 213, 0, '', '', '', '', '', 0),
-(38, 38, NULL, 'visa', '', 2222, '0000-00-00', 213, 0, '', '', '', '', '', 0),
-(39, 38, NULL, 'visa', '', 2222, '0000-00-00', 213, 0, '', '', '', '', '', 0),
-(40, 38, NULL, 'visa', '', 2222, '0000-00-00', 213, 0, '', '', '', '', '', 0),
-(41, 38, NULL, 'visa', '', 24324, '0000-00-00', 223, 0, '', '', '', '', '', 0),
-(42, 38, NULL, 'visa', '', 24324, '0000-00-00', 223, 0, '', '', '', '', '', 0),
-(43, 38, NULL, 'visa', '', 24324, '0000-00-00', 223, 0, '', '', '', '', '', 0),
-(44, 38, NULL, 'visa', '', 24324, '0000-00-00', 223, 0, '', '', '', '', '', 0),
-(45, 38, NULL, 'visa', '', 222, '0000-00-00', 222, 0, '', '', '', '', '', 0),
-(46, 38, NULL, 'visa', '', 222, '0000-00-00', 222, 0, '', '', '', '', '', 0),
-(47, 38, NULL, 'visa', '', 222, '0000-00-00', 222, 0, '', '', '', '', '', 0),
-(48, 38, NULL, 'visa', '', 222, '0000-00-00', 222, 0, '', '', '', '', '', 0),
-(49, 38, NULL, 'visa', '', 333, '0000-00-00', 444, 0, '', '', '', '', '', 0),
-(51, 38, NULL, 'visa', '', 333, '0000-00-00', 444, 0, '', '', '', '', '', 0),
-(52, 38, NULL, 'visa', '', 333, '0000-00-00', 444, 0, '', '', '', '', '', 0),
-(54, 38, NULL, 'visa', '', 23232, '0000-00-00', 334, 0, '', '', '', '', '', 0),
-(55, 38, NULL, 'visa', '', 23232, '0000-00-00', 334, 0, '', '', '', '', '', 0),
-(56, 38, NULL, 'visa', '', 23232, '0000-00-00', 334, 0, '', '', '', '', '', 0),
-(57, 38, NULL, 'visa', '', 23232, '0000-00-00', 334, 0, '', '', '', '', '', 0),
-(64, 39, NULL, 'visa', 'mrenj', 234, '0000-00-00', 333, 11, 'mendwd', 'dwfew', 'de', 'mmm2', 'cdcw', 0),
-(65, 39, NULL, 'visa', 'mrenj', 234, '0000-00-00', 333, 11, 'mendwd', 'dwfew', 'de', 'mmm2', 'cdcw', 0),
-(66, 12, NULL, 'visa', 'CC', 232141, '0000-00-00', 223, 11, 'MWN', 'WD', '23e ssw', 'hee', 'uk', 0),
-(67, 12, NULL, 'visa', 'CC', 232141, '0000-00-00', 223, 11, 'MWN', 'WD', '23e ssw', 'hee', 'uk', 0),
-(83, NULL, 1, 'visa', '', 0, '0000-00-00', 232, 0, '', '', '', '', '', 0);
+INSERT INTO `payment_information` (`paymentInfoID`, `customerID`, `adminID`, `card_type`, `name_on_card`, `card_number`, `expiry_date`, `CVV`, `house_number`, `address_line1`, `address_line2`, `post_code`, `city`, `country`) VALUES
+(56, 38, NULL, 'visa', '', 23232, '0000', 334, 0, '', '', '', '', ''),
+(57, 38, NULL, 'visa', '', 23232, '0000', 334, 0, '', '', '', '', ''),
+(64, 39, NULL, 'visa', 'mrenj', 234, '0000', 333, 11, 'mendwd', 'dwfew', 'de', 'mmm2', 'cdcw'),
+(65, 39, NULL, 'visa', 'mrenj', 234, '0000', 333, 11, 'mendwd', 'dwfew', 'de', 'mmm2', 'cdcw'),
+(66, 12, NULL, 'visa', 'CC', 232141, '0000', 223, 11, 'MWN', 'WD', '23e ssw', 'hee', 'uk'),
+(67, 12, NULL, 'visa', 'CC', 232141, '0000', 223, 11, 'MWN', 'WD', '23e ssw', 'hee', 'uk'),
+(76, NULL, 2, 'visa', '', 0, '0000', 2424, 0, '', '', '', '', ''),
+(77, NULL, 2, 'visa', '', 0, '0000', 2424, 0, '', '', '', '', ''),
+(78, NULL, 2, 'visa', '', 0, '0000', 2424, 0, '', '', '', '', ''),
+(79, NULL, 2, 'visa', '', 0, '0000', 2424, 0, '', '', '', '', ''),
+(80, NULL, 2, 'visa', '', 0, '0000', 2424, 0, '', '', '', '', ''),
+(81, NULL, 2, 'visa', '', 0, '0000', 2424, 0, '', '', '', '', ''),
+(83, 47, NULL, 'visa', '', 3322, '12/2', 780, 0, '', '', '', '', ''),
+(84, 47, NULL, 'visa', '', 3322, '12/2', 780, 0, '', '', '', '', ''),
+(85, 47, NULL, 'visa', '', 3322, '12/2', 780, 0, '', '', '', '', ''),
+(86, NULL, 3, 'visa', '', 1122, '11/3', 573, 0, '', '', '', '', ''),
+(87, 48, NULL, 'visa', 'Guest Ye', 1235, '01/2', 897, 123, 'idk street', 'somwhere', 'City', 'cv12 1ds', 'United Kingdom'),
+(88, 48, NULL, 'visa', 'Guest Ye', 1235, '01/2', 897, 123, 'idk street', 'somwhere', 'City', 'cv12 1ds', 'United Kingdom'),
+(89, 48, NULL, 'visa', 'Guest Ye', 1235, '01/2', 897, 123, 'idk street', 'somwhere', 'City', 'cv12 1ds', 'United Kingdom'),
+(90, 48, NULL, 'visa', 'Guest Ye', 1235, '01/2', 897, 123, 'idk street', 'somwhere', 'City', 'cv12 1ds', 'United Kingdom'),
+(91, 48, NULL, 'visa', 'Guest Ye', 1235, '01/2', 897, 123, 'idk street', 'somwhere', 'Cityyy', 'cv12 1ds', 'United Kingdom'),
+(92, 48, NULL, 'visa', 'Guest Ye', 1235, '01/2', 897, 123, 'idk street', 'somwhere', 'Cityyy', 'cv12 1ds', 'United Kingdom'),
+(93, 48, NULL, 'visa', 'Guest Ye', 1235, '01/2', 897, 123, 'idk street', 'somwhere', 'Cityyy', 'cv12 1ds', 'United Kingdom'),
+(94, 48, NULL, 'visa', 'Guest Ye', 1235, '01/2', 897, 123, 'idk street', 'somwhere', 'Cityyy', 'cv12 1ds', 'United Kingdom'),
+(95, 56, NULL, 'visa', 'guest', 2147483647, '12/1', 765, 2443243, 'fdfdhd', 'fdfgdhg', 'kjhkj', 'hjhkjh', 'kjhkkjh'),
+(96, 57, NULL, 'visa', 'sadasd', 2147483647, '12/2', 123, 123, 'dsfdfs', 'dsfsdf', 'dsfsdf', 'sdfsd', 'sdfdsf'),
+(97, 57, NULL, 'visa', 'sadasd', 2147483647, '12/2', 123, 123, 'dsfdfs', 'dsfsdf', 'dsfsdf', 'sdfsd', 'sdfdsf'),
+(98, 57, NULL, 'visa', 'sadasd', 2147483647, '12/2', 123, 123, 'dsfdfs', 'dsfsdf', 'dsfsdf', 'sdfsd', 'sdfdsf'),
+(99, 60, NULL, 'visa', 'guest user', 6786, '10/2', 123, 12, 'road', 'street', 'ab1 2cd', 'city', 'country'),
+(100, 61, NULL, 'visa', 'guest user', 1234, '09/2', 456, 12, 'road', 'street', 'ab1 2cd', 'city', 'United Kingdom');
 
 -- --------------------------------------------------------
 
@@ -367,19 +441,34 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`productID`, `image`, `product_name`, `price`, `description`, `categoryID`, `colour`, `size`, `stock`, `is_featured`, `is_new`, `is_popular`) VALUES
-(1, 'TennisRacket.jpeg', 'Tennis Racket', 10.98, 'A simple test for tennis racket', 1, 'Green', '10', 1, 1, 0, 0),
-(2, 'BoxingGloves.jpeg', 'Boxing Gloves', 5.99, 'Gloves used for boxing with premium padding for extra comfort', 2, 'Black', '1', 5, 1, 0, 0),
-(3, 'ClimbingRope.jpeg', 'Climbing Rope', 79.99, 'A rope used for climbing', 3, 'Brown', '5', 12, 0, 1, 0),
-(4, 'Football.jpeg', 'Football', 5.99, 'A round football', 4, 'White', '5', 20, 0, 0, 1),
-(5, 'ResistanceBand.jpeg', 'Resistance Band', 2.99, 'A band used for home workouts', 5, 'Blue', '2', 50, 1, 0, 0),
-(6, 'tennisballs.jpg', 'Tennis Ball', 7.99, 'A simple test for tennis balls', 1, 'Orange', '4', -42, 0, 0, 1),
-(7, 'badmintonracket.jpg', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1, 'Green', '2', 37, 1, 0, 0),
-(8, 'shuttlecock.jpg', 'Shuttlecocks', 10.98, 'A simple test for shuttlecock', 1, 'Green', '2', -6, 0, 1, 0),
-(9, 'tenniswrap.jpg', 'Tennis Wrap', 5.99, 'A simple test for tennis wrap', 1, 'Purple', '7', 4, 1, 0, 0),
-(10, 'climbingshoe.jpg', 'Climbing Shoes', 112.99, 'Shoes used for climbing', 3, 'Pink', '5', 25, 1, 0, 1),
-(11, 'chalk.jpg', 'climbing chalk', 8.99, 'Shoes used for climbing', 3, 'White', '3', 66, 0, 1, 1),
-(12, 'harness.jpg', 'Climbing Harness', 39.99, 'A harness used for climbing', 3, 'Magenta', '6', 6, 1, 0, 0),
-(13, 'carabiner.jpg', 'Carabiner', 12.99, 'A carabiner used for climbing', 3, 'Yellow', '2', 24, 1, 1, 0);
+(1, 'TennisRacket.webp', 'Tennis Racket', 20, 'A simple test for tennis racket', 1, 'Green', 'One Size', 0, 1, 0, 0),
+(2, 'BoxingGloves.webp', 'Boxing Gloves', 5.99, 'Gloves used for boxing with premium padding for extra comfort', 2, 'Black', 'Medium', 5, 1, 0, 0),
+(3, 'ClimbingRope.webp', 'Climbing Rope', 79.99, 'A rope used for climbing', 3, 'Brown', '5', 10, 0, 1, 0),
+(4, 'Football.webp', 'Football', 5.99, 'A round football', 4, 'White', '5', 20, 0, 0, 1),
+(5, 'ResistanceBand.webp', 'Resistance Band', 2.99, 'A band used for home workouts', 5, 'Blue', '2', 50, 1, 0, 0),
+(6, 'tennisballs.webp', 'Tennis Ball', 7.99, 'A simple test for tennis balls', 1, 'Orange', '4', 41, 0, 0, 1),
+(7, 'badmintonracket.webp', 'Badminton Racket', 9.98, 'A simple test for badminton racket', 1, 'Green', '2', 36, 1, 0, 0),
+(8, 'shuttlecock.webp', 'Shuttlecocks', 10.98, 'A simple test for shuttlecock', 1, 'Green', '2', 4, 0, 1, 0),
+(9, 'tenniswrap.webp', 'Tennis Wrap', 5.99, 'A simple test for tennis wrap', 1, 'Purple', '7', 0, 1, 0, 0),
+(10, 'climbingshoe.webp', 'Climbing Shoes', 112.99, 'Shoes used for climbing', 3, 'Pink', '5', 25, 1, 0, 1),
+(12, 'harness.webp', 'Climbing Harness', 39.99, 'A harness used for climbing', 3, 'Magenta', '6', 6, 1, 0, 0),
+(13, 'carabiner.webp', 'Carabiner', 12.99, 'A carabiner used for climbing', 3, 'Yellow', '2', 24, 1, 1, 0),
+(14, 'home-fitness-treadmill.webp', 'Treadmill', 399.99, 'treadmill', 5, 'Black', 'One Size', 12, 1, 1, 0),
+(15, 'home-fitness-push-up-board.webp', 'Push Up Board', 26.49, 'pushups', 5, 'Multi-coloured', 'One Size', 34, 0, 0, 1),
+(16, 'swimming-pool-float.webp', 'Swimming Pool Float', 8.99, 'a pool float', 8, 'pink', 'One Size', 7, 0, 1, 0),
+(17, 'swimming-pool-noodle.webp', 'Pool Noodle', 4.49, 'a floating foam noodle designed for swimming use', 8, 'Multi-Coloured', 'One Size', 13, 1, 0, 0),
+(18, 'swimming-Trunks.webp', 'Swimming Trunks', 8.99, 'Swimming Shorts', 8, 'Blue/White', 'Medium', 16, 1, 0, 1),
+(19, 'swimming-nose-clip.webp', 'Nose Clips', 4.49, 'Clips for swimming uses', 8, 'Multi-Coloured', 'One Size', 17, 0, 0, 0),
+(20, 'swimming-goggles.webp', 'Swimming Goggles', 6.89, 'Goggles used for swimming', 8, 'Blue', 'One Size', 12, 0, 0, 1),
+(21, 'swimming-cap.webp', 'Swimming Cap', 3.99, 'A latex cap made to keep your hair dry while swimming', 8, 'Blue', 'One Size', 4, 0, 0, 0),
+(22, 'footballBoots.webp', 'Football Boots', 68.99, 'Boots used for playing football', 4, 'Black/Gold', 'UK 9', 6, 1, 0, 0),
+(23, 'footballSocks.webp', 'Football Socks', 5.99, 'Socks for use with football boots', 4, 'White', 'Uk 6-8', 13, 0, 0, 0),
+(24, 'footbalPump.webp', 'Football Pump', 5.49, 'A hand-hlp pump used to inflate balls.', 4, 'Black', 'One Size', 7, 0, 0, 0),
+(25, 'groinGuard.webp', 'Groin Guard', 11.49, 'Protective equipement for use in combat sports', 2, 'Purple', 'One Size', 5, 0, 0, 0),
+(26, 'headGear.webp', 'Head Guard', 18.99, 'Protective head gear to keep you safe in combat sports', 2, 'Black', 'One Size ', 2, 0, 0, 0),
+(27, 'mouthGuard.webp', 'Mouth Guard ', 6.99, 'Protective moth equipment for combat and contat sports', 2, 'Black/Clear', 'One Size', 6, 0, 1, 0),
+(28, 'punchingPads.webp', 'Punchig Pads', 14.99, 'Foam and leather pads used for combat practice', 2, 'Black/Red', 'One Size', 6, 0, 0, 0),
+(29, 'shinPads.webp', 'Shin Pads', 8.99, 'Protective shin eqipment for football', 4, 'Black', 'One Size', 5, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -394,8 +483,8 @@ CREATE TABLE `review` (
   `productID` int(11) DEFAULT NULL,
   `review` text NOT NULL,
   `review_date` date NOT NULL,
-  `first_name` text DEFAULT NULL,
-  `last_name` text DEFAULT NULL
+  `first_name` text NOT NULL,
+  `last_name` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -410,7 +499,10 @@ INSERT INTO `review` (`reviewID`, `customerID`, `adminID`, `productID`, `review`
 (8, NULL, NULL, 0, 'xx', '2024-03-17', 'x', 'xx'),
 (9, NULL, NULL, 6, 'x', '2024-03-17', 'x', 'xxx'),
 (10, NULL, NULL, 6, 'ccc', '2024-03-17', 'cc', 'ccc'),
-(11, NULL, NULL, 0, 'TTTTTTTTTT\r\n', '2024-03-17', 'TTTTTTT', 'TTTTTTT');
+(11, NULL, NULL, 0, 'TTTTTTTTTT\r\n', '2024-03-17', 'TTTTTTT', 'TTTTTTT'),
+(12, NULL, 2, 7, 'xxxxx', '2024-03-18', '', ''),
+(13, NULL, 2, NULL, 'xxxx', '2024-03-18', '', ''),
+(14, NULL, NULL, 1, 'amaazinggggg', '2024-03-22', 'ssssss', 'ssssss');
 
 --
 -- Indexes for dumped tables
@@ -481,7 +573,7 @@ ALTER TABLE `orders_products`
 ALTER TABLE `payment_information`
   ADD PRIMARY KEY (`paymentInfoID`),
   ADD KEY `customerID` (`customerID`),
-  ADD KEY `payment_information_ibfk_2` (`adminID`);
+  ADD KEY `adminID` (`adminID`);
 
 --
 -- Indexes for table `products`
@@ -507,61 +599,61 @@ ALTER TABLE `review`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `addressID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `cartID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `categoryID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `contact_request`
 --
 ALTER TABLE `contact_request`
-  MODIFY `contactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `contactID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `orders_products`
 --
 ALTER TABLE `orders_products`
-  MODIFY `ordersProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ordersProductID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `payment_information`
 --
 ALTER TABLE `payment_information`
-  MODIFY `paymentInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `paymentInfoID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `review`
@@ -606,21 +698,13 @@ ALTER TABLE `orders_products`
 --
 ALTER TABLE `payment_information`
   ADD CONSTRAINT `payment_information_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`),
-  ADD CONSTRAINT `payment_information_ibfk_2` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`) ON DELETE CASCADE;
+  ADD CONSTRAINT `payment_information_ibfk_2` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
 
 --
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`categoryID`) REFERENCES `category` (`categoryID`);
-
---
--- Constraints for table `review`
---
-ALTER TABLE `review`
-  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`customerID`),
-  ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`productID`),
-  ADD CONSTRAINT `review_ibfk_3` FOREIGN KEY (`adminID`) REFERENCES `admin` (`adminID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
