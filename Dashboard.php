@@ -200,7 +200,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Stock Management</h5>
                         <p class="card-text">Manage items low on Stock here:</p>
-                        <a href="stockManagement.webp" class="btn btn-primary">Manage Stock</a>
+                        <a href="stockManagement.php" class="btn btn-primary">Manage Stock</a>
                     </div>
                 </div>
             </div>
@@ -217,7 +217,9 @@
         </div>
     </div>
                         
-    <footer>
+    
+</body>
+<footer>
         <div class="footer-container">
             <div class="footer-links">
                 <a href="reviews.php">Reviews</a>
@@ -227,5 +229,4 @@
             </div>
         </div>
     </footer>
-</body>
 </html>

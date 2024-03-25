@@ -32,7 +32,7 @@ textarea {
     color: var(--color1);
     font-weight: 700;
     font-family: var(--font2);
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     border: none;
 
 }
@@ -47,7 +47,7 @@ textarea{
     color: var(--color1);
     font-weight: 700;
     font-family: var(--font2);
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .contact-form-container h2, label{

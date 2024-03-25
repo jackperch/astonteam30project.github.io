@@ -418,7 +418,9 @@
                      echo "<br>";
                      echo "<a href='account.php'><center>Click here to view your orders<center></a>";
                      echo "<br>";
-                     echo "<a href='index.php'><center>or Click here to go to Home page<center></a>";
+                     echo "or";
+                     echo "<br>";
+                     echo "<a href='index.php'><center>Click here to go to Home page<center></a>";
                      echo "<br>";
                  echo "</div>";
      

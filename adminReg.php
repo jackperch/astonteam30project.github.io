@@ -182,7 +182,10 @@ if (isset($_POST['adminsignupsubmitted'])) {
 
 
 
-        <footer>
+        
+        
+    </body>
+    <footer>
             <div class="footer-container">
                 <div class="footer-links">
                     <a href="reviews.php">Reviews</a>
@@ -192,9 +195,6 @@ if (isset($_POST['adminsignupsubmitted'])) {
                 </div>
             </div>
         </footer>
-        
-    </body>
-
     <script src="signup.js"></script>
 
 </html>

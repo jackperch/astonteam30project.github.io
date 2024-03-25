@@ -113,7 +113,7 @@ try {
                 echo $product['stock'] == 0 ? 'stock-red' : 
                      ($product['stock'] < 5 ? 'stock-orange' : 
                      ($product['stock'] < 10 ? 'stock-amber' : 
-                     ($product['stock'] > 10 ? 'stock-green' :'')));
+                     ($product['stock'] > 9 ? 'stock-green' :'')));
             ?>">
                 <td><?php echo htmlspecialchars($product['productID']); ?></td>
                 <td><?php echo htmlspecialchars($product['product_name']); ?></td>
@@ -125,3 +125,13 @@ try {
 
 
 </body>
+<footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="reviews.php">Reviews</a>
+                <a href="contact.php">Contact Us</a>
+                <a href="about.php">About Us</a>
+                <a href="privacy-policy.php">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
