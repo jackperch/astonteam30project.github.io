@@ -164,10 +164,10 @@
             <input type="text" id="name" name="name"   placeholder="name" onblur="validateName()">
             <span id="nameError"></span>
 
-            <input type="email" id="email" name="email"  onblur="validateEmail()" placeholder="email">
+            <input type="email" id="email" name="email"  oninput="validateEmail()" placeholder="email">
             <span id="emailError"></span>
 
-            <textarea id="message" name="message" rows="4"  onblur="validateMessage()" placeholder="message..."></textarea>
+            <textarea id="message" name="message" rows="4"  oninput="validateMessage()" placeholder="message..."></textarea>
             <span id="messageError"></span>
 
             <label for="member?">Please Tick the box below if you are a member of our club</label>
