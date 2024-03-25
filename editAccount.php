@@ -173,7 +173,7 @@
 
                         //retrives address of the admin
                         $retrieveAddresID = $adminData['addressID'];
-                        echo $retrieveAddresID;
+                       // echo $retrieveAddresID;
                         $retrieveAddressquery = $db->prepare('SELECT * FROM address WHERE addressID = ?');
                         $retrieveAddressquery->execute([$retrieveAddresID]);
                         $rowCount = $retrieveAddressquery->rowCount();
