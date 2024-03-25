@@ -11,7 +11,8 @@ h1 {
 }
 
 .my-account-container {
-    max-width: 900px;
+    max-width: 700px;
+    width: 550px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -66,6 +67,7 @@ h1 {
 .my-details a:hover,
 .my-orders a:hover {
     background-color: #c2ee0a;
+    color: black;
 }
 
 .product-container {

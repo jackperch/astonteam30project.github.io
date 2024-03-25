@@ -274,20 +274,20 @@
         <section class="my-details">
             <h3> My Current Details</h3>
             <ul>
-                <li><strong>Username:</strong> <?php 
+                <li><strong>Username:<br></strong> <?php 
                 if (isset($_SESSION['adminID'])){
                     echo $adminData['username'];
-                    echo "<li><strong>First Name:</strong> " . $adminData['first_name'] . "</li>";
-                    echo "<li><strong>Last Name:</strong> " . $adminData['last_name'] . "</li>";
-                    echo "<li><strong>Email:</strong> " . $adminData['email'] . "</li>";
-                    echo "<li><strong>Address:</strong> " . $adminAddressData['house_number'] . ' ' . $adminAddressData['address_line_1'] . ' ' . $adminAddressData['address_line_2'] . ' ' . $adminAddressData['post_code'] . ' ' . $adminAddressData['city'] . ' ' . $adminAddressData['country'] . "</li>";
+                    echo "<li><strong>First Name:<br></strong> " . $adminData['first_name'] . "</li>";
+                    echo "<li><strong>Last Name:<br></strong> " . $adminData['last_name'] . "</li>";
+                    echo "<li><strong>Email:<br></strong> " . $adminData['email'] . "</li>";
+                    echo "<li><strong>Address:<br></strong> " . $adminAddressData['house_number'] . ' ' . $adminAddressData['address_line_1'] . '<br>' . $adminAddressData['address_line_2'] . '<br>' . $adminAddressData['post_code'] . '<br>' . $adminAddressData['city'] . '<br>' . $adminAddressData['country'] . "</li>";
 
                 }elseif(isset($_SESSION['customerID'])){
                     echo $customerData['username'];
-                    echo "<li><strong>First Name:</strong> " . $customerData['first_name'] . "</li>";
-                    echo "<li><strong>Last Name:</strong> " . $customerData['last_name'] . "</li>";
-                    echo "<li><strong>Email:</strong> " . $customerData['email'] . "</li>";
-                    echo "<li><strong>Address:</strong> " . $addressData['house_number'] . ' ' . $addressData['address_line_1'] . ' ' . $addressData['address_line_2'] . ' ' . $addressData['post_code'] . ' ' . $addressData['city'] . ' ' . $addressData['country'] . "</li>";
+                    echo "<li><strong>First Name:<br></strong> " . $customerData['first_name'] . "</li>";
+                    echo "<li><strong>Last Name:<br></strong> " . $customerData['last_name'] . "</li>";
+                    echo "<li><strong>Email:<br></strong> " . $customerData['email'] . "</li>";
+                    echo "<li><strong>Address:<br></strong> " . $addressData['house_number'] . ' ' . $addressData['address_line_1'] . '<br>' . $addressData['address_line_2'] . "<br>" . $addressData['post_code'] . '<br>' . $addressData['city'] . '<br>' . $addressData['country'] . "</li>";
                 }
 
                 ?>
@@ -319,44 +319,36 @@
                 echo"<input type='text' id='postcode' name='postcode' value='Post code:". $adminAddressData['post_code']."' required>";
                 echo"<input type='text' id='city' name='city' value='City: ".$adminAddressData['city']."' required>";
                 echo"<input type='text' id='country' name='country' value='Country:". $adminAddressData['country'] ."' required>";
-                echo"<br>";
+               
                 echo"<input type='submit' value='Update'>";
                echo" <input type='hidden' id= 'editAccountSubmitted' name='editAccountSubmitted' value='TRUE' />";
-               echo"</form>";
+               //echo"</form>";
                 
 
 
 
             }elseif(isset($_SESSION['customerID'])){
                 echo "<label for='username'>Username:</label>";
-                echo "<br>";
                 echo "<input type='text' id='username' name='username' value='" . $customerData['username'] . "' required>";
-                echo "<br>";
                 echo "<label for='password'>Password:</label>";
-                echo "<br>";
                 echo "<input type='password' id='password' name='password' required>";
-                echo "<br>";
                 echo "<label for='first_name'>First Name:</label>";
-                echo "<br>";
                 echo "<input type='text' id='first_name' name='first_name' value='" . $customerData['first_name'] . "' required>";
-                echo "<br>";
                 echo "<label for='last_name'>Last Name:</label>";
-                echo "<br>";
                 echo "<input type='text' id='last_name' name='last_name' value='" . $customerData['last_name'] . "' required>";
-                echo "<br>";
                 echo "<label for='email'>Email:</label>";
-                echo"<br>";
+               
                 echo"<input type='email' id='email' name='email' value='". $customerData['email'] . "' required>";
-                echo"<br>";
+               
                 echo"<label for = 'address'>Address:</label>";
-                echo"<br>";
+               
                 echo "<input type='text' id='house_number' name='house_number' value='House number" . $addressData['house_number'] . "' required>";
                 echo "<input type='text' id='address_line_1' name='address line 1' value='Address line 1:" . $addressData['address_line_1']. "' required>";
                 echo"<input type='text' id='address_line_2' name='address line 2' value='Address line 2:" . $addressData['address_line_2']. "' required>";
                 echo"<input type='text' id='postcode' name='postcode' value='Post code:". $addressData['post_code']."' required>";
                 echo"<input type='text' id='city' name='city' value='City: ".$addressData['city']."' required>";
                 echo"<input type='text' id='country' name='country' value='Country:". $addressData['country'] ."' required>";
-                echo"<br>";
+               
     
                 echo"<input type='submit' value='Update'>";
                echo" <input type='hidden' id= 'editAccountSubmitted' name='editAccountSubmitted' value='TRUE' />";
@@ -369,8 +361,8 @@
         </section>
     </div>
 
-
-    <footer>
+</body>
+<footer>
         <div class="footer-container">
             <div class="footer-links">
                 <a href="reviews.php">Reviews</a>
@@ -380,5 +372,4 @@
             </div>
         </div>
     </footer>
-</body>
 </html>
