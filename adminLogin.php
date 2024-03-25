@@ -152,11 +152,11 @@
             <h2>Admin Log In</h2>
             <form   action="adminLogin.php" method="post">
 
-                <input type="text" id="username" name="username" onclick="validateUsername()" placeholder="USERNAME">
+                <input type="text" id="username" name="username" oninput="validateUsername()" placeholder="USERNAME">
                 <span id="usernameError"></span>
 
 
-                <input type="password" id="password" name="password" onclick="validatePassword()" placeholder="PASSWORD">
+                <input type="password" id="password" name="password" oninput="validatePassword()" placeholder="PASSWORD">
                 <span id="passwordError"></span>
                 <input  onclick=" return validateForm()" type="submit" value="LOG IN" >
                 <input type="hidden" id= "adminLogin" name="adminLogin" value="TRUE" />

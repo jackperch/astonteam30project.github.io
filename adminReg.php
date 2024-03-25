@@ -145,32 +145,32 @@ if (isset($_POST['adminsignupsubmitted'])) {
                 <h2>Admin Sign Up</h2>
                 <form action="adminReg.php" method="post">
                     
-                    <input type="text" id="first-name" name="first-name"  placeholder="First Name"  onblur="validateFirstName()">
+                    <input type="text" id="first-name" name="first-name"  placeholder="First Name"  oninput="validateFirstName()">
                     <span id="first-name-error"></span>
 
-                    <input type="text" id="last-name" name="last-name"  placeholder="Last Name"   onblur="validateLastName()">
+                    <input type="text" id="last-name" name="last-name"  placeholder="Last Name"   oninput="validateLastName()">
                     <span id="last-name-error"></span>
 
-                    <input type="text" id="username" name="username"  placeholder="Username" onblur="validateUsername()">
+                    <input type="text" id="username" name="username"  placeholder="Username" oninput="validateUsername()">
                     <span id="username-error"></span>
                     
-                    <input type="password" id="password" name="password"  placeholder="Password" onblur="validatePassword()">
+                    <input type="password" id="password" name="password"  placeholder="Password" oninput="validatePassword()">
                     <span id="password-error"></span>
 
-                    <input type="text" id="email" name="email"  placeholder="E-mail" onblur="validateEmail()">
+                    <input type="text" id="email" name="email"  placeholder="E-mail" oninput="validateEmail()">
                    <span id="email-error"></span>
 
-                    <input type="text" id="house-number" name="house-number" placeholder="house name or number" onblur="validateHouseNumber()">
+                    <input type="text" id="house-number" name="house-number" placeholder="house name or number" oninput="validateHouseNumber()">
                     <span id="house-number-error"></span>
-                    <input type="text" id="address-line1" name="address-line1" placeholder="first line of address" onblur="validateAdressLine1()">
+                    <input type="text" id="address-line1" name="address-line1" placeholder="first line of address" oninput="validateAdressLine1()">
                     <span id="address-line1-error"></span>
-                    <input type="text" id="address-line2" name="address-line2" placeholder="second line of address" onblur="validateAdressLine2()">
+                    <input type="text" id="address-line2" name="address-line2" placeholder="second line of address" oninput="validateAdressLine2()">
                     <span id="address-line2-error"></span>
-                    <input type="text" id="post-code" name="post-code" placeholder="post code" onblur="validatePostCode()">
+                    <input type="text" id="post-code" name="post-code" placeholder="post code" oninput="validatePostCode()">
                     <span id="post-code-error"></span>
-                    <input type="text" id="city" name="city" placeholder="city" onblur="validateCity()">
+                    <input type="text" id="city" name="city" placeholder="city" oninput="validateCity()">
                     <span id="city-error"></span>
-                    <input type="text" id="country" name="country" placeholder="country" onblur="validateCountry()">
+                    <input type="text" id="country" name="country" placeholder="country" oninput="validateCountry()">
                     <span id="country-error"></span>
 
 
