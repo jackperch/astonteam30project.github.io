@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     height: 81vh;
+    padding: 60px;
 }
 
 .login-container {
@@ -16,11 +17,15 @@
     width: 100%;
     padding: 20px;
     border: none;
-    background-color: var(--formcolor);
+    /* background-color: var(--formcolor); */
     /*box-shadow: 0 0 10px #c2ee0a;*/
     color: #000000;
     margin-bottom: 100px;
     text-transform: uppercase;
+    margin: 0 auto;
+    background-color: #ffffffe0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.933);
 }
 .login-container h2 {
     font-weight: 700;
@@ -65,6 +70,7 @@ input[type="submit"] {
     font-weight: 700;
     
 }
+
 
 button {
     background-color: #000000; /* Use the yellow 2 color from the palette */

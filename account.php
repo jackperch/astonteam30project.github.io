@@ -327,7 +327,9 @@
     </div>
 
 
-    <footer>
+    
+</body>
+<footer>
         <div class="footer-container">
             <div class="footer-links">
                 <a href="reviews.php">Reviews</a>
@@ -337,5 +339,4 @@
             </div>
         </div>
     </footer>
-</body>
 </html>

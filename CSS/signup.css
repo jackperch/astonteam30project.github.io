@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 60px;
 }
 
 .signup-container {
@@ -14,12 +15,16 @@
     align-content: center;
     max-width: 600px;
     width: 100%;
-    padding: 20px;
-    border: none;
-    background-color: #aaaaaa;
+    padding: 40px;
+    border: 20px;
+    /* background-color: #aaaaaa; */
     color: #000000;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
     /*text-transform: uppercase;*/
+    margin: 20px auto;
+    background-color: #ffffffe0;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.933);
 }
 
 form {
