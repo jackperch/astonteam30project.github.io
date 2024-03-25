@@ -161,13 +161,13 @@
 
         <form action="contact.php" method="post">
 
-            <input type="text" id="name" name="name"   placeholder="Full Name" onblur="validateName()">
+            <input type="text" id="name" name="name"   placeholder="Full Name" oninput="validateName()">
             <span id="nameError"></span>
 
-            <input type="email" id="email" name="email"  onblur="validateEmail()" placeholder="E-mail">
+            <input type="email" id="email" name="email"  oninput="validateEmail()" placeholder="E-mail">
             <span id="emailError"></span>
 
-            <textarea id="message" name="message" rows="4"  onblur="validateMessage()" placeholder="Enter your message here..."></textarea>
+            <textarea id="message" name="message" rows="4"  oninput="validateMessage()" placeholder="Enter your message here..."></textarea>
             <span id="messageError"></span>
 
             <label for="member?">Please Tick the box below if you are a member of our club</label>
