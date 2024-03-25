@@ -121,7 +121,8 @@ if(isset($_POST['orderSubmitted'])){ // If there is a post request been sent by 
                      }
                    
                     //echo "Order placed successfully!";
-                    header("Location:successfulOrder.php");
+
+                    header("Location:successfulOrder.php?order=success");
                 } else {
                     echo "Failed to retrieve customer ID.";
                 }
